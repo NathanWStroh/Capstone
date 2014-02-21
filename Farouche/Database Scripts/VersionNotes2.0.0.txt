@@ -1,0 +1,57 @@
+Version Notes:
+Steven VersionNotes 2.0.0
+Stuff was done
+-----------------------------------------------------------------------------
+Ben 1/30/14 VersionNotes 1.0.3b
+Removed: Sku from Products, CategoryID, and LocationID
+Changed: Onhand became Available
+Added: ReorderThreshold, ReorderAmount, ShippingDimensions, ShippingWeight, Reserved to Products
+
+Also edited associated Stored Procedures and Insert Statements.	
+-----------------------------------------------------------------------------
+Steven 1/28/14 VersionNotes1.0.3
+
+Appended to the file Users Table and Roles table, as well as FK constraint between Users and Roles.
+Added insert Users, Insert Roles.
+
+-----------------------------------------------------------------------------
+Maggie 1/27/14 1500 VersionNotes1.0.2
+
+Appended to the end of file the stored procedures for the categories, locations, productCategories, and vendorSourceItems tables.
+Updated .bat file
+
+-----------------------------------------------------------------------------
+Kaleb 1/26/14 VersionNotes1.0.1
+
+Appended to the end of the file are the stored procedures for the products table.
+This includes: 
+	Insert product
+	Update product
+	Activate product
+	Deactivate product
+	Delete product
+	Select one product
+	Select all products
+	Select products by active flag
+
+-----------------------------------------------------------------------------
+
+Andrew 1/26/14 1700 VersionNotes1.00a
+
+I'm adding to Maggie's InventoryMaster1.0.sql the following:
+Vendors Create Table, Vendors Insert Statments, Vendors stored procedures.
+I updated the .bat file.
+I renamed the .sql file to InventoryMaster1.00a.sql
+
+-----------------------------------------------------------------------------
+
+Maggie 1/26/14 1545 VersionNotes1.0
+In this folder I placed the .bat file - will need to go in and edit the .bat file when we update to a new version on the MasterInventory database file. 
+
+Added identity column on VendorSourceItems (VendorSourceItemID) for convenience as will need to use as foreign key reference for vendor source orders and perhaps some other tables (according to last semester's ER diagrams)
+
+In order to keep referential integrity as well as have convenient identity columns in the join tables VendorSourceItems and ProductCategories I added a new Alter Table constraint to force the two foreign keys to be unique. I used the naming convention: [UQ_Column1_Column2]. 
+
+-----------------------------------------------------------------------------
+
+In the beginning...
