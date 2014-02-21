@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Farouche.BusinessLogic"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Farouche.DataAccess", "com.Farouche.DataAccess\com.Farouche.DataAccess.csproj", "{E366A3B6-F888-499D-86CC-EE7ED690C067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Farouche.Commmons", "com.Farouche.Commmons\com.Farouche.Commmons.csproj", "{08560DF2-72F5-4FDA-843D-72F3D768FCD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Farouche.Commons", "com.Farouche.Commons\com.Farouche.Commons.csproj", "{08560DF2-72F5-4FDA-843D-72F3D768FCD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

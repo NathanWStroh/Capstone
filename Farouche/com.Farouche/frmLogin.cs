@@ -5,8 +5,7 @@
 using System;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
-using com.Farouche.Commmons;
-
+using com.Farouche.Commons;
 namespace com.Farouche.Presentation
 {
     public partial class FrmLogin : Form

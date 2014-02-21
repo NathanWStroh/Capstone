@@ -120,9 +120,9 @@
       <Project>{E96BBF82-B410-4CC7-A7C8-B788416A8069}</Project>
       <Name>com.Farouche.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\com.Farouche.Commmons\com.Farouche.Commmons.csproj">
+    <ProjectReference Include="..\com.Farouche.Commons\com.Farouche.Commons.csproj">
       <Project>{08560DF2-72F5-4FDA-843D-72F3D768FCD8}</Project>
-      <Name>com.Farouche.Commmons</Name>
+      <Name>com.Farouche.Commons</Name>
     </ProjectReference>
     <ProjectReference Include="..\com.Farouche.DataAccess\com.Farouche.DataAccess.csproj">
       <Project>{E366A3B6-F888-499D-86CC-EE7ED690C067}</Project>

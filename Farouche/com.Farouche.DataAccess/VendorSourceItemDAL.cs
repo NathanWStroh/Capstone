@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.SqlTypes;
-using com.Farouche.Commmons;
-
+using com.Farouche.Commons;
 //Author: Adam
 //Date Created: 1/31/2014
 //Last Modified: 2/14/2014

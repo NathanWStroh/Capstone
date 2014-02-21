@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
-using com.Farouche.Commmons;
 
 namespace com.Farouche.Presentation
 {

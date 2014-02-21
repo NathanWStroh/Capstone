@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
-using com.Farouche.Commmons;
-
+using com.Farouche.Commons;
 //Author: Nathan S
 //Date Created: null
 //Last Modified: 2/20/2014
@@ -142,7 +141,7 @@ namespace com.Farouche.Presentation
 
                 try
                 {
-                    _productManager.UpdateProduct(newProduct, _currentProduct);
+                    _productManager.UpdateProduct(productInfo, _currentProduct);
                     MessageBox.Show("Product added to Inventory");
 
                 }

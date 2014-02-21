@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.SqlClient;
-using com.Farouche.Commmons;
-
+using com.Farouche.Commons;
 //Author: Andrew Willhoit
 //Date Created: 1/31/2014
 //Last Modified: 02/9/2014 

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
-using com.Farouche.Commmons;
-
+using com.Farouche.Commons;
 //Author: Adam
 //Date Created: 1/31/2014
 //Last Modified: 02/07/2014

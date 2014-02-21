@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("com.Farouche")]
+[assembly: AssemblyTitle("com.Farouche.Commmons")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("com.Farouche")]
+[assembly: AssemblyProduct("com.Farouche.Commmons")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("dbd3a30e-e1fc-427c-a38a-ad1a6620f5f2")]
+[assembly: Guid("46772e9b-fd9f-462a-8530-84d2b978bb9a")]
 
 // Version information for an assembly consists of the following four values:
 //

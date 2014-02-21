@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E96BBF82-B410-4CC7-A7C8-B788416A8069}</ProjectGuid>
+    <ProjectGuid>{08560DF2-72F5-4FDA-843D-72F3D768FCD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.Farouche.BusinessLogic</RootNamespace>
-    <AssemblyName>com.Farouche.BusinessLogic</AssemblyName>
+    <RootNamespace>com.Farouche.Commons</RootNamespace>
+    <AssemblyName>com.Farouche.Commons</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,24 +33,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authenticator.cs" />
-    <Compile Include="ProductManager.cs" />
+    <Compile Include="AccessToken.cs" />
+    <Compile Include="Enity.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VendorManager.cs" />
-    <Compile Include="VendorSourceItemManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\com.Farouche.Commons\com.Farouche.Commons.csproj">
-      <Project>{08560DF2-72F5-4FDA-843D-72F3D768FCD8}</Project>
-      <Name>com.Farouche.Commons</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\com.Farouche.DataAccess\com.Farouche.DataAccess.csproj">
-      <Project>{E366A3B6-F888-499D-86CC-EE7ED690C067}</Project>
-      <Name>com.Farouche.DataAccess</Name>
-    </ProjectReference>
+    <Compile Include="Vendor.cs" />
+    <Compile Include="VendorSourceItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

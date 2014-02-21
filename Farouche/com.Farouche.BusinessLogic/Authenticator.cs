@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Data;
-using System.Diagnostics;
-using com.Farouche.Commmons;
 using com.Farouche.DataAccess;
-
+using com.Farouche.Commons;
 //Author: Steven Schuette
 //Date Created: 1/31/2014
 //Last Modified: 1/31/2014
