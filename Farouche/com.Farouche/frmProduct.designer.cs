@@ -37,7 +37,7 @@
             this.btnActivateProduct = new System.Windows.Forms.Button();
             this.cbProductStatusSearch = new System.Windows.Forms.ComboBox();
             this.lblProductActiveSearch = new System.Windows.Forms.Label();
-            this.btnViewProducts = new System.Windows.Forms.Button();
+            this.btnGetProductByID = new System.Windows.Forms.Button();
             this.btnUpdateProduct = new System.Windows.Forms.Button();
             this.txtProductIDSearch = new System.Windows.Forms.TextBox();
             this.lblProductIDSearch = new System.Windows.Forms.Label();
@@ -94,7 +94,7 @@
             this.tabProducts.Controls.Add(this.btnActivateProduct);
             this.tabProducts.Controls.Add(this.cbProductStatusSearch);
             this.tabProducts.Controls.Add(this.lblProductActiveSearch);
-            this.tabProducts.Controls.Add(this.btnViewProducts);
+            this.tabProducts.Controls.Add(this.btnGetProductByID);
             this.tabProducts.Controls.Add(this.btnUpdateProduct);
             this.tabProducts.Controls.Add(this.txtProductIDSearch);
             this.tabProducts.Controls.Add(this.lblProductIDSearch);
@@ -138,6 +138,7 @@
             this.cbProductStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbProductStatusSearch.TabIndex = 16;
             this.cbProductStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbProductStatusSearch_SelectedIndexChanged);
+            this.cbProductStatusSearch.Click += new System.EventHandler(this.cbProductStatusSearch_Click);
             // 
             // lblProductActiveSearch
             // 
@@ -146,17 +147,17 @@
             this.lblProductActiveSearch.Name = "lblProductActiveSearch";
             this.lblProductActiveSearch.Size = new System.Drawing.Size(40, 13);
             this.lblProductActiveSearch.TabIndex = 15;
-            this.lblProductActiveSearch.Text = "Status:";
+            this.lblProductActiveSearch.Text = "Active:";
             // 
-            // btnViewProducts
+            // btnGetProductByID
             // 
-            this.btnViewProducts.Location = new System.Drawing.Point(6, 282);
-            this.btnViewProducts.Name = "btnViewProducts";
-            this.btnViewProducts.Size = new System.Drawing.Size(100, 25);
-            this.btnViewProducts.TabIndex = 14;
-            this.btnViewProducts.Text = "View Products";
-            this.btnViewProducts.UseVisualStyleBackColor = true;
-            this.btnViewProducts.Click += new System.EventHandler(this.btnViewProducts_Click_1);
+            this.btnGetProductByID.Location = new System.Drawing.Point(280, 14);
+            this.btnGetProductByID.Name = "btnGetProductByID";
+            this.btnGetProductByID.Size = new System.Drawing.Size(42, 25);
+            this.btnGetProductByID.TabIndex = 14;
+            this.btnGetProductByID.Text = "Find";
+            this.btnGetProductByID.UseVisualStyleBackColor = true;
+            this.btnGetProductByID.Click += new System.EventHandler(this.btnViewProducts_Click_1);
             // 
             // btnUpdateProduct
             // 
@@ -197,7 +198,7 @@
             this.lvProducts.TabIndex = 10;
             this.lvProducts.UseCompatibleStateImageBehavior = false;
             this.lvProducts.View = System.Windows.Forms.View.Details;
-            this.lvProducts.SelectedIndexChanged += new System.EventHandler(this.lvProducts_SelectedIndexChanged);
+            this.lvProducts.Click += new System.EventHandler(this.lvProducts_Click);
             // 
             // btnAddProduct
             // 
@@ -248,7 +249,7 @@
         private System.Windows.Forms.TabPage tabProducts;
         private System.Windows.Forms.ComboBox cbProductStatusSearch;
         private System.Windows.Forms.Label lblProductActiveSearch;
-        private System.Windows.Forms.Button btnViewProducts;
+        private System.Windows.Forms.Button btnGetProductByID;
         private System.Windows.Forms.Button btnUpdateProduct;
         private System.Windows.Forms.TextBox txtProductIDSearch;
         private System.Windows.Forms.Label lblProductIDSearch;

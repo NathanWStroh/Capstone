@@ -12,6 +12,8 @@ using com.Farouche.Commons;
 *                               Changelog
 * Date         By          Ticket          Version         Description
 * 02/07/2014   Adam                          0.0.1b        Updated method names and class name.
+* 
+* 02/26/2014   Kaleb                         0.0.3a        Adjusted the get product methods to assign the returned values to  *                                                          Products.
 */
 namespace com.Farouche.BusinessLogic
 {
@@ -48,9 +50,8 @@ namespace com.Farouche.BusinessLogic
 
         public List<Product> GetProducts()
         {
-            List<Product> products = ProductDAL.FetchProducts(_connection);
-            Console.WriteLine(products);
-            return products;
+            Products = ProductDAL.FetchProducts(_connection);
+            return Products;
         }//End of getProducts()
 
         public Product GetProduct(int productId)
@@ -61,9 +62,8 @@ namespace com.Farouche.BusinessLogic
 
         public List<Product> GetProductsByActive(Boolean activeState)
         {
-            List<Product> products = ProductDAL.FetchProductsByActive(activeState, _connection);
-            Console.WriteLine(products);
-            return products;
+            Products = ProductDAL.FetchProductsByActive(activeState, _connection);
+            return Products;
         }//End of getProductsByActive(.)
     }
 }
