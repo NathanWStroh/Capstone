@@ -18,6 +18,12 @@ using com.Farouche.Commons;
 *                                                           Added event handlers for index changed events.
 *
 * 02/20/14     Nathan S     n/a             "updated"       Added accessToken value to ProductView Windows.
+* 
+* 02/26/2014   Kaleb W                       0.0.3a         Adjusted class to populate the list view upon selecting an active
+*                                                           status.
+*                                                           Adjusted class to determine whether the item is active or not
+*                                                           which determines what controls are enabled.
+* 
 */ 
 
 
@@ -36,6 +42,8 @@ namespace com.Farouche.Presentation
         {
             InitializeComponent();
             _myAccessToken = acctoken;
+            //Instantiates a ProductManager.
+            _myProductManager = new ProductManager();
         }//End of FrmProduct(.)
 
         private void frmAddProduct_Load(object sender, EventArgs e)
@@ -44,9 +52,6 @@ namespace com.Farouche.Presentation
 
             //Populates the active combo box. 
             this.populateActiveCombo();
-
-            //Instantiates a ProductManager.
-            _myProductManager = new ProductManager();
 
             //Populates the list view upon the page load event.
             populateListView(this.lvProducts, _myProductManager.GetProductsByActive(true));
@@ -99,21 +104,7 @@ namespace com.Farouche.Presentation
         //Event handler causing the products list view to be populated.
         private void btnViewProducts_Click_1(object sender, EventArgs e)
         {
-            Boolean active;
-            switch (this.cbProductStatusSearch.SelectedIndex)
-            {
-                case 0:
-                    active = true; //True
-                    populateListView(this.lvProducts, _myProductManager.GetProductsByActive(active));
-                    break;
-                case 1:
-                    active = false; //False
-                    populateListView(this.lvProducts, _myProductManager.GetProductsByActive(active));
-                    break;
-                case 2:
-                    populateListView(this.lvProducts, _myProductManager.GetProducts());
-                    break;
-            }
+
         }//End of btnViewProducts_Click(..)
 
         private void btnActivateProduct_Click(object sender, EventArgs e)
@@ -124,7 +115,7 @@ namespace com.Farouche.Presentation
             {
                 MessageBox.Show("The product was activated");
             }
-            populateListView(this.lvProducts, _myProductManager.GetProductsByActive(false));
+            findActiveSelection();
         }//End of btnActivateProduct_Click(..)
 
         private void btnDeactivate_Click(object sender, EventArgs e)
@@ -135,31 +126,13 @@ namespace com.Farouche.Presentation
             {
                 MessageBox.Show("The product was deactivated");
             }
-
-            populateListView(this.lvProducts, _myProductManager.GetProductsByActive(true));
+            findActiveSelection();
         }//End of btnDeativateProduct_Click(..)
-
-        private void lvProducts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int currentIndex = this.lvProducts.Items[0].Index;
-            Product thisProduct = _myProductManager.Products[currentIndex];
-            if (thisProduct.Active == true)
-            {
-                btnActivateProduct.Enabled = false;
-                btnDeactivateProduct.Enabled = true;
-            }
-            else
-            {
-                btnActivateProduct.Enabled = true;
-                btnDeactivateProduct.Enabled = false;
-            }
-            btnUpdateProduct.Enabled = true;
-        }//End of lvProducts_SelectedIndexChanged(..)
 
         //Sets the update, activate, deactive buttons enabled property to false.
         private void cbProductStatusSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setDefaults();
+            findActiveSelection();
         }//End of cbProductStatusSearch_SelectedIndexChanged(..)
 
         private void setDefaults()
@@ -192,20 +165,63 @@ namespace com.Farouche.Presentation
             FrmVendorSource form = new FrmVendorSource(_myAccessToken);
             form.Show();
             Close();
-        }
+        }//End of btnVendorSource_Click(..)
 
         private void btnVendor_Click(object sender, EventArgs e)
         {
             FrmVendor form = new FrmVendor(_myAccessToken);
             form.Show();
             Close();
-        }
+        }//End of btnVendor_Click(..)
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
             FrmLogin frm = new FrmLogin();
             frm.Show();
             Close();
-        }
+        }//End of btnLogout_Click(..)
+
+        private void lvProducts_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvProducts.SelectedItems[0].Index;
+            Console.WriteLine(currentIndex);
+            Product thisProduct = _myProductManager.Products[currentIndex];
+            if (thisProduct.Active == true)
+            {
+                btnActivateProduct.Enabled = false;
+                btnDeactivateProduct.Enabled = true;
+            }
+            else
+            {
+                btnActivateProduct.Enabled = true;
+                btnDeactivateProduct.Enabled = false;
+            }
+            btnUpdateProduct.Enabled = true;
+        }//End of lvProducts_Click(..)
+
+        private void findActiveSelection()
+        {
+            Boolean active;
+            switch (this.cbProductStatusSearch.SelectedIndex)
+            {
+                case 0:
+                    active = true; //True
+                    populateListView(this.lvProducts, _myProductManager.GetProductsByActive(active));
+                    break;
+                case 1:
+                    active = false; //False
+                    populateListView(this.lvProducts, _myProductManager.GetProductsByActive(active));
+                    break;
+                case 2:
+                    populateListView(this.lvProducts, _myProductManager.GetProducts());
+                    break;
+            }
+            setDefaults();
+        }//End of findActiveSelection()
+
+        private void cbProductStatusSearch_Click(object sender, EventArgs e)
+        {
+            setDefaults();
+        }//End of cbProductStatusSearch_Click(..)
     }
 }
