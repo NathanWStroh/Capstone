@@ -23,7 +23,7 @@ namespace com.Farouche.Commons
         private string _userName; // picker or packer name, not in Shipping Order table, comes from users table?
         private Boolean _picked; //when picked is switched to true, _userID should be set to null
         private DateTime _shipDate;
-        private int _shippingTermsId;
+        private int _shippingTermId;
         private string _shippingTermDesc; // not in Shipping Order table, but comes from ShippingTerm Table
         private string _shippingVendorName; // // not in ShippingOrder table, but comes from ShippingVendor table
         private string _shipToName;
@@ -110,15 +110,15 @@ namespace com.Farouche.Commons
                 _shipDate = value; 
             }
         }
-        public int ShippingTermsId
+        public int ShippingTermId
         { 
             get
             {
-                return _shippingTermsId;
+                return _shippingTermId;
             }
             set 
             {
-                _shippingTermsId = value;
+                _shippingTermId = value;
             } 
         }
         // not in Shipping Order table, but comes from ShippingTerm Table
@@ -214,7 +214,7 @@ namespace com.Farouche.Commons
 
         public override string ToString()
         {
-            return string.Format("Id: {0}, PurchaseOrderId: {1}, UserId:, {2}, UserName:, {3}, Picked: {4}, ShipDate: {5}, ShippingTermsId: {6}, ShippingTermsDesc: {7}, ShippingVendorName: {8}, ShipToName: {9}, ShipToAddress: {10}, ShipToCity: {11}, ShipToState: {12}, ShipToZip: {13}, ShippingOrderLineItemList: {14}", ID, PurchaseOrderId, UserId, UserName, Picked, ShipDate, ShippingTermsId, ShippingTermDesc, ShippingVendorName, ShipToName, ShipToAddress, ShipToCity, ShipToState, ShipToZip, ShippingOrderLineItemList);
+            return string.Format("Id: {0}, PurchaseOrderId: {1}, UserId:, {2}, UserName:, {3}, Picked: {4}, ShipDate: {5}, ShippingTermsId: {6}, ShippingTermsDesc: {7}, ShippingVendorName: {8}, ShipToName: {9}, ShipToAddress: {10}, ShipToCity: {11}, ShipToState: {12}, ShipToZip: {13}, ShippingOrderLineItemList: {14}", ID, PurchaseOrderId, UserId, UserName, Picked, ShipDate, ShippingTermId, ShippingTermDesc, ShippingVendorName, ShipToName, ShipToAddress, ShipToCity, ShipToState, ShipToZip, ShippingOrderLineItemList);
         }
 
         public Type GetType()

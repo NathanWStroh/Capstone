@@ -74,6 +74,7 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
+                //TODO - verify these @param names are correct
                 mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", lineItem.ShippingOrderID);
                 mySqlCommand.Parameters.AddWithValue("@ProductID", lineItem.ProductId);
                 mySqlCommand.Parameters.AddWithValue("@ProductName", lineItem.ProductName);
@@ -122,6 +123,7 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
+                //TODO - verify these @param names are correct
                 mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", lineItem.ShippingOrderID);
                 mySqlCommand.Parameters.AddWithValue("@ProductID", lineItem.ProductId);
                 myConnection.Open();
@@ -159,6 +161,7 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
+                //TODO - verify these @param names are correct
                 mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", lineItem.ShippingOrderID);
                 mySqlCommand.Parameters.AddWithValue("@ProductID", lineItem.ProductId);
                 myConnection.Open();
@@ -251,7 +254,7 @@ namespace com.Farouche.DataAccess
             try
             {
                 var mySqlCommand = new SqlCommand("proc_GetShippingOrderLineItems", myConnection);
-                mySqlCommand.Parameters.AddWithValue("@shippingOrderId",shippingOrderId);
+                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID",shippingOrderId);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
             
                 myConnection.Open();
