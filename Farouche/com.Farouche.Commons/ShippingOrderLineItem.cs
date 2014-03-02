@@ -14,7 +14,7 @@
 
 namespace com.Farouche.Commons
 {
-    class ShippingOrderLineItem
+    public class ShippingOrderLineItem
     {
         private int _shippingOrderId;
         private int _productID;

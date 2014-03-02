@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace com.Farouche.Commons
 {
-    class ShippingOrder
+    public class ShippingOrder
     {
         private int _Id;
         private int _purchaseOrderId;

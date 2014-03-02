@@ -14,7 +14,7 @@
 
 namespace com.Farouche.Commons
 {
-    class ShippingVendor : Entity
+    public class ShippingVendor : Entity
     {
 
         private string _address;

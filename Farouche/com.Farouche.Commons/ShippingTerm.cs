@@ -14,7 +14,7 @@
 
 namespace com.Farouche.Commons
 {
-    class ShippingTerm
+    public class ShippingTerm
     {
 
         private int _Id;

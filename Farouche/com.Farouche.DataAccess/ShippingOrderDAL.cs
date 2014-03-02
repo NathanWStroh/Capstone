@@ -20,7 +20,7 @@ using com.Farouche.Commons;
 
 namespace com.Farouche.DataAccess
 {
-    class ShippingOrderDAL
+    public class ShippingOrderDAL : DatabaseConnection
     {
     }
 }
