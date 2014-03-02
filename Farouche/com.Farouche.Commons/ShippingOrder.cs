@@ -178,7 +178,6 @@ namespace com.Farouche.Commons
                 _shipToCity = value;
             }
         }
-
         public string ShipToState
         {
             get

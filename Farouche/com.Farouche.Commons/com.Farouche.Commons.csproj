@@ -41,6 +41,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShippingOrder.cs" />
     <Compile Include="ShippingOrderLineItem.cs" />
+    <Compile Include="ShippingTerm.cs" />
     <Compile Include="ShippingVendor.cs" />
     <Compile Include="Vendor.cs" />
     <Compile Include="VendorSourceItem.cs" />
