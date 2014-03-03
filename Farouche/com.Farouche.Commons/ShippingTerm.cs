@@ -21,6 +21,15 @@ namespace com.Farouche.Commons
         private int _shippingVendorID;
         private string _description;
 
+        public ShippingTerm()
+        {
+        }
+
+        public ShippingTerm(int Id)
+        {
+            this.Id = Id;
+        }
+
 
         public int Id
         {

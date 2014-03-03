@@ -26,6 +26,16 @@ namespace com.Farouche.Commons
         private string _contact;
         private string _contactEmail;
 
+        public ShippingVendor()
+        {
+        }
+
+        public ShippingVendor(int Id)
+        {
+            this.Id = Id;
+        }
+
+
         public string Address
         {
             get 

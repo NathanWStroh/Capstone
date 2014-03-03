@@ -172,7 +172,7 @@ namespace com.Farouche.DataAccess
         } // end PickShippingOrder
 
 
-        public static bool unpickShippingOrder(ShippingOrder shippingOrder, SqlConnection myConnection)
+        public static bool UnpickShippingOrder(ShippingOrder shippingOrder, SqlConnection myConnection)
         {
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
@@ -249,7 +249,7 @@ namespace com.Farouche.DataAccess
         } // end ShipShippingOrder
 
         // set ShipDate back to null, in case of accidental shipped status
-        public static bool unshipShippingOrder(ShippingOrder shippingOrder, SqlConnection myConnection)
+        public static bool UnshipShippingOrder(ShippingOrder shippingOrder, SqlConnection myConnection)
         {
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
