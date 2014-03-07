@@ -7,8 +7,10 @@ namespace com.Farouche.Commons
 {
     public class VendorOrder : Entity
     {
-        public VendorOrder()
-        { 
+        public VendorOrder(int vendorId, int productId)
+        {
+            this.ProductID = productId;
+            this.VendorID = vendorId;
         }
         public int ProductID;
         public int VendorID;

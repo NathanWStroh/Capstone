@@ -75,7 +75,8 @@ namespace com.Farouche.BusinessLogic
 
         public bool AddNewLineItemToVendorOrder(VendorOrder vendorOrder,Product productToAdd, int qtyReceived)
         {
-            if(productToAdd == null) throw new ApplicationException("Product can't be null");
+            if (productToAdd == null) throw new ApplicationException("Product can't be null");
+            if (vendorOrder == null) throw new ApplicationException("VendorOrder can't be null");
             if (qtyReceived <= 0) throw new ApplicationException("Quantity recieved has to be greater than 0");
             var newVendorOrderLineItem = new VendorOrderLineItem(vendorOrder.Id, productToAdd.Id)
             {

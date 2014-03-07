@@ -140,7 +140,7 @@ csx/
 AppPackages/
 
 # Others
-sql/
+# sql/ [commented out by JG]
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
