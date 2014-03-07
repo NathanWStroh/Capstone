@@ -14,9 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Test", "Unit Test\Unit Test.csproj", "{27B46ADC-919E-458D-B730-B9085A6D4AAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD0147DE-4EBE-45BF-90D9-063EC11CE8D4}"
-	ProjectSection(SolutionItems) = preProject
-		com.Farouche.vsmdi = com.Farouche.vsmdi
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

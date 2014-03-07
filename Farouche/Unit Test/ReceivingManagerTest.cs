@@ -29,6 +29,8 @@ namespace Unit_Test
         [Test]
         public void UpdateQtyDamaged5()
         {
+            //Didn't write test for the project because I didn't know if we got
+            //Into mocks and how to catch calls to the DAL
             Assert.AreEqual(true,true);
         }
     }
