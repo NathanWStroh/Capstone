@@ -44,6 +44,8 @@
     <Compile Include="ShippingTerm.cs" />
     <Compile Include="ShippingVendor.cs" />
     <Compile Include="Vendor.cs" />
+    <Compile Include="VendorOrder.cs" />
+    <Compile Include="VendorOrderLineItem.cs" />
     <Compile Include="VendorSourceItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
