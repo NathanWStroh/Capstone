@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010 Change!
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Farouche.Presentation", "com.Farouche\com.Farouche.Presentation.csproj", "{21666F04-C030-4B7D-95A6-97D5C1889FF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Farouche.BusinessLogic", "com.Farouche.BusinessLogic\com.Farouche.BusinessLogic.csproj", "{E96BBF82-B410-4CC7-A7C8-B788416A8069}"
