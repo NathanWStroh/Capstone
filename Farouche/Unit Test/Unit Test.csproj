@@ -3,15 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E366A3B6-F888-499D-86CC-EE7ED690C067}</ProjectGuid>
+    <ProjectGuid>{27B46ADC-919E-458D-B730-B9085A6D4AAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.Farouche.DataAccess</RootNamespace>
-    <AssemblyName>com.Farouche.DataAccess</AssemblyName>
+    <RootNamespace>Unit_Test</RootNamespace>
+    <AssemblyName>Unit Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,34 +33,43 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\NUnit 2.6.3\bin\framework\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseConnection.cs" />
-    <Compile Include="FlexListDAL.cs" />
-    <Compile Include="ProductDAL.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShippingOrderDAL.cs" />
-    <Compile Include="ShippingOrderLineItemDAL.cs" />
-    <Compile Include="ShippingTermDAL.cs" />
-    <Compile Include="ShippingVendorDAL.cs" />
-    <Compile Include="VendorDAL.cs" />
-    <Compile Include="VendorOrderLineItemDAL.cs" />
-    <Compile Include="VendorOrderDAL.cs" />
-    <Compile Include="VendorSourceItemDAL.cs" />
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceivingManagerTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\com.Farouche.BusinessLogic\com.Farouche.BusinessLogic.csproj">
+      <Project>{E96BBF82-B410-4CC7-A7C8-B788416A8069}</Project>
+      <Name>com.Farouche.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\com.Farouche.Commons\com.Farouche.Commons.csproj">
       <Project>{08560DF2-72F5-4FDA-843D-72F3D768FCD8}</Project>
       <Name>com.Farouche.Commons</Name>
     </ProjectReference>
+    <ProjectReference Include="..\com.Farouche.DataAccess\com.Farouche.DataAccess.csproj">
+      <Project>{E366A3B6-F888-499D-86CC-EE7ED690C067}</Project>
+      <Name>com.Farouche.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
