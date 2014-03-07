@@ -36,8 +36,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddVendorWindow.cs">
@@ -52,11 +54,29 @@
     <Compile Include="frmProduct.designer.cs">
       <DependentUpon>frmProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOpenVendorOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOpenVendorOrders.Designer.cs">
+      <DependentUpon>frmOpenVendorOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReceivingNotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceivingNotes.Designer.cs">
+      <DependentUpon>frmReceivingNotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVendor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmVendor.designer.cs">
       <DependentUpon>frmVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReceiving.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReceiving.Designer.cs">
+      <DependentUpon>frmReceiving.cs</DependentUpon>
     </Compile>
     <Compile Include="frmVendorSource.cs">
       <SubType>Form</SubType>
@@ -84,8 +104,17 @@
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmOpenVendorOrders.resx">
+      <DependentUpon>frmOpenVendorOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceivingNotes.resx">
+      <DependentUpon>frmReceivingNotes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVendor.resx">
       <DependentUpon>frmVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReceiving.resx">
+      <DependentUpon>frmReceiving.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVendorSource.resx">
       <DependentUpon>frmVendorSource.cs</DependentUpon>

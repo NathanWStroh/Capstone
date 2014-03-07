@@ -285,6 +285,18 @@ namespace com.Farouche.Presentation
             }
         }
 
+        private void btnOpenVendorOrders_Click(object sender, EventArgs e)
+        {
+            frmOpenVendorOrders _frmOpenVendorOrders = new frmOpenVendorOrders();
+            _frmOpenVendorOrders.Show();
+        }
+
+        private void btnReceiving_Click(object sender, EventArgs e)
+        {
+            frmReceiving _frmReceiving = new frmReceiving();
+            _frmReceiving.Show();
+        }
+
 
        
 
