@@ -76,16 +76,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tpUpdateVendor = new System.Windows.Forms.TabPage();
-            this.tpShowVendors = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtVendors = new System.Windows.Forms.TextBox();
-            this.tpShowProducts = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtProducts = new System.Windows.Forms.TextBox();
-            this.btnProduct = new System.Windows.Forms.Button();
-            this.btnVendorSource = new System.Windows.Forms.Button();
-            this.btnPressed = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
             this.cbVendorID = new System.Windows.Forms.ComboBox();
             this.cbCountry = new System.Windows.Forms.ComboBox();
             this.cbState = new System.Windows.Forms.ComboBox();
@@ -108,6 +98,18 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.tpShowVendors = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtVendors = new System.Windows.Forms.TextBox();
+            this.tpShowProducts = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtProducts = new System.Windows.Forms.TextBox();
+            this.btnProduct = new System.Windows.Forms.Button();
+            this.btnVendorSource = new System.Windows.Forms.Button();
+            this.btnPressed = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnOpenVendorOrders = new System.Windows.Forms.Button();
+            this.btnReceiving = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpAddVendor.SuspendLayout();
             this.tpDeactivateVendor.SuspendLayout();
@@ -593,103 +595,6 @@
             this.tpUpdateVendor.UseVisualStyleBackColor = true;
             this.tpUpdateVendor.Click += new System.EventHandler(this.tpUpdateVendor_Click);
             // 
-            // tpShowVendors
-            // 
-            this.tpShowVendors.Controls.Add(this.label1);
-            this.tpShowVendors.Controls.Add(this.txtVendors);
-            this.tpShowVendors.Location = new System.Drawing.Point(4, 22);
-            this.tpShowVendors.Name = "tpShowVendors";
-            this.tpShowVendors.Size = new System.Drawing.Size(772, 324);
-            this.tpShowVendors.TabIndex = 0;
-            this.tpShowVendors.Text = "Show Vendors";
-            this.tpShowVendors.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Vendors:";
-            // 
-            // txtVendors
-            // 
-            this.txtVendors.Location = new System.Drawing.Point(7, 30);
-            this.txtVendors.Multiline = true;
-            this.txtVendors.Name = "txtVendors";
-            this.txtVendors.Size = new System.Drawing.Size(660, 189);
-            this.txtVendors.TabIndex = 0;
-            // 
-            // tpShowProducts
-            // 
-            this.tpShowProducts.Controls.Add(this.label2);
-            this.tpShowProducts.Controls.Add(this.txtProducts);
-            this.tpShowProducts.Location = new System.Drawing.Point(4, 22);
-            this.tpShowProducts.Name = "tpShowProducts";
-            this.tpShowProducts.Padding = new System.Windows.Forms.Padding(3);
-            this.tpShowProducts.Size = new System.Drawing.Size(772, 324);
-            this.tpShowProducts.TabIndex = 3;
-            this.tpShowProducts.Text = "Show Products";
-            this.tpShowProducts.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Products:";
-            // 
-            // txtProducts
-            // 
-            this.txtProducts.Location = new System.Drawing.Point(8, 32);
-            this.txtProducts.Multiline = true;
-            this.txtProducts.Name = "txtProducts";
-            this.txtProducts.Size = new System.Drawing.Size(660, 189);
-            this.txtProducts.TabIndex = 2;
-            // 
-            // btnProduct
-            // 
-            this.btnProduct.Location = new System.Drawing.Point(108, 399);
-            this.btnProduct.Name = "btnProduct";
-            this.btnProduct.Size = new System.Drawing.Size(90, 23);
-            this.btnProduct.TabIndex = 6;
-            this.btnProduct.Text = "Product";
-            this.btnProduct.UseVisualStyleBackColor = true;
-            this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
-            // 
-            // btnVendorSource
-            // 
-            this.btnVendorSource.Location = new System.Drawing.Point(204, 399);
-            this.btnVendorSource.Name = "btnVendorSource";
-            this.btnVendorSource.Size = new System.Drawing.Size(90, 23);
-            this.btnVendorSource.TabIndex = 7;
-            this.btnVendorSource.Text = "Vendor Source";
-            this.btnVendorSource.UseVisualStyleBackColor = true;
-            this.btnVendorSource.Click += new System.EventHandler(this.btnVendorSource_Click);
-            // 
-            // btnPressed
-            // 
-            this.btnPressed.Enabled = false;
-            this.btnPressed.Location = new System.Drawing.Point(12, 399);
-            this.btnPressed.Name = "btnPressed";
-            this.btnPressed.Size = new System.Drawing.Size(90, 23);
-            this.btnPressed.TabIndex = 8;
-            this.btnPressed.Text = "Vendor";
-            this.btnPressed.UseVisualStyleBackColor = true;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Location = new System.Drawing.Point(747, 402);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(75, 23);
-            this.btnLogout.TabIndex = 9;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
             // cbVendorID
             // 
             this.cbVendorID.FormattingEnabled = true;
@@ -873,11 +778,130 @@
             this.label22.TabIndex = 38;
             this.label22.Text = "Vendor Name:";
             // 
+            // tpShowVendors
+            // 
+            this.tpShowVendors.Controls.Add(this.label1);
+            this.tpShowVendors.Controls.Add(this.txtVendors);
+            this.tpShowVendors.Location = new System.Drawing.Point(4, 22);
+            this.tpShowVendors.Name = "tpShowVendors";
+            this.tpShowVendors.Size = new System.Drawing.Size(772, 324);
+            this.tpShowVendors.TabIndex = 0;
+            this.tpShowVendors.Text = "Show Vendors";
+            this.tpShowVendors.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Vendors:";
+            // 
+            // txtVendors
+            // 
+            this.txtVendors.Location = new System.Drawing.Point(7, 30);
+            this.txtVendors.Multiline = true;
+            this.txtVendors.Name = "txtVendors";
+            this.txtVendors.Size = new System.Drawing.Size(660, 189);
+            this.txtVendors.TabIndex = 0;
+            // 
+            // tpShowProducts
+            // 
+            this.tpShowProducts.Controls.Add(this.label2);
+            this.tpShowProducts.Controls.Add(this.txtProducts);
+            this.tpShowProducts.Location = new System.Drawing.Point(4, 22);
+            this.tpShowProducts.Name = "tpShowProducts";
+            this.tpShowProducts.Padding = new System.Windows.Forms.Padding(3);
+            this.tpShowProducts.Size = new System.Drawing.Size(772, 324);
+            this.tpShowProducts.TabIndex = 3;
+            this.tpShowProducts.Text = "Show Products";
+            this.tpShowProducts.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Products:";
+            // 
+            // txtProducts
+            // 
+            this.txtProducts.Location = new System.Drawing.Point(8, 32);
+            this.txtProducts.Multiline = true;
+            this.txtProducts.Name = "txtProducts";
+            this.txtProducts.Size = new System.Drawing.Size(660, 189);
+            this.txtProducts.TabIndex = 2;
+            // 
+            // btnProduct
+            // 
+            this.btnProduct.Location = new System.Drawing.Point(108, 399);
+            this.btnProduct.Name = "btnProduct";
+            this.btnProduct.Size = new System.Drawing.Size(90, 23);
+            this.btnProduct.TabIndex = 6;
+            this.btnProduct.Text = "Product";
+            this.btnProduct.UseVisualStyleBackColor = true;
+            this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
+            // 
+            // btnVendorSource
+            // 
+            this.btnVendorSource.Location = new System.Drawing.Point(204, 399);
+            this.btnVendorSource.Name = "btnVendorSource";
+            this.btnVendorSource.Size = new System.Drawing.Size(90, 23);
+            this.btnVendorSource.TabIndex = 7;
+            this.btnVendorSource.Text = "Vendor Source";
+            this.btnVendorSource.UseVisualStyleBackColor = true;
+            this.btnVendorSource.Click += new System.EventHandler(this.btnVendorSource_Click);
+            // 
+            // btnPressed
+            // 
+            this.btnPressed.Enabled = false;
+            this.btnPressed.Location = new System.Drawing.Point(12, 399);
+            this.btnPressed.Name = "btnPressed";
+            this.btnPressed.Size = new System.Drawing.Size(90, 23);
+            this.btnPressed.TabIndex = 8;
+            this.btnPressed.Text = "Vendor";
+            this.btnPressed.UseVisualStyleBackColor = true;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(747, 402);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(75, 23);
+            this.btnLogout.TabIndex = 9;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnOpenVendorOrders
+            // 
+            this.btnOpenVendorOrders.Location = new System.Drawing.Point(300, 399);
+            this.btnOpenVendorOrders.Name = "btnOpenVendorOrders";
+            this.btnOpenVendorOrders.Size = new System.Drawing.Size(129, 23);
+            this.btnOpenVendorOrders.TabIndex = 10;
+            this.btnOpenVendorOrders.Text = "Open Vendor Orders";
+            this.btnOpenVendorOrders.UseVisualStyleBackColor = true;
+            this.btnOpenVendorOrders.Click += new System.EventHandler(this.btnOpenVendorOrders_Click);
+            // 
+            // btnReceiving
+            // 
+            this.btnReceiving.Location = new System.Drawing.Point(435, 399);
+            this.btnReceiving.Name = "btnReceiving";
+            this.btnReceiving.Size = new System.Drawing.Size(75, 23);
+            this.btnReceiving.TabIndex = 11;
+            this.btnReceiving.Text = "Receiving";
+            this.btnReceiving.UseVisualStyleBackColor = true;
+            this.btnReceiving.Click += new System.EventHandler(this.btnReceiving_Click);
+            // 
             // FrmVendor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 437);
+            this.Controls.Add(this.btnReceiving);
+            this.Controls.Add(this.btnOpenVendorOrders);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnPressed);
             this.Controls.Add(this.btnVendorSource);
@@ -984,6 +1008,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnOpenVendorOrders;
+        private System.Windows.Forms.Button btnReceiving;
     }
 }
 
