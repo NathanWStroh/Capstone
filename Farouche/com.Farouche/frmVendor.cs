@@ -297,12 +297,11 @@ namespace com.Farouche.Presentation
             _frmReceiving.Show();
         }
 
-
-       
-
-
-
-
-        
+        private void btnShipping_Click(object sender, EventArgs e)
+        {
+            var form = new FrmShipping(_myAccessToken);
+            form.Show();
+            this.Close();
+        }
     }
 }

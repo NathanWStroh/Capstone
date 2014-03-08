@@ -44,6 +44,7 @@
             this.lvProducts = new System.Windows.Forms.ListView();
             this.btnAddProduct = new System.Windows.Forms.Button();
             this.tabControlProducts = new System.Windows.Forms.TabControl();
+            this.btnShipping = new System.Windows.Forms.Button();
             this.tabProducts.SuspendLayout();
             this.tabControlProducts.SuspendLayout();
             this.SuspendLayout();
@@ -157,7 +158,6 @@
             this.btnGetProductByID.TabIndex = 14;
             this.btnGetProductByID.Text = "Find";
             this.btnGetProductByID.UseVisualStyleBackColor = true;
-            this.btnGetProductByID.Click += new System.EventHandler(this.btnViewProducts_Click_1);
             // 
             // btnUpdateProduct
             // 
@@ -219,11 +219,22 @@
             this.tabControlProducts.Size = new System.Drawing.Size(780, 350);
             this.tabControlProducts.TabIndex = 21;
             // 
+            // btnShipping
+            // 
+            this.btnShipping.Location = new System.Drawing.Point(300, 399);
+            this.btnShipping.Name = "btnShipping";
+            this.btnShipping.Size = new System.Drawing.Size(75, 23);
+            this.btnShipping.TabIndex = 25;
+            this.btnShipping.Text = "Shipping";
+            this.btnShipping.UseVisualStyleBackColor = true;
+            this.btnShipping.Click += new System.EventHandler(this.btnShipping_Click);
+            // 
             // FrmProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 437);
+            this.Controls.Add(this.btnShipping);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.tabControlProducts);
             this.Controls.Add(this.btnPressed);
@@ -258,5 +269,6 @@
         private System.Windows.Forms.TabControl tabControlProducts;
         private System.Windows.Forms.Button btnDeactivateProduct;
         private System.Windows.Forms.Button btnActivateProduct;
+        private System.Windows.Forms.Button btnShipping;
     }
 }

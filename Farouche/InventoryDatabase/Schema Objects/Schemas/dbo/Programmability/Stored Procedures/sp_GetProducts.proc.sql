@@ -3,4 +3,4 @@
 CREATE PROCEDURE [dbo].[sp_GetProducts]
 AS
 	SELECT * FROM [dbo].[Products]
-	ORDER BY [ProductID]
+	ORDER BY [Active] DESC, [ProductID]

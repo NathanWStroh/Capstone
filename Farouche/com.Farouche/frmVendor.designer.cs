@@ -110,6 +110,7 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnOpenVendorOrders = new System.Windows.Forms.Button();
             this.btnReceiving = new System.Windows.Forms.Button();
+            this.btnShipping = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpAddVendor.SuspendLayout();
             this.tpDeactivateVendor.SuspendLayout();
@@ -895,11 +896,22 @@
             this.btnReceiving.UseVisualStyleBackColor = true;
             this.btnReceiving.Click += new System.EventHandler(this.btnReceiving_Click);
             // 
+            // btnShipping
+            // 
+            this.btnShipping.Location = new System.Drawing.Point(516, 399);
+            this.btnShipping.Name = "btnShipping";
+            this.btnShipping.Size = new System.Drawing.Size(75, 23);
+            this.btnShipping.TabIndex = 12;
+            this.btnShipping.Text = "Shipping";
+            this.btnShipping.UseVisualStyleBackColor = true;
+            this.btnShipping.Click += new System.EventHandler(this.btnShipping_Click);
+            // 
             // FrmVendor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 437);
+            this.Controls.Add(this.btnShipping);
             this.Controls.Add(this.btnReceiving);
             this.Controls.Add(this.btnOpenVendorOrders);
             this.Controls.Add(this.btnLogout);
@@ -1010,6 +1022,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button btnOpenVendorOrders;
         private System.Windows.Forms.Button btnReceiving;
+        private System.Windows.Forms.Button btnShipping;
     }
 }
 

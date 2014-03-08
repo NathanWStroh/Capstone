@@ -111,5 +111,12 @@ namespace com.Farouche.Presentation
             frm.Show();
             Close();
         }
+
+        private void btnShipping_Click(object sender, EventArgs e)
+        {
+            var form = new FrmShipping(_myAccessToken);
+            form.Show();
+            this.Close();
+        }
     }
 }

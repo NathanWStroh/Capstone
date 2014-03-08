@@ -48,6 +48,18 @@
     <Compile Include="AddVendorWindow.Designer.cs">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAddShippingTerm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddShippingTerm.designer.cs">
+      <DependentUpon>FrmAddShippingTerm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddShippingVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddShippingVendor.designer.cs">
+      <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +77,24 @@
     </Compile>
     <Compile Include="frmReceivingNotes.Designer.cs">
       <DependentUpon>frmReceivingNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShipping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShipping.designer.cs">
+      <DependentUpon>FrmShipping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateShippingTerm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateShippingTerm.designer.cs">
+      <DependentUpon>FrmUpdateShippingTerm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateShippingVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateShippingVendor.designer.cs">
+      <DependentUpon>FrmUpdateShippingVendor.cs</DependentUpon>
     </Compile>
     <Compile Include="frmVendor.cs">
       <SubType>Form</SubType>
@@ -101,6 +131,12 @@
     <EmbeddedResource Include="AddVendorWindow.resx">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddShippingTerm.resx">
+      <DependentUpon>FrmAddShippingTerm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddShippingVendor.resx">
+      <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +145,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReceivingNotes.resx">
       <DependentUpon>frmReceivingNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShipping.resx">
+      <DependentUpon>FrmShipping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateShippingTerm.resx">
+      <DependentUpon>FrmUpdateShippingTerm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateShippingVendor.resx">
+      <DependentUpon>FrmUpdateShippingVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVendor.resx">
       <DependentUpon>frmVendor.cs</DependentUpon>

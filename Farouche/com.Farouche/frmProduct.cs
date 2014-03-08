@@ -26,7 +26,6 @@ using com.Farouche.Commons;
 * 
 */ 
 
-
 //Enumeration for active drop down.
 public enum Active { No = 0, Yes = 1 };
 
@@ -101,15 +100,10 @@ namespace com.Farouche.Presentation
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }//End of populateListView(..)
 
-        //Event handler causing the products list view to be populated.
-        private void btnViewProducts_Click_1(object sender, EventArgs e)
-        {
-
-        }//End of btnViewProducts_Click(..)
-
         private void btnActivateProduct_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.lvProducts.Items[0].Index;
+            //int currentIndex = this.lvProducts.Items[0].Index;
+            int currentIndex = this.lvProducts.SelectedIndices[0];
             Boolean success = _myProductManager.ReactivateProduct(_myProductManager.Products[currentIndex]);
             if (success == true)
             {
@@ -120,7 +114,8 @@ namespace com.Farouche.Presentation
 
         private void btnDeactivate_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.lvProducts.Items[0].Index;
+            //int currentIndex = this.lvProducts.Items[0].Index;
+            int currentIndex = this.lvProducts.SelectedIndices[0];
             Boolean success = _myProductManager.DeactivateProduct(_myProductManager.Products[currentIndex]);
             if (success == true)
             {
@@ -153,7 +148,8 @@ namespace com.Farouche.Presentation
         //Need to make sure that this links up with Nathan's code correctly.
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.lvProducts.Items[0].Index;
+            //int currentIndex = this.lvProducts.Items[0].Index;
+            int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
             ProductView frm = new ProductView(_myAccessToken, thisProduct);
             frm.Show();
@@ -183,7 +179,8 @@ namespace com.Farouche.Presentation
 
         private void lvProducts_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.lvProducts.SelectedItems[0].Index;
+            //int currentIndex = this.lvProducts.SelectedItems[0].Index;
+            int currentIndex = this.lvProducts.SelectedIndices[0];
             Console.WriteLine(currentIndex);
             Product thisProduct = _myProductManager.Products[currentIndex];
             if (thisProduct.Active == true)
@@ -223,5 +220,12 @@ namespace com.Farouche.Presentation
         {
             setDefaults();
         }//End of cbProductStatusSearch_Click(..)
+
+        private void btnShipping_Click(object sender, EventArgs e)
+        {
+            var form = new FrmShipping(_myAccessToken);
+            form.Show();
+            this.Close();
+        }
     }
 }

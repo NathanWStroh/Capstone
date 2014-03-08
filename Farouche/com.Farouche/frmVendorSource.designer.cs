@@ -30,6 +30,7 @@
         {
             this.vendorSrcTab = new System.Windows.Forms.TabControl();
             this.addVSITab = new System.Windows.Forms.TabPage();
+            this.unitCost = new System.Windows.Forms.TextBox();
             this.vnd = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -49,7 +50,7 @@
             this.btnVendor = new System.Windows.Forms.Button();
             this.btnPressed = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.unitCost = new System.Windows.Forms.TextBox();
+            this.btnShipping = new System.Windows.Forms.Button();
             this.vendorSrcTab.SuspendLayout();
             this.addVSITab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minQty)).BeginInit();
@@ -86,6 +87,13 @@
             this.addVSITab.TabIndex = 0;
             this.addVSITab.Text = "Add Vendor Source Item";
             this.addVSITab.UseVisualStyleBackColor = true;
+            // 
+            // unitCost
+            // 
+            this.unitCost.Location = new System.Drawing.Point(266, 58);
+            this.unitCost.Name = "unitCost";
+            this.unitCost.Size = new System.Drawing.Size(121, 20);
+            this.unitCost.TabIndex = 10;
             // 
             // vnd
             // 
@@ -253,18 +261,22 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // unitCost
+            // btnShipping
             // 
-            this.unitCost.Location = new System.Drawing.Point(266, 58);
-            this.unitCost.Name = "unitCost";
-            this.unitCost.Size = new System.Drawing.Size(121, 20);
-            this.unitCost.TabIndex = 10;
+            this.btnShipping.Location = new System.Drawing.Point(300, 399);
+            this.btnShipping.Name = "btnShipping";
+            this.btnShipping.Size = new System.Drawing.Size(75, 23);
+            this.btnShipping.TabIndex = 24;
+            this.btnShipping.Text = "Shipping";
+            this.btnShipping.UseVisualStyleBackColor = true;
+            this.btnShipping.Click += new System.EventHandler(this.btnShipping_Click);
             // 
             // FrmVendorSource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 437);
+            this.Controls.Add(this.btnShipping);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnPressed);
             this.Controls.Add(this.btnVendor);
@@ -306,6 +318,7 @@
         private System.Windows.Forms.Button btnPressed;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.TextBox unitCost;
+        private System.Windows.Forms.Button btnShipping;
     }
 }
 
