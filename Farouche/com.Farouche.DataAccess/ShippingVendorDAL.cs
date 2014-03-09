@@ -7,13 +7,13 @@ using com.Farouche.Commons;
 
 //Author: Andrew
 //Date Created: 3/2/2014
-//Last Modified: 3/2/2014
+//Last Modified: 3/8/2014
 //Last Modified By: Andrew Willhoit
 
 /*
  *                               Changelog
  * Date         By          Ticket          Version         Description
- * 
+ * 3/6/14       Andrew                                      Fixed methods
  * 
  * 
 */
@@ -33,15 +33,15 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@ShippingVendorID", shippingVendor.Id);
-                mySqlCommand.Parameters.AddWithValue("@Name", shippingVendor.Name);
-                mySqlCommand.Parameters.AddWithValue("@Address", shippingVendor.Address);
-                mySqlCommand.Parameters.AddWithValue("@City", shippingVendor.City);
-                mySqlCommand.Parameters.AddWithValue("@State", shippingVendor.State);
-                mySqlCommand.Parameters.AddWithValue("@Zip", shippingVendor.Zip);
-                mySqlCommand.Parameters.AddWithValue("@Phone", shippingVendor.Phone);
-                mySqlCommand.Parameters.AddWithValue("@Contact", shippingVendor.Contact);
-                mySqlCommand.Parameters.AddWithValue("@ContactEmail", shippingVendor.ContactEmail);
+                mySqlCommand.Parameters.AddWithValue("@name", shippingVendor.Name);
+                mySqlCommand.Parameters.AddWithValue("@address", shippingVendor.Address);
+                mySqlCommand.Parameters.AddWithValue("@city", shippingVendor.City);
+                mySqlCommand.Parameters.AddWithValue("@state", shippingVendor.State);
+                mySqlCommand.Parameters.AddWithValue("@country", shippingVendor.Country);
+                mySqlCommand.Parameters.AddWithValue("@zip", shippingVendor.Zip);
+                mySqlCommand.Parameters.AddWithValue("@phone", shippingVendor.Phone);
+                mySqlCommand.Parameters.AddWithValue("@contact", shippingVendor.Contact);
+                mySqlCommand.Parameters.AddWithValue("@contactEmail", shippingVendor.ContactEmail);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -69,7 +69,7 @@ namespace com.Farouche.DataAccess
         }// end AddShippingVendor
 
 
-	    public static bool UpdateShippingVendor(ShippingVendor shippingVendor,ShippingVendor origShippingVendor, SqlConnection myConnection)
+        public static bool UpdateShippingVendor(ShippingVendor shippingVendor,ShippingVendor origShippingVendor, SqlConnection myConnection)
         {
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
@@ -78,25 +78,27 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@ShippingVendorID", shippingVendor.Id);
-                mySqlCommand.Parameters.AddWithValue("@Name", shippingVendor.Name);
-                mySqlCommand.Parameters.AddWithValue("@Address", shippingVendor.Address);
-                mySqlCommand.Parameters.AddWithValue("@City", shippingVendor.City);
-                mySqlCommand.Parameters.AddWithValue("@State", shippingVendor.State);
-                mySqlCommand.Parameters.AddWithValue("@Zip", shippingVendor.Zip);
-                mySqlCommand.Parameters.AddWithValue("@Phone", shippingVendor.Phone);
-                mySqlCommand.Parameters.AddWithValue("@Contact", shippingVendor.Contact);
-                mySqlCommand.Parameters.AddWithValue("@ContactEmail", shippingVendor.ContactEmail);
 
-                mySqlCommand.Parameters.AddWithValue("@ShippingVendorID", origShippingVendor.Id);
-                mySqlCommand.Parameters.AddWithValue("@Name", origShippingVendor.Name);
-                mySqlCommand.Parameters.AddWithValue("@Address", origShippingVendor.Address);
-                mySqlCommand.Parameters.AddWithValue("@City", origShippingVendor.City);
-                mySqlCommand.Parameters.AddWithValue("@State", origShippingVendor.State);
-                mySqlCommand.Parameters.AddWithValue("@Zip", origShippingVendor.Zip);
-                mySqlCommand.Parameters.AddWithValue("@Phone", origShippingVendor.Phone);
-                mySqlCommand.Parameters.AddWithValue("@Contact", origShippingVendor.Contact);
-                mySqlCommand.Parameters.AddWithValue("@ContactEmail", origShippingVendor.ContactEmail);
+                mySqlCommand.Parameters.AddWithValue("@name", shippingVendor.Name);
+                mySqlCommand.Parameters.AddWithValue("@address", shippingVendor.Address);
+                mySqlCommand.Parameters.AddWithValue("@city", shippingVendor.City);
+                mySqlCommand.Parameters.AddWithValue("@state", shippingVendor.State);
+                mySqlCommand.Parameters.AddWithValue("@country", shippingVendor.Country);
+                mySqlCommand.Parameters.AddWithValue("@zip", shippingVendor.Zip);
+                mySqlCommand.Parameters.AddWithValue("@phone", shippingVendor.Phone);
+                mySqlCommand.Parameters.AddWithValue("@contact", shippingVendor.Contact);
+                mySqlCommand.Parameters.AddWithValue("@contactEmail", shippingVendor.ContactEmail);
+
+                mySqlCommand.Parameters.AddWithValue("@orig_ShippingVendorID", origShippingVendor.Id);
+                mySqlCommand.Parameters.AddWithValue("@orig_Name", origShippingVendor.Name);
+                mySqlCommand.Parameters.AddWithValue("@orig_Address", origShippingVendor.Address);
+                mySqlCommand.Parameters.AddWithValue("@orig_City", origShippingVendor.City);
+                mySqlCommand.Parameters.AddWithValue("@orig_State", origShippingVendor.State);
+                mySqlCommand.Parameters.AddWithValue("@orig_Country", origShippingVendor.Country);
+                mySqlCommand.Parameters.AddWithValue("@orig_Zip", origShippingVendor.Zip);
+                mySqlCommand.Parameters.AddWithValue("@orig_Phone", origShippingVendor.Phone);
+                mySqlCommand.Parameters.AddWithValue("@orig_Contact", origShippingVendor.Contact);
+                mySqlCommand.Parameters.AddWithValue("@orig_ContactEmail", origShippingVendor.ContactEmail);
 
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
@@ -123,9 +125,9 @@ namespace com.Farouche.DataAccess
             }
             return false;
         }// end UpdateShippingVendor
-		   
+           
 
-	    public static ShippingVendor GetShippingVendorById(int id, SqlConnection myConnection)
+        public static ShippingVendor GetShippingVendorById(int id, SqlConnection myConnection)
         {
             var shippingVendor = new ShippingVendor();
             myConnection = myConnection ?? GetInventoryDbConnection();
@@ -135,7 +137,7 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@ShippingVendorID", id);
+                mySqlCommand.Parameters.AddWithValue("@shippingVendorID", id);
                 myConnection.Open();
 
                 var mySqlReader = mySqlCommand.ExecuteReader();
@@ -149,8 +151,8 @@ namespace com.Farouche.DataAccess
                             Name = mySqlReader.GetString(1),
                             Address = mySqlReader.GetString(2),
                             City = mySqlReader.GetString(3),
-                            Country = mySqlReader.GetString(4),
-                            State = mySqlReader.GetString(5),
+                            State = mySqlReader.GetString(4),
+                            Country = mySqlReader.GetString(5),
                             Zip = mySqlReader.GetString(6),
                             Phone = mySqlReader.GetString(7),
                             Contact = mySqlReader.GetString(8),
@@ -184,9 +186,9 @@ namespace com.Farouche.DataAccess
 
             return shippingVendor;
         }// end GetShippingVendorById
-		    
+            
 
-	    public static List<ShippingVendor> GetAllShippingVendors(SqlConnection myConnection)
+        public static List<ShippingVendor> GetAllShippingVendors(SqlConnection myConnection)
         {
             var shippingVendorList = new List<ShippingVendor>();
 
@@ -210,8 +212,8 @@ namespace com.Farouche.DataAccess
                             Name = mySqlReader.GetString(1),
                             Address = mySqlReader.GetString(2),
                             City = mySqlReader.GetString(3),
-                            Country = mySqlReader.GetString(4),
                             State = mySqlReader.GetString(5),
+                            Country = mySqlReader.GetString(4),
                             Zip = mySqlReader.GetString(6),
                             Phone = mySqlReader.GetString(7),
                             Contact = mySqlReader.GetString(8),

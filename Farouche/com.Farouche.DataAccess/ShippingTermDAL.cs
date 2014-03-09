@@ -7,13 +7,13 @@ using com.Farouche.Commons;
 
 //Author: Andrew
 //Date Created: 3/2/2014
-//Last Modified: 3/2/2014
+//Last Modified: 3/8/2014
 //Last Modified By: Andrew Willhoit
 
 /*
  *                               Changelog
  * Date         By          Ticket          Version         Description
- * 
+ * 3/6/14       Andrew                                      Fixed methods
  * 
  * 
 */
@@ -31,9 +31,8 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@ShippingTermID", shippingTerm.Id);
-                mySqlCommand.Parameters.AddWithValue("@ShippingVendorID",shippingTerm.ShippingVendorId);
-                mySqlCommand.Parameters.AddWithValue("@Description", shippingTerm.Description);
+                mySqlCommand.Parameters.AddWithValue("@shippingVendorID",shippingTerm.ShippingVendorId);
+                mySqlCommand.Parameters.AddWithValue("@description", shippingTerm.Description);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -59,9 +58,9 @@ namespace com.Farouche.DataAccess
             }
             return false; 
         }//end AddShippingTerm
-	
+    
 
-	public static bool UpdateShippingTerms(ShippingTerm shippingTerm, ShippingTerm origShippingTerm, SqlConnection myConnection)
+    public static bool UpdateShippingTerms(ShippingTerm shippingTerm, ShippingTerm origShippingTerm, SqlConnection myConnection)
     {
         myConnection = myConnection ?? GetInventoryDbConnection();
         try
@@ -70,13 +69,12 @@ namespace com.Farouche.DataAccess
             {
                 CommandType = CommandType.StoredProcedure
             };
-            mySqlCommand.Parameters.AddWithValue("@ShippingTermID", shippingTerm.Id);
-            mySqlCommand.Parameters.AddWithValue("@ShippingVendorID", shippingTerm.ShippingVendorId);
-            mySqlCommand.Parameters.AddWithValue("@Description", shippingTerm.Description);
+            mySqlCommand.Parameters.AddWithValue("@shippingVendorID", shippingTerm.ShippingVendorId);
+            mySqlCommand.Parameters.AddWithValue("@description", shippingTerm.Description);
 
-            mySqlCommand.Parameters.AddWithValue("@ShippingTermID", origShippingTerm.Id);
-            mySqlCommand.Parameters.AddWithValue("@ShippingVendorID", origShippingTerm.ShippingVendorId);
-            mySqlCommand.Parameters.AddWithValue("@Description", origShippingTerm.Description);
+            mySqlCommand.Parameters.AddWithValue("@orig_ShippingTermID", origShippingTerm.Id);
+            mySqlCommand.Parameters.AddWithValue("@orig_ShippingVendorID", origShippingTerm.ShippingVendorId);
+            mySqlCommand.Parameters.AddWithValue("@orig_Description", origShippingTerm.Description);
 
             myConnection.Open();
             if (mySqlCommand.ExecuteNonQuery() == 1)
@@ -105,17 +103,17 @@ namespace com.Farouche.DataAccess
     }// end UpdateShippingTerms
 
 
-	public static ShippingTerm GetShippingTermsById(int id, SqlConnection myConnection)
+    public static ShippingTerm GetShippingTermsById(int id, SqlConnection myConnection)
     {
         var shippingTerm = new ShippingTerm();
         myConnection = myConnection ?? GetInventoryDbConnection();
         try
         {
-            var mySqlCommand = new SqlCommand("proc_getshippingTermsByID", myConnection)
+            var mySqlCommand = new SqlCommand("proc_GetShippingTermsByID", myConnection)
             {
                 CommandType = CommandType.StoredProcedure
             };
-            mySqlCommand.Parameters.AddWithValue("@ShippingTermID", id);
+            mySqlCommand.Parameters.AddWithValue("@shippingTermID", id);
             myConnection.Open();
 
             var mySqlReader = mySqlCommand.ExecuteReader();
@@ -127,7 +125,7 @@ namespace com.Farouche.DataAccess
                     shippingTerm = new ShippingTerm(mySqlReader.GetInt32(0))
                     {
                        ShippingVendorId = mySqlReader.GetInt32(1),
-                        Description = mySqlReader.GetString(2)
+                       Description = mySqlReader.GetString(2)
                     };
                 }
 
@@ -156,7 +154,7 @@ namespace com.Farouche.DataAccess
         return shippingTerm;
     }//end GetShippingTermsById
 
-	public static List<ShippingTerm> GetAllShippingTerms(SqlConnection myConnection)
+    public static List<ShippingTerm> GetAllShippingTerms(SqlConnection myConnection)
     {
         var shippingTermList = new List<ShippingTerm>();
 
@@ -207,7 +205,7 @@ namespace com.Farouche.DataAccess
         return shippingTermList;
     }//end GetAllShippingTerms
 
-		
+        
 
 
     }

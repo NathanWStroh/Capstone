@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 //Author: Andrew
 //Date Created: 2/23/2014
-//Last Modified: 3/1/2014 
+//Last Modified: 3/8/2014 
 //Last Modified By: Andrew Willhoit
 
 /*
 *                               Changelog
 * Date         By          Ticket          Version         Description
-* 
+* 3/6/14       Andrew                                      Added _userFirstName & _userLastName
 * 
 */
 
@@ -19,10 +19,11 @@ namespace com.Farouche.Commons
     {
         private int _Id;
         private int _purchaseOrderId;
-        private int _userId; // picker or packer
-        private string _userName; // picker or packer name, not in Shipping Order table, comes from users table?
+        private int? _userId; // picker or packer
+        private string _userLastName;
+        private string _userFirstName; // picker or packer name, not in Shipping Order table, comes from users table?
         private Boolean _picked; //when picked is switched to true, _userID should be set to null
-        private DateTime _shipDate;
+        private DateTime? _shipDate;
         private int _shippingTermId;
         private string _shippingTermDesc; // not in Shipping Order table, but comes from ShippingTerm Table
         private string _shippingVendorName; // // not in ShippingOrder table, but comes from ShippingVendor table
@@ -32,6 +33,7 @@ namespace com.Farouche.Commons
         private string _shipToState;
         private string _shipToZip;
         private List<ShippingOrderLineItem> _shippingOrderLineItemList;
+
 
 
 
@@ -66,7 +68,7 @@ namespace com.Farouche.Commons
                 _purchaseOrderId = value;
             }
         }
-        public int UserId
+        public int? UserId
         {
             get
             {
@@ -77,15 +79,26 @@ namespace com.Farouche.Commons
                 _userId = value;
             }
         }
-        public string UserName
+        public string UserLastName
+        {
+            get
+            {
+                return _userLastName;
+            }
+            set
+            {
+                _userLastName = value;
+            }
+        }
+        public string UserFirstName
         {
             get 
             {
-                return _userName; 
+                return _userFirstName; 
             }
             set 
             {
-                _userName = value; 
+                _userFirstName = value; 
             }
         }
         public Boolean Picked
@@ -99,7 +112,7 @@ namespace com.Farouche.Commons
                 _picked = value;
             }
         }
-        public DateTime ShipDate
+        public DateTime? ShipDate
         {
             get 
             { 
@@ -214,7 +227,7 @@ namespace com.Farouche.Commons
 
         public override string ToString()
         {
-            return string.Format("Id: {0}, PurchaseOrderId: {1}, UserId:, {2}, UserName:, {3}, Picked: {4}, ShipDate: {5}, ShippingTermsId: {6}, ShippingTermsDesc: {7}, ShippingVendorName: {8}, ShipToName: {9}, ShipToAddress: {10}, ShipToCity: {11}, ShipToState: {12}, ShipToZip: {13}, ShippingOrderLineItemList: {14}", ID, PurchaseOrderId, UserId, UserName, Picked, ShipDate, ShippingTermId, ShippingTermDesc, ShippingVendorName, ShipToName, ShipToAddress, ShipToCity, ShipToState, ShipToZip, ShippingOrderLineItemList);
+            return string.Format("Id: {0}, PurchaseOrderId: {1}, UserId: {2}, UserLastName: {3}, UserFirstName: {4}, Picked: {5}, ShipDate: {6}, ShippingTermsId: {7}, ShippingTermsDesc: {8}, ShippingVendorName: {9}, ShipToName: {10}, ShipToAddress: {11}, ShipToCity: {12}, ShipToState: {13}, ShipToZip: {14}", ID, PurchaseOrderId, UserId, UserLastName, UserFirstName, Picked, ShipDate, ShippingTermId, ShippingTermDesc, ShippingVendorName, ShipToName, ShipToAddress, ShipToCity, ShipToState, ShipToZip);
         }
 
         public Type GetType()

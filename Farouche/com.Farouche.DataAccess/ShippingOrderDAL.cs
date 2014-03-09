@@ -7,13 +7,13 @@ using com.Farouche.Commons;
 
 //Author: Andrew
 //Date Created: 3/2/2014
-//Last Modified: 3/2/2014
+//Last Modified: 3/8/2014
 //Last Modified By: Andrew Willhoit
 
 /*
  *                               Changelog
  * Date         By          Ticket          Version         Description
- * 
+ * 3/6/14       Andrew                                      Fixed methods
  * 
  * 
 */
@@ -32,20 +32,18 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
-                mySqlCommand.Parameters.AddWithValue("@ProductID", shippingOrder.PurchaseOrderId);
-                mySqlCommand.Parameters.AddWithValue("@ProductName", shippingOrder.UserId);
-                mySqlCommand.Parameters.AddWithValue("@Picked", shippingOrder.Picked ? 1 : 0); //Change to bit, Ternary Operator 
-                mySqlCommand.Parameters.AddWithValue("@ShipDate", (SqlDateTime)shippingOrder.ShipDate);
-                mySqlCommand.Parameters.AddWithValue("@ShippingTermID", shippingOrder.ShippingTermId);
-                mySqlCommand.Parameters.AddWithValue("@ShipToName", shippingOrder.ShipToName);
-                mySqlCommand.Parameters.AddWithValue("@ShipToAddress", shippingOrder.ShipToAddress);
-                mySqlCommand.Parameters.AddWithValue("@ShipToCity", shippingOrder.ShipToCity);
-                mySqlCommand.Parameters.AddWithValue("@ShipToState", shippingOrder.ShipToState);
-                mySqlCommand.Parameters.AddWithValue("@ShipToZip", shippingOrder.ShipToZip);
+                
+                mySqlCommand.Parameters.AddWithValue("@purchaseOrderID", shippingOrder.PurchaseOrderId);
+                mySqlCommand.Parameters.AddWithValue("@userID", shippingOrder.UserId ?? Convert.DBNull); //could be null
+                mySqlCommand.Parameters.AddWithValue("@picked", shippingOrder.Picked ? 1 : 0);
+                mySqlCommand.Parameters.AddWithValue("@shipDate", (shippingOrder.ShipDate) ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shippingTermID", shippingOrder.ShippingTermId);                   
+                mySqlCommand.Parameters.AddWithValue("@shipToName", shippingOrder.ShipToName ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shipToAddress", shippingOrder.ShipToAddress ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shipToCity", shippingOrder.ShipToCity ?? Convert.DBNull); 
+                mySqlCommand.Parameters.AddWithValue("@shipToState", shippingOrder.ShipToState ?? Convert.DBNull); 
+                mySqlCommand.Parameters.AddWithValue("@shipToZip", shippingOrder.ShipToZip ?? Convert.DBNull); 
 
-                // need a way to add shippingOrder.ShippingOrderLineItemList to database???
 
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
@@ -83,30 +81,29 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
-                mySqlCommand.Parameters.AddWithValue("@ProductID", shippingOrder.PurchaseOrderId);
-                mySqlCommand.Parameters.AddWithValue("@ProductName", shippingOrder.UserId);
-                mySqlCommand.Parameters.AddWithValue("@Picked", shippingOrder.Picked ? 1 : 0); //Change to bit, Ternary Operator 
-                mySqlCommand.Parameters.AddWithValue("@ShipDate", (SqlDateTime)shippingOrder.ShipDate);
-                mySqlCommand.Parameters.AddWithValue("@ShippingTermID", shippingOrder.ShippingTermId);
-                mySqlCommand.Parameters.AddWithValue("@ShipToName", shippingOrder.ShipToName);
-                mySqlCommand.Parameters.AddWithValue("@ShipToAddress", shippingOrder.ShipToAddress);
-                mySqlCommand.Parameters.AddWithValue("@ShipToCity", shippingOrder.ShipToCity);
-                mySqlCommand.Parameters.AddWithValue("@ShipToState", shippingOrder.ShipToState);
-                mySqlCommand.Parameters.AddWithValue("@ShipToZip", shippingOrder.ShipToZip);
+
+                mySqlCommand.Parameters.AddWithValue("@purchaseOrderID", shippingOrder.PurchaseOrderId);
+                mySqlCommand.Parameters.AddWithValue("@userID", shippingOrder.UserId ?? Convert.DBNull); //could be null
+                mySqlCommand.Parameters.AddWithValue("@picked", shippingOrder.Picked ? 1 : 0);
+                mySqlCommand.Parameters.AddWithValue("@shipDate", (shippingOrder.ShipDate) ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shippingTermID", shippingOrder.ShippingTermId);
+                mySqlCommand.Parameters.AddWithValue("@shipToName", shippingOrder.ShipToName ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shipToAddress", shippingOrder.ShipToAddress ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shipToCity", shippingOrder.ShipToCity ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shipToState", shippingOrder.ShipToState ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@shipToZip", shippingOrder.ShipToZip ?? Convert.DBNull); 
 
                 mySqlCommand.Parameters.AddWithValue("@orig_ShippingOrderID", origShippingOrder.ID);
-                mySqlCommand.Parameters.AddWithValue("@orig_ProductID", origShippingOrder.PurchaseOrderId);
-                mySqlCommand.Parameters.AddWithValue("@orig_ProductName", origShippingOrder.UserId);
-                mySqlCommand.Parameters.AddWithValue("@orig_Picked", origShippingOrder.Picked ? 1 : 0); //Change to bit, Ternary Operator 
-                mySqlCommand.Parameters.AddWithValue("@orig_ShipDate", (SqlDateTime)origShippingOrder.ShipDate);
+                mySqlCommand.Parameters.AddWithValue("@orig_PurchaseOrderID", origShippingOrder.PurchaseOrderId);
+                mySqlCommand.Parameters.AddWithValue("@orig_UserID", origShippingOrder.UserId ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@orig_Picked", origShippingOrder.Picked ? 1 : 0);
+                mySqlCommand.Parameters.AddWithValue("@orig_ShipDate", (origShippingOrder.ShipDate) ?? Convert.DBNull);
                 mySqlCommand.Parameters.AddWithValue("@orig_ShippingTermID", origShippingOrder.ShippingTermId);
-                mySqlCommand.Parameters.AddWithValue("@orig_ShipToName", origShippingOrder.ShipToName);
-                mySqlCommand.Parameters.AddWithValue("@orig_ShipToAddress", origShippingOrder.ShipToAddress);
-                mySqlCommand.Parameters.AddWithValue("@orig_ShipToCity", origShippingOrder.ShipToCity);
-                mySqlCommand.Parameters.AddWithValue("@orig_ShipToState", origShippingOrder.ShipToState);
-                mySqlCommand.Parameters.AddWithValue("@orig_ShipToZip", origShippingOrder.ShipToZip);
+                mySqlCommand.Parameters.AddWithValue("@orig_ShipToName", origShippingOrder.ShipToName ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@orig_ShipToAddress", origShippingOrder.ShipToAddress ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@orig_ShipToCity", origShippingOrder.ShipToCity ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@orig_ShipToState", origShippingOrder.ShipToState ?? Convert.DBNull);
+                mySqlCommand.Parameters.AddWithValue("@orig_ShipToZip", origShippingOrder.ShipToZip ?? Convert.DBNull); 
 
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
@@ -134,17 +131,18 @@ namespace com.Farouche.DataAccess
             return false;
         } // end UpdateShippingOrder(...)
 
+
         public static bool PickShippingOrder(ShippingOrder shippingOrder, SqlConnection myConnection)
         {
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_PickShippingOrder", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateShippingOrderPicked", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
+                
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrder.ID);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -177,12 +175,12 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_UnpickShippingOrder", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateShippingOrderRemovePicked", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
+                
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrder.ID);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -215,13 +213,13 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_ShipShippingOrder", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateShippingOrderShipDate", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
-                mySqlCommand.Parameters.AddWithValue("@ShipDate", shippingOrder.ShipDate);
+                
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrder.ID);
+                mySqlCommand.Parameters.AddWithValue("@shipDate", shippingOrder.ShipDate);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -254,12 +252,12 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_UnpickShippingOrder", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateShippingOrderRemoveShipDate", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
+                
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrder.ID);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -291,13 +289,13 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_AssignShippingOrder", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateShippingOrderUser", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
-                mySqlCommand.Parameters.AddWithValue("@NewUserID", newUserId);
+               
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrder.ID);
+                mySqlCommand.Parameters.AddWithValue("@newUserID", newUserId);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -330,12 +328,12 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_UnassignShippingOrder", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateShippingOrderRemoveUser", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                //TODO - verify these @param names are correct
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrder.ID);
+                
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrder.ID);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -386,22 +384,38 @@ namespace com.Farouche.DataAccess
                         var shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
-
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID,myConnection);
-                       
+
+                        //var shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0));
+                        //shippingOrder.PurchaseOrderId = mySqlReader.GetInt32(1);
+                        //shippingOrder.UserId = mySqlReader[2] as int?;
+                        //shippingOrder.UserLastName = mySqlReader[3] as string;
+                        //shippingOrder.UserFirstName = mySqlReader[4] as string;
+                        //shippingOrder.Picked = (Boolean)mySqlReader.GetSqlBoolean(5);
+                        //shippingOrder.ShipDate = mySqlReader[6] as DateTime?;
+                        //shippingOrder.ShippingTermId = mySqlReader.GetInt32(7);
+                        //shippingOrder.ShippingTermDesc = mySqlReader.GetString(8);
+                        //shippingOrder.ShippingVendorName = mySqlReader.GetString(9);
+                        //shippingOrder.ShipToName = mySqlReader[10] as string;
+                        //shippingOrder.ShipToAddress = mySqlReader[11] as string;
+                        //shippingOrder.ShipToCity = mySqlReader[12] as string;
+                        //shippingOrder.ShipToState = mySqlReader[13] as string;
+                        //shippingOrder.ShipToZip = mySqlReader[14] as string;
+
+
                         //Add item to list
                         shippingOrderList.Add(shippingOrder);
 
@@ -422,7 +436,7 @@ namespace com.Farouche.DataAccess
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine("An Unknown Exception has occurred." + ex.Message + ex.StackTrace);
             }
             finally
             {
@@ -454,27 +468,24 @@ namespace com.Farouche.DataAccess
                         var shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
-
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID, myConnection);
 
                         //Add item to list
                         shippingOrderList.Add(shippingOrder);
-
                     }
-
                 }
 
                 mySqlReader.Close();
@@ -522,27 +533,24 @@ namespace com.Farouche.DataAccess
                         var shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
-
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID, myConnection);
 
                         //Add item to list
                         shippingOrderList.Add(shippingOrder);
-
                     }
-
                 }
 
                 mySqlReader.Close();
@@ -591,27 +599,24 @@ namespace com.Farouche.DataAccess
                         var shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
-
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID, myConnection);
 
                         //Add item to list
                         shippingOrderList.Add(shippingOrder);
-
                     }
-
                 }
 
                 mySqlReader.Close();
@@ -659,21 +664,20 @@ namespace com.Farouche.DataAccess
                         var shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
-
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID, myConnection);
 
                         //Add item to list
                         shippingOrderList.Add(shippingOrder);
@@ -714,11 +718,11 @@ namespace com.Farouche.DataAccess
             try
             {
 
-                var mySqlCommand = new SqlCommand("proc_GetShippingOrderById", myConnection)
+                var mySqlCommand = new SqlCommand("proc_GetShippingOrderByID", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@ShippingOrderID", shippingOrderId);
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrderId);
                 myConnection.Open();
 
                 var mySqlReader = mySqlCommand.ExecuteReader();
@@ -729,21 +733,37 @@ namespace com.Farouche.DataAccess
                         shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
 
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID, myConnection);
+                        //shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0));
+                        //shippingOrder.PurchaseOrderId = mySqlReader.GetInt32(1);
+                        //shippingOrder.UserId = mySqlReader.GetInt32(2);
+                        //shippingOrder.UserLastName = mySqlReader.GetString(3);
+                        //shippingOrder.UserFirstName = mySqlReader.GetString(4);
+                        //shippingOrder.Picked = (Boolean)mySqlReader.GetSqlBoolean(5);
+                        //shippingOrder.ShipDate = mySqlReader.GetDateTime(6);
+                        //shippingOrder.ShippingTermId = mySqlReader.GetInt32(7);
+                        //shippingOrder.ShippingTermDesc = mySqlReader.GetString(8);
+                        //shippingOrder.ShippingVendorName = mySqlReader.GetString(9);
+                        //shippingOrder.ShipToName = mySqlReader[10] as string;
+                        //shippingOrder.ShipToAddress = mySqlReader[11] as string;
+                        //shippingOrder.ShipToCity = mySqlReader[12] as string;
+                        //shippingOrder.ShipToState = mySqlReader[13] as string;
+                        //shippingOrder.ShipToZip = mySqlReader[14] as string;
+
                     } // end while
 
                 
@@ -774,6 +794,8 @@ namespace com.Farouche.DataAccess
         } // end GetShippingOrderById
 
 
+
+
         public static ShippingOrder GetShippingOrderByPurchaseOrderId(int purchaseOrderId, SqlConnection myConnection)
         {
             var shippingOrder = new ShippingOrder();
@@ -782,11 +804,11 @@ namespace com.Farouche.DataAccess
             try
             {
 
-                var mySqlCommand = new SqlCommand("proc_GetShippingOrder", myConnection)
+                var mySqlCommand = new SqlCommand("proc_GetShippingOrderByPurchaseOrderID", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@PurchaseOrderID", purchaseOrderId);
+                mySqlCommand.Parameters.AddWithValue("@purchaseOrderID", purchaseOrderId);
                 myConnection.Open();
 
                 var mySqlReader = mySqlCommand.ExecuteReader();
@@ -797,21 +819,21 @@ namespace com.Farouche.DataAccess
                         shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
 
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID, myConnection);
                     } // end while
 
 
@@ -864,21 +886,20 @@ namespace com.Farouche.DataAccess
                         var shippingOrder = new ShippingOrder(mySqlReader.GetInt32(0))
                         {
                             PurchaseOrderId = mySqlReader.GetInt32(1),
-                            UserId = mySqlReader.GetInt32(2),
-                            UserName = mySqlReader.GetString(3),
-                            Picked = (Boolean)mySqlReader.GetSqlBoolean(4),
-                            ShipDate = (DateTime)mySqlReader.GetSqlDateTime(5),
-                            ShippingTermId = mySqlReader.GetInt32(6),
-                            ShippingTermDesc = mySqlReader.GetString(7),
-                            ShippingVendorName = mySqlReader.GetString(8),
-                            ShipToName = mySqlReader.GetString(9),
-                            ShipToAddress = mySqlReader.GetString(10),
-                            ShipToState = mySqlReader.GetString(11),
-                            ShipToZip = mySqlReader.GetString(12)
-
+                            UserId = mySqlReader[2] as int?,
+                            UserLastName = mySqlReader[3] as string,
+                            UserFirstName = mySqlReader[4] as string,
+                            Picked = (Boolean)mySqlReader.GetSqlBoolean(5),
+                            ShipDate = mySqlReader[6] as DateTime?,
+                            ShippingTermId = mySqlReader.GetInt32(7),
+                            ShippingTermDesc = mySqlReader.GetString(8),
+                            ShippingVendorName = mySqlReader.GetString(9),
+                            ShipToName = mySqlReader[10] as string,
+                            ShipToAddress = mySqlReader[11] as string,
+                            ShipToCity = mySqlReader[12] as string,
+                            ShipToState = mySqlReader[13] as string,
+                            ShipToZip = mySqlReader[14] as string
                         };
-                        //populates the LineItemsList
-                        shippingOrder.ShippingOrderLineItemList = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrder.ID, myConnection);
 
                         //Add item to list
                         shippingOrderList.Add(shippingOrder);

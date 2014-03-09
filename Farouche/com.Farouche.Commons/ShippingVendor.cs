@@ -2,7 +2,7 @@
 
 //Author: Andrew
 //Date Created: 3/1/2014
-//Last Modified: 3/2/2014 
+//Last Modified: 3/8/2014 
 //Last Modified By: Andrew Willhoit
 
 /*
@@ -126,7 +126,7 @@ namespace com.Farouche.Commons
         }
         public override string ToString()
         {
-            return string.Format("ID: {0}, Name: {1}, Address, {2}, City: {3}, Country: {4}, State: {5}, Zip: {6}, Phone: {7}, Contact: {8}, ContactEmail: {9}", Id, Name, Address, City, Country, State, Zip, Phone, Contact, ContactEmail);
+            return string.Format("ID: {0}, Name: {1}, Address: {2}, City: {3}, State: {4}, Country: {5}, Zip: {6}, Phone: {7}, Contact: {8}, ContactEmail: {9}", Id, Name, Address, City, State, Country, Zip, Phone, Contact, ContactEmail);
         }
 
         public override Type GetType()
