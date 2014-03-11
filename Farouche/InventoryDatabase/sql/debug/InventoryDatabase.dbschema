@@ -17,7 +17,7 @@
 			<Metadata Name="CompatibilityMode" Value="100" />
 		</CustomData>
 		<CustomData Category="Permissions" Type="XmlPermissions">
-			<Metadata Name="FileName" Value="C:\USERS\KALEB\GIT-REPOSITORIES\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
+			<Metadata Name="FileName" Value="C:\USERS\STEVEN\DESKTOP\GIT-REPOSITORIES\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
 		</CustomData>
 	</Header>
 	<Model>
@@ -277,6 +277,38 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
 		</Element>
+		<Element Type="ISql90DefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[(0)]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
+		</Element>
+		<Element Type="ISql90DefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[(0)]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+		</Element>
 		<Element Type="ISql90Route" Name="[AutoCreatedLocal]">
 			<Property Name="Address" Value="LOCAL" />
 			<Relationship Name="Authorizer">
@@ -392,6 +424,116 @@
 			<Relationship Name="ForeignTable">
 				<Entry>
 					<References Name="[dbo].[Locations]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_ShippingOrderLineItems_Products]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_ShippingOrderLineItems_ShippingOrders]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_ShippingOrders_ShippingTermsLookup]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_ShippingOrders_Users]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK_ShippingTermsLookup_ShippingVendor]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
 				</Entry>
 			</Relationship>
 		</Element>
@@ -670,6 +812,111 @@
 				</Entry>
 			</Relationship>
 		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingOrderLineItems]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingOrders]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingTermsLookup]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingVendors]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
+		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Users]">
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
@@ -719,7 +966,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_VendorOrders]">
 			<Relationship Name="ColumnSpecifications">
@@ -743,7 +990,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Vendors]">
 			<Relationship Name="ColumnSpecifications">
@@ -789,6 +1036,765 @@
 					<References Name="[dbo].[VendorSourceItems]" />
 				</Entry>
 			</Relationship>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrderLineItems]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT li.[ShippingOrderID], li.[ProductID], p.[ShortDesc], li.[Quantity], p.[Location], li.[Picked]
+	FROM [dbo].[ShippingOrderLineItems] li
+	JOIN [dbo].[Products] p
+	ON li.[ProductID] = p.[ProductID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShortDesc]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="262" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingOrderLineItems]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrders]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	ORDER BY so.[ShippingOrderID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="609" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingOrders]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrdersByEmployee]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	WHERE so.[UserID] = @userID
+	ORDER BY so.[UserID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetAllShippingOrdersByEmployee].[@userID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetAllShippingOrdersByEmployee].[@userID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="660" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingOrdersByEmployee]&#xD;&#xA;(&#xD;&#xA;&#x9;@userID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrdersNotPicked]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	WHERE [Picked] = 0
+	ORDER BY so.[ShippingOrderID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="639" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingOrdersNotPicked]&#xD;&#xA;As" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrdersNotShipped]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	WHERE so.[ShipDate] IS NULL
+	ORDER BY so.[ShippingOrderID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="649" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingOrdersNotShipped]&#xD;&#xA;As" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrdersPicked]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	WHERE [Picked] = 1
+	ORDER BY so.[ShippingOrderID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="636" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingOrdersPicked]&#xD;&#xA;As" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrdersShipped]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	WHERE so.[ShipDate] IS NOT NULL
+	ORDER BY so.[ShippingOrderID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="650" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingOrdersShipped]&#xD;&#xA;As" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingTerms]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT *
+	FROM [dbo].[ShippingTermsLookup]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="93" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingTerms]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingVendors]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT *
+	FROM [dbo].[ShippingVendors]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="91" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetAllShippingVendors]&#xD;&#xA;AS" />
+			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllVendorOrderLineItems]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -1132,6 +2138,425 @@ RETURN]]></Value>
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetExceptionItemsByVendorOrder]&#xD;&#xA;@VendorOrderID int&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetShippingOrderByID]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	WHERE so.[ShippingOrderID] = @shippingOrderID
+	ORDER BY so.[ShippingOrderID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetShippingOrderByID].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetShippingOrderByID].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="686" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetShippingOrderByID]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetShippingOrderByPurchaseOrderID]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.[ShippingOrderID], so.[PurchaseOrderID], so.[UserID], u.[LastName], u.[FirstName],
+	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
+	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
+	FROM [dbo].[Users] u
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
+	ON u.[UserID] = so.[UserID]
+	JOIN [dbo].[ShippingTermsLookup] st
+	ON so.[ShippingTermID] = st.[ShippingTermID]
+	JOIN [dbo].[ShippingVendors] sv
+	ON st.[ShippingVendorID] = sv.[ShippingVendorID]
+	WHERE so.[PurchaseOrderID] = @purchaseOrderID
+	ORDER BY so.[PurchaseOrderID]]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Users]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Users].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetShippingOrderByPurchaseOrderID].[@purchaseOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetShippingOrderByPurchaseOrderID].[@purchaseOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="699" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetShippingOrderByPurchaseOrderID]&#xD;&#xA;(&#xD;&#xA;&#x9;@purchaseOrderID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetShippingOrderLineItems]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT li.[ShippingOrderID], li.[ProductID], p.[ShortDesc], li.[Quantity], p.[Location], li.[Picked]
+	FROM [dbo].[ShippingOrderLineItems] li
+	JOIN [dbo].[Products] p
+	ON li.[ProductID] = p.[ProductID]
+	WHERE li.[ShippingOrderID] = @shippingOrderID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShortDesc]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetShippingOrderLineItems].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetShippingOrderLineItems].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="337" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetShippingOrderLineItems]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int&#xD;&#xA;)&#x9;&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetShippingTermsByID]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT *
+	FROM [dbo].[ShippingTermsLookup]
+	WHERE [ShippingTermID] = @shippingTermID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetShippingTermsByID].[@shippingTermID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetShippingTermsByID].[@shippingTermID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="165" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetShippingTermsByID]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingTermID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetShippingVendorByID]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT *
+	FROM [dbo].[ShippingVendors]
+	WHERE [ShippingVendorID] = @shippingVendorID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetShippingVendorByID].[@shippingVendorID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetShippingVendorByID].[@shippingVendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="168" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetShippingVendorByID]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingVendorID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorOrderLineItem]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -1210,6 +2635,658 @@ RETURN]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetVendorOrderLineItem]&#xD;&#xA;&#x9;@VendorOrderID int, &#xD;&#xA;&#x9;@ProductID int&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_InsertIntoShippingOrderLineItems]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	INSERT INTO [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity],[Picked])
+	VALUES (@shippingOrderID,@productID,@quantity,@picked)]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@shippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@productID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@picked]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@quantity]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrderLineItems].[@picked]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="51" />
+				<Property Name="Length" Value="353" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/* ShippingOrderLineItemsDAL Stored Procedures */&#xD;&#xA;CREATE PROCEDURE [proc_InsertIntoShippingOrderLineItems]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int,&#xD;&#xA;    @productID int,&#xD;&#xA;    @quantity int,&#xD;&#xA;    @picked bit&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_InsertIntoShippingOrders]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	INSERT INTO [dbo].[ShippingOrders]
+		([PurchaseOrderID],[UserID],[Picked],[ShipDate],[ShippingTermID],[ShipToName],[ShipToAddress],
+																[ShipToCity],[ShipToState],[ShipToZip]) 
+	VALUES 
+		(@purchaseOrderID,@userID,@picked,@shipDate,@shippingTermID,@shipToName,@shipToAddress,@shipToCity,
+																@shipToState, @shipToZip)]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@purchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@userID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@shipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@shippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToZip]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@purchaseOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@userID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@picked]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@shipDate]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@shippingTermID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToAddress]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToCity]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToState]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingOrders].[@shipToZip]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="42" />
+				<Property Name="Length" Value="695" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/* ShippingOrderDAL Stored Procedures */&#xD;&#xA;CREATE PROCEDURE [proc_InsertIntoShippingOrders]&#xD;&#xA;(     &#xD;&#xA;&#x9;@purchaseOrderID int,&#xD;&#xA;&#x9;@userID int,&#xD;&#xA;&#x9;@picked&#x9;&#x9;bit,&#xD;&#xA;&#x9;@shipDate  date,&#xD;&#xA;&#x9;@shippingTermID int,&#xD;&#xA;&#x9;@shipToName  varchar(50),&#xD;&#xA;&#x9;@shipToAddress varchar(250),&#xD;&#xA;&#x9;@shipToCity   varchar(50),&#xD;&#xA;&#x9;@shipToState   varchar(50),&#xD;&#xA;&#x9;@shipToZip  varchar(10)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_InsertIntoShippingTerm]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	INSERT INTO [dbo].[ShippingTermsLookup]([ShippingVendorID],[Description])
+	VALUES (@shippingVendorID,@description)]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingTerm].[@shippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingTerm].[@description]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingTerm].[@shippingVendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingTerm].[@description]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="127" />
+				<Property Name="Length" Value="354" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/* ShippingTermDAL Stored Procedures */&#xD;&#xA;/* ShippingTermID is an Identity and will be created on Update can not pass it in */&#xD;&#xA;CREATE PROCEDURE [proc_InsertIntoShippingTerm]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingVendorID int,&#xD;&#xA;&#x9;@description varchar(250)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_InsertIntoShippingVendors]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	INSERT INTO [dbo].[ShippingVendors]([Name],[Address],[City],[State],[Country],[Zip],[Phone],[Contact],[ContactEmail])
+	VALUES(@name,@address,@city,@state,@country,@zip,@phone,@contact,@contactEmail)]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Address]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[City]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[State]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Country]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Zip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Phone]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Contact]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ContactEmail]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@address]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@city]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@state]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@country]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@zip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@phone]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@contact]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertIntoShippingVendors].[@contactEmail]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@name]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@address]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@city]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="25" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@state]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="2" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@country]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@zip]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@phone]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="12" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@contact]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertIntoShippingVendors].[@contactEmail]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="43" />
+				<Property Name="Length" Value="533" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/* ShippingVendorDAL stored Procedures */&#xD;&#xA;CREATE PROCEDURE [proc_InsertIntoShippingVendors]&#xD;&#xA;(&#xD;&#xA;    @name varchar(50),&#xD;&#xA;    @address varchar(50),&#xD;&#xA;    @city varchar(25),&#xD;&#xA;    @state varchar(2),&#xD;&#xA;&#x9;@country varchar(50),&#xD;&#xA;    @zip varchar(10),&#xD;&#xA;    @phone varchar(12),&#xD;&#xA;    @contact varchar(50),&#xD;&#xA;    @contactEmail varchar(50)&#xD;&#xA;)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_InsertIntoVendorOrderLineItems]">
@@ -1348,6 +3425,1728 @@ RETURN @@IDENTITY]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_InsertIntoVendorOrderLineItems]&#xD;&#xA;&#x9;(@VendorOrderID int,&#xD;&#xA;     @ProductID int,&#xD;&#xA;     @QtyOrdered int,&#xD;&#xA;     @QtyReceived int,&#xD;&#xA;     @QtyDamaged int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrder]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrders]
+	SET 
+		[PurchaseOrderID]= 	@purchaseOrderID,
+		[UserID]		=	@userID,
+		[Picked]		=	@picked,
+		[ShipDate] 		=	@shipDate,
+		[ShippingTermID]=	@shippingTermID,
+		[ShipToName]	=	@shipToName,
+		[ShipToAddress]	=	@shipToAddress,
+		[ShipToCity] 	=	@shipToCity,
+		[ShipToState]	=	@shipToState,
+		[ShipToZip]		=	@shipToZip
+	WHERE
+		[ShippingOrderID]= 	@orig_ShippingOrderID AND
+		[PurchaseOrderID]= 	@orig_PurchaseOrderID AND
+		[UserID]		=	@orig_UserID AND
+		[Picked]		=	@orig_Picked AND
+		[ShipDate]		=	@orig_ShipDate AND
+		[ShippingTermID]=   @orig_ShippingTermID AND
+		[ShipToName] 	=	@orig_ShipToName AND
+		[ShipToAddress] =	@orig_ShipToAddress AND
+		[ShipToCity]	=	@orig_ShipToCity AND
+		[ShipToState] 	= 	@orig_ShipToState AND
+		[ShipToZip] 	=	@orig_ShipToZip
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@purchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@userID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@shipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@shippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@shipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@shipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@shipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@shipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@shipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_PurchaseOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToZip]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@purchaseOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@userID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@picked]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@shipDate]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@shippingTermID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@shipToName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@shipToAddress]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@shipToCity]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@shipToState]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@shipToZip]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_PurchaseOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_UserID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_Picked]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipDate]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShippingTermID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToAddress]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToCity]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToState]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrder].[@orig_ShipToZip]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="1501" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrder]&#xD;&#xA;(&#xD;&#xA;&#x9;@purchaseOrderID int,&#xD;&#xA;&#x9;@userID int,&#xD;&#xA;&#x9;@picked&#x9;&#x9;bit,&#xD;&#xA;    @shipDate  date,&#xD;&#xA;    @shippingTermID int,&#xD;&#xA;    @shipToName  varchar(50),&#xD;&#xA;    @shipToAddress varchar(250),&#xD;&#xA;    @shipToCity   varchar(50),&#xD;&#xA;    @shipToState   varchar(50),&#xD;&#xA;    @shipToZip  varchar(10),&#x9;&#x9;  &#xD;&#xA;    @orig_ShippingOrderID int,&#xD;&#xA;    @orig_PurchaseOrderID int,&#xD;&#xA;    @orig_UserID&#x9;&#x9;int,&#xD;&#xA;    @orig_Picked&#x9;&#x9;bit,&#xD;&#xA;    @orig_ShipDate   date,&#xD;&#xA;    @orig_ShippingTermID int,&#xD;&#xA;&#x9;@orig_ShipToName  varchar(50),&#xD;&#xA;    @orig_ShipToAddress varchar(250),&#xD;&#xA;    @orig_ShipToCity varchar(50),&#xD;&#xA;    @orig_ShipToState  varchar(50),&#xD;&#xA;    @orig_ShipToZip  varchar(10)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderLineItem]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrderLineItems]
+	SET
+		[ShippingOrderID] = @shippingOrderID,
+		[ProductID] = @productID,
+		[Quantity] = @quantity,
+		[Picked] = @picked
+	WHERE 
+		[ShippingOrderID] = @orig_ShippingOrderID AND
+		[ProductID] = @orig_ProductID AND
+		[Quantity] = @orig_Quantity AND
+		[Picked] = @orig_Picked
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@shippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@productID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_Picked]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@quantity]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@picked]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_ShippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_ProductID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_Quantity]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItem].[@orig_Picked]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="588" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderLineItem]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int,&#xD;&#xA;    @productID int,&#xD;&#xA;    @quantity int,&#xD;&#xA;    @picked bit,&#xD;&#xA;&#x9;@orig_ShippingOrderID int,&#xD;&#xA;    @orig_ProductID int,&#xD;&#xA;    @orig_Quantity int,&#xD;&#xA;    @orig_Picked bit&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderLineItemPicked]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrderLineItems]
+	SET [Picked] = 1
+	WHERE [ShippingOrderID] = @shippingOrderID AND
+		  [ProductID] = @productID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItemPicked].[@shippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItemPicked].[@productID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItemPicked].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItemPicked].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="246" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderLineItemPicked]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int,&#xD;&#xA;&#x9;@productID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderLineItemRemovePicked]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrderLineItems]
+	SET [Picked] = 0
+	WHERE [ShippingOrderID] = @shippingOrderID AND
+		  [ProductID] = @productID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItemRemovePicked].[@shippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderLineItemRemovePicked].[@productID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItemRemovePicked].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderLineItemRemovePicked].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="252" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderLineItemRemovePicked]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int,&#xD;&#xA;&#x9;@productID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderPicked]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrders]
+	SET [Picked] = 1
+	WHERE [ShippingOrderID] = @shippingOrderID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderPicked].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderPicked].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="178" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderPicked]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderRemovePicked]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrders]
+	SET [Picked] = 0
+	WHERE [ShippingOrderID] = @shippingOrderID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[Picked]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderRemovePicked].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderRemovePicked].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="184" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderRemovePicked]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderRemoveShipDate]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrders]
+	SET [ShipDate] = NULL
+	WHERE [ShippingOrderID] = @shippingOrderID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderRemoveShipDate].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderRemoveShipDate].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="192" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderRemoveShipDate] &#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderRemoveUser]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingOrders]
+	SET [UserID] = NULL
+	WHERE [ShippingOrderID] = @shippingOrderID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderRemoveUser].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderRemoveUser].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="185" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderRemoveUser]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderShipDate]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[	
+	UPDATE [dbo].[ShippingOrders]
+	SET [ShipDate] = @ShipDate
+	WHERE [ShippingOrderID] = @ShippingOrderID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderShipDate].[@shipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderShipDate].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderShipDate].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderShipDate].[@shipDate]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="142" />
+				<Property Name="Length" Value="352" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/* Changed name from proc_ShipShippingOrder to proc_SetShippingOrderShipDate */&#xD;&#xA;/* This Procedure also replaces proc_UnpickShippingOrder */&#xD;&#xA;CREATE PROCEDURE [proc_UpdateShippingOrderShipDate] &#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int,&#xD;&#xA;&#x9;@shipDate Date&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrderUser]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingORders]
+	SET [UserID] = @newUserID
+	WHERE [ShippingOrderID] = @shippingOrderID]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[UserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderUser].[@newUserID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingOrderUser].[@shippingOrderID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderUser].[@shippingOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingOrderUser].[@newUserID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="203" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrderUser]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingOrderID int,&#xD;&#xA;&#x9;@newUserID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingTerm]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingTermsLookup]
+	SET
+		[ShippingVendorID]  = @shippingVendorID,
+		[Description] 		= @description
+	WHERE 
+		[ShippingTermID]	= @orig_ShippingTermID AND
+		[ShippingVendorID]	= @orig_ShippingVendorID AND
+		[Description]		= @orig_Description
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingTerm].[@shippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingTerm].[@description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingTerm].[@orig_ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingTerm].[@orig_ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingTerm].[@orig_Description]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingTerm].[@shippingVendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingTerm].[@description]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingTerm].[@orig_ShippingTermID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingTerm].[@orig_ShippingVendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingTerm].[@orig_Description]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="483" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingTerm]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingVendorID int,&#xD;&#xA;&#x9;@description varchar(250),&#xD;&#xA;&#x9;@orig_ShippingTermID int,&#xD;&#xA;&#x9;@orig_ShippingVendorID int,&#xD;&#xA;&#x9;@orig_Description varchar(250)&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingVendor]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[ShippingVendors]
+	SET
+		[Name]		= @name,
+		[Address]	= @address,
+		[City]		= @city,
+		[State]		= @state,
+		[Country]	= @country,
+		[Zip]		= @zip,
+		[Phone]		= @phone,
+		[Contact]   = @contact,
+		[ContactEmail] = @contactEmail
+	WHERE
+		[ShippingVendorID] = @orig_ShippingVendorID AND
+		[Name]		= @orig_Name AND
+		[Address]	= @orig_Address AND
+		[City]		= @orig_City AND
+		[State]		= @orig_State AND
+		[Country]	= @orig_Country AND
+		[Zip]		= @orig_Zip AND
+		[Phone]		= @orig_Phone AND
+		[Contact]   = @orig_Contact AND
+		[ContactEmail] = @orig_ContactEmail
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Address]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@address]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[City]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@city]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[State]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@state]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Country]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@country]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Zip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@zip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Phone]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@phone]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Contact]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@contact]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ContactEmail]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@contactEmail]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_Address]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_City]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_State]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_Country]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_Zip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_Phone]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_Contact]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateShippingVendor].[@orig_ContactEmail]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@name]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@address]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@city]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="25" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@state]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="2" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@country]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@zip]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@phone]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="12" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@contact]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@contactEmail]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_ShippingVendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_Name]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_Address]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_City]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="25" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_State]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="2" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_Country]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_Zip]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_Phone]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="12" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_Contact]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateShippingVendor].[@orig_ContactEmail]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="1195" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingVendor]&#xD;&#xA;(&#xD;&#xA;&#x9;@name varchar(50),&#xD;&#xA;    @address varchar(50),&#xD;&#xA;    @city varchar(25),&#xD;&#xA;    @state varchar(2),&#xD;&#xA;&#x9;@country varchar(50),&#xD;&#xA;    @zip varchar(10),&#xD;&#xA;    @phone varchar(12),&#xD;&#xA;    @contact varchar(50),&#xD;&#xA;    @contactEmail varchar(50),&#xD;&#xA;&#x9;@orig_ShippingVendorID int,&#xD;&#xA;&#x9;@orig_Name varchar(50),&#xD;&#xA;    @orig_Address varchar(50),&#xD;&#xA;    @orig_City varchar(25),&#xD;&#xA;    @orig_State varchar(2),&#xD;&#xA;&#x9;@orig_Country varchar(50),&#xD;&#xA;    @orig_Zip varchar(10),&#xD;&#xA;    @orig_Phone varchar(12),&#xD;&#xA;    @orig_Contact varchar(50),&#xD;&#xA;    @orig_ContactEmail varchar(50)&#xD;&#xA;)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateVendorOrderLineItems]">
@@ -1893,6 +5692,530 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[ShippingOrderLineItems]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrderLineItems].[ProductID]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrderLineItems].[Quantity]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrderLineItems].[Picked]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="19" />
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="20" />
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[ShippingOrders]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShippingOrderID]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[PurchaseOrderID]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShippingTermID]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[UserID]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShipDate]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[Picked]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="18" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShipToName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShipToAddress]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShipToCity]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShipToState]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingOrders].[ShipToZip]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="21" />
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[ShippingTermsLookup]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingTermsLookup].[ShippingTermID]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingTermsLookup].[Description]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="22" />
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[ShippingVendors]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[ShippingVendorID]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[Address]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[City]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="25" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[State]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="2" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[Country]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[Zip]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[Phone]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="12" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[Contact]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ShippingVendors].[ContactEmail]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="23" />
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateCategory]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -6326,6 +10649,33 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 		</Element>
+		<Element Type="ISql100UniqueConstraint" Name="[dbo].[UQ_ShippingOrderID_ProductID]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+			</Relationship>
+		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[Users]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
@@ -6604,7 +10954,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="18" />
+						<AttachedAnnotation Disambiguator="24" />
 						<AttachedAnnotation Disambiguator="9" />
 					</Element>
 				</Entry>
@@ -6720,7 +11070,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="19" />
+						<AttachedAnnotation Disambiguator="25" />
 						<AttachedAnnotation Disambiguator="6" />
 					</Element>
 				</Entry>

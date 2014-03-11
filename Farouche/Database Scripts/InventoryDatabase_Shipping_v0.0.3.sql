@@ -1,6 +1,6 @@
-IF EXISTS(SELECT 1 FROM master.dbo.sysdatabases WHERE name = 'Inventory') 
+IF EXISTS(SELECT 1 FROM master.dbo.sysdatabases WHERE name = 'InventoryDatabase') 
 BEGIN
-	USE Inventory
+	USE InventoryDatabase
 END
 GO
 
@@ -325,7 +325,7 @@ AS
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]
@@ -340,7 +340,7 @@ As
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]
@@ -356,7 +356,7 @@ As
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]
@@ -372,7 +372,7 @@ As
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]
@@ -388,7 +388,7 @@ As
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]
@@ -407,7 +407,7 @@ AS
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]
@@ -426,7 +426,7 @@ AS
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]
@@ -445,7 +445,7 @@ AS
 	so.[Picked],so.[ShipDate], so.[ShippingTermID],st.[Description],sv.[Name],
 	so.[ShipToName], so.[ShipToAddress], so.[ShipToCity], so.[ShipToState], so.[ShipToZip]
 	FROM [dbo].[Users] u
-	JOIN [dbo].[ShippingOrders] so
+	RIGHT OUTER JOIN [dbo].[ShippingOrders] so
 	ON u.[UserID] = so.[UserID]
 	JOIN [dbo].[ShippingTermsLookup] st
 	ON so.[ShippingTermID] = st.[ShippingTermID]

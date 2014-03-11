@@ -128,3 +128,65 @@ INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOr
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (12, 3, 500.00, 10,25, 0)
 GO
 
+/* Insert for ShippingVendors */
+SET IDENTITY_INSERT [dbo].[ShippingVendors] ON
+INSERT [dbo].[ShippingVendors] ([ShippingVendorID],[Name],[Address],[City],[State],[Country],[Zip],[Phone],[Contact],[ContactEmail])
+VALUES (1,'FedEx','2315 Edgewood Rd SW','Cedar Rapids','IA','United States','52404','319-390-5393','Speedy Gonzales','QuickMouse@fedex.com')
+INSERT [dbo].[ShippingVendors] ([ShippingVendorID],[Name],[Address],[City],[State],[Country],[Zip],[Phone],[Contact],[ContactEmail])
+VALUES (2,'UPS','3315 Williams Blvd SW Suite 2','Cedar Rapids','IA','United States','52404','319-365-2112','Road Runner','Acme42@ups.com')
+INSERT [dbo].[ShippingVendors] ([ShippingVendorID],[Name],[Address],[City],[State],[Country],[Zip],[Phone],[Contact],[ContactEmail])
+VALUES (3,'USPS','615 6th Ave SE','Cedar Rapids','IA','United States','52401-1923','319-39905560','Snail','ItWillGetThereEventually@usps.com')
+SET IDENTITY_INSERT [dbo].[ShippingVendors] OFF
+GO
+/* Insert for shippingTermsLookup */
+SET IDENTITY_INSERT [dbo].[ShippingTermsLookup] ON
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (1,1,'Overnight')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (2,1,'2-day')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (3,1,'3-day')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (4,1,'5-7 days')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (5,2,'Overnight')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (6,2,'2-day')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (7,2,'3-day')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (8,2,'5-7 days')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (9,3,'Overnight')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (10,3,'2-day')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (11,3,'3-day')
+INSERT [dbo].[ShippingTermsLookup] ([ShippingTermID],[ShippingVendorID],[Description]) VALUES (12,3,'5-7 days')
+SET IDENTITY_INSERT [dbo].[ShippingTermsLookup] OFF
+GO
+
+/* Insert for ShippingOrders */
+SET IDENTITY_INSERT [dbo].[ShippingOrders] ON
+INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
+VALUES (1,1,1,1,'2014-02-22')
+INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
+VALUES (2,2,2,2,'2014-02-23')
+INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
+VALUES (3,3,3,2,'2014-02-23')
+INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
+VALUES (4,4,3,2,'2014-02-24')
+INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
+VALUES (5,5,1,2,'2014-02-25')
+SET IDENTITY_INSERT [dbo].[ShippingOrders] OFF
+GO
+
+/* Insert for ShippingOrderLineItems */
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (1,1,1)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (1,3,3)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (1,5,2)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (1,7,4)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (1,8,5)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (1,9,3)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (2,3,1)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (2,5,7)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (2,7,2)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity],[Picked]) VALUES (2,11,15,'1')
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity],[Picked]) VALUES (3,12,4,'1')
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity],[Picked]) VALUES (3,3,8,'1')
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity],[Picked]) VALUES (3,1,1,'1')
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (4,1,1)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity]) VALUES (4,10,5)
+INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity],[Picked]) VALUES (5,5,5,'1')
+GO
+
+
