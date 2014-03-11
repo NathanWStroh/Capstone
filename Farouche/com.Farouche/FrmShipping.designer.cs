@@ -49,9 +49,30 @@
             this.btnUpdateTerm = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.btnAddTerm = new System.Windows.Forms.Button();
+            this.tabShippingOrders = new System.Windows.Forms.TabPage();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.tabPackList = new System.Windows.Forms.TabControl();
+            this.tabAllOrders = new System.Windows.Forms.TabPage();
+            this.btnClearUser = new System.Windows.Forms.Button();
+            this.lvAllOrders = new System.Windows.Forms.ListView();
+            this.tabPickList = new System.Windows.Forms.TabPage();
+            this.lvPickList = new System.Windows.Forms.ListView();
+            this.btnStartPick = new System.Windows.Forms.Button();
+            this.tabMyOrders = new System.Windows.Forms.TabPage();
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.lvMyOrders = new System.Windows.Forms.ListView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnPackComplete = new System.Windows.Forms.Button();
+            this.lvPackList = new System.Windows.Forms.ListView();
             this.tabShippingVendors.SuspendLayout();
             this.tabControlShippingVendors.SuspendLayout();
             this.tabShippingTerms.SuspendLayout();
+            this.tabShippingOrders.SuspendLayout();
+            this.tabPackList.SuspendLayout();
+            this.tabAllOrders.SuspendLayout();
+            this.tabPickList.SuspendLayout();
+            this.tabMyOrders.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDeactivateVendor
@@ -187,6 +208,7 @@
             // 
             this.tabControlShippingVendors.Controls.Add(this.tabShippingVendors);
             this.tabControlShippingVendors.Controls.Add(this.tabShippingTerms);
+            this.tabControlShippingVendors.Controls.Add(this.tabShippingOrders);
             this.tabControlShippingVendors.Location = new System.Drawing.Point(26, 19);
             this.tabControlShippingVendors.Name = "tabControlShippingVendors";
             this.tabControlShippingVendors.SelectedIndex = 0;
@@ -281,6 +303,163 @@
             this.btnAddTerm.UseVisualStyleBackColor = true;
             this.btnAddTerm.Click += new System.EventHandler(this.btnAddTerm_Click);
             // 
+            // tabShippingOrders
+            // 
+            this.tabShippingOrders.Controls.Add(this.btnRefresh);
+            this.tabShippingOrders.Controls.Add(this.tabPackList);
+            this.tabShippingOrders.Location = new System.Drawing.Point(4, 22);
+            this.tabShippingOrders.Name = "tabShippingOrders";
+            this.tabShippingOrders.Padding = new System.Windows.Forms.Padding(3);
+            this.tabShippingOrders.Size = new System.Drawing.Size(772, 324);
+            this.tabShippingOrders.TabIndex = 2;
+            this.tabShippingOrders.Text = "Shipping Orders";
+            this.tabShippingOrders.UseVisualStyleBackColor = true;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(624, 6);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(144, 24);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Refresh Lists";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
+            // tabPackList
+            // 
+            this.tabPackList.Controls.Add(this.tabAllOrders);
+            this.tabPackList.Controls.Add(this.tabPickList);
+            this.tabPackList.Controls.Add(this.tabMyOrders);
+            this.tabPackList.Controls.Add(this.tabPage2);
+            this.tabPackList.Location = new System.Drawing.Point(0, 16);
+            this.tabPackList.Name = "tabPackList";
+            this.tabPackList.SelectedIndex = 0;
+            this.tabPackList.Size = new System.Drawing.Size(772, 313);
+            this.tabPackList.TabIndex = 2;
+            // 
+            // tabAllOrders
+            // 
+            this.tabAllOrders.Controls.Add(this.btnClearUser);
+            this.tabAllOrders.Controls.Add(this.lvAllOrders);
+            this.tabAllOrders.Location = new System.Drawing.Point(4, 22);
+            this.tabAllOrders.Name = "tabAllOrders";
+            this.tabAllOrders.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAllOrders.Size = new System.Drawing.Size(764, 287);
+            this.tabAllOrders.TabIndex = 0;
+            this.tabAllOrders.Text = "All Orders";
+            this.tabAllOrders.UseVisualStyleBackColor = true;
+            // 
+            // btnClearUser
+            // 
+            this.btnClearUser.Location = new System.Drawing.Point(620, 260);
+            this.btnClearUser.Name = "btnClearUser";
+            this.btnClearUser.Size = new System.Drawing.Size(144, 23);
+            this.btnClearUser.TabIndex = 1;
+            this.btnClearUser.Text = "Clear User";
+            this.btnClearUser.UseVisualStyleBackColor = true;
+            // 
+            // lvAllOrders
+            // 
+            this.lvAllOrders.GridLines = true;
+            this.lvAllOrders.Location = new System.Drawing.Point(2, 0);
+            this.lvAllOrders.MultiSelect = false;
+            this.lvAllOrders.Name = "lvAllOrders";
+            this.lvAllOrders.Size = new System.Drawing.Size(760, 252);
+            this.lvAllOrders.TabIndex = 0;
+            this.lvAllOrders.UseCompatibleStateImageBehavior = false;
+            // 
+            // tabPickList
+            // 
+            this.tabPickList.Controls.Add(this.lvPickList);
+            this.tabPickList.Controls.Add(this.btnStartPick);
+            this.tabPickList.Location = new System.Drawing.Point(4, 22);
+            this.tabPickList.Name = "tabPickList";
+            this.tabPickList.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPickList.Size = new System.Drawing.Size(764, 287);
+            this.tabPickList.TabIndex = 1;
+            this.tabPickList.Text = "Pick List";
+            this.tabPickList.UseVisualStyleBackColor = true;
+            // 
+            // lvPickList
+            // 
+            this.lvPickList.GridLines = true;
+            this.lvPickList.Location = new System.Drawing.Point(0, 2);
+            this.lvPickList.MultiSelect = false;
+            this.lvPickList.Name = "lvPickList";
+            this.lvPickList.Size = new System.Drawing.Size(760, 252);
+            this.lvPickList.TabIndex = 2;
+            this.lvPickList.UseCompatibleStateImageBehavior = false;
+            // 
+            // btnStartPick
+            // 
+            this.btnStartPick.Location = new System.Drawing.Point(620, 260);
+            this.btnStartPick.Name = "btnStartPick";
+            this.btnStartPick.Size = new System.Drawing.Size(144, 23);
+            this.btnStartPick.TabIndex = 1;
+            this.btnStartPick.Text = "Start Pick";
+            this.btnStartPick.UseVisualStyleBackColor = true;
+            // 
+            // tabMyOrders
+            // 
+            this.tabMyOrders.Controls.Add(this.btnDetails);
+            this.tabMyOrders.Controls.Add(this.lvMyOrders);
+            this.tabMyOrders.Location = new System.Drawing.Point(4, 22);
+            this.tabMyOrders.Name = "tabMyOrders";
+            this.tabMyOrders.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMyOrders.Size = new System.Drawing.Size(764, 287);
+            this.tabMyOrders.TabIndex = 2;
+            this.tabMyOrders.Text = "My Orders";
+            this.tabMyOrders.UseVisualStyleBackColor = true;
+            // 
+            // btnDetails
+            // 
+            this.btnDetails.Location = new System.Drawing.Point(620, 260);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(144, 23);
+            this.btnDetails.TabIndex = 1;
+            this.btnDetails.Text = "View Details";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            // 
+            // lvMyOrders
+            // 
+            this.lvMyOrders.GridLines = true;
+            this.lvMyOrders.Location = new System.Drawing.Point(2, 0);
+            this.lvMyOrders.MultiSelect = false;
+            this.lvMyOrders.Name = "lvMyOrders";
+            this.lvMyOrders.Size = new System.Drawing.Size(760, 252);
+            this.lvMyOrders.TabIndex = 0;
+            this.lvMyOrders.UseCompatibleStateImageBehavior = false;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnPackComplete);
+            this.tabPage2.Controls.Add(this.lvPackList);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(764, 287);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Pack List";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnPackComplete
+            // 
+            this.btnPackComplete.Location = new System.Drawing.Point(620, 260);
+            this.btnPackComplete.Name = "btnPackComplete";
+            this.btnPackComplete.Size = new System.Drawing.Size(144, 23);
+            this.btnPackComplete.TabIndex = 1;
+            this.btnPackComplete.Text = "Ready for Ship";
+            this.btnPackComplete.UseVisualStyleBackColor = true;
+            // 
+            // lvPackList
+            // 
+            this.lvPackList.GridLines = true;
+            this.lvPackList.Location = new System.Drawing.Point(0, 2);
+            this.lvPackList.MultiSelect = false;
+            this.lvPackList.Name = "lvPackList";
+            this.lvPackList.Size = new System.Drawing.Size(760, 252);
+            this.lvPackList.TabIndex = 0;
+            this.lvPackList.UseCompatibleStateImageBehavior = false;
+            // 
             // FrmShipping
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,6 +479,12 @@
             this.tabControlShippingVendors.ResumeLayout(false);
             this.tabShippingTerms.ResumeLayout(false);
             this.tabShippingTerms.PerformLayout();
+            this.tabShippingOrders.ResumeLayout(false);
+            this.tabPackList.ResumeLayout(false);
+            this.tabAllOrders.ResumeLayout(false);
+            this.tabPickList.ResumeLayout(false);
+            this.tabMyOrders.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -327,5 +512,20 @@
         private System.Windows.Forms.Button btnUpdateTerm;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button btnAddTerm;
+        private System.Windows.Forms.TabPage tabShippingOrders;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.TabControl tabPackList;
+        private System.Windows.Forms.TabPage tabAllOrders;
+        private System.Windows.Forms.Button btnClearUser;
+        private System.Windows.Forms.ListView lvAllOrders;
+        private System.Windows.Forms.TabPage tabPickList;
+        private System.Windows.Forms.ListView lvPickList;
+        private System.Windows.Forms.Button btnStartPick;
+        private System.Windows.Forms.TabPage tabMyOrders;
+        private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.ListView lvMyOrders;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button btnPackComplete;
+        private System.Windows.Forms.ListView lvPackList;
     }
 }

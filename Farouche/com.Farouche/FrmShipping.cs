@@ -21,7 +21,8 @@ namespace com.Farouche.Presentation
     {
         private readonly AccessToken _myAccessToken;
         private ShippingVendorManager _myVendorManager;
-        private ShippingTermManager _myTermManager; 
+        private ShippingTermManager _myTermManager;
+        private ShippingOrderManager _myOrderManager;
 
         public FrmShipping(AccessToken acctoken)
         {
@@ -29,7 +30,8 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
             _myTermManager = new ShippingTermManager();
-        }
+            _myOrderManager = new ShippingOrderManager();
+        }//End FrmShipping(.)
 
         private void FrmShipping_Load(object sender, EventArgs e)
         {
@@ -37,10 +39,36 @@ namespace com.Farouche.Presentation
 
             //Populates the active combo box. 
             this.PopulateActiveCombo();
-
+            RefreshOrderViews();
             //Populate the vendor list view.
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
-        }
+        }//End FrmShipping_Load(..)
+
+        private void RefreshOrderViews()
+        {
+            //populateListView(lvAllOrders, _myOrderManager.Get
+            PopulateOrderListView(lvPickList, _myOrderManager.GetNonPickedOrders());
+            PopulateOrderListView(lvMyOrders, _myOrderManager.GetOrdersByUserId(_myAccessToken.UserID));
+            PopulateOrderListView(lvPackList, _myOrderManager.GetPickedOrders());
+        }//End of refresh()
+
+        private void PopulateOrderListView(ListView lv, List<ShippingOrder> orderList)
+        {
+            lv.Items.Clear();
+            lv.Columns.Clear();
+            foreach (var order in orderList)
+            {
+                var item = new ListViewItem();
+                item.Text = order.ID.ToString();
+                item.SubItems.Add(order.ShippingVendorName);
+                item.SubItems.Add(order.Picked.ToString());
+                lv.Items.Add(item);
+            }
+            lv.Columns.Add("OrderID");
+            lv.Columns.Add("Vendor");
+            lv.Columns.Add("Picked");
+            lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }//End of populateListView(..)
 
         //Populates the Active combo box.
         //Postcondition: The combo box will hold the values (Yes, No, Both).
@@ -166,6 +194,91 @@ namespace com.Farouche.Presentation
             FrmProduct form = new FrmProduct(_myAccessToken);
             form.Show();
             Close();
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedOrder = this.lvMyOrders.Items[0].Index;
+                FrmViewOrderDetails myForm = new FrmViewOrderDetails(_myOrderManager.Orders[selectedOrder], _myAccessToken);
+                myForm.Show();
+                Hide();
+            }
+            catch
+            {
+                MessageBox.Show("Please select an order from the list", "No Order Selected");
+            }
+        }//End btnDetails(..)
+
+        private void btnStartPick_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedOrder = this.lvPickList.Items[0].Index;
+                Boolean success = _myOrderManager.UpdateUserId(_myOrderManager.Orders[selectedOrder], _myAccessToken.UserID);
+                if (success == true)
+                {
+                    FrmViewOrderDetails myForm = new FrmViewOrderDetails(_myOrderManager.Orders[selectedOrder], _myAccessToken);
+                    myForm.Show();
+                    Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Order already taken by another employee", "Please Refresh");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please select an order from the list", "No Order Selected");
+            }
+        }//End btnStartPick(..)
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshOrderViews();
+        }//End btnRefresh(..)
+
+        private void btnPackComplete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedOrder = this.lvPackList.Items[0].Index;
+                Boolean success = _myOrderManager.UpdateShippedDate(_myOrderManager.Orders[selectedOrder]);
+                if (success == true)
+                {
+                    MessageBox.Show("Now Printing Pack Slip", "Packing Complete");
+                }
+                else
+                {
+                    MessageBox.Show("Cannot complete action.", "Please Refresh");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please select an order from the list", "No Order Selected");
+            }
+        }
+
+        private void btnClearUser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedOrder = this.lvAllOrders.Items[0].Index;
+                Boolean success = _myOrderManager.ClearUserId(_myOrderManager.Orders[selectedOrder]);
+                if (success == true)
+                {
+                    MessageBox.Show("EmployeeID removed from selected order.", "Action Complete");
+                }
+                else
+                {
+                    MessageBox.Show("Cannot complete action.", "Please Refresh");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please select an order from the list", "No Order Selected");
+            }
         }
     }
 }

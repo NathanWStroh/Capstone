@@ -96,5 +96,11 @@ namespace com.Farouche.BusinessLogic
             return LineItem;
         }//End of GetLineItem(.)
 
+        public List<ShippingOrderLineItem> GetLineItemsByID(int shippingOrderID)
+        { 
+            //Need to do error checking... Try/Catch.
+            LineItems = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(shippingOrderID, _connection);
+            return LineItems;
+        }
     }//End of class.
 }//End of namespace.
