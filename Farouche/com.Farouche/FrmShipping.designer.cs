@@ -40,14 +40,14 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnVendorSource = new System.Windows.Forms.Button();
             this.btnProduct = new System.Windows.Forms.Button();
-            this.tabControlShippingVendors = new System.Windows.Forms.TabControl();
+            this.tabControlShipping = new System.Windows.Forms.TabControl();
             this.tabShippingTerms = new System.Windows.Forms.TabPage();
             this.btnDeactivateTerm = new System.Windows.Forms.Button();
             this.btnActivateTerm = new System.Windows.Forms.Button();
             this.cbTermStatusSearch = new System.Windows.Forms.ComboBox();
             this.lblActive = new System.Windows.Forms.Label();
             this.btnUpdateTerm = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvShippingTerms = new System.Windows.Forms.ListView();
             this.btnAddTerm = new System.Windows.Forms.Button();
             this.tabShippingOrders = new System.Windows.Forms.TabPage();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -65,7 +65,7 @@
             this.btnPackComplete = new System.Windows.Forms.Button();
             this.lvPackList = new System.Windows.Forms.ListView();
             this.tabShippingVendors.SuspendLayout();
-            this.tabControlShippingVendors.SuspendLayout();
+            this.tabControlShipping.SuspendLayout();
             this.tabShippingTerms.SuspendLayout();
             this.tabShippingOrders.SuspendLayout();
             this.tabPackList.SuspendLayout();
@@ -204,16 +204,17 @@
             this.btnProduct.UseVisualStyleBackColor = true;
             this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
             // 
-            // tabControlShippingVendors
+            // tabControlShipping
             // 
-            this.tabControlShippingVendors.Controls.Add(this.tabShippingVendors);
-            this.tabControlShippingVendors.Controls.Add(this.tabShippingTerms);
-            this.tabControlShippingVendors.Controls.Add(this.tabShippingOrders);
-            this.tabControlShippingVendors.Location = new System.Drawing.Point(26, 19);
-            this.tabControlShippingVendors.Name = "tabControlShippingVendors";
-            this.tabControlShippingVendors.SelectedIndex = 0;
-            this.tabControlShippingVendors.Size = new System.Drawing.Size(780, 350);
-            this.tabControlShippingVendors.TabIndex = 26;
+            this.tabControlShipping.Controls.Add(this.tabShippingVendors);
+            this.tabControlShipping.Controls.Add(this.tabShippingTerms);
+            this.tabControlShipping.Controls.Add(this.tabShippingOrders);
+            this.tabControlShipping.Location = new System.Drawing.Point(26, 19);
+            this.tabControlShipping.Name = "tabControlShipping";
+            this.tabControlShipping.SelectedIndex = 0;
+            this.tabControlShipping.Size = new System.Drawing.Size(780, 350);
+            this.tabControlShipping.TabIndex = 26;
+            this.tabControlShipping.SelectedIndexChanged += new System.EventHandler(this.tabControlShipping_SelectedIndexChanged);
             // 
             // tabShippingTerms
             // 
@@ -222,7 +223,7 @@
             this.tabShippingTerms.Controls.Add(this.cbTermStatusSearch);
             this.tabShippingTerms.Controls.Add(this.lblActive);
             this.tabShippingTerms.Controls.Add(this.btnUpdateTerm);
-            this.tabShippingTerms.Controls.Add(this.listView1);
+            this.tabShippingTerms.Controls.Add(this.lvShippingTerms);
             this.tabShippingTerms.Controls.Add(this.btnAddTerm);
             this.tabShippingTerms.Location = new System.Drawing.Point(4, 22);
             this.tabShippingTerms.Name = "tabShippingTerms";
@@ -281,17 +282,18 @@
             this.btnUpdateTerm.UseVisualStyleBackColor = true;
             this.btnUpdateTerm.Click += new System.EventHandler(this.btnUpdateTerm_Click);
             // 
-            // listView1
+            // lvShippingTerms
             // 
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(123, 54);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(643, 253);
-            this.listView1.TabIndex = 20;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvShippingTerms.FullRowSelect = true;
+            this.lvShippingTerms.GridLines = true;
+            this.lvShippingTerms.Location = new System.Drawing.Point(123, 54);
+            this.lvShippingTerms.MultiSelect = false;
+            this.lvShippingTerms.Name = "lvShippingTerms";
+            this.lvShippingTerms.Size = new System.Drawing.Size(643, 253);
+            this.lvShippingTerms.TabIndex = 20;
+            this.lvShippingTerms.UseCompatibleStateImageBehavior = false;
+            this.lvShippingTerms.View = System.Windows.Forms.View.Details;
+            this.lvShippingTerms.Click += new System.EventHandler(this.lvShippingTerms_Click);
             // 
             // btnAddTerm
             // 
@@ -359,6 +361,7 @@
             // 
             // lvAllOrders
             // 
+            this.lvAllOrders.FullRowSelect = true;
             this.lvAllOrders.GridLines = true;
             this.lvAllOrders.Location = new System.Drawing.Point(2, 0);
             this.lvAllOrders.MultiSelect = false;
@@ -366,6 +369,7 @@
             this.lvAllOrders.Size = new System.Drawing.Size(760, 252);
             this.lvAllOrders.TabIndex = 0;
             this.lvAllOrders.UseCompatibleStateImageBehavior = false;
+            this.lvAllOrders.View = System.Windows.Forms.View.Details;
             // 
             // tabPickList
             // 
@@ -381,13 +385,15 @@
             // 
             // lvPickList
             // 
+            this.lvPickList.FullRowSelect = true;
             this.lvPickList.GridLines = true;
-            this.lvPickList.Location = new System.Drawing.Point(0, 2);
+            this.lvPickList.Location = new System.Drawing.Point(-2, -2);
             this.lvPickList.MultiSelect = false;
             this.lvPickList.Name = "lvPickList";
             this.lvPickList.Size = new System.Drawing.Size(760, 252);
             this.lvPickList.TabIndex = 2;
             this.lvPickList.UseCompatibleStateImageBehavior = false;
+            this.lvPickList.View = System.Windows.Forms.View.Details;
             // 
             // btnStartPick
             // 
@@ -421,6 +427,7 @@
             // 
             // lvMyOrders
             // 
+            this.lvMyOrders.FullRowSelect = true;
             this.lvMyOrders.GridLines = true;
             this.lvMyOrders.Location = new System.Drawing.Point(2, 0);
             this.lvMyOrders.MultiSelect = false;
@@ -428,6 +435,7 @@
             this.lvMyOrders.Size = new System.Drawing.Size(760, 252);
             this.lvMyOrders.TabIndex = 0;
             this.lvMyOrders.UseCompatibleStateImageBehavior = false;
+            this.lvMyOrders.View = System.Windows.Forms.View.Details;
             // 
             // tabPage2
             // 
@@ -452,6 +460,7 @@
             // 
             // lvPackList
             // 
+            this.lvPackList.FullRowSelect = true;
             this.lvPackList.GridLines = true;
             this.lvPackList.Location = new System.Drawing.Point(0, 2);
             this.lvPackList.MultiSelect = false;
@@ -459,6 +468,7 @@
             this.lvPackList.Size = new System.Drawing.Size(760, 252);
             this.lvPackList.TabIndex = 0;
             this.lvPackList.UseCompatibleStateImageBehavior = false;
+            this.lvPackList.View = System.Windows.Forms.View.Details;
             // 
             // FrmShipping
             // 
@@ -469,14 +479,14 @@
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnVendorSource);
             this.Controls.Add(this.btnProduct);
-            this.Controls.Add(this.tabControlShippingVendors);
+            this.Controls.Add(this.tabControlShipping);
             this.Name = "FrmShipping";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Shipping";
             this.Load += new System.EventHandler(this.FrmShipping_Load);
             this.tabShippingVendors.ResumeLayout(false);
             this.tabShippingVendors.PerformLayout();
-            this.tabControlShippingVendors.ResumeLayout(false);
+            this.tabControlShipping.ResumeLayout(false);
             this.tabShippingTerms.ResumeLayout(false);
             this.tabShippingTerms.PerformLayout();
             this.tabShippingOrders.ResumeLayout(false);
@@ -503,14 +513,14 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnVendorSource;
         private System.Windows.Forms.Button btnProduct;
-        private System.Windows.Forms.TabControl tabControlShippingVendors;
+        private System.Windows.Forms.TabControl tabControlShipping;
         private System.Windows.Forms.TabPage tabShippingTerms;
         private System.Windows.Forms.Button btnDeactivateTerm;
         private System.Windows.Forms.Button btnActivateTerm;
         private System.Windows.Forms.ComboBox cbTermStatusSearch;
         private System.Windows.Forms.Label lblActive;
         private System.Windows.Forms.Button btnUpdateTerm;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvShippingTerms;
         private System.Windows.Forms.Button btnAddTerm;
         private System.Windows.Forms.TabPage tabShippingOrders;
         private System.Windows.Forms.Button btnRefresh;

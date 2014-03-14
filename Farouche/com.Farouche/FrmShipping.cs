@@ -54,6 +54,7 @@ namespace com.Farouche.Presentation
 
         private void PopulateOrderListView(ListView lv, List<ShippingOrder> orderList)
         {
+            _myOrderManager.Orders = orderList;
             lv.Items.Clear();
             lv.Columns.Clear();
             foreach (var order in orderList)
@@ -118,12 +119,42 @@ namespace com.Farouche.Presentation
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }//End of PopulateVendorListView(..)
 
+        //Populates a list view.
+        private void PopulateTermListView(ListView lv, List<ShippingTerm> termList)
+        {
+            _myTermManager.ShippingTerms = termList;
+            lv.Items.Clear();
+            lv.Columns.Clear();
+            foreach (var term in termList)
+            {
+                var item = new ListViewItem();
+                item.Text = term.Id.ToString();
+                item.SubItems.Add(term.ShippingVendorId.ToString());
+                if (term.Description.Length > 25)
+                {
+                    item.SubItems.Add(term.Description.Substring(0,25));
+                }
+                else
+                {
+                    item.SubItems.Add(term.Description);
+                }
+                lv.Items.Add(item);
+            }
+            lv.Columns.Add("Term ID");
+            lv.Columns.Add("Vendor ID");
+            lv.Columns.Add("Description");
+            lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }//End of PopulateVendorListView(..)
+
         //Restores default control properties.
         private void setDefaults()
         {
             btnUpdateVendor.Enabled = false;
             btnDeactivateVendor.Enabled = false;
             btnActivateVendor.Enabled = false;
+            btnUpdateTerm.Enabled = false;
+            btnActivateTerm.Enabled = false;
+            btnDeactivateTerm.Enabled = false;
         }//End of setDefaults()
 
         private void lvShippingVendors_Click(object sender, EventArgs e)
@@ -146,26 +177,36 @@ namespace com.Farouche.Presentation
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
             FrmAddShippingVendor form = new FrmAddShippingVendor();
-            form.Show();
-        }
+            form.ShowDialog();
+            setDefaults();
+            PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
+        }//End of btnAddVendor_Click(..)
 
         private void btnUpdateVendor_Click(object sender, EventArgs e)
         {
-            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor();
-            form.Show();
-        }
+            var currentIndex = this.lvShippingVendors.SelectedIndices[0];
+            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex]);
+            form.ShowDialog();
+            setDefaults();
+            PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
+        }//End of btnUpdateVendor_Click(..)
 
         private void btnAddTerm_Click(object sender, EventArgs e)
         {
             FrmAddShippingTerm form = new FrmAddShippingTerm();
-            form.Show();
-        }
+            form.ShowDialog();
+            setDefaults();
+            PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
+        }//End of btnAddTerm_Click(..)
 
         private void btnUpdateTerm_Click(object sender, EventArgs e)
         {
-            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm();
-            form.Show();
-        }
+            var currentIndex = this.lvShippingTerms.SelectedIndices[0];
+            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex]);
+            form.ShowDialog();
+            setDefaults();
+            PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
+        }//End of btnUpdateTerm_Click(..)
 
         //Navigation event handlers for the application.
         private void btnVendor_Click(object sender, EventArgs e)
@@ -173,28 +214,48 @@ namespace com.Farouche.Presentation
             FrmVendor form = new FrmVendor(_myAccessToken);
             form.Show();
             Close();
-        }
+        }//End of btnVendor_Click(..)
 
         private void btnVendorSource_Click(object sender, EventArgs e)
         {
             FrmVendorSource form = new FrmVendorSource(_myAccessToken);
             form.Show();
             Close();
-        }
+        }//End of btnVendorSource_Click(..)
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
             FrmLogin frm = new FrmLogin();
             frm.Show();
             Close();
-        }
+        }//End of btnLogout_Click(..)
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
             FrmProduct form = new FrmProduct(_myAccessToken);
             form.Show();
             Close();
-        }
+        }//End of btnProduct_click(..)
+
+        private void tabControlShipping_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.tabControlShipping.SelectedIndex)
+            {
+                case 0:
+                    PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
+                    setDefaults();
+                    break;
+                case 1:
+                    PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
+                    setDefaults();
+                    break;
+            }
+        }//End of tabControlShipping_SelectedIndexChanged(..)
+
+        private void lvShippingTerms_Click(object sender, EventArgs e)
+        {
+            btnUpdateTerm.Enabled = true;
+        }//End of lvShippingTerms_Click(..)
 
         private void btnDetails_Click(object sender, EventArgs e)
         {
@@ -258,7 +319,7 @@ namespace com.Farouche.Presentation
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
-        }
+        }//End of btnPackComplete_Click(..)
 
         private void btnClearUser_Click(object sender, EventArgs e)
         {
@@ -279,6 +340,6 @@ namespace com.Farouche.Presentation
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
-        }
+        }//End of btnClearUser_Click(..)
     }
 }

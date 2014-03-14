@@ -28,33 +28,95 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnClose = new System.Windows.Forms.Button();
+            this.txtDesc = new System.Windows.Forms.TextBox();
+            this.comboVendor = new System.Windows.Forms.ComboBox();
+            this.lblDesc = new System.Windows.Forms.Label();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.labelVendor = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnClose
+            // txtDesc
             // 
-            this.btnClose.Location = new System.Drawing.Point(291, 200);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.txtDesc.Location = new System.Drawing.Point(111, 58);
+            this.txtDesc.Multiline = true;
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.Size = new System.Drawing.Size(282, 117);
+            this.txtDesc.TabIndex = 1;
+            // 
+            // comboVendor
+            // 
+            this.comboVendor.FormattingEnabled = true;
+            this.comboVendor.Location = new System.Drawing.Point(111, 30);
+            this.comboVendor.Name = "comboVendor";
+            this.comboVendor.Size = new System.Drawing.Size(121, 21);
+            this.comboVendor.TabIndex = 0;
+            // 
+            // lblDesc
+            // 
+            this.lblDesc.AutoSize = true;
+            this.lblDesc.Location = new System.Drawing.Point(42, 61);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Size = new System.Drawing.Size(63, 13);
+            this.lblDesc.TabIndex = 41;
+            this.lblDesc.Text = "Description:";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(226, 208);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(89, 23);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.Text = "Update Term";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click_1);
+            // 
+            // labelVendor
+            // 
+            this.labelVendor.AutoSize = true;
+            this.labelVendor.Location = new System.Drawing.Point(61, 33);
+            this.labelVendor.Name = "labelVendor";
+            this.labelVendor.Size = new System.Drawing.Size(44, 13);
+            this.labelVendor.TabIndex = 37;
+            this.labelVendor.Text = "Vendor:";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(145, 208);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FrmUpdateShippingTerm
             // 
+            this.AcceptButton = this.btnEdit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 261);
-            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.txtDesc);
+            this.Controls.Add(this.comboVendor);
+            this.Controls.Add(this.lblDesc);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.labelVendor);
+            this.Controls.Add(this.btnCancel);
             this.Name = "FrmUpdateShippingTerm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Update Shipping Term";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.TextBox txtDesc;
+        private System.Windows.Forms.ComboBox comboVendor;
+        private System.Windows.Forms.Label lblDesc;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label labelVendor;
+        private System.Windows.Forms.Button btnCancel;
+
     }
 }
