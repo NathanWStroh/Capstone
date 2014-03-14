@@ -210,7 +210,7 @@ namespace com.Farouche.DataAccess
                         {
                             ProductName = mySqlReader.GetString(2),
                             Quantity = mySqlReader.GetInt32(3),
-                            ProductLocation = mySqlReader.GetString(4),
+                            ProductLocation = mySqlReader[4] as string,
                             IsPicked = mySqlReader.GetBoolean(5)              
                         };
                 
@@ -265,7 +265,7 @@ namespace com.Farouche.DataAccess
                         {
                             ProductName = mySqlReader.GetString(2),
                             Quantity = mySqlReader.GetInt32(3),
-                            ProductLocation = mySqlReader.GetString(4),
+                            ProductLocation = mySqlReader[4] as string,
                             IsPicked = mySqlReader.GetBoolean(5)
                         };
 
