@@ -44,6 +44,11 @@ namespace com.Farouche
 
         }
 
+        private void cbGetVendorsByName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
             
         

@@ -15,6 +15,7 @@ namespace com.Farouche
         {
             
             InitializeComponent();
+            populateVendorOrderLineItems();
             
 
 
@@ -26,6 +27,10 @@ namespace com.Farouche
             
         }
 
+        private void populateVendorOrderLineItems()
+        {
+
+        }
         
     }
 }

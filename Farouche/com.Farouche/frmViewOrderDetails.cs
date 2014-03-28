@@ -68,8 +68,8 @@ namespace com.Farouche
                 if(lvItemsForPick.Items.Count.Equals(0))
                 {
                     MessageBox.Show("Order has been sent to packing queue", "Ready for Packing");
-                    frmViewOrder myForm = new frmViewOrder(_myAccessToken);
-                    myForm.Show();
+                    //frmViewOrder myForm = new frmViewOrder(_myAccessToken);
+                    //myForm.Show();
                     Hide();
                 }
                 else

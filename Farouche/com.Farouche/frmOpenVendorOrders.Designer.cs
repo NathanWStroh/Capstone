@@ -89,6 +89,7 @@
             this.cbGetVendorsByName.Name = "cbGetVendorsByName";
             this.cbGetVendorsByName.Size = new System.Drawing.Size(121, 21);
             this.cbGetVendorsByName.TabIndex = 2;
+            this.cbGetVendorsByName.SelectedIndexChanged += new System.EventHandler(this.cbGetVendorsByName_SelectedIndexChanged);
             // 
             // btngetAllOpenOrdersByVendor
             // 
