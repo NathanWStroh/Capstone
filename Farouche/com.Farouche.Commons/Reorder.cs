@@ -24,8 +24,8 @@ namespace com.Farouche.Commons
     {
         private Product product;
         private VendorSourceItem vendorSourceItem;
-        private Vendor vendor;
 
+     
                
 
 

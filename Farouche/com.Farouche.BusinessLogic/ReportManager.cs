@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using com.Farouche.Commons;
 
 //Author: 
 //Date Created: 3/28/14
@@ -22,9 +23,8 @@ namespace com.Farouche.BusinessLogic
     class ReportManager
     {
 
-        public Boolean InitializeReport()
+        public List<Reorder> InitializeReport(int vendorId)
         {
-
             throw new NotImplementedException();
         }
 

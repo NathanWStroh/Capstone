@@ -448,10 +448,12 @@ namespace com.Farouche.DataAccess
             // proc_UpdateProductReorderAmount
         }
 
-        public Boolean VerifyProductsAtThreshold()
+        public Boolean UpdateOnOrder(int amount)
         {
             throw new NotImplementedException();
-            // proc_VerifyProductsAtThreshold
+            // proc_UpdateProductOnOrder
         }
+
+
     }
 }

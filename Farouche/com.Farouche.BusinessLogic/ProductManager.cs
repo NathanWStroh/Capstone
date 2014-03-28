@@ -81,10 +81,11 @@ namespace com.Farouche.BusinessLogic
             throw new NotImplementedException();
         } //End of UpdateReorderAmount(.)
 
-        public Boolean VerifyProductsAtThreshold()
+        public Boolean UpdateOnOrder(int amount)
         {
             throw new NotImplementedException();
-        } //End of VerifyProductsAtThreshold()
+        } //End of UpdateOnOrder(.)
+
 
     }
 }
