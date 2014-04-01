@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
@@ -141,7 +142,7 @@ namespace com.Farouche.Presentation
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ProductView frm = new ProductView(_myAccessToken);
-            frm.Show();
+            frm.ShowDialog();
             this.Close();
         }//End of btnAdd_Click(..)
 
