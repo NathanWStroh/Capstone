@@ -303,5 +303,11 @@ namespace com.Farouche.Presentation
             form.Show();
             this.Close();
         }
+
+        private void btnReorder_Click(object sender, EventArgs e)
+        {
+            var form = new frmReorder(_myAccessToken);
+            form.Show();
+        }
     }
 }
