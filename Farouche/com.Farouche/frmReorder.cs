@@ -68,8 +68,7 @@ namespace com.Farouche
             }            
             cb.ValueMember = "reorderAmount";
             cb.DisplayMember = "reorderAmount";
-            cb.DataSource = dt;
-                      
+            cb.DataSource = dt;                      
         }
         //populates the "Product" ComboBoxColumn with a list of Products
         private void populateNewLineProductComboBox(DataGridViewComboBoxColumn cb)
