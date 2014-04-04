@@ -48,6 +48,7 @@
     <Compile Include="ShippingOrderLineItemDAL.cs" />
     <Compile Include="ShippingTermDAL.cs" />
     <Compile Include="ShippingVendorDAL.cs" />
+    <Compile Include="StatesDAL.cs" />
     <Compile Include="VendorDAL.cs" />
     <Compile Include="VendorOrderLineItemDAL.cs" />
     <Compile Include="VendorOrderDAL.cs" />

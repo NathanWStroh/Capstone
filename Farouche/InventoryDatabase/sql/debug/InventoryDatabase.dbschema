@@ -17,7 +17,7 @@
 			<Metadata Name="CompatibilityMode" Value="100" />
 		</CustomData>
 		<CustomData Category="Permissions" Type="XmlPermissions">
-			<Metadata Name="FileName" Value="C:\USERS\ANDREW\DESKTOP\GITCAPSTONE\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
+			<Metadata Name="FileName" Value="G:\CAPSTONE\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
 		</CustomData>
 	</Header>
 	<Model>
@@ -183,6 +183,22 @@
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[((0))]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[Products].[OnOrder]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
+		</Element>
+		<Element Type="ISql90DefaultConstraint">
+			<Property Name="DefaultExpressionScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[((1))]]></Value>
 			</Property>
 			<Relationship Name="DefiningTable">
@@ -195,7 +211,7 @@
 					<References Name="[dbo].[Products].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -211,7 +227,7 @@
 					<References Name="[dbo].[Locations].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -227,7 +243,7 @@
 					<References Name="[dbo].[Categories].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -243,7 +259,7 @@
 					<References Name="[dbo].[ProductCategories].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -259,7 +275,7 @@
 					<References Name="[dbo].[Vendors].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -275,7 +291,7 @@
 					<References Name="[dbo].[VendorSourceItems].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -291,7 +307,7 @@
 					<References Name="[dbo].[ShippingOrders].[Picked]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -307,7 +323,7 @@
 					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
 		</Element>
 		<Element Type="ISql90Route" Name="[AutoCreatedLocal]">
 			<Property Name="Address" Value="LOCAL" />
@@ -351,7 +367,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="14" />
+						<AttachedAnnotation Disambiguator="15" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -703,7 +719,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="13" />
+						<AttachedAnnotation Disambiguator="14" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -843,7 +859,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingOrders]">
 			<Relationship Name="ColumnSpecifications">
@@ -867,7 +883,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingTermsLookup]">
 			<Relationship Name="ColumnSpecifications">
@@ -891,7 +907,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingVendors]">
 			<Relationship Name="ColumnSpecifications">
@@ -915,7 +931,31 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_States]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[States].[StateCode]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[States]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Users]">
 			<Relationship Name="ColumnSpecifications">
@@ -966,7 +1006,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_VendorOrders]">
 			<Relationship Name="ColumnSpecifications">
@@ -990,7 +1030,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Vendors]">
 			<Relationship Name="ColumnSpecifications">
@@ -1036,6 +1076,98 @@
 					<References Name="[dbo].[VendorSourceItems]" />
 				</Entry>
 			</Relationship>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GenerateReorderReports]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	select p.ProductID, ReorderAmount, ReorderThreshold, vsi.VendorID, ItemsPerCase, UnitCost, UnitPrice, MinQtyToOrder
+    from Products p
+            Join VendorSourceItems vsi on 
+                vsi.ProductID = p.ProductID
+            where p.active = 'true' and
+                vsi.Active = 'true' and
+                vsi.VendorID = @VendorID  and
+                OnHand + OnOrder < ReorderThreshold]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ReorderThreshold]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[UnitPrice]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GenerateReorderReports].[@VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[OnHand]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[OnOrder]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GenerateReorderReports].[@VendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="482" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GenerateReorderReports]&#xD;&#xA;&#x9;@VendorID int&#xD;&#xA;AS" />
+			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrderLineItems]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -5415,7 +5547,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="15" />
+						<AttachedAnnotation Disambiguator="16" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -5477,6 +5609,23 @@ RETURN @@ROWCOUNT]]></Value>
 							</Entry>
 						</Relationship>
 						<AttachedAnnotation Disambiguator="11" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Products].[OnOrder]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="12" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -5620,7 +5769,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="12" />
+						<AttachedAnnotation Disambiguator="13" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -5758,7 +5907,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="19" />
+						<AttachedAnnotation Disambiguator="20" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -5772,7 +5921,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="20" />
+			<AttachedAnnotation Disambiguator="21" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[ShippingOrders]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -5870,7 +6019,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="18" />
+						<AttachedAnnotation Disambiguator="19" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -5964,7 +6113,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="21" />
+			<AttachedAnnotation Disambiguator="22" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[ShippingTermsLookup]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -6030,7 +6179,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="22" />
+			<AttachedAnnotation Disambiguator="23" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[ShippingVendors]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -6215,9 +6364,10 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="23" />
+			<AttachedAnnotation Disambiguator="24" />
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Categories]
@@ -6225,7 +6375,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Category] = @category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Categories]" />
@@ -6272,6 +6421,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateLocation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Locations]
@@ -6279,7 +6429,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Location] = @location
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Locations]" />
@@ -6326,6 +6475,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateProduct]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Products]
@@ -6333,7 +6483,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [ProductID] = @ProductID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -6379,6 +6528,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateProductCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[ProductCategories]
@@ -6387,7 +6537,6 @@ RETURN @@ROWCOUNT]]></Value>
 			AND Category = @category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -6455,6 +6604,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateVendor]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Vendors]
@@ -6462,7 +6612,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [VendorID] = @VendorID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -6508,6 +6657,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateVendorSourceItem]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[VendorSourceItems]
@@ -6516,7 +6666,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [ProductID] = @productID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -6583,13 +6732,13 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	DELETE FROM[dbo].[Categories]
 	WHERE [Category] = @category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Categories]" />
@@ -6633,13 +6782,13 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteLocation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	DELETE FROM [dbo].[Locations]
 	WHERE [Location] = @location
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Locations]" />
@@ -6683,6 +6832,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteProduct]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	DELETE FROM [dbo].[Products]
@@ -6700,7 +6850,6 @@ RETURN @@ROWCOUNT]]></Value>
 	AND [Active] = @Active
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -6978,6 +7127,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteProductCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	DELETE FROM [dbo].[ProductCategories]
@@ -6985,7 +7135,6 @@ RETURN @@ROWCOUNT]]></Value>
 			AND Category = @category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -7050,13 +7199,13 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteVendor]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	DELETE FROM [dbo].[Vendors]
 	WHERE [VendorID] = @VendorID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -7099,6 +7248,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteVendorSourceItem]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	DELETE FROM [dbo].[VendorSourceItems]
@@ -7106,7 +7256,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [ProductID] = @productID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -7170,6 +7319,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetAllVendorSourceItems]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
@@ -7177,7 +7327,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Active] = 1
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -7215,6 +7364,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetCategories]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [Category]
@@ -7222,7 +7372,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Active] = 1
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Categories]" />
@@ -7248,6 +7397,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetLocations]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [Location]
@@ -7255,7 +7405,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Active] = 1
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Locations]" />
@@ -7281,13 +7430,13 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProduct]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT * FROM [dbo].[Products]
 	WHERE [ProductID] = @ProductID
 	ORDER BY [ProductID]]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -7330,6 +7479,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductCategories]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [ProductID], [Category]
@@ -7337,7 +7487,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Active] = 1
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -7366,6 +7515,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductCategoriesByCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [Category], [ProductCategories].[ProductID], [Products].[ShortDesc] 
@@ -7374,7 +7524,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [ProductCategories].[ProductID] = [Products].[ProductID]
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -7430,6 +7579,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductCategoriesByProduct]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [ProductID], [ProductCategories].[Category]
@@ -7438,7 +7588,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [ProductCategories].[Category] = [Categories].[Category]
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -7490,12 +7639,12 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProducts]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT * FROM [dbo].[Products]
 	ORDER BY [Active] DESC, [ProductID]]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -7521,13 +7670,13 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductsByActive]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT * FROM [dbo].[Products]
 	WHERE [Active] = @Active
 	ORDER BY [ProductID]]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -7573,6 +7722,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendor]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT *
@@ -7580,7 +7730,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE VendorID = @VendorID
 	Return]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -7623,13 +7772,13 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendors]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT *
 	FROM Vendors 
 	Return]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -7649,6 +7798,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorsActive]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT *
@@ -7656,7 +7806,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE Active = 1
 	Return]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -7679,6 +7828,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorSourceItem]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Active]
@@ -7688,7 +7838,6 @@ RETURN @@ROWCOUNT]]></Value>
 	RETURN @@ROWCOUNT
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -7764,6 +7913,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorSourceItemsByProduct]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
@@ -7772,7 +7922,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [ProductID] = @productID
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -7830,6 +7979,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorSourceItemsByVendor]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
@@ -7838,7 +7988,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [VendorID] = @vendorID
 	RETURN]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -7896,6 +8045,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoCategories]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	INSERT INTO [dbo].[Categories]
@@ -7903,7 +8053,6 @@ RETURN @@ROWCOUNT]]></Value>
 	VALUES
 		(@Category)]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Categories]" />
@@ -7947,6 +8096,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoLocations]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	INSERT INTO [dbo].[Locations]
@@ -7954,7 +8104,6 @@ RETURN @@ROWCOUNT]]></Value>
 	VALUES
 		(@location)]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Locations]" />
@@ -7998,6 +8147,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoProductCategories]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	INSERT INTO [dbo].[ProductCategories]
@@ -8006,7 +8156,6 @@ RETURN @@ROWCOUNT]]></Value>
 		(@productID, @category)
 	RETURN @@IDENTITY]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -8071,13 +8220,13 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoProducts]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	INSERT IntO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[ShippingDimensions],[ShippingWeight],[Active])
 	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @ShippingDimensions, @ShippingWeight, @Active)
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -8333,6 +8482,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoVendor]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	INSERT INTO Vendors
@@ -8342,7 +8492,6 @@ RETURN @@ROWCOUNT]]></Value>
 
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -8561,12 +8710,12 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoVendorSourceItems]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
 	RETURN @@IDENTITY]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -8714,6 +8863,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_ReactivateCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Categories]
@@ -8721,7 +8871,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Category] = @category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Categories]" />
@@ -8768,6 +8917,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_ReactivateLocation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Locations]
@@ -8775,7 +8925,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Location] = @location
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Locations]" />
@@ -8822,6 +8971,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_ReactivateProduct]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Products]
@@ -8829,7 +8979,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [ProductID] = @ProductID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -8875,6 +9024,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_ReactivateProductCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[ProductCategories]
@@ -8883,7 +9033,6 @@ RETURN @@ROWCOUNT]]></Value>
 			AND Category = @category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -8951,6 +9100,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_ReactivateVendor]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Vendors]
@@ -8958,7 +9108,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE VendorID = @VendorID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -9004,6 +9153,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_ReactivateVendorSourceItem]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[VendorSourceItems]
@@ -9012,7 +9162,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [ProductID] = @productID
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -9079,6 +9228,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Categories]
@@ -9086,7 +9236,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Category] = @orig_category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Categories]" />
@@ -9149,6 +9298,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateLocation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Locations]
@@ -9156,7 +9306,6 @@ RETURN @@ROWCOUNT]]></Value>
 	WHERE [Location] = @orig_location
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Locations]" />
@@ -9219,6 +9368,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateProductCategory]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[ProductCategories]
@@ -9228,7 +9378,6 @@ RETURN @@ROWCOUNT]]></Value>
 			AND Category = @orig_category
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[ProductCategories]" />
@@ -9330,6 +9479,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateProducts]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Products]
@@ -9348,7 +9498,6 @@ RETURN @@ROWCOUNT]]></Value>
 	AND [Active] = @OriginalActive
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Products]" />
@@ -9828,6 +9977,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateVendor]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE Vendors
@@ -9852,7 +10002,6 @@ RETURN @@ROWCOUNT]]></Value>
 	
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -10261,6 +10410,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateVendorName]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE Vendors
@@ -10270,7 +10420,6 @@ RETURN @@ROWCOUNT]]></Value>
 
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[Vendors]" />
@@ -10354,6 +10503,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateVendorSourceItem]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[VendorSourceItems]
@@ -10369,7 +10519,6 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [ItemsPerCase] = @orig_itemsPerCase
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="BodyDependencies">
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems]" />
@@ -10584,6 +10733,88 @@ RETURN @@ROWCOUNT]]></Value>
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="&#x9;&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_UpdateVendorSourceItem]*/&#xD;&#xA;CREATE PROCEDURE [sp_UpdateVendorSourceItem]&#xD;&#xA;&#x9;(@vendorID int,&#xD;&#xA;&#x9; @productID int,&#xD;&#xA;&#x9; @unitCost money,&#xD;&#xA;&#x9; @minQtyToOrder int,&#xD;&#xA;&#x9; @itemsPerCase int,&#xD;&#xA;&#x9; @orig_vendorID int,&#xD;&#xA;&#x9; @orig_productID int,&#xD;&#xA;&#x9; @orig_unitCost money,&#xD;&#xA;&#x9; @orig_minQtyToOrder int,&#xD;&#xA;&#x9; @orig_itemsPerCase int)&#xD;&#xA;AS" />
 			</Annotation>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[States]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[States].[StateCode]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="2" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[States].[StateName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="20" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[States].[FirstZipCode]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[States].[LastZipCode]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Filegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="25" />
 		</Element>
 		<Element Type="ISql100UniqueConstraint" Name="[dbo].[UQ_ProductID_Category]">
 			<Relationship Name="ColumnSpecifications">
@@ -10954,7 +11185,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="24" />
+						<AttachedAnnotation Disambiguator="26" />
 						<AttachedAnnotation Disambiguator="9" />
 					</Element>
 				</Entry>
@@ -11070,7 +11301,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="25" />
+						<AttachedAnnotation Disambiguator="27" />
 						<AttachedAnnotation Disambiguator="6" />
 					</Element>
 				</Entry>
@@ -11273,7 +11504,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="16" />
+						<AttachedAnnotation Disambiguator="17" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -11380,7 +11611,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="17" />
+						<AttachedAnnotation Disambiguator="18" />
 					</Element>
 				</Entry>
 			</Relationship>

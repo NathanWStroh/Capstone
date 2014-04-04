@@ -45,6 +45,7 @@
     <Compile Include="ShippingOrderManager.cs" />
     <Compile Include="ShippingTermManager.cs" />
     <Compile Include="ShippingVendorManager.cs" />
+    <Compile Include="StateManager.cs" />
     <Compile Include="VendorManager.cs" />
     <Compile Include="VendorSourceItemManager.cs" />
   </ItemGroup>

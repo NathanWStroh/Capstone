@@ -44,6 +44,7 @@
     <Compile Include="ShippingOrderLineItem.cs" />
     <Compile Include="ShippingTerm.cs" />
     <Compile Include="ShippingVendor.cs" />
+    <Compile Include="State.cs" />
     <Compile Include="Vendor.cs" />
     <Compile Include="VendorOrder.cs" />
     <Compile Include="VendorOrderLineItem.cs" />

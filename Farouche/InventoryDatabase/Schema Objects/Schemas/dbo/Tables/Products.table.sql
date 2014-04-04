@@ -2,6 +2,7 @@
     [ProductID]          INT           IDENTITY (1, 1) NOT NULL,
     [Available]          INT           DEFAULT ((0)) NOT NULL,
     [OnHand]             INT           DEFAULT ((0)) NOT NULL,
+    [OnOrder]            INT           DEFAULT ((0)) NOT NULL,
     [Description]        VARCHAR (250) NOT NULL,
     [Location]           VARCHAR (250) NULL,
     [UnitPrice]          MONEY         NOT NULL,
