@@ -16,7 +16,7 @@ namespace com.Farouche.DataAccess
 {
     public class DatabaseConnection
     {
-        const string ConnectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=InventoryDatabase;Integrated Security=True";
+        const string ConnectionString = "Data Source=localhost\\sqlexpress;Initial Catalog=InventoryDatabase;Integrated Security=True";
         private static SqlConnection _myConnection;
         static protected SqlConnection GetInventoryDbConnection()
         {
