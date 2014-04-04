@@ -326,6 +326,7 @@
             this.btnRefresh.TabIndex = 3;
             this.btnRefresh.Text = "Refresh Lists";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // tabPackList
             // 
@@ -359,11 +360,13 @@
             this.btnClearUser.TabIndex = 1;
             this.btnClearUser.Text = "Clear User";
             this.btnClearUser.UseVisualStyleBackColor = true;
+            this.btnClearUser.Click += new System.EventHandler(this.btnClearUser_Click);
             // 
             // lvAllOrders
             // 
             this.lvAllOrders.FullRowSelect = true;
             this.lvAllOrders.GridLines = true;
+            this.lvAllOrders.HideSelection = false;
             this.lvAllOrders.Location = new System.Drawing.Point(2, 0);
             this.lvAllOrders.MultiSelect = false;
             this.lvAllOrders.Name = "lvAllOrders";
@@ -388,6 +391,7 @@
             // 
             this.lvPickList.FullRowSelect = true;
             this.lvPickList.GridLines = true;
+            this.lvPickList.HideSelection = false;
             this.lvPickList.Location = new System.Drawing.Point(-2, -2);
             this.lvPickList.MultiSelect = false;
             this.lvPickList.Name = "lvPickList";
@@ -404,6 +408,7 @@
             this.btnStartPick.TabIndex = 1;
             this.btnStartPick.Text = "Start Pick";
             this.btnStartPick.UseVisualStyleBackColor = true;
+            this.btnStartPick.Click += new System.EventHandler(this.btnStartPick_Click);
             // 
             // tabMyOrders
             // 
@@ -425,11 +430,13 @@
             this.btnDetails.TabIndex = 1;
             this.btnDetails.Text = "View Details";
             this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
             // lvMyOrders
             // 
             this.lvMyOrders.FullRowSelect = true;
             this.lvMyOrders.GridLines = true;
+            this.lvMyOrders.HideSelection = false;
             this.lvMyOrders.Location = new System.Drawing.Point(2, 0);
             this.lvMyOrders.MultiSelect = false;
             this.lvMyOrders.Name = "lvMyOrders";
@@ -458,11 +465,13 @@
             this.btnPackComplete.TabIndex = 1;
             this.btnPackComplete.Text = "Ready for Ship";
             this.btnPackComplete.UseVisualStyleBackColor = true;
+            this.btnPackComplete.Click += new System.EventHandler(this.btnPackComplete_Click);
             // 
             // lvPackList
             // 
             this.lvPackList.FullRowSelect = true;
             this.lvPackList.GridLines = true;
+            this.lvPackList.HideSelection = false;
             this.lvPackList.Location = new System.Drawing.Point(0, 2);
             this.lvPackList.MultiSelect = false;
             this.lvPackList.Name = "lvPackList";

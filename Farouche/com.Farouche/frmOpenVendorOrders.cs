@@ -33,7 +33,7 @@ namespace com.Farouche
 
             //fillVendorDropDown();
 
-            VendorOrder vendorOrder1 = new VendorOrder();
+            /*VendorOrder vendorOrder1 = new VendorOrder();
             VendorOrder vendorOrder2 = new VendorOrder();
             
 
@@ -50,11 +50,9 @@ namespace com.Farouche
             vendorOrder2.ProductID = 2;
             vendorOrder2.Name = "Target";
             vendorOrder2.DateOrdered = "1/25/2014";
-            vendorOrder2.NumberOfShipments = 1;
+            vendorOrder2.NumberOfShipments = 1;*/
 
-            orderList = new List<VendorOrder>();
-            orderList.Add(vendorOrder1);
-            orderList.Add(vendorOrder2);
+            orderList = _receivingManager.GetAllOpenOrders();
 
             vendorList = new List<Vendor>();
             var vendor1 = new Vendor();
@@ -111,10 +109,12 @@ namespace com.Farouche
             foreach (var vendorOrder in orderList)
             {
                 var item = new ListViewItem();
+
                 item.Text = vendorOrder.VendorOrderID.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
+
                 item.SubItems.Add(vendorOrder.Name);
-                item.SubItems.Add(vendorOrder.DateOrdered);
+                item.SubItems.Add(vendorOrder.DateOrdered.ToString();
                 item.SubItems.Add(vendorOrder.NumberOfShipments.ToString());
                 lv.Items.Add(item);
             }
