@@ -408,6 +408,7 @@ PRINT N'Creating [dbo].[States]...';
 
 GO
 CREATE TABLE [dbo].[States] (
+    [StateID]      INT          IDENTITY (1, 1) NOT NULL,
     [StateCode]    CHAR (2)     NOT NULL,
     [StateName]    VARCHAR (20) NOT NULL,
     [FirstZipCode] INT          NOT NULL,
