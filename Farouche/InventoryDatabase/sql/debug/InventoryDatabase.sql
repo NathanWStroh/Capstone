@@ -12,9 +12,10 @@ GO
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
 GO
-:on error exit
-GO
 USE [master]
+
+GO
+:on error exit
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -145,6 +146,7 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
+
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -1162,6 +1164,23 @@ AS
 	WHERE so.[PurchaseOrderID] = @purchaseOrderID
 	ORDER BY so.[PurchaseOrderID]
 GO
+PRINT N'Creating [dbo].[proc_GetShippingOrderLineItem]...';
+
+
+GO
+CREATE PROCEDURE [proc_GetShippingOrderLineItem]
+(
+	@productID int,
+	@shippingOrderID int
+)
+AS
+	SELECT li.[ShippingOrderID], li.[ProductID], p.[ShortDesc], li.[Quantity], p.[Location], li.[Picked]
+	FROM [dbo].[ShippingOrderLineItems] li
+	JOIN [dbo].[Products] p
+	ON li.[ProductID] = p.[ProductID]
+	WHERE li.[ProductID] = @productID
+	AND li.[ShippingOrderID] = @shippingOrderID
+GO
 PRINT N'Creating [dbo].[proc_GetShippingOrderLineItems]...';
 
 
@@ -1508,7 +1527,7 @@ CREATE PROCEDURE [proc_UpdateShippingOrderUser]
 	@newUserID int
 )
 AS
-	UPDATE [dbo].[ShippingORders]
+	UPDATE [dbo].[ShippingOrders]
 	SET [UserID] = @newUserID
 	WHERE [ShippingOrderID] = @shippingOrderID
 GO

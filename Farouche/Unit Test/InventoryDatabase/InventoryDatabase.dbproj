@@ -627,8 +627,5 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\ShippingVendors.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetShippingOrderLineItem.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
   </ItemGroup>
 </Project>

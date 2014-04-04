@@ -4,7 +4,7 @@
 	@newUserID int
 )
 AS
-	UPDATE [dbo].[ShippingORders]
+	UPDATE [dbo].[ShippingOrders]
 	SET [UserID] = @newUserID
 	WHERE [ShippingOrderID] = @shippingOrderID
 

@@ -40,6 +40,7 @@
             // 
             // lvItemsForPick
             // 
+            this.lvItemsForPick.FullRowSelect = true;
             this.lvItemsForPick.GridLines = true;
             this.lvItemsForPick.Location = new System.Drawing.Point(27, 34);
             this.lvItemsForPick.MultiSelect = false;
@@ -47,6 +48,7 @@
             this.lvItemsForPick.Size = new System.Drawing.Size(297, 321);
             this.lvItemsForPick.TabIndex = 0;
             this.lvItemsForPick.UseCompatibleStateImageBehavior = false;
+            this.lvItemsForPick.View = System.Windows.Forms.View.Details;
             // 
             // btnPick
             // 
@@ -60,6 +62,7 @@
             // 
             // lvPickedItems
             // 
+            this.lvPickedItems.FullRowSelect = true;
             this.lvPickedItems.GridLines = true;
             this.lvPickedItems.Location = new System.Drawing.Point(437, 34);
             this.lvPickedItems.MultiSelect = false;
@@ -67,6 +70,7 @@
             this.lvPickedItems.Size = new System.Drawing.Size(279, 321);
             this.lvPickedItems.TabIndex = 2;
             this.lvPickedItems.UseCompatibleStateImageBehavior = false;
+            this.lvPickedItems.View = System.Windows.Forms.View.Details;
             // 
             // btnPrintDetails
             // 

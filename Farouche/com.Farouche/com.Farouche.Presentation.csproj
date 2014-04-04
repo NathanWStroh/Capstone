@@ -120,11 +120,11 @@
     <Compile Include="frmLogin.designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmViewOrderDetails.cs">
+    <Compile Include="FrmViewOrderDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmViewOrderDetails.designer.cs">
-      <DependentUpon>frmViewOrderDetails.cs</DependentUpon>
+    <Compile Include="FrmViewOrderDetails.designer.cs">
+      <DependentUpon>FrmViewOrderDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductView.cs">
       <SubType>Form</SubType>
@@ -173,8 +173,8 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmViewOrderDetails.resx">
-      <DependentUpon>frmViewOrderDetails.cs</DependentUpon>
+    <EmbeddedResource Include="FrmViewOrderDetails.resx">
+      <DependentUpon>FrmViewOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductView.resx">
       <DependentUpon>ProductView.cs</DependentUpon>
