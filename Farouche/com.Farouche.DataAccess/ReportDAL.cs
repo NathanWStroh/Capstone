@@ -26,7 +26,7 @@ namespace com.Farouche.DataAccess
 
         public static List<Reorder> getReorderReportData(int vendorId, SqlConnection connection)
         {
-            List<Reorder> reorders = null;
+            List<Reorder> reorders = new List<Reorder>();
             SqlConnection conn = connection ?? GetInventoryDbConnection();
             try
             {
