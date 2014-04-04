@@ -17,11 +17,7 @@
 			<Metadata Name="CompatibilityMode" Value="100" />
 		</CustomData>
 		<CustomData Category="Permissions" Type="XmlPermissions">
-<<<<<<< HEAD
-			<Metadata Name="FileName" Value="C:\USERS\ANDREW\DESKTOP\GITCAPSTONE\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-=======
 			<Metadata Name="FileName" Value="J:\CAPSTONE\CAPSTONE_CODE\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
->>>>>>> Nathan
 		</CustomData>
 	</Header>
 	<Model>
