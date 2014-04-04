@@ -84,6 +84,12 @@
     <Compile Include="FrmShipping.designer.cs">
       <DependentUpon>FrmShipping.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmStartUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStartUp.Designer.cs">
+      <DependentUpon>frmStartUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmUpdateShippingTerm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,17 +114,23 @@
     <Compile Include="frmReceiving.Designer.cs">
       <DependentUpon>frmReceiving.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmVendorCreateOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVendorCreateOrder.Designer.cs">
+      <DependentUpon>frmVendorCreateOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVendorSource.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmVendorSource.designer.cs">
       <DependentUpon>frmVendorSource.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
+    <Compile Include="FrmLogin.designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="frmViewOrderDetails.cs">
       <SubType>Form</SubType>
@@ -155,6 +167,9 @@
     <EmbeddedResource Include="FrmShipping.resx">
       <DependentUpon>FrmShipping.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmStartUp.resx">
+      <DependentUpon>frmStartUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateShippingTerm.resx">
       <DependentUpon>FrmUpdateShippingTerm.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,11 +182,14 @@
     <EmbeddedResource Include="frmReceiving.resx">
       <DependentUpon>frmReceiving.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmVendorCreateOrder.resx">
+      <DependentUpon>frmVendorCreateOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVendorSource.resx">
       <DependentUpon>frmVendorSource.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
-      <DependentUpon>frmLogin.cs</DependentUpon>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmViewOrderDetails.resx">
       <DependentUpon>frmViewOrderDetails.cs</DependentUpon>
