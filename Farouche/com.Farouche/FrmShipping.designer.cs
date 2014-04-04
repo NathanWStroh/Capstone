@@ -162,6 +162,7 @@
             this.lvShippingVendors.TabIndex = 10;
             this.lvShippingVendors.UseCompatibleStateImageBehavior = false;
             this.lvShippingVendors.View = System.Windows.Forms.View.Details;
+            //this.lvShippingVendors.SelectedIndexChanged += new System.EventHandler(this.lvShippingVendors_SelectedIndexChanged);
             this.lvShippingVendors.Click += new System.EventHandler(this.lvShippingVendors_Click);
             // 
             // btnAddVendor

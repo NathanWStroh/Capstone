@@ -2,6 +2,7 @@
 //Date Created: 1/31/2014
 //Last Modified: 1/31/2014
 //Last Modified By: Steven Schuette
+
 using System;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
@@ -18,15 +19,15 @@ namespace com.Farouche.Presentation
         private void btnLogin_Click(object sender, EventArgs e)
         {
 
-            AccessToken myAccessToken = default(AccessToken);
+           AccessToken myAccessToken = default(AccessToken);
 
-           FrmVendor myForm = default(FrmVendor);
+           frmStartUp myForm = default(frmStartUp);
             try
             {
 
                 myAccessToken = Authenticator.authenticate(int.Parse(txtUserID.Text), txtPassword.Text);
 
-                myForm = new FrmVendor(myAccessToken);
+                myForm = new frmStartUp(myAccessToken);
                 myForm.Show();
                 Hide();
 

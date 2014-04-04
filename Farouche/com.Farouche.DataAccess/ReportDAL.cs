@@ -22,7 +22,7 @@ namespace com.Farouche.DataAccess
     public class ReportDAL
     {
 
-        public static Reorder getReorderReportData()
+        public List<Reorder> getReorderReportData(int vendorId)
         {
             throw new NotImplementedException();
             // proc_GenerateReorderReports
