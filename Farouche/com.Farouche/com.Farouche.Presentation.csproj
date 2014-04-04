@@ -78,6 +78,18 @@
     <Compile Include="frmReceivingNotes.Designer.cs">
       <DependentUpon>frmReceivingNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReorder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReorder.Designer.cs">
+      <DependentUpon>frmReorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReorderChangeLevels.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReorderChangeLevels.Designer.cs">
+      <DependentUpon>frmReorderChangeLevels.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmShipping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +176,12 @@
     <EmbeddedResource Include="frmReceivingNotes.resx">
       <DependentUpon>frmReceivingNotes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReorder.resx">
+      <DependentUpon>frmReorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReorderChangeLevels.resx">
+      <DependentUpon>frmReorderChangeLevels.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmShipping.resx">
       <DependentUpon>FrmShipping.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +247,9 @@
       <Project>{E366A3B6-F888-499D-86CC-EE7ED690C067}</Project>
       <Name>com.Farouche.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
