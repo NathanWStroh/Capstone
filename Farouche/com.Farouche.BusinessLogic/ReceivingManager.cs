@@ -11,7 +11,7 @@ namespace com.Farouche.BusinessLogic
 
         public List<VendorOrder> GetAllOpenOrders()
         {
-            var vendorOrders = VendorOrderDAL.GetAll();
+            var vendorOrders = VendorOrderDAL.GetAll(_connection);
             return vendorOrders ?? new List<VendorOrder>();
         }
 

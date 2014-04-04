@@ -71,6 +71,7 @@
             this.btngetAllOpenOrdersByVendor.TabIndex = 3;
             this.btngetAllOpenOrdersByVendor.Text = "Get Vendor Orders";
             this.btngetAllOpenOrdersByVendor.UseVisualStyleBackColor = true;
+            this.btngetAllOpenOrdersByVendor.Click += new System.EventHandler(this.btngetAllOpenOrdersByVendor_Click);
             // 
             // frmOpenVendorOrders
             // 

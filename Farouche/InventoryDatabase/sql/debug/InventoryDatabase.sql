@@ -8,18 +8,14 @@ SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL
 
 GO
 :setvar DatabaseName "InventoryDatabase"
-<<<<<<< HEAD
 :setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
-=======
-:setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\"
-:setvar DefaultLogPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\"
->>>>>>> Nathan
+
+GO
+USE [master]
 
 GO
 :on error exit
-GO
-USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -150,6 +146,7 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
+
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -1081,6 +1078,16 @@ AS
 	SELECT [VendorOrderID],[ProductID],[QtyOrdered],[QtyReceived],[QtyDamaged]
 	from [VendorOrderLineItems]
 	where [VendorOrderID] = @VendorOrderID
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
+	As
+	SELECT [VendorOrderID],[VendorID],[DateOrdered],[AmountofShipments]
+	from [VendorOrders]
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
