@@ -68,8 +68,8 @@ namespace com.Farouche
                 if(lvItemsForPick.Items.Count.Equals(0))
                 {
                     MessageBox.Show("Order has been sent to packing queue", "Ready for Packing");
-                    frmViewOrder myForm = new frmViewOrder(_myAccessToken);
-                    myForm.Show();
+                    //frmViewOrder myForm = new frmViewOrder(_myAccessToken);
+                   // myForm.Show();
                     Hide();
                 }
                 else
@@ -125,6 +125,13 @@ namespace com.Farouche
             {
                 MessageBox.Show("Please select an item from the list", "No Item Selected");
             }
-        }//End of BtnUnpick_Click(..)
+        }
+
+        private void FrmViewOrderDetails_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+      //End of BtnUnpick_Click(..)
     }
 }

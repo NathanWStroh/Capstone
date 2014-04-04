@@ -132,6 +132,7 @@
             this.Controls.Add(this.lvItemsForPick);
             this.Name = "FrmViewOrderDetails";
             this.Text = "Shipping Order Details";
+            this.Load += new System.EventHandler(this.FrmViewOrderDetails_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,4 +149,5 @@
         private System.Windows.Forms.Button btnComplete;
         private System.Windows.Forms.Button btnUnpick;
     }
+
 }
