@@ -9,12 +9,12 @@ SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL
 GO
 :setvar DatabaseName "InventoryDatabase"
 :setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
-
-GO
-USE [master]
+:setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
 GO
 :on error exit
+GO
+USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -145,7 +145,6 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
-
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -1092,6 +1091,14 @@ CREATE PROCEDURE [proc_GetAllShippingVendors]
 AS
 	SELECT *
 	FROM [dbo].[ShippingVendors]
+GO
+PRINT N'Creating [dbo].[proc_GetAllStates]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllStates]
+AS
+	select * from [dbo].States
 GO
 PRINT N'Creating [dbo].[proc_GetAllVendorOrderLineItems]...';
 

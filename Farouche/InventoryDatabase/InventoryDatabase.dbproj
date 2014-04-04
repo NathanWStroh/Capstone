@@ -631,10 +631,13 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GenerateReorderReports.proc.sql">
-	      <SubType>Code</SubType>
+      <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetShippingOrderLineItem.proc.sql">
-    <SubType>Code</SubType>
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetAllStates.proc.sql">
+      <SubType>Code</SubType>
     </Build>
   </ItemGroup>
 </Project>
