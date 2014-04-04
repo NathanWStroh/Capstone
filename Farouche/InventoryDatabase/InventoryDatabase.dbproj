@@ -647,7 +647,8 @@
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendorOrderByVendorAndDate.proc.sql">
 	  <SubType>Code</SubType>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\States.table.sql">
+    </Build>
+	<Build Include="Schema Objects\Schemas\dbo\Tables\States.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GenerateReorderReports.proc.sql">
