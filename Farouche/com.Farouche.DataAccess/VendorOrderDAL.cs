@@ -29,7 +29,7 @@ namespace com.Farouche.DataAccess
                         var newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                          {
                              DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                             ShipmentsReceived = myReader.GetInt16(3),
+                             NumberOfShipments = myReader.GetInt16(3),
                              Finalized = myReader.GetBoolean(4),
                              Active = myReader.GetBoolean(5)
                          };
@@ -75,7 +75,7 @@ namespace com.Farouche.DataAccess
                         var newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            ShipmentsReceived = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt16(3),
                             Finalized = myReader.GetBoolean(4)
                         };
                         allOpenOrders.Add(newVendorOrder);
@@ -121,7 +121,7 @@ namespace com.Farouche.DataAccess
                         var newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            ShipmentsReceived = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt16(3),
                             Finalized = myReader.GetBoolean(4)
                         };
                         allOpenOrders.Add(newVendorOrder);
@@ -167,10 +167,11 @@ namespace com.Farouche.DataAccess
                         newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            ShipmentsReceived = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt16(3),
                             Finalized = myReader.GetBoolean(4),
                             Active = myReader.GetBoolean(5)
                         };
+                        return newVendorOrder;
                     };
                 }
                 myReader.Close();
@@ -191,9 +192,6 @@ namespace com.Farouche.DataAccess
             {
                 connection.Close();
             }
-            if (newVendorOrder != null)
-                return newVendorOrder;
-            else
                 throw new ApplicationException("Vendor Order: " + VendorOrderID + ", not found");
         }
         public static bool Update(VendorOrder oldVendorOrder, VendorOrder newVendorOrder, SqlConnection connection)
@@ -208,9 +206,9 @@ namespace com.Farouche.DataAccess
                 mySqlCommand.Parameters.AddWithValue("@VendorOrderID", newVendorOrder.Id);
                 mySqlCommand.Parameters.AddWithValue("@VendorID", newVendorOrder.VendorID);
                 mySqlCommand.Parameters.AddWithValue("@DateOrdered", newVendorOrder.DateOrdered);
-                mySqlCommand.Parameters.AddWithValue("@AmountOfShipments", newVendorOrder.ShipmentsReceived);
+                mySqlCommand.Parameters.AddWithValue("@AmountOfShipments", newVendorOrder.NumberOfShipments);
                 mySqlCommand.Parameters.AddWithValue("@Finalized", newVendorOrder.Finalized);
-                mySqlCommand.Parameters.AddWithValue("@orig_AmountOfShipments", oldVendorOrder.ShipmentsReceived);
+                mySqlCommand.Parameters.AddWithValue("@orig_AmountOfShipments", oldVendorOrder.NumberOfShipments);
                 mySqlCommand.Parameters.AddWithValue("@orig_Finalized", oldVendorOrder.Finalized);
                 connection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)

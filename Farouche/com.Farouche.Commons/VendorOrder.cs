@@ -9,7 +9,7 @@ namespace com.Farouche.Commons
     {
         private int _vendorId;
 		private DateTime _dateOrdered;
-		private int _shipmentsReceived;
+		private int _numberOfShipments;
 		private List<VendorOrderLineItem> _lineItems;
         private bool _finalized;
         private double _orderTotal;
@@ -29,10 +29,10 @@ namespace com.Farouche.Commons
 			get {return _vendorId;}
 			set {_vendorId = value;}
 		}
-		public int ShipmentsReceived 
+		public int NumberOfShipments
 		{
-			get {return _shipmentsReceived;}
-			set {_shipmentsReceived = value;}
+			get {return _numberOfShipments;}
+			set {_numberOfShipments = value;}
 		}
 		public List<VendorOrderLineItem> LineItems 
 		{

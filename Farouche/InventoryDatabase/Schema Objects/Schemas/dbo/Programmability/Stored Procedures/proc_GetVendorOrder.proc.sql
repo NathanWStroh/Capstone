@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[proc_getVendorOrder]
-	@VendorOrderId int, 
+	@VendorOrderId int 
 AS
 	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	FROM VendorOrders

@@ -17,7 +17,7 @@
 			<Metadata Name="CompatibilityMode" Value="100" />
 		</CustomData>
 		<CustomData Category="Permissions" Type="XmlPermissions">
-			<Metadata Name="FileName" Value="C:\USERS\ANDREW\DESKTOP\TEMPCAPSTONE\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
+			<Metadata Name="FileName" Value="D:\GIT-REPOSITORIES\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
 		</CustomData>
 	</Header>
 	<Model>
@@ -203,22 +203,6 @@
 			</Property>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[Products]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[dbo].[Products].[Active]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
-		</Element>
-		<Element Type="ISql90DefaultConstraint">
-			<Property Name="DefaultExpressionScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[((1))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
 					<References Name="[dbo].[Locations]" />
 				</Entry>
 			</Relationship>
@@ -227,7 +211,7 @@
 					<References Name="[dbo].[Locations].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -243,7 +227,7 @@
 					<References Name="[dbo].[Categories].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -259,7 +243,7 @@
 					<References Name="[dbo].[ProductCategories].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -275,7 +259,7 @@
 					<References Name="[dbo].[Vendors].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -291,7 +275,7 @@
 					<References Name="[dbo].[VendorSourceItems].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -307,7 +291,7 @@
 					<References Name="[dbo].[ShippingOrders].[Picked]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -321,6 +305,22 @@
 			<Relationship Name="ForColumn">
 				<Entry>
 					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+		</Element>
+		<Element Type="ISql90DefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[((1))]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[Products].[Active]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
@@ -367,7 +367,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="15" />
+						<AttachedAnnotation Disambiguator="14" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -719,7 +719,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="14" />
+						<AttachedAnnotation Disambiguator="13" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -1167,6 +1167,117 @@
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GenerateReorderReports]&#xD;&#xA;&#x9;@VendorID int&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllOpenVendorOrders]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+RETURN]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Finalized]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="218" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrders]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllOpenVendorOrdersByVendor]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+	AND [VendorID] = @VendorId
+RETURN]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Finalized]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetAllOpenVendorOrdersByVendor].[@VendorId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetAllOpenVendorOrdersByVendor].[@VendorId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="271" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrdersByVendor]&#xD;&#xA;&#x9;@VendorId int&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllShippingOrderLineItems]">
@@ -2119,6 +2230,49 @@ RETURN]]></Value>
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrderLineItemsByVendorOrder]&#xD;&#xA;&#x9;@VendorOrderID int&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllVendorOrders]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	From VendorOrders
+RETURN]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Finalized]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="176" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetExceptionItems]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -2800,6 +2954,153 @@ RETURN]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetShippingVendorByID]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingVendorID int&#xD;&#xA;)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_getVendorOrder]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorOrderID] = @VendorOrderId
+RETURN]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Finalized]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_getVendorOrder].[@VendorOrderId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_getVendorOrder].[@VendorOrderId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="235" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_getVendorOrder]&#xD;&#xA;&#x9;@VendorOrderId int &#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorOrderByVendorAndDate]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorID] = @VendorID
+	and [DateOrdered] = @DateOrdered
+RETURN]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Finalized]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetVendorOrderByVendorAndDate].[@VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetVendorOrderByVendorAndDate].[@DateOrdered]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetVendorOrderByVendorAndDate].[@VendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetVendorOrderByVendorAndDate].[@DateOrdered]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="291" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]&#xD;&#xA;&#x9;@VendorID int, &#xD;&#xA;&#x9;@DateOrdered date&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorOrderLineItem]">
@@ -3670,6 +3971,75 @@ RETURN @@IDENTITY]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_InsertIntoVendorOrderLineItems]&#xD;&#xA;&#x9;(@VendorOrderID int,&#xD;&#xA;     @ProductID int,&#xD;&#xA;     @QtyOrdered int,&#xD;&#xA;     @QtyReceived int,&#xD;&#xA;     @QtyDamaged int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_InsertVendorOrder]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	Insert into [VendorOrders] (VendorID, DateOrdered)
+	Values (@VendorID, @DateOrdered)
+RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertVendorOrder].[@VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_InsertVendorOrder].[@DateOrdered]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertVendorOrder].[@VendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_InsertVendorOrder].[@DateOrdered]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[date]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="196" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]&#xD;&#xA;&#x9;@VendorID int, &#xD;&#xA;&#x9;@DateOrdered date&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrder]">
@@ -5394,6 +5764,181 @@ RETURN @@IDENTITY]]></Value>
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingVendor]&#xD;&#xA;(&#xD;&#xA;&#x9;@name varchar(50),&#xD;&#xA;    @address varchar(50),&#xD;&#xA;    @city varchar(25),&#xD;&#xA;    @state varchar(2),&#xD;&#xA;&#x9;@country varchar(50),&#xD;&#xA;    @zip varchar(10),&#xD;&#xA;    @phone varchar(12),&#xD;&#xA;    @contact varchar(50),&#xD;&#xA;    @contactEmail varchar(50),&#xD;&#xA;&#x9;@orig_ShippingVendorID int,&#xD;&#xA;&#x9;@orig_Name varchar(50),&#xD;&#xA;    @orig_Address varchar(50),&#xD;&#xA;    @orig_City varchar(25),&#xD;&#xA;    @orig_State varchar(2),&#xD;&#xA;&#x9;@orig_Country varchar(50),&#xD;&#xA;    @orig_Zip varchar(10),&#xD;&#xA;    @orig_Phone varchar(12),&#xD;&#xA;    @orig_Contact varchar(50),&#xD;&#xA;    @orig_ContactEmail varchar(50)&#xD;&#xA;)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateVendorOrder]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[VendorOrders]
+	SET [AmountOfShipments] = @AmountOfShipments,
+	    [Finalized] = @Finalized
+	WHERE [VendorOrderID] = @VendorOrderID
+	  and [VendorID] = @VendorID
+	  and [DateOrdered] = @DateOrdered
+	  and [AmountOfShipments] = @orig_AmountOfShipments
+	  and [Finalized] = @orig_Finalized
+	
+RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateVendorOrder].[@AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[Finalized]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateVendorOrder].[@Finalized]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateVendorOrder].[@VendorOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateVendorOrder].[@VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorOrders].[DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateVendorOrder].[@DateOrdered]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateVendorOrder].[@orig_AmountOfShipments]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateVendorOrder].[@orig_Finalized]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateVendorOrder].[@VendorOrderID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateVendorOrder].[@VendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateVendorOrder].[@DateOrdered]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateVendorOrder].[@AmountOfShipments]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateVendorOrder].[@Finalized]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateVendorOrder].[@orig_AmountOfShipments]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateVendorOrder].[@orig_Finalized]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="552" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_UpdateVendorOrder]&#xD;&#xA;&#x9;(@VendorOrderID int,&#xD;&#xA;&#x9; @VendorID int,&#xD;&#xA;&#x9; @DateOrdered datetime,&#xD;&#xA;&#x9; @AmountOfShipments int,&#xD;&#xA;&#x9; @Finalized bit,&#xD;&#xA;&#x9; @orig_AmountOfShipments int,&#xD;&#xA;&#x9; @orig_Finalized bit)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateVendorOrderLineItems]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -5660,7 +6205,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="16" />
+						<AttachedAnnotation Disambiguator="15" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -5882,7 +6427,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="13" />
+						<AttachedAnnotation Disambiguator="20" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -6020,7 +6565,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="20" />
+						<AttachedAnnotation Disambiguator="19" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -6132,7 +6677,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="19" />
+						<AttachedAnnotation Disambiguator="18" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -11634,7 +12179,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="17" />
+						<AttachedAnnotation Disambiguator="16" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -11741,7 +12286,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="18" />
+						<AttachedAnnotation Disambiguator="17" />
 					</Element>
 				</Entry>
 			</Relationship>

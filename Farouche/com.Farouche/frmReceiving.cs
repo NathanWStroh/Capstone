@@ -30,10 +30,10 @@ namespace com.Farouche
         {
             InitializeComponent();
             this.vendorOrder = vendorOrder;
-            txtVendorOrderID.Text = vendorOrder.VendorOrderID.ToString();
+            txtVendorOrderID.Text = vendorOrder.Id.ToString();
             txtVendorName.Text = vendorOrder.Name;
             txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
-            txtDateOrdered.Text = vendorOrder.DateOrdered;
+            txtDateOrdered.Text = vendorOrder.DateOrdered.ToString();
 
         }
 

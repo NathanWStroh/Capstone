@@ -1,11 +1,11 @@
 ﻿CREATE PROCEDURE [dbo].[proc_UpdateVendorOrder]
 	(@VendorOrderID int,
-	 @VendorID,
-	 @DateOrdered,
-	 @AmountOfShipments,
-	 @Finalized,
-	 @orig_AmountOfShipments,
-	 @orig_Finalized)
+	 @VendorID int,
+	 @DateOrdered datetime,
+	 @AmountOfShipments int,
+	 @Finalized bit,
+	 @orig_AmountOfShipments int,
+	 @orig_Finalized bit)
 AS
 	UPDATE [dbo].[VendorOrders]
 	SET [AmountOfShipments] = @AmountOfShipments,

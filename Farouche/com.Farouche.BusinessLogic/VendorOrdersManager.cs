@@ -43,9 +43,9 @@ namespace com.Farouche.BusinessLogic
         public bool UpdateShipmentsReceived(VendorOrder order, int qtyReceived)
         {
 			if(order == null) throw new ApplicationException("VendorOrder cannot be null");
-			if(qtyReceived + order.ShipmentsReceived < 0) throw new ApplicationException("Total quantity of shipments received cannot be negative");
+			if(qtyReceived + order.NumberOfShipments < 0) throw new ApplicationException("Total quantity of shipments received cannot be negative");
 			var oldOrder = order;
-            order.ShipmentsReceived += qtyReceived;
+            order.NumberOfShipments += qtyReceived;
             var result = VendorOrderDAL.Update(oldOrder, order, _connection);
             return result;
         }
