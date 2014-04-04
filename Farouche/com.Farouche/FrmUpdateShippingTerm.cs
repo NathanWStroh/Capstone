@@ -49,7 +49,6 @@ namespace com.Farouche
         {
             _myShippingVendorManager.GetVendors();
             ShippingVendor vendor;
-            int index = 0;
             for (int i = 0; i < _myShippingVendorManager.ShippingVendors.Count; i++)
             {
                 vendor = _myShippingVendorManager.ShippingVendors[i];
