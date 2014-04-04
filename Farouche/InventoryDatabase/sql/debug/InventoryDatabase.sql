@@ -9,12 +9,12 @@ SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL
 GO
 :setvar DatabaseName "InventoryDatabase"
 :setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
-
-GO
-USE [master]
+:setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
 GO
 :on error exit
+GO
+USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -145,7 +145,6 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
-
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -409,6 +408,7 @@ PRINT N'Creating [dbo].[States]...';
 
 GO
 CREATE TABLE [dbo].[States] (
+    [StateID]      INT          IDENTITY (1, 1) NOT NULL,
     [StateCode]    CHAR (2)     NOT NULL,
     [StateName]    VARCHAR (20) NOT NULL,
     [FirstZipCode] INT          NOT NULL,

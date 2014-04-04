@@ -1,4 +1,5 @@
 ﻿CREATE TABLE [dbo].[States](
+	[StateID] [int] IDENTITY(1,1) NOT NULL,
 	[StateCode] [char](2) NOT NULL,
 	[StateName] [varchar](20) NOT NULL,
 	[FirstZipCode] [int] NOT NULL,
