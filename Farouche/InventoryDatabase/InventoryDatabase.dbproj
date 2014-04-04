@@ -646,6 +646,17 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendorOrderByVendorAndDate.proc.sql">
+	  <SubType>Code</SubType>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\States.table.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GenerateReorderReports.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetShippingOrderLineItem.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetAllStates.proc.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>

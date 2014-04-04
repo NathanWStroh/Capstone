@@ -111,6 +111,7 @@
             this.btnOpenVendorOrders = new System.Windows.Forms.Button();
             this.btnReceiving = new System.Windows.Forms.Button();
             this.btnShipping = new System.Windows.Forms.Button();
+            this.btnReorder = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpAddVendor.SuspendLayout();
             this.tpDeactivateVendor.SuspendLayout();
@@ -906,11 +907,22 @@
             this.btnShipping.UseVisualStyleBackColor = true;
             this.btnShipping.Click += new System.EventHandler(this.btnShipping_Click);
             // 
+            // btnReorder
+            // 
+            this.btnReorder.Location = new System.Drawing.Point(599, 399);
+            this.btnReorder.Name = "btnReorder";
+            this.btnReorder.Size = new System.Drawing.Size(75, 23);
+            this.btnReorder.TabIndex = 13;
+            this.btnReorder.Text = "Reorder";
+            this.btnReorder.UseVisualStyleBackColor = true;
+            this.btnReorder.Click += new System.EventHandler(this.btnReorder_Click);
+            // 
             // FrmVendor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 437);
+            this.Controls.Add(this.btnReorder);
             this.Controls.Add(this.btnShipping);
             this.Controls.Add(this.btnReceiving);
             this.Controls.Add(this.btnOpenVendorOrders);
@@ -1023,6 +1035,7 @@
         private System.Windows.Forms.Button btnOpenVendorOrders;
         private System.Windows.Forms.Button btnReceiving;
         private System.Windows.Forms.Button btnShipping;
+        private System.Windows.Forms.Button btnReorder;
     }
 }
 

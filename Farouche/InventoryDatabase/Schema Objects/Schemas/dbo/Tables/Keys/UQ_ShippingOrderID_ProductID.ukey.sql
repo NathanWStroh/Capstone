@@ -1,4 +1,4 @@
-﻿ALTER TABLE [dbo].[ShippingOrderLineItems] WITH NOCHECK ADD CONSTRAINT [UQ_ShippingOrderID_ProductID]
+﻿ALTER TABLE [dbo].[ShippingOrderLineItems] ADD CONSTRAINT [UQ_ShippingOrderID_ProductID]
 	UNIQUE ([ShippingOrderID], [ProductID])
 
 

@@ -65,5 +65,22 @@ namespace com.Farouche.BusinessLogic
             Products = ProductDAL.FetchProductsByActive(activeState, _connection);
             return Products;
         }//End of getProductsByActive(.)
+
+        // start of new methods - 3.28.14
+        public Boolean UpdateThreshold(int amount)
+        {
+            throw new NotImplementedException();
+        } //End of UpdateThreshold(.)
+
+        public Boolean UpdateReorderAmount(int amount)
+        {
+            throw new NotImplementedException();
+        } //End of UpdateReorderAmount(.)
+
+        public Boolean UpdateOnOrder(int amount)
+        {
+            throw new NotImplementedException();
+        } //End of UpdateOnOrder(.)
+
     }
 }

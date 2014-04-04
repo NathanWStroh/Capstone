@@ -40,10 +40,12 @@
     <Compile Include="ProductManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceivingManager.cs" />
+    <Compile Include="ReportManager.cs" />
     <Compile Include="ShippingOrderLineItemManager.cs" />
     <Compile Include="ShippingOrderManager.cs" />
     <Compile Include="ShippingTermManager.cs" />
     <Compile Include="ShippingVendorManager.cs" />
+    <Compile Include="StateManager.cs" />
     <Compile Include="VendorManager.cs" />
     <Compile Include="VendorOrdersManager.cs" />
     <Compile Include="VendorSourceItemManager.cs" />

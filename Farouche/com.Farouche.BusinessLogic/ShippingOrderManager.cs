@@ -150,7 +150,11 @@ namespace com.Farouche.BusinessLogic
 
         //Are these additional methods needed?
 
-        //GetAllShippingOrders method?
+        public List<ShippingOrder> GetAllShippingOrders()
+        {
+            this.Orders = ShippingOrderDAL.GetAllShippingOrders(_connection);
+            return Orders;
+        }
         //GetAllShippingOrdersShipped?
         //GetAllShippingOrdersNotShipped?
         //GetShippingOrderByPurchaseOrderId?
