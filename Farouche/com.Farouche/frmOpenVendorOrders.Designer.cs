@@ -28,50 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.chVendorOrderID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chVendorName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chDateOrdered = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chNumberOfShipments = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvOpenVendorOrders = new System.Windows.Forms.ListView();
             this.lblGetAllOpenOrdersByVendor = new System.Windows.Forms.Label();
             this.cbGetVendorsByName = new System.Windows.Forms.ComboBox();
             this.btngetAllOpenOrdersByVendor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listView1
+            // lvOpenVendorOrders
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chVendorOrderID,
-            this.chVendorName,
-            this.chDateOrdered,
-            this.chNumberOfShipments});
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(53, 54);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(645, 288);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // chVendorOrderID
-            // 
-            this.chVendorOrderID.Text = "Vendor Order ID";
-            this.chVendorOrderID.Width = 114;
-            // 
-            // chVendorName
-            // 
-            this.chVendorName.Text = "Vendor Name";
-            this.chVendorName.Width = 85;
-            // 
-            // chDateOrdered
-            // 
-            this.chDateOrdered.Text = "Date Ordered";
-            this.chDateOrdered.Width = 104;
-            // 
-            // chNumberOfShipments
-            // 
-            this.chNumberOfShipments.Text = "Number of Shipments";
-            this.chNumberOfShipments.Width = 153;
+            this.lvOpenVendorOrders.GridLines = true;
+            this.lvOpenVendorOrders.Location = new System.Drawing.Point(55, 54);
+            this.lvOpenVendorOrders.Name = "lvOpenVendorOrders";
+            this.lvOpenVendorOrders.Size = new System.Drawing.Size(645, 288);
+            this.lvOpenVendorOrders.TabIndex = 0;
+            this.lvOpenVendorOrders.UseCompatibleStateImageBehavior = false;
+            this.lvOpenVendorOrders.View = System.Windows.Forms.View.Details;
+            this.lvOpenVendorOrders.SelectedIndexChanged += new System.EventHandler(this.lvOpenVendorOrders_Click);
             // 
             // lblGetAllOpenOrdersByVendor
             // 
@@ -108,7 +80,7 @@
             this.Controls.Add(this.btngetAllOpenOrdersByVendor);
             this.Controls.Add(this.cbGetVendorsByName);
             this.Controls.Add(this.lblGetAllOpenOrdersByVendor);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lvOpenVendorOrders);
             this.Name = "frmOpenVendorOrders";
             this.Text = "Open Vendor Orders";
             this.Load += new System.EventHandler(this.frmOpenVendorOrders_Load);
@@ -119,11 +91,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader chVendorOrderID;
-        private System.Windows.Forms.ColumnHeader chVendorName;
-        private System.Windows.Forms.ColumnHeader chDateOrdered;
-        private System.Windows.Forms.ColumnHeader chNumberOfShipments;
+        private System.Windows.Forms.ListView lvOpenVendorOrders;
         private System.Windows.Forms.Label lblGetAllOpenOrdersByVendor;
         private System.Windows.Forms.ComboBox cbGetVendorsByName;
         private System.Windows.Forms.Button btngetAllOpenOrdersByVendor;
