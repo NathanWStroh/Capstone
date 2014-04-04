@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using System.Windows.Forms.VisualStyles;
 using com.Farouche.Commons;
 using System.Data.SqlClient;
 using System.Data;
@@ -10,6 +12,7 @@ namespace com.Farouche.DataAccess
 {
     public class VendorOrderDAL : DatabaseConnection
     {
+
         public static List<VendorOrder> GetAll(SqlConnection connection)
         {
             List<VendorOrder> allOrders = new List<VendorOrder>();
@@ -37,6 +40,7 @@ namespace com.Farouche.DataAccess
                     };
                 }
                 myReader.Close();
+
             }
             catch (DataException ex)
             {
@@ -52,9 +56,11 @@ namespace com.Farouche.DataAccess
             }
             finally
             {
+
                 connection.Close();
             }
             return allOrders;
+
         }
         public static List<VendorOrder> GetAllOpenOrders(SqlConnection connection)
         {
