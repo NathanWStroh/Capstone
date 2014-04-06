@@ -12,11 +12,12 @@ using System.Data;
 //Last Modified By: Adam Chandler
 
 /*
-*                               Changelog
-* Date         By          Ticket          Version         Description
-*  3/28/14  Adam                                           Added getReorderReportData method
-* 
-*                                                         
+ *                               Changelog
+ * Date         By          Ticket          Version         Description
+ *  4/05/14  Adam                                           Changed DAL Class to not use passed in connection
+ *  3/28/14  Adam                                           Added GetReorderReportData method
+ * 
+ *
 */
 
 namespace com.Farouche.DataAccess
@@ -24,10 +25,10 @@ namespace com.Farouche.DataAccess
     public class ReportDAL : DatabaseConnection
     {
 
-        public static List<Reorder> getReorderReportData(int vendorId, SqlConnection connection)
+        public static List<Reorder> GetReorderReportData(int vendorId)
         {
             List<Reorder> reorders = new List<Reorder>();
-            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            SqlConnection conn = GetInventoryDbConnection();
             try
             {
                 conn.Open();
@@ -80,7 +81,7 @@ namespace com.Farouche.DataAccess
                 conn.Close();
             }
             return reorders;
-        }
+        }  // end GetReorderReportData(.)
 
 
     }

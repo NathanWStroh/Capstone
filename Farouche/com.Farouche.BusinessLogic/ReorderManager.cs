@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using com.Farouche.Commons;
+using com.Farouche.DataAccess;
 
 namespace com.Farouche.BusinessLogic
 {
@@ -12,6 +13,15 @@ namespace com.Farouche.BusinessLogic
         public List<Reorder> Reorders
         {
             get { return _reorders; }
+        } 
+
+        public List<Reorder> GetReordersForVendor(int vendorId)
+        {
+            if (vendorId == null)
+            {
+                throw new ArgumentNullException("VendorID cannot be empty");
+            }
+            return ReportDAL.GetReorderReportData(vendorId);
         }
 
         public ReorderManager(List<Reorder> reorders)
@@ -19,40 +29,102 @@ namespace com.Farouche.BusinessLogic
             _reorders = reorders;
         }
 
-        public Boolean removeFromOrder(Reorder reorder)
+        public Boolean RemoveFromOrder(Reorder reorder)
         {
+            return UpdateOrderList(reorder, true);
+        }
+
+        public Boolean AddNewLineItem(Product product, VendorSourceItem vendorSrcItem)
+        {
+            throw new NotImplementedException();
+        }
+        public Boolean AddToOrder(Reorder reorder)
+        {
+            return UpdateOrderList(reorder, false);
+        }
+        private Boolean UpdateOrderList(Reorder reorder, Boolean remove)
+        {
+            reorder.ShouldReorder = !remove;
+            return UpdateOrderInCollection(reorder);
+        } //end UpdateOrderList(..)
+        
+        public Double UpdateReorderAmount(Reorder reorder, int amt)
+        {
+            if (amt == null)
+            {
+                amt = 0;
+            }
+            reorder.CasesToOrder = amt;
+            if (UpdateOrderInCollection(reorder))
+            {
+                return GetReorderRowTotal(reorder);
+            }
+            else 
+            {
+                throw new ApplicationException("Never should happen, Houston We Have A Problem");
+            } 
+        } //end UpdateReorderAmount(..)
+
+        public Double GetReportTotal()
+        {
+            double totalReorderCost = 0;
+            foreach (var reorderI in _reorders)
+            {
+                totalReorderCost = totalReorderCost + GetReorderRowTotal(reorderI);
+            }
+            return totalReorderCost;
+        } // end GetReportTotal()
+
+        public Boolean OrderReorders()
+        {
+            foreach (var reorder in _reorders)
+            {
+                if (reorder.ShouldReorder == true && reorder.CasesToOrder > 0)
+                { 
+                    //Use VendorOrderManager to add the odds
+                }
+            }
             return true;
-        }
-        // removeFromOrder(Reorder reorder)
-            //Return boolean update list item
+        } // end OrderReorders()
 
-        public Boolean addToOrder(Reorder reorder)
+        private Boolean UpdateOrderInCollection(Reorder reorder)
         {
-            return true;
-        }
-        // addToOrder(Reorder reorder)
-            // return boolean update list item
+            if (reorder == null)
+            {
+                throw new ArgumentNullException("Reorder item cannot be null");
+            }
+            if (_reorders.Count == 0) 
+            { 
+                throw new ApplicationException("There are no reorder objects in the collection"); 
+            }
+            if (!_reorders.Contains(reorder))
+            {
+                throw new ApplicationException("No reorder found in reorders collection");
+            }
+            foreach (var reorderI in _reorders)
+	            {
+		            if (reorderI == reorder)
+                    {
+                        reorderI.CasesToOrder = reorder.CasesToOrder;
+                        reorderI.ShouldReorder = reorder.ShouldReorder;
+                        //reorderI.Product = reorder.Product;
+                        reorderI.VendorSourceItem = reorder.VendorSourceItem;
+                        return true;
+                    }   
+                }
+            return false;
+        } //end UpdateOrderInCollection(.)
 
-        public Double updateReorderAmount(Reorder reorder, int amt)
+        private Double GetReorderRowTotal(Reorder reorder)
         {
-            return 25.5;
-        }
-        // updateReorderAmount(Reorder reorder, int amt)
-            // return double total row
-
-        public Double getReportTotal()
-        {
-            return 99.9;
-        }
-        // getReportTotal()
-           // return total of all reorders
-
-        public Boolean orderReorders()
-        {
-            return true;
-        }
-        // orderReorders()
-            //return boolean
-
+            try
+            {
+                return (Double)(reorder.CasesToOrder * reorder.VendorSourceItem.UnitCost);
+            }
+            catch(Exception ex)
+            {
+                throw new ArithmeticException("Calculating row total threw an exception");
+            }
+        } //end GetReorderRowTotal(.)
     }
 }
