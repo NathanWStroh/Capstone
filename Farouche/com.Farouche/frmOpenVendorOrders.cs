@@ -57,8 +57,8 @@ namespace com.Farouche
             vendorList = new List<Vendor>();
             var vendor1 = new Vendor();
             var vendor2 = new Vendor();
-            vendor1.Name = vendorOrder1.Name;
-            vendor2.Name = vendorOrder2.Name;
+            //vendor1.Name = vendorOrder1.Name;
+            //vendor2.Name = vendorOrder2.Name;
             vendorList.Add(vendor1);
             vendorList.Add(vendor2);
             fillVendorDropDown(vendorList);
@@ -110,11 +110,11 @@ namespace com.Farouche
             {
                 var item = new ListViewItem();
 
-                item.Text = vendorOrder.VendorOrderID.ToString();
+               // item.Text = vendorOrder.VendorOrderID.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
 
                 item.SubItems.Add(vendorOrder.Name);
-                item.SubItems.Add(vendorOrder.DateOrdered.ToString();
+                item.SubItems.Add(vendorOrder.DateOrdered.ToString());
                 item.SubItems.Add(vendorOrder.NumberOfShipments.ToString());
                 lv.Items.Add(item);
             }
@@ -148,10 +148,10 @@ namespace com.Farouche
             foreach (var vendorOrder in orderList)
             {
                 var item = new ListViewItem();
-                item.Text = vendorOrder.VendorOrderID.ToString();
+              //  item.Text = vendorOrder.VendorOrderID.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
                 item.SubItems.Add(vendorOrder.Name);
-                item.SubItems.Add(vendorOrder.DateOrdered);
+              //  item.SubItems.Add(vendorOrder.DateOrdered);
                 item.SubItems.Add(vendorOrder.NumberOfShipments.ToString());
                 lv.Items.Add(item);
             }
@@ -170,13 +170,14 @@ namespace com.Farouche
             lvOpenVendorOrders.FullRowSelect = true;
             var selectedRow = lvOpenVendorOrders.SelectedItems;
   
-               vendorOrder = new VendorOrder();
+             //  vendorOrder = new VendorOrder();
                foreach (ListViewItem item in selectedRow)
                {
-                   vendorOrder.VendorOrderID = Int32.Parse(item.SubItems[0].Text);
+                   //Use the correct constructor here 
+                //   vendorOrder.Id = Int32.Parse(item.SubItems[0].Text);
                    vendorOrder.VendorID = Int32.Parse(item.SubItems[1].Text);
                    vendorOrder.Name = item.SubItems[2].Text;
-                   vendorOrder.DateOrdered = item.SubItems[3].Text;
+                 //  vendorOrder.DateOrdered = item.SubItems[3].Text;
                    vendorOrder.NumberOfShipments = Int32.Parse(item.SubItems[4].Text);
                }
                frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
