@@ -141,6 +141,7 @@ AppPackages/
 
 # Others
 # sql/ [commented out by JG]
+*.dbschema
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*

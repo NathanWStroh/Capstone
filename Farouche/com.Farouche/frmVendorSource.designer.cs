@@ -109,6 +109,7 @@
             this.vnd.TabIndex = 9;
             this.vnd.UseCompatibleStateImageBehavior = false;
             this.vnd.View = System.Windows.Forms.View.Details;
+            //this.vnd.SelectedIndexChanged += new System.EventHandler(this.vnd_SelectedIndexChanged);
             // 
             // columnHeader2
             // 

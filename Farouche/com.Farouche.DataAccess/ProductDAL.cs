@@ -433,5 +433,26 @@ namespace com.Farouche.DataAccess
             }
             return products;
         }//End of fetchProductsByActive(..)
+
+
+        // start of new methods - 3.28.14
+        public Boolean UpdateThreshold(int amount)
+        {
+            throw new NotImplementedException();
+            // proc_UpdateProductThreshold
+        }
+
+        public Boolean UpdateReorderAmount(int amount)
+        {
+            throw new NotImplementedException();
+            // proc_UpdateProductReorderAmount
+        }
+
+        public Boolean UpdateOnOrder(int amount)
+        {
+            throw new NotImplementedException();
+            // proc_UpdateProductOnOrder
+        }
+
     }
 }

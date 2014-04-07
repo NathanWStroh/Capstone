@@ -43,10 +43,12 @@
     <Compile Include="FlexListDAL.cs" />
     <Compile Include="ProductDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDAL.cs" />
     <Compile Include="ShippingOrderDAL.cs" />
     <Compile Include="ShippingOrderLineItemDAL.cs" />
     <Compile Include="ShippingTermDAL.cs" />
     <Compile Include="ShippingVendorDAL.cs" />
+    <Compile Include="StatesDAL.cs" />
     <Compile Include="VendorDAL.cs" />
     <Compile Include="VendorOrderLineItemDAL.cs" />
     <Compile Include="VendorOrderDAL.cs" />

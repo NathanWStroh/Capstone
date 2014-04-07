@@ -16,30 +16,35 @@ namespace com.Farouche
         private ShippingOrderLineItemManager _myOrderDetails;
         private ShippingOrderManager _myOrderManager;
         private ShippingOrder _myOrder;
+        private int _myOrderId;
         private AccessToken _myAccessToken;
 
-        public FrmViewOrderDetails(ShippingOrder order, AccessToken accToken)
+        public FrmViewOrderDetails(int orderId, AccessToken accToken)
         {
             InitializeComponent();
+            Text += "                 Details for Order #" + _myOrderId;  
             _myAccessToken = accToken;
-            _myOrder = order;
+            _myOrderId = orderId;
             _myOrderDetails = new ShippingOrderLineItemManager();
+            _myOrderManager = new ShippingOrderManager();
+            PopulateLineItemLists();
         }// End FrmViewOrderDetails(..)
 
-        public void FrmViewOrderDetails_Load(object sender, EventArgs e)
+        private void PopulateLineItemLists()
         {
-            PopulateListView(lvItemsForPick, _myOrderDetails.GetLineItemsByID(_myOrder.ID), false);
-            PopulateListView(lvItemsForPick, _myOrderDetails.GetLineItemsByID(_myOrder.ID), true);
-        }// End FrmViewOrderDetails_Load(..)
+            PopulateListViews(lvItemsForPick, _myOrderDetails.GetLineItemsByID(_myOrderId), false);
+            PopulateListViews(lvPickedItems, _myOrderDetails.GetLineItemsByID(_myOrderId), true);
+        }//PopulateLineItemLists()
 
-        private void PopulateListView(ListView lv, List<ShippingOrderLineItem> orderItemList, Boolean value)
+        private void PopulateListViews(ListView lv, List<ShippingOrderLineItem> orderItemList, Boolean value)
         {
-            foreach (var orderItem in orderItemList)
+            lv.Items.Clear();
+            lv.Columns.Clear();
+            _myOrderDetails.LineItems = orderItemList;
+            foreach (var orderItem in _myOrderDetails.LineItems)
             {
                 if (orderItem.IsPicked == value)
                 {
-                    lv.Items.Clear();
-                    lv.Columns.Clear();
                     var item = new ListViewItem();
                     item.Text = orderItem.ProductId.ToString();
                     item.SubItems.Add(orderItem.ProductName);
@@ -53,7 +58,7 @@ namespace com.Farouche
             lv.Columns.Add("Quantity");
             lv.Columns.Add("Location");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }//End of PopulateListView(..)
+        }//End of PopulateListViews...)
 
         private void BtnPrintDetails_Click(object sender, EventArgs e)
         {
@@ -62,24 +67,27 @@ namespace com.Farouche
 
         private void BtnComplete_Click(object sender, EventArgs e)
         {
+            _myOrder = _myOrderManager.GetOrderByID(_myOrderId);
             Boolean success = _myOrderManager.UpdatePickedTrue(_myOrder);
-            if (success == true)
+            Boolean success2 = _myOrderManager.ClearUserId(_myOrderManager.GetOrderByID(_myOrderId));
+            if (success == true && success2 == true)
             {
                 if(lvItemsForPick.Items.Count.Equals(0))
                 {
-                    //MessageBox.Show("Order has been sent to packing queue", "Ready for Packing");
-                    //frmViewOrder myForm = new frmViewOrder(_myAccessToken);
-                    //myForm.Show();
-                    //Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Not all items for this order have been picked", "Slacker!");
+                    Close();
+                    MessageBox.Show("Order has been sent to shipping.", "Pick Complete");
                 }
             }
             else
-            { 
-                MessageBox.Show("Action Could Not Be Completed", "Error");
+            {
+                if (success == false)
+                {
+                    MessageBox.Show("Error picking order.", "Pick Fail");
+                }
+                if (success == false)
+                {
+                    MessageBox.Show("Error shifting ownership.", "Ownership Change Fail");
+                }
             }
         }//End of BtnComplete_Click(..)
 
@@ -87,19 +95,24 @@ namespace com.Farouche
         {
             try
             {
-                int selectedItem = this.lvItemsForPick.Items[0].Index;
-                Boolean success = _myOrderDetails.UpdatePickedTrue(_myOrderDetails.LineItems[selectedItem]);
+                int selectedItem = this.lvItemsForPick.SelectedIndices[0];
+                int selectedItemId = Convert.ToInt32(lvItemsForPick.Items[selectedItem].Text);
+                ShippingOrderLineItem currentItem = _myOrderDetails.GetLineItem(selectedItemId, _myOrderId);
+                Boolean success = _myOrderDetails.UpdatePickedTrue(currentItem);
                 if (success == true)
                 {
-                    PopulateListView(lvItemsForPick, _myOrderDetails.GetLineItemsByID(_myOrder.ID), false);
-                    PopulateListView(lvPickedItems, _myOrderDetails.GetLineItemsByID(_myOrder.ID), true);
+                    PopulateLineItemLists();
                 }
                 else
                 {
                     MessageBox.Show("Action could not be completed", "Error");
                 }
+                if (lvItemsForPick.Items.Count.Equals(0))
+                {
+                    btnComplete.Enabled = true;
+                }
             }
-            catch
+            catch(ArgumentNullException)
             {
                 MessageBox.Show("Please select an item from the list", "No Item Selected");
             }
@@ -109,22 +122,34 @@ namespace com.Farouche
         {
             try
             {
-                int selectedItem = this.lvItemsForPick.Items[0].Index;
-                Boolean success = _myOrderDetails.UpdatePickedFalse(_myOrderDetails.LineItems[selectedItem]);
+            int selectedItem = this.lvPickedItems.SelectedIndices[0];
+                int selectedItemId = Convert.ToInt32(lvPickedItems.Items[selectedItem].Text);
+                ShippingOrderLineItem currentItem = _myOrderDetails.GetLineItem(selectedItemId, _myOrderId);
+                Boolean success = _myOrderDetails.UpdatePickedFalse(currentItem);
                 if (success == true)
                 {
-                    PopulateListView(lvItemsForPick, _myOrderDetails.GetLineItemsByID(_myOrder.ID), false);
-                    PopulateListView(lvPickedItems, _myOrderDetails.GetLineItemsByID(_myOrder.ID), true);
+                    PopulateLineItemLists();
                 }
                 else
                 {
                     MessageBox.Show("Action could not be completed", "Error");
+                }
+                if (lvItemsForPick.Items.Count > 0)
+                {
+                    btnComplete.Enabled = false;
                 }
             }
             catch
             {
                 MessageBox.Show("Please select an item from the list", "No Item Selected");
             }
-        }//End of BtnUnpick_Click(..)
+        }
+
+        private void FrmViewOrderDetails_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+      //End of BtnUnpick_Click(..)
     }
 }
