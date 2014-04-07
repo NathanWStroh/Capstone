@@ -171,13 +171,6 @@ namespace com.Farouche.Presentation
             Close();
         }//End of btnVendor_Click(..)
 
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            FrmLogin frm = new FrmLogin();
-            frm.Show();
-            Close();
-        }//End of btnLogout_Click(..)
-
         private void lvProducts_Click(object sender, EventArgs e)
         {
             //int currentIndex = this.lvProducts.SelectedItems[0].Index;
