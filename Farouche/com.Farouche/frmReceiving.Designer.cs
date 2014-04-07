@@ -40,12 +40,12 @@
             this.lblDateReceived = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNumberofShipments = new System.Windows.Forms.TextBox();
             this.lblShipmentsReceived = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnUpdateOrder = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvVendorOrderLineItems = new System.Windows.Forms.ListView();
             this.chProductID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chQtyOrdered = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chQtyReceived = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -114,6 +114,7 @@
             this.btnAddLineItemtoCurrentListView.TabIndex = 7;
             this.btnAddLineItemtoCurrentListView.Text = "Add Line Item";
             this.btnAddLineItemtoCurrentListView.UseVisualStyleBackColor = true;
+            this.btnAddLineItemtoCurrentListView.Click += new System.EventHandler(this.btnAddLineItemtoCurrentListView_Click);
             // 
             // btnAddNote
             // 
@@ -123,6 +124,7 @@
             this.btnAddNote.TabIndex = 8;
             this.btnAddNote.Text = "Add Note";
             this.btnAddNote.UseVisualStyleBackColor = true;
+            this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
             // 
             // btnUpdateLineItem
             // 
@@ -132,6 +134,7 @@
             this.btnUpdateLineItem.TabIndex = 9;
             this.btnUpdateLineItem.Text = "Update Line Item";
             this.btnUpdateLineItem.UseVisualStyleBackColor = true;
+            this.btnUpdateLineItem.Click += new System.EventHandler(this.btnUpdateLineItem_Click);
             // 
             // lblDateReceived
             // 
@@ -158,13 +161,13 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Number of Shipments";
             // 
-            // textBox1
+            // txtNumberofShipments
             // 
-            this.textBox1.Location = new System.Drawing.Point(368, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(63, 20);
-            this.textBox1.TabIndex = 13;
+            this.txtNumberofShipments.Location = new System.Drawing.Point(368, 10);
+            this.txtNumberofShipments.Name = "txtNumberofShipments";
+            this.txtNumberofShipments.ReadOnly = true;
+            this.txtNumberofShipments.Size = new System.Drawing.Size(63, 20);
+            this.txtNumberofShipments.TabIndex = 13;
             // 
             // lblShipmentsReceived
             // 
@@ -188,8 +191,9 @@
             this.btnUpdateOrder.Name = "btnUpdateOrder";
             this.btnUpdateOrder.Size = new System.Drawing.Size(161, 23);
             this.btnUpdateOrder.TabIndex = 16;
-            this.btnUpdateOrder.Text = "Update Order";
+            this.btnUpdateOrder.Text = "Update Vendor Order";
             this.btnUpdateOrder.UseVisualStyleBackColor = true;
+            this.btnUpdateOrder.Click += new System.EventHandler(this.btnUpdateOrder_Click);
             // 
             // btnCancel
             // 
@@ -199,25 +203,26 @@
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // listView1
+            // lvVendorOrderLineItems
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvVendorOrderLineItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chProductID,
             this.chQtyOrdered,
             this.chQtyReceived,
             this.chTotalQtyReceived,
             this.chQtyDamaged,
             this.chLineItemNotes});
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.LabelWrap = false;
-            this.listView1.Location = new System.Drawing.Point(12, 85);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(658, 297);
-            this.listView1.TabIndex = 18;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvVendorOrderLineItems.FullRowSelect = true;
+            this.lvVendorOrderLineItems.GridLines = true;
+            this.lvVendorOrderLineItems.LabelWrap = false;
+            this.lvVendorOrderLineItems.Location = new System.Drawing.Point(12, 85);
+            this.lvVendorOrderLineItems.Name = "lvVendorOrderLineItems";
+            this.lvVendorOrderLineItems.Size = new System.Drawing.Size(658, 297);
+            this.lvVendorOrderLineItems.TabIndex = 18;
+            this.lvVendorOrderLineItems.UseCompatibleStateImageBehavior = false;
+            this.lvVendorOrderLineItems.View = System.Windows.Forms.View.Details;
             // 
             // chProductID
             // 
@@ -254,12 +259,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 423);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lvVendorOrderLineItems);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdateOrder);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.lblShipmentsReceived);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtNumberofShipments);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.lblDateReceived);
@@ -295,12 +300,12 @@
         private System.Windows.Forms.Label lblDateReceived;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNumberofShipments;
         private System.Windows.Forms.Label lblShipmentsReceived;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnUpdateOrder;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvVendorOrderLineItems;
         private System.Windows.Forms.ColumnHeader chProductID;
         private System.Windows.Forms.ColumnHeader chQtyOrdered;
         private System.Windows.Forms.ColumnHeader chQtyReceived;

@@ -23,9 +23,6 @@ namespace com.Farouche.BusinessLogic
         public List<Product> Products;
         public Product Product;
         public Boolean AddProduct(Product product)
-        
-
-
         {
             //Returns true or false depending on if the record was inserted.
             return ProductDAL.InsertProduct(product, _connection);
@@ -69,7 +66,6 @@ namespace com.Farouche.BusinessLogic
             return Products;
         }//End of getProductsByActive(.)
 
-
         // start of new methods - 3.28.14
         public Boolean UpdateThreshold(int amount)
         {
@@ -85,7 +81,6 @@ namespace com.Farouche.BusinessLogic
         {
             throw new NotImplementedException();
         } //End of UpdateOnOrder(.)
-
 
     }
 }

@@ -88,11 +88,10 @@ namespace com.Farouche.BusinessLogic
             return LineItems;
         }//End of GetLineItems()
 
-        //Need to update DAL to return just a ShippingOrderLineItem.
-        public ShippingOrderLineItem GetLineItem(int itemID)
+        public ShippingOrderLineItem GetLineItem(int productID, int shippingOrderID)
         {
             //Need to do error checking... Try/Catch.
-            //LineItem = ShippingOrderLineItemDAL.GetShippingOrderLineItemsById(itemID, _connection);
+            LineItem = ShippingOrderLineItemDAL.GetShippingOrderLineItemById(productID, shippingOrderID, _connection);
             return LineItem;
         }//End of GetLineItem(.)
 

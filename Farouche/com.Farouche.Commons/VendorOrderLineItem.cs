@@ -14,6 +14,7 @@ namespace com.Farouche.Commons
         private int _qtyReceived;
         private int _qtyOrdered;
         private string _note;
+        private double _lineItemTotal;
 
         public VendorOrderLineItem(int vendorOrderId, int productId)
         {
@@ -47,7 +48,11 @@ namespace com.Farouche.Commons
             get { return _vendorOrderId; }
             set { _vendorOrderId = value; }
         }
-
+        public double LineItemTotal
+        {
+            get { return _lineItemTotal; }
+            set { _lineItemTotal = value; }
+        }
         public int QtyOrdered
         {
             get { return _qtyOrdered; }

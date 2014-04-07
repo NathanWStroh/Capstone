@@ -296,6 +296,53 @@ namespace com.Farouche.DataAccess
 
         } //end GetShippingOrderLineItemsById(..)
 
+        public static ShippingOrderLineItem GetShippingOrderLineItemById(int productId, int shippingOrderID, SqlConnection myConnection)
+        {
+            var shippingLineItem = new ShippingOrderLineItem();
+            myConnection = myConnection ?? GetInventoryDbConnection();
+            try
+            {
+                var mySqlCommand = new SqlCommand("proc_GetShippingOrderLineItem", myConnection);
+                mySqlCommand.Parameters.AddWithValue("@productID", productId);
+                mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrderID);
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
 
+                myConnection.Open();
+
+                SqlDataReader mySqlReader = mySqlCommand.ExecuteReader();
+                if (mySqlReader.HasRows)
+                {
+                    while(mySqlReader.Read())
+                    {
+                        shippingLineItem = new ShippingOrderLineItem(mySqlReader.GetInt32(0), mySqlReader.GetInt32(1))
+                        {
+                            ProductName = mySqlReader.GetString(2),
+                            Quantity = mySqlReader.GetInt32(3),
+                            ProductLocation = mySqlReader[4] as string,
+                            IsPicked = mySqlReader.GetBoolean(5)
+                        };
+                    }
+                } // End If
+                mySqlReader.Close();
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            return shippingLineItem;
+        }
     } // end ShippingOrderLineItemDAL class
 }

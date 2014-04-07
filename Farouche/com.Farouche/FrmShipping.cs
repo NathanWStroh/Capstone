@@ -46,30 +46,117 @@ namespace com.Farouche.Presentation
 
         private void RefreshOrderViews()
         {
-            //populateListView(lvAllOrders, _myOrderManager.Get
+            PopulateMasterListView(lvAllOrders, _myOrderManager.GetAllShippingOrders());
             PopulateOrderListView(lvPickList, _myOrderManager.GetNonPickedOrders());
             PopulateOrderListView(lvMyOrders, _myOrderManager.GetOrdersByUserId(_myAccessToken.UserID));
-            PopulateOrderListView(lvPackList, _myOrderManager.GetPickedOrders());
+            PopulatePackListView(lvPackList, _myOrderManager.GetPickedOrders());
         }//End of refresh()
+
+        private void PopulateMasterListView(ListView lv, List<ShippingOrder> orderlist)
+        {
+            _myOrderManager.Orders = orderlist;
+            lv.Items.Clear();
+            lv.Columns.Clear();
+            foreach (var order in _myOrderManager.Orders)
+            {
+                var item = new ListViewItem();
+                item.Text = order.ID.ToString();
+                item.SubItems.Add(order.ShippingVendorName);
+                item.SubItems.Add(order.ShippingTermDesc);
+                if (order.UserId.HasValue)
+                {
+                    item.SubItems.Add(order.UserId.ToString());
+                    item.SubItems.Add(order.UserFirstName.ToString());
+                    item.SubItems.Add(order.UserLastName.ToString());
+                }
+                else
+                {
+                    item.SubItems.Add(" ");
+                    item.SubItems.Add(" ");
+                    item.SubItems.Add(" ");
+                }
+                item.SubItems.Add(order.Picked.ToString());
+                item.SubItems.Add(order.ShipDate.ToString());
+                lv.Items.Add(item);
+            }
+            lv.Columns.Add("OrderID");
+            lv.Columns.Add("Vendor");
+            lv.Columns.Add("ShipTerm");
+            lv.Columns.Add("UserID");
+            lv.Columns.Add("FirstName");
+            lv.Columns.Add("LastName");
+            lv.Columns.Add("Picked");
+            lv.Columns.Add("ShipDate");
+            lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }//End PopulateMasterListView(..)
+
+        private void PopulatePackListView(ListView lv, List<ShippingOrder> orderList)
+        {
+            _myOrderManager.Orders = orderList;
+            lv.Items.Clear();
+            lv.Columns.Clear();
+            foreach (var order in _myOrderManager.Orders)
+            {
+                if (!order.UserId.HasValue)
+                {
+                    var item = new ListViewItem();
+                    item.Text = order.ID.ToString();
+                    item.SubItems.Add(order.ShippingVendorName);
+                    item.SubItems.Add(order.ShippingTermDesc);
+                    item.SubItems.Add(order.ShipToName);
+                    item.SubItems.Add(order.ShipToAddress);
+                    item.SubItems.Add(order.ShipToCity);
+                    item.SubItems.Add(order.ShipToState);
+                    item.SubItems.Add(order.ShipToZip);
+                    item.SubItems.Add(order.Picked.ToString());
+                    lv.Items.Add(item);
+                }
+            }
+            lv.Columns.Add("OrderID");
+            lv.Columns.Add("Vendor");
+            lv.Columns.Add("ShipTerm");
+            lv.Columns.Add("CustomerName");
+            lv.Columns.Add("Address");
+            lv.Columns.Add("City");
+            lv.Columns.Add("State");
+            lv.Columns.Add("ZipCode");
+            lv.Columns.Add("Picked");
+            lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }//End PopulatePackListView(..)
 
         private void PopulateOrderListView(ListView lv, List<ShippingOrder> orderList)
         {
             _myOrderManager.Orders = orderList;
             lv.Items.Clear();
             lv.Columns.Clear();
-            foreach (var order in orderList)
+            foreach (var order in _myOrderManager.Orders)
             {
                 var item = new ListViewItem();
                 item.Text = order.ID.ToString();
                 item.SubItems.Add(order.ShippingVendorName);
+                if (order.UserId.HasValue)
+                {
+                    item.SubItems.Add(order.UserId.ToString());
+                    item.SubItems.Add(order.UserFirstName.ToString());
+                    item.SubItems.Add(order.UserLastName.ToString());
+                }
+                else
+                {
+                    item.SubItems.Add(" ");
+                    item.SubItems.Add(" ");
+                    item.SubItems.Add(" ");
+                }
                 item.SubItems.Add(order.Picked.ToString());
                 lv.Items.Add(item);
             }
             lv.Columns.Add("OrderID");
             lv.Columns.Add("Vendor");
+            lv.Columns.Add("UserID");
+            lv.Columns.Add("FirstName");
+            lv.Columns.Add("LastName");
             lv.Columns.Add("Picked");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }//End of populateListView(..)
+        }//End of PopulateOrderListView(..)
 
         //Populates the Active combo box.
         //Postcondition: The combo box will hold the values (Yes, No, Both).
@@ -147,7 +234,7 @@ namespace com.Farouche.Presentation
         }//End of PopulateVendorListView(..)
 
         //Restores default control properties.
-        private void setDefaults()
+        private void SetDefaults()
         {
             btnUpdateVendor.Enabled = false;
             btnDeactivateVendor.Enabled = false;
@@ -178,7 +265,7 @@ namespace com.Farouche.Presentation
         {
             FrmAddShippingVendor form = new FrmAddShippingVendor();
             form.ShowDialog();
-            setDefaults();
+            SetDefaults();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
         }//End of btnAddVendor_Click(..)
 
@@ -187,7 +274,7 @@ namespace com.Farouche.Presentation
             var currentIndex = this.lvShippingVendors.SelectedIndices[0];
             FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex]);
             form.ShowDialog();
-            setDefaults();
+            SetDefaults();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
         }//End of btnUpdateVendor_Click(..)
 
@@ -195,7 +282,7 @@ namespace com.Farouche.Presentation
         {
             FrmAddShippingTerm form = new FrmAddShippingTerm();
             form.ShowDialog();
-            setDefaults();
+            SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
         }//End of btnAddTerm_Click(..)
 
@@ -204,7 +291,7 @@ namespace com.Farouche.Presentation
             var currentIndex = this.lvShippingTerms.SelectedIndices[0];
             FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex]);
             form.ShowDialog();
-            setDefaults();
+            SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
         }//End of btnUpdateTerm_Click(..)
 
@@ -243,11 +330,11 @@ namespace com.Farouche.Presentation
             {
                 case 0:
                     PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
-                    setDefaults();
+                    SetDefaults();
                     break;
                 case 1:
                     PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
-                    setDefaults();
+                    SetDefaults();
                     break;
             }
         }//End of tabControlShipping_SelectedIndexChanged(..)
@@ -261,35 +348,53 @@ namespace com.Farouche.Presentation
         {
             try
             {
-                int selectedOrder = this.lvMyOrders.Items[0].Index;
-                FrmViewOrderDetails myForm = new FrmViewOrderDetails(_myOrderManager.Orders[selectedOrder], _myAccessToken);
-                myForm.Show();
-                Hide();
+                int selectedOrder = (int)this.lvMyOrders.SelectedIndices[0] + 1;
+                InitPick(selectedOrder);
             }
-            catch
+            catch(ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
         }//End btnDetails(..)
 
+        private void InitPick(int selectedOrder)
+        {
+            FrmViewOrderDetails details = new FrmViewOrderDetails(_myOrderManager.GetOrderByID(selectedOrder).ID, _myAccessToken);
+            details.FormClosed += new FormClosedEventHandler(Details_FormClosed);
+            details.Show();
+        }//End initPick(.)
+
+        private void Details_FormClosed(object sender, EventArgs e)
+        {
+            RefreshOrderViews();
+        }
+
         private void btnStartPick_Click(object sender, EventArgs e)
         {
             try
             {
-                int selectedOrder = this.lvPickList.Items[0].Index;
-                Boolean success = _myOrderManager.UpdateUserId(_myOrderManager.Orders[selectedOrder], _myAccessToken.UserID);
-                if (success == true)
+                int selectedOrder = (int)this.lvPickList.SelectedIndices[0] + 1;
+                ShippingOrder myOrder = _myOrderManager.GetOrderByID(selectedOrder);
+                if(myOrder.UserId.HasValue)
                 {
-                    FrmViewOrderDetails myForm = new FrmViewOrderDetails(_myOrderManager.Orders[selectedOrder], _myAccessToken);
-                    myForm.Show();
-                    Hide();
+                    MessageBox.Show("Ownership belongs to another", "Already Assigned");
                 }
                 else
                 {
-                    MessageBox.Show("Order already taken by another employee", "Please Refresh");
+                    Boolean success = _myOrderManager.UpdateUserId(myOrder, _myAccessToken.UserID);
+                    if (success == true)
+                    {
+                       RefreshOrderViews();
+                       InitPick(selectedOrder);
+                    }
+                    else
+                    {
+                       MessageBox.Show("Ownership of pick to you has failed", "Assignment Failed");
+                       RefreshOrderViews();
+                    }
                 }
             }
-            catch
+            catch(ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
@@ -304,18 +409,22 @@ namespace com.Farouche.Presentation
         {
             try
             {
-                int selectedOrder = this.lvPackList.Items[0].Index;
-                Boolean success = _myOrderManager.UpdateShippedDate(_myOrderManager.Orders[selectedOrder]);
+                int selectedOrder = (int)this.lvPackList.SelectedIndices[0] + 1;
+                ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrder);
+                Boolean success = _myOrderManager.UpdateShippedDate(currentOrder);
+                _myOrderManager.UpdateUserId(currentOrder, _myAccessToken.UserID);
                 if (success == true)
                 {
                     MessageBox.Show("Now Printing Pack Slip", "Packing Complete");
+                    RefreshOrderViews();
                 }
                 else
                 {
                     MessageBox.Show("Cannot complete action.", "Please Refresh");
+                    RefreshOrderViews();
                 }
             }
-            catch
+            catch(ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
@@ -325,21 +434,31 @@ namespace com.Farouche.Presentation
         {
             try
             {
-                int selectedOrder = this.lvAllOrders.Items[0].Index;
-                Boolean success = _myOrderManager.ClearUserId(_myOrderManager.Orders[selectedOrder]);
-                if (success == true)
+                int selectedOrderId = (int)this.lvAllOrders.SelectedIndices[0] + 1;
+                ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrderId);
+                if (currentOrder.Picked == true && currentOrder.UserId.HasValue)
                 {
-                    MessageBox.Show("EmployeeID removed from selected order.", "Action Complete");
+                    MessageBox.Show("That order has already been shipped.", "Cannot Change Employee");
                 }
                 else
                 {
-                    MessageBox.Show("Cannot complete action.", "Please Refresh");
+                    Boolean success = _myOrderManager.ClearUserId(currentOrder);
+                    if (success == true)
+                    {
+                        RefreshOrderViews();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot complete operation.", "Operation Failed");
+                    }
                 }
             }
-            catch
+            catch(ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
+
         }//End of btnClearUser_Click(..)
+
     }
 }
