@@ -65,8 +65,6 @@ namespace com.Farouche.Presentation
         }
         private void btClose_Click(object sender, EventArgs e)
         {
-            FrmProduct frm = new FrmProduct(_myAccessToken);
-            frm.Show();
             this.Close();
         }//btClose_Click
 
