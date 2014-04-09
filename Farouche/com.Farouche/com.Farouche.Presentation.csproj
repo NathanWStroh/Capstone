@@ -102,6 +102,24 @@
     <Compile Include="frmStartUp.Designer.cs">
       <DependentUpon>frmStartUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmUpdateReorderAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderAmount.designer.cs">
+      <DependentUpon>FrmUpdateReorderAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderOnOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderOnOrder.designer.cs">
+      <DependentUpon>FrmUpdateReorderOnOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderThreshold.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderThreshold.designer.cs">
+      <DependentUpon>FrmUpdateReorderThreshold.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmUpdateShippingTerm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +205,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmStartUp.resx">
       <DependentUpon>frmStartUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderAmount.resx">
+      <DependentUpon>FrmUpdateReorderAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderOnOrder.resx">
+      <DependentUpon>FrmUpdateReorderOnOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderThreshold.resx">
+      <DependentUpon>FrmUpdateReorderThreshold.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateShippingTerm.resx">
       <DependentUpon>FrmUpdateShippingTerm.cs</DependentUpon>

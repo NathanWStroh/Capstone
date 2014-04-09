@@ -1,6 +1,4 @@
-﻿
-/*Object:  StoredProcedure [dbo].[sp_DeleteProduct]*/
-CREATE PROCEDURE [dbo].[sp_DeleteProduct]
+﻿CREATE PROCEDURE [dbo].[sp_DeleteProduct]
 	(@ProductID				Int,
 	@Available				Int,
 	@OnHand				int,
@@ -10,6 +8,7 @@ CREATE PROCEDURE [dbo].[sp_DeleteProduct]
 	@ShortDesc				VarChar(50),
 	@ReorderThreshold		int,
 	@ReorderAmount			int,
+	@OnOrder				int,
 	@ShippingDimensions		varchar(50),
 	@ShippingWeight			float,
 	@Active					Bit)
@@ -24,6 +23,7 @@ AS
 	AND [ShortDesc] = @ShortDesc
 	AND [ReorderThreshold] = @ReorderThreshold
 	AND [ReorderAmount] = @ReorderAmount
+	AND [OnOrder] = @OnOrder
 	AND [ShippingDimensions] = @ShippingDimensions
 	AND [ShippingWeight] = @ShippingWeight
 	AND [Active] = @Active

@@ -1,13 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 //Author: Kaleb
 //Date Created: 1/31/2014
-//Last Modified: 1/31/2014
-//Last Modified By: Steven Schuette
+//Last Modified: 04/01/2014
+//Last Modified By: Kaleb Wendel
 
 /*
 *                               Changelog
@@ -20,12 +19,12 @@ using com.Farouche.Commons;
 *
 * 02/20/14     Nathan S     n/a             "updated"       Added accessToken value to ProductView Windows.
 * 
-* 02/26/2014   Kaleb W                       0.0.3a         Adjusted class to populate the list view upon selecting an active
-*                                                           status.
-*                                                           Adjusted class to determine whether the item is active or not
-*                                                           which determines what controls are enabled.
+* 02/26/2014   Kaleb W                       0.0.3a         Adjusted class to populate the list view upon selecting an active status.
+*                                                           Adjusted class to determine whether the item is active or not which determines what controls are enabled.
 * 
-*/ 
+* 04/01/2014   Kaleb                                        Adjusted populateListView to include OnOrder, Threshold, ReorderAmount, ShippingWeight, and ShippingDimension values. Also adjusted this method to account for nullable values. 
+* 
+*/
 
 //Enumeration for active drop down.
 public enum Active { No = 0, Yes = 1 };
@@ -85,8 +84,13 @@ namespace com.Farouche.Presentation
                 item.SubItems.Add(product.description);
                 item.SubItems.Add(product.reserved.ToString());
                 item.SubItems.Add(product.available.ToString());
-                item.SubItems.Add(product.location.ToString());
+                item.SubItems.Add(product.location == null ? "Null" : product.location.ToString());
                 item.SubItems.Add(product.unitPrice.ToString());
+                item.SubItems.Add(product._reorderThreshold == null ? "Null" : product._reorderThreshold.ToString());
+                item.SubItems.Add(product._reorderAmount == null ? "Null" : product._reorderAmount.ToString());
+                item.SubItems.Add(product._onOrder.ToString());
+                item.SubItems.Add(product._shippingDemensions == null ? "Null" : product._shippingDemensions.ToString());
+                item.SubItems.Add(product._shippingWeight == null ? "Null" : product._shippingWeight.ToString());
                 item.SubItems.Add(product.Active.ToString());
                 lv.Items.Add(item);
             }
@@ -97,6 +101,11 @@ namespace com.Farouche.Presentation
             lv.Columns.Add("Available");
             lv.Columns.Add("Location ID");
             lv.Columns.Add("Unit Price");
+            lv.Columns.Add("Threshold");
+            lv.Columns.Add("Reorder Amount");
+            lv.Columns.Add("On Order");
+            lv.Columns.Add("Shipping Dimensions");
+            lv.Columns.Add("Shipping Weight");
             lv.Columns.Add("Active");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }//End of populateListView(..)
@@ -136,25 +145,27 @@ namespace com.Farouche.Presentation
             btnUpdateProduct.Enabled = false;
             btnDeactivateProduct.Enabled = false;
             btnActivateProduct.Enabled = false;
+            btnUpdateOnOrder.Enabled = false;
+            btnUpdateReorderAmount.Enabled = false;
+            btnUpdateReorderThreshold.Enabled = false;
         }//End of setDefaults()
-        
+
         //Need to make sure that this links up with Nathan's code correctly.
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ProductView frm = new ProductView(_myAccessToken);
             frm.ShowDialog();
-            this.Close();
+            findActiveSelection();
         }//End of btnAdd_Click(..)
 
         //Need to make sure that this links up with Nathan's code correctly.
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
-            //int currentIndex = this.lvProducts.Items[0].Index;
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
             ProductView frm = new ProductView(_myAccessToken, thisProduct);
-            frm.Show();
-            this.Close();   
+            frm.ShowDialog();
+            findActiveSelection();
         }//End of btnUpdateProduct_Click(..)
 
         private void btnVendorSource_Click(object sender, EventArgs e)
@@ -182,7 +193,6 @@ namespace com.Farouche.Presentation
         {
             //int currentIndex = this.lvProducts.SelectedItems[0].Index;
             int currentIndex = this.lvProducts.SelectedIndices[0];
-            Console.WriteLine(currentIndex);
             Product thisProduct = _myProductManager.Products[currentIndex];
             if (thisProduct.Active == true)
             {
@@ -194,6 +204,9 @@ namespace com.Farouche.Presentation
                 btnActivateProduct.Enabled = true;
                 btnDeactivateProduct.Enabled = false;
             }
+            btnUpdateReorderThreshold.Enabled = true;
+            btnUpdateReorderAmount.Enabled = true;
+            btnUpdateOnOrder.Enabled = true;
             btnUpdateProduct.Enabled = true;
         }//End of lvProducts_Click(..)
 
@@ -227,6 +240,33 @@ namespace com.Farouche.Presentation
             var form = new FrmShipping(_myAccessToken);
             form.Show();
             this.Close();
+        }
+
+        private void btnUpdateReorderAmount_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvProducts.SelectedIndices[0];
+            Product thisProduct = _myProductManager.Products[currentIndex];
+            FrmUpdateReorderAmount frm = new FrmUpdateReorderAmount(thisProduct._reorderAmount, thisProduct.Id);
+            frm.ShowDialog();
+            findActiveSelection();
+        }
+
+        private void btnUpdateReorderThreshold_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvProducts.SelectedIndices[0];
+            Product thisProduct = _myProductManager.Products[currentIndex];
+            FrmUpdateReorderThreshold frm = new FrmUpdateReorderThreshold(thisProduct._reorderThreshold, thisProduct.Id);
+            frm.ShowDialog();
+            findActiveSelection();
+        }
+
+        private void btnUpdateOnOrder_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvProducts.SelectedIndices[0];
+            Product thisProduct = _myProductManager.Products[currentIndex];
+            FrmUpdateReorderOnOrder frm = new FrmUpdateReorderOnOrder(thisProduct._onOrder, thisProduct.Id);
+            frm.ShowDialog();
+            findActiveSelection();
         }
     }
 }

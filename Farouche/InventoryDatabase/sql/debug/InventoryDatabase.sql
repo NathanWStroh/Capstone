@@ -272,13 +272,13 @@ CREATE TABLE [dbo].[Products] (
     [ProductID]          INT           IDENTITY (1, 1) NOT NULL,
     [Available]          INT           NOT NULL,
     [OnHand]             INT           NOT NULL,
-    [OnOrder]            INT           NOT NULL,
     [Description]        VARCHAR (250) NOT NULL,
     [Location]           VARCHAR (250) NULL,
     [UnitPrice]          MONEY         NOT NULL,
     [ShortDesc]          VARCHAR (50)  NOT NULL,
     [ReorderThreshold]   INT           NULL,
     [ReorderAmount]      INT           NULL,
+    [OnOrder]            INT           NOT NULL,
     [ShippingDimensions] VARCHAR (50)  NULL,
     [ShippingWeight]     FLOAT         NULL,
     [Active]             BIT           NOT NULL
@@ -950,6 +950,32 @@ AS
                 vsi.VendorID = @VendorID  and
                 OnHand + OnOrder < ReorderThreshold
 GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrders]
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrdersByVendor]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrdersByVendor]
+	@VendorId int
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+	AND [VendorID] = @VendorId
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetAllShippingOrderLineItems]...';
 
 
@@ -1142,9 +1168,9 @@ PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
 
 GO
 CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
-	As
-	SELECT [VendorOrderID],[VendorID],[DateOrdered],[AmountofShipments]
-	from [VendorOrders]
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	From VendorOrders
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
@@ -1289,6 +1315,32 @@ AS
 	FROM [dbo].[ShippingVendors]
 	WHERE [ShippingVendorID] = @shippingVendorID
 GO
+PRINT N'Creating [dbo].[proc_getVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_getVendorOrder]
+	@VendorOrderId int 
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorOrderID] = @VendorOrderId
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetVendorOrderByVendorAndDate]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorID] = @VendorID
+	and [DateOrdered] = @DateOrdered
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetVendorOrderLineItem]...';
 
 
@@ -1401,6 +1453,57 @@ AS
      VALUES
            (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged)
 RETURN @@IDENTITY
+GO
+PRINT N'Creating [dbo].[proc_InsertVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	Insert into [VendorOrders] (VendorID, DateOrdered)
+	Values (@VendorID, @DateOrdered)
+RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductOnOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductOnOrder]
+	(@ProductID		int,
+	@Amount			int)
+AS
+	UPDATE [dbo].[Products]
+	SET [OnOrder] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductReorderAmount]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductReorderAmount]
+	(@ProductID		int,
+	@Amount			int)
+AS
+	UPDATE [dbo].[Products]
+	SET [ReorderAmount] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductThreshold]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductThreshold]
+	(@ProductID		int,
+	@Amount			int)
+AS
+	UPDATE [dbo].[Products]
+	SET [ReorderThreshold] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateShippingOrder]...';
 
@@ -1672,6 +1775,30 @@ AS
 		[ContactEmail] = @orig_ContactEmail
 	RETURN @@ROWCOUNT
 GO
+PRINT N'Creating [dbo].[proc_UpdateVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateVendorOrder]
+	(@VendorOrderID int,
+	 @VendorID int,
+	 @DateOrdered datetime,
+	 @AmountOfShipments int,
+	 @Finalized bit,
+	 @orig_AmountOfShipments int,
+	 @orig_Finalized bit)
+AS
+	UPDATE [dbo].[VendorOrders]
+	SET [AmountOfShipments] = @AmountOfShipments,
+	    [Finalized] = @Finalized
+	WHERE [VendorOrderID] = @VendorOrderID
+	  and [VendorID] = @VendorID
+	  and [DateOrdered] = @DateOrdered
+	  and [AmountOfShipments] = @orig_AmountOfShipments
+	  and [Finalized] = @orig_Finalized
+	
+RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_UpdateVendorOrderLineItems]...';
 
 
@@ -1887,8 +2014,6 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
-
-/*Object:  StoredProcedure [dbo].[sp_DeleteProduct]*/
 CREATE PROCEDURE [dbo].[sp_DeleteProduct]
 	(@ProductID				Int,
 	@Available				Int,
@@ -1899,6 +2024,7 @@ CREATE PROCEDURE [dbo].[sp_DeleteProduct]
 	@ShortDesc				VarChar(50),
 	@ReorderThreshold		int,
 	@ReorderAmount			int,
+	@OnOrder				int,
 	@ShippingDimensions		varchar(50),
 	@ShippingWeight			float,
 	@Active					Bit)
@@ -1913,6 +2039,7 @@ AS
 	AND [ShortDesc] = @ShortDesc
 	AND [ReorderThreshold] = @ReorderThreshold
 	AND [ReorderAmount] = @ReorderAmount
+	AND [OnOrder] = @OnOrder
 	AND [ShippingDimensions] = @ShippingDimensions
 	AND [ShippingWeight] = @ShippingWeight
 	AND [Active] = @Active
@@ -2422,19 +2549,20 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 GO
 CREATE PROCEDURE [dbo].[sp_InsertIntoProducts]
 	(@Available			Int,
-	@OnHand			Int,
+	@OnHand				Int,
 	@Description		VarChar(250),
 	@Location			varchar(250),
 	@UnitPrice			Money,
 	@ShortDesc			VarChar(50),
 	@ReorderThreshold	int,
 	@ReorderAmount		int,
+	@OnOrder			int,
 	@ShippingDimensions varchar(50),
 	@ShippingWeight		float,
 	@Active				Bit)
 AS
-	INSERT IntO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[ShippingDimensions],[ShippingWeight],[Active])
-	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @ShippingDimensions, @ShippingWeight, @Active)
+	INSERT INTO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[OnOrder],[ShippingDimensions],[ShippingWeight],[Active])
+	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @OnOrder, @ShippingDimensions, @ShippingWeight, @Active)
 	RETURN @@ROWCOUNT
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
@@ -2715,47 +2843,69 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
-
-/*Object:  StoredProcedure [dbo].[sp_UpdateProducts]*/
 CREATE PROCEDURE [dbo].[sp_UpdateProducts]
-	(@ProductID				Int,
-	@Available				Int,
-	@OriginalAvailable		Int,
-	@OnHand				Int,
-	@OriginalOnHand		Int,
-	@Description			VarChar(250),
-	@OriginalDescription	VarChar(250),
-	@Location				varchar(250),
-	@OriginalLocation		varchar(250),
-	@UnitPrice				Money,
-	@OriginalUnitPrice		Money,
-	@ShortDesc				VarChar(50),
-	@OriginalShortDesc		VarChar(50),
-	@ReorderThreshold		int,
-	@OriginalReorderThreshold int,
-	@ReorderAmount			int,
-	@OriginalReorderAmount	int,
-	@ShippingDimensions		varchar(50),
-	@OriginalShippingDimensions varchar(50),
-	@ShippingWeight			float,
-	@OriginalShippingWeight	float,
-	@Active					Bit,
-	@OriginalActive			Bit)
+	(@ProductID						Int,
+	@Available						Int,
+	@OnHand							Int,
+	@Description					VarChar(250),
+	@Location						varchar(250),
+	@UnitPrice						Money,
+	@ShortDesc						VarChar(50),
+	@ReorderThreshold				int,
+	@ReorderAmount					int,
+	@OnOrder						int,
+	@ShippingDimensions				varchar(50),
+	@ShippingWeight					float,
+	@Active							Bit,
+	@OriginalAvailable				Int,
+	@OriginalOnHand					Int,
+	@OriginalDescription			VarChar(250),
+	@OriginalLocation				varchar(250),
+	@OriginalUnitPrice				Money,
+	@OriginalShortDesc				VarChar(50),
+	@OriginalReorderThreshold 		int,
+	@OriginalReorderAmount			int,
+	@OriginalOnOrder				int,
+	@OriginalShippingDimensions 	varchar(50),
+	@OriginalShippingWeight			float,
+	@OriginalActive					Bit)
 AS
 	UPDATE [dbo].[Products]
-	SET [Available] = @Available, [OnHand] = @OnHand, [Description] = @Description, [Location] = @Location, [UnitPrice] = @UnitPrice, [ShortDesc] = @ShortDesc, [ReorderThreshold] = @ReorderThreshold, [ReorderAmount] = @ReorderAmount, [ShippingDimensions] = @ShippingDimensions, [ShippingWeight] = @ShippingWeight, [Active] = @Active
+	SET [Available] = @Available, 
+		[OnHand] = @OnHand, 
+		[Description] = @Description, 
+		[Location] = @Location, 
+		[UnitPrice] = @UnitPrice, 
+		[ShortDesc] = @ShortDesc, 
+		[ReorderThreshold] = @ReorderThreshold, 
+		[ReorderAmount] = @ReorderAmount, 
+		[ShippingDimensions] = @ShippingDimensions, 
+		[ShippingWeight] = @ShippingWeight, 
+		[Active] = @Active, 
+		[OnOrder] = @OnOrder
 	WHERE [ProductID] = @ProductID
-	AND [Available] = @OriginalAvailable
-	AND [OnHand] = @OriginalOnHand
-	AND [Description] = @OriginalDescription
-	AND [Location] = @OriginalLocation
-	AND [UnitPrice] = @OriginalUnitPrice
-	AND [ShortDesc] = @OriginalShortDesc
-	AND [ReorderThreshold] = @OriginalReorderThreshold
-	AND [ReorderAmount] = @OriginalReorderAmount
-	AND [ShippingDimensions] = @OriginalShippingDimensions
-	AND	[ShippingWeight] = @OriginalShippingWeight
-	AND [Active] = @OriginalActive
+		AND [Available] = @OriginalAvailable
+		AND [OnHand] = @OriginalOnHand
+		AND [Description] = @OriginalDescription
+		AND (([Location] = @OriginalLocation)
+		OR (@OriginalLocation IS NULL
+		AND @Location IS NULL))
+		AND [UnitPrice] = @OriginalUnitPrice
+		AND [ShortDesc] = @OriginalShortDesc
+		AND (([ReorderThreshold] = @OriginalReorderThreshold)
+		OR (@OriginalReorderThreshold IS NULL
+		AND @ReorderThreshold IS NULL))
+		AND (([ReorderAmount] = @OriginalReorderAmount)
+		OR (@OriginalReorderAmount IS NULL
+		AND @ReorderAmount IS NULL))
+		AND [OnOrder] = @OriginalOnOrder
+		AND (([ShippingDimensions] = @OriginalShippingDimensions)
+		OR (@OriginalShippingDimensions IS NULL
+		AND @ShippingDimensions IS NULL))
+		AND (([ShippingWeight] = @OriginalShippingWeight)
+		OR (@OriginalShippingWeight IS NULL
+		AND @ShippingWeight IS NULL))
+		AND [Active] = @OriginalActive
 	RETURN @@ROWCOUNT
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
