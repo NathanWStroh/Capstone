@@ -8,19 +8,13 @@ SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL
 
 GO
 :setvar DatabaseName "InventoryDatabase"
-<<<<<<< HEAD
 :setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\"
 :setvar DefaultLogPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\"
-=======
-:setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
-:setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
->>>>>>> fdf1901f6ed7f5317738f2e9783e7b74dbed29cb
-
-GO
-USE [master]
 
 GO
 :on error exit
+GO
+USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -151,7 +145,6 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
-
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -955,6 +948,32 @@ AS
                 vsi.VendorID = @VendorID  and
                 OnHand + OnOrder < ReorderThreshold
 GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrders]
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrdersByVendor]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrdersByVendor]
+	@VendorId int
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+	AND [VendorID] = @VendorId
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetAllShippingOrderLineItems]...';
 
 
@@ -1147,9 +1166,9 @@ PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
 
 GO
 CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
-	As
-	SELECT [VendorOrderID],[VendorID],[DateOrdered],[AmountofShipments]
-	from [VendorOrders]
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	From VendorOrders
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
@@ -1294,6 +1313,32 @@ AS
 	FROM [dbo].[ShippingVendors]
 	WHERE [ShippingVendorID] = @shippingVendorID
 GO
+PRINT N'Creating [dbo].[proc_getVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_getVendorOrder]
+	@VendorOrderId int 
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorOrderID] = @VendorOrderId
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetVendorOrderByVendorAndDate]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorID] = @VendorID
+	and [DateOrdered] = @DateOrdered
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetVendorOrderLineItem]...';
 
 
@@ -1406,6 +1451,18 @@ AS
      VALUES
            (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged)
 RETURN @@IDENTITY
+GO
+PRINT N'Creating [dbo].[proc_InsertVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	Insert into [VendorOrders] (VendorID, DateOrdered)
+	Values (@VendorID, @DateOrdered)
+RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateShippingOrder]...';
 
@@ -1676,6 +1733,30 @@ AS
 		[Contact]   = @orig_Contact AND
 		[ContactEmail] = @orig_ContactEmail
 	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateVendorOrder]
+	(@VendorOrderID int,
+	 @VendorID int,
+	 @DateOrdered datetime,
+	 @AmountOfShipments int,
+	 @Finalized bit,
+	 @orig_AmountOfShipments int,
+	 @orig_Finalized bit)
+AS
+	UPDATE [dbo].[VendorOrders]
+	SET [AmountOfShipments] = @AmountOfShipments,
+	    [Finalized] = @Finalized
+	WHERE [VendorOrderID] = @VendorOrderID
+	  and [VendorID] = @VendorID
+	  and [DateOrdered] = @DateOrdered
+	  and [AmountOfShipments] = @orig_AmountOfShipments
+	  and [Finalized] = @orig_Finalized
+	
+RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateVendorOrderLineItems]...';
 

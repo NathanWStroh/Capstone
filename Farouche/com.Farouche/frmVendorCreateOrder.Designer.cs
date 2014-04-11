@@ -30,8 +30,7 @@
         {
             this.comboProduct = new System.Windows.Forms.ComboBox();
             this.btAddLineItem = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btRemove = new System.Windows.Forms.Button();
             this.btAddNewProduct = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.tbOrderDate = new System.Windows.Forms.TextBox();
@@ -59,23 +58,14 @@
             this.btAddLineItem.Text = "Add Item";
             this.btAddLineItem.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btRemove
             // 
-            this.button3.Location = new System.Drawing.Point(596, 99);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(14, 139);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btRemove.Location = new System.Drawing.Point(577, 99);
+            this.btRemove.Name = "btRemove";
+            this.btRemove.Size = new System.Drawing.Size(94, 23);
+            this.btRemove.TabIndex = 8;
+            this.btRemove.Text = "Remove Line";
+            this.btRemove.UseVisualStyleBackColor = true;
             // 
             // btAddNewProduct
             // 
@@ -90,7 +80,7 @@
             // 
             this.listView1.Location = new System.Drawing.Point(95, 99);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(495, 243);
+            this.listView1.Size = new System.Drawing.Size(476, 243);
             this.listView1.TabIndex = 12;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -158,8 +148,7 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.comboProduct);
             this.Controls.Add(this.btAddLineItem);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btRemove);
             this.Controls.Add(this.btAddNewProduct);
             this.Name = "frmVendorCreateOrder";
             this.Text = "Create Order View";
@@ -172,8 +161,7 @@
 
         private System.Windows.Forms.ComboBox comboProduct;
         private System.Windows.Forms.Button btAddLineItem;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btRemove;
         private System.Windows.Forms.Button btAddNewProduct;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.TextBox tbOrderDate;

@@ -75,8 +75,8 @@ namespace com.Farouche.Presentation
         private void populateListView(ListView lv, List<Product> productList)
         {
             _myProductManager.Products = productList;
-            lv.Items.Clear();
-            lv.Columns.Clear();
+            lv.Clear();
+            
             foreach (var product in productList)
             {
                 var item = new ListViewItem();
@@ -143,7 +143,7 @@ namespace com.Farouche.Presentation
         {
             ProductView frm = new ProductView(_myAccessToken);
             frm.ShowDialog();
-            this.Close();
+            //this.Close();
         }//End of btnAdd_Click(..)
 
         //Need to make sure that this links up with Nathan's code correctly.
@@ -153,8 +153,8 @@ namespace com.Farouche.Presentation
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
             ProductView frm = new ProductView(_myAccessToken, thisProduct);
-            frm.Show();
-            this.Close();   
+            frm.ShowDialog();
+            //this.Close();   
         }//End of btnUpdateProduct_Click(..)
 
         private void btnVendorSource_Click(object sender, EventArgs e)
