@@ -950,6 +950,32 @@ AS
                 vsi.VendorID = @VendorID  and
                 OnHand + OnOrder < ReorderThreshold
 GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrders]
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrdersByVendor]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrdersByVendor]
+	@VendorId int
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+	AND [VendorID] = @VendorId
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetAllShippingOrderLineItems]...';
 
 
@@ -1142,9 +1168,10 @@ PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
 
 GO
 CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
-	As
-	SELECT [VendorOrderID],[VendorID],[DateOrdered],[AmountofShipments]
-	from [VendorOrders]
+
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	From VendorOrders
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
@@ -1289,6 +1316,32 @@ AS
 	FROM [dbo].[ShippingVendors]
 	WHERE [ShippingVendorID] = @shippingVendorID
 GO
+PRINT N'Creating [dbo].[proc_getVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_getVendorOrder]
+	@VendorOrderId int 
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorOrderID] = @VendorOrderId
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetVendorOrderByVendorAndDate]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorID] = @VendorID
+	and [DateOrdered] = @DateOrdered
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetVendorOrderLineItem]...';
 
 
@@ -1401,6 +1454,18 @@ AS
      VALUES
            (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged)
 RETURN @@IDENTITY
+GO
+PRINT N'Creating [dbo].[proc_InsertVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	Insert into [VendorOrders] (VendorID, DateOrdered)
+	Values (@VendorID, @DateOrdered)
+RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateShippingOrder]...';
 
@@ -1671,6 +1736,30 @@ AS
 		[Contact]   = @orig_Contact AND
 		[ContactEmail] = @orig_ContactEmail
 	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateVendorOrder]
+	(@VendorOrderID int,
+	 @VendorID int,
+	 @DateOrdered datetime,
+	 @AmountOfShipments int,
+	 @Finalized bit,
+	 @orig_AmountOfShipments int,
+	 @orig_Finalized bit)
+AS
+	UPDATE [dbo].[VendorOrders]
+	SET [AmountOfShipments] = @AmountOfShipments,
+	    [Finalized] = @Finalized
+	WHERE [VendorOrderID] = @VendorOrderID
+	  and [VendorID] = @VendorID
+	  and [DateOrdered] = @DateOrdered
+	  and [AmountOfShipments] = @orig_AmountOfShipments
+	  and [Finalized] = @orig_Finalized
+	
+RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateVendorOrderLineItems]...';
 

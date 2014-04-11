@@ -296,7 +296,7 @@ namespace com.Farouche.DataAccess
                         newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            ShipmentsReceived = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt16(3),
                             Finalized = myReader.GetBoolean(4),
                             Active = myReader.GetBoolean(5)
                         };

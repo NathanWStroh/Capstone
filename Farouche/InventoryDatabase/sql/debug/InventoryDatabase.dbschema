@@ -17,11 +17,7 @@
 			<Metadata Name="CompatibilityMode" Value="100" />
 		</CustomData>
 		<CustomData Category="Permissions" Type="XmlPermissions">
-
 			<Metadata Name="FileName" Value="E:\GIT REPOSITORY AGAIN\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-
-			<Metadata Name="FileName" Value="D:\GIT-REPOSITORIES\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-
 		</CustomData>
 	</Header>
 	<Model>
@@ -2238,13 +2234,8 @@ RETURN]]></Value>
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
 				<Value><![CDATA[
-<<<<<<< HEAD
-	SELECT [VendorOrderID],[VendorID],[DateOrdered],[AmountofShipments]
-	from [VendorOrders]
-=======
 	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	From VendorOrders
->>>>>>> origin/master
 RETURN]]></Value>
 			</Property>
 			<Relationship Name="BodyDependencies">
@@ -2263,15 +2254,12 @@ RETURN]]></Value>
 				<Entry>
 					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
 				</Entry>
-<<<<<<< HEAD
-=======
 				<Entry>
 					<References Name="[dbo].[VendorOrders].[Finalized]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[VendorOrders].[Active]" />
 				</Entry>
->>>>>>> origin/master
 			</Relationship>
 			<Relationship Name="Owner">
 				<Entry>
@@ -2279,17 +2267,10 @@ RETURN]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-<<<<<<< HEAD
-				<Property Name="Length" Value="153" />
+				<Property Name="Length" Value="178" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;&#x9;As" />
-=======
-				<Property Name="Length" Value="176" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;AS" />
->>>>>>> origin/master
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetExceptionItems]">
