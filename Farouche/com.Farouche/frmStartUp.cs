@@ -5,8 +5,8 @@
 
 /*
 *                               Changelog
-* Date         By          Ticket          Version         Description
-* 
+* Date         By           Ticket          Version         Description
+* 4-4-14       NathanStroh                  ???             Removed title from frame.
 */
 
 using System;
@@ -48,9 +48,24 @@ namespace com.Farouche.Presentation
         {
             FrmProduct frm = new FrmProduct(_myAccessToken);
             frm.MdiParent = this;
+            this.Text = frm.Text;
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
- 
+        }
+
+        private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVendorCreateOrder frm = new frmVendorCreateOrder(_myAccessToken);
+            frm.MdiParent = this;
+            this.Text = frm.Text;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void newProductToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProductView frm = new ProductView(_myAccessToken);
+            frm.ShowDialog();
         }
         
         //TSMI = Tool Strip Menu Item

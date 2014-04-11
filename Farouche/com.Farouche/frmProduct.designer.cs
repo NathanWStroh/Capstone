@@ -31,7 +31,6 @@
             this.btnVendor = new System.Windows.Forms.Button();
             this.btnVendorSource = new System.Windows.Forms.Button();
             this.btnPressed = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
             this.tabProducts = new System.Windows.Forms.TabPage();
             this.btnUpdateOnOrder = new System.Windows.Forms.Button();
             this.btnUpdateReorderThreshold = new System.Windows.Forms.Button();
@@ -81,16 +80,6 @@
             this.btnPressed.TabIndex = 20;
             this.btnPressed.Text = "Product";
             this.btnPressed.UseVisualStyleBackColor = true;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Location = new System.Drawing.Point(747, 402);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(75, 23);
-            this.btnLogout.TabIndex = 22;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // tabProducts
             // 
@@ -274,7 +263,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 437);
             this.Controls.Add(this.btnShipping);
-            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.tabControlProducts);
             this.Controls.Add(this.btnPressed);
             this.Controls.Add(this.btnVendorSource);
@@ -295,7 +283,6 @@
         private System.Windows.Forms.Button btnVendor;
         private System.Windows.Forms.Button btnVendorSource;
         private System.Windows.Forms.Button btnPressed;
-        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.TabPage tabProducts;
         private System.Windows.Forms.ComboBox cbProductStatusSearch;
         private System.Windows.Forms.Label lblProductActiveSearch;

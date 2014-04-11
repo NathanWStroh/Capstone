@@ -74,8 +74,8 @@ namespace com.Farouche.Presentation
         private void populateListView(ListView lv, List<Product> productList)
         {
             _myProductManager.Products = productList;
-            lv.Items.Clear();
-            lv.Columns.Clear();
+            lv.Clear();
+            
             foreach (var product in productList)
             {
                 var item = new ListViewItem();
@@ -155,7 +155,11 @@ namespace com.Farouche.Presentation
         {
             ProductView frm = new ProductView(_myAccessToken);
             frm.ShowDialog();
+<<<<<<< HEAD
             findActiveSelection();
+=======
+            //this.Close();
+>>>>>>> nathan
         }//End of btnAdd_Click(..)
 
         //Need to make sure that this links up with Nathan's code correctly.
@@ -165,7 +169,11 @@ namespace com.Farouche.Presentation
             Product thisProduct = _myProductManager.Products[currentIndex];
             ProductView frm = new ProductView(_myAccessToken, thisProduct);
             frm.ShowDialog();
+<<<<<<< HEAD
             findActiveSelection();
+=======
+            //this.Close();   
+>>>>>>> nathan
         }//End of btnUpdateProduct_Click(..)
 
         private void btnVendorSource_Click(object sender, EventArgs e)
@@ -181,13 +189,6 @@ namespace com.Farouche.Presentation
             form.Show();
             Close();
         }//End of btnVendor_Click(..)
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            FrmLogin frm = new FrmLogin();
-            frm.Show();
-            Close();
-        }//End of btnLogout_Click(..)
 
         private void lvProducts_Click(object sender, EventArgs e)
         {
