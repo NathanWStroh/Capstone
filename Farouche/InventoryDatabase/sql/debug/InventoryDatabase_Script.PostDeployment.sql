@@ -244,3 +244,9 @@ INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) 
 GO
 
 /*Inserts for VendorOrders*/
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (1, '2014-01-01T12:29:04') 
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (1, '2014-02-07T09:45:59')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (2, '2014-03-28T10:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (2, '2014-04-01T18:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (3, '2013-11-28T20:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (3, '2013-12-28T23:44:08')
