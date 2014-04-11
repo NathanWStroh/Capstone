@@ -11,8 +11,6 @@ GO
 :setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
-
-
 GO
 :on error exit
 GO
@@ -477,12 +475,12 @@ PRINT N'Creating [dbo].[VendorOrders]...';
 
 GO
 CREATE TABLE [dbo].[VendorOrders] (
-    [VendorOrderID]     INT           IDENTITY (1, 1) NOT NULL,
-    [VendorID]          INT           NOT NULL,
-    [DateOrdered]       SMALLDATETIME NOT NULL,
-    [AmountOfShipments] INT           NOT NULL,
-    [Finalized]         BIT           NOT NULL,
-    [Active]            BIT           NOT NULL,
+    [VendorOrderID]     INT      IDENTITY (1, 1) NOT NULL,
+    [VendorID]          INT      NOT NULL,
+    [DateOrdered]       DATETIME NOT NULL,
+    [AmountOfShipments] INT      NOT NULL,
+    [Finalized]         BIT      NOT NULL,
+    [Active]            BIT      NOT NULL,
     CONSTRAINT [PK_VendorOrders] PRIMARY KEY CLUSTERED ([VendorOrderID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
 ) ON [PRIMARY];
 
@@ -1163,6 +1161,17 @@ AS
 	where [VendorOrderID] = @VendorOrderID
 RETURN
 GO
+PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
+
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	From VendorOrders
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetCLSPackDetails]...';
 
 
@@ -1173,20 +1182,6 @@ AS
 	SELECT so.ShippingOrderID, so.ShippingTermID, sv.ShippingVendorID, st.Description, sv.Name, st.Description, si.ProductID, pr.ShortDesc, si.Quantity, so.ShipDate, so.ShipToName, so.ShipToAddress, so.ShipToCity, so.ShipToState, so.ShipToZip
 	FROM [dbo].[ShippingTermsLookup] st, [dbo].[Products] pr, [dbo].[ShippingVendors] sv, [dbo].[ShippingOrders] so, [dbo].[ShippingOrderLineItems] si
 	WHERE so.ShippingOrderID = @ShippingOrderId AND so.ShippingTermID = st.ShippingTermID AND st.ShippingVendorID = sv.ShippingVendorID AND so.ShippingOrderID = si.ShippingOrderID AND si.ProductID = pr.ProductID
-RETURN
-GO
-PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
-
-
-GO
-CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
-AS
-	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
-	From VendorOrders
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
@@ -1482,7 +1477,6 @@ AS
 	Values (@VendorID, @DateOrdered)
 RETURN @@ROWCOUNT
 GO
-
 PRINT N'Creating [dbo].[proc_UpdateProductOnOrder]...';
 
 
@@ -1522,7 +1516,6 @@ AS
 	WHERE [ProductID] = @ProductID
 	RETURN @@ROWCOUNT
 GO
-
 PRINT N'Creating [dbo].[proc_UpdateShippingOrder]...';
 
 
@@ -3311,6 +3304,14 @@ INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) 
 INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WV', N'West Virginia', 24700, 26899)
 INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WY', N'Wyoming', 82000, 83199)
 GO
+
+/*Inserts for VendorOrders*/
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (1, '2014-01-01T12:29:04') 
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (1, '2014-02-07T09:45:59')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (2, '2014-03-28T10:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (2, '2014-04-01T18:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (3, '2013-11-28T20:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (3, '2013-12-28T23:44:08')
 
 GO
 PRINT N'Checking existing data against newly created constraints';
