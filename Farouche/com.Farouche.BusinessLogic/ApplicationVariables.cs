@@ -49,25 +49,9 @@ namespace com.Farouche.BusinessLogic
             {
                 _variables = ApplicationVariablesDAL.GetAllApplicationVariables();
                 StateManager stateManager = new StateManager();
-                Dictionary<int, State> tempStates = new Dictionary<int, State>();
+                _states = new Dictionary<int, State>(stateManager.GetAllStates());
 
-                // Dictionary<int, State> tempStates = new Dictionary<int, State>(stateManager.GetAllStates());
-
-                //  Dictionary<int, State> tempStates = new Dictionary<int, State>();
-                //  tempStates = stateManager.GetAllStates();
-
-
-                //  _states = new Dictionary<int, State>(tempStates);
-
-
-                // tempStates = StatesDAL.GetAllStates(_connection);
-
-
-                //     Console.WriteLine(stateManager.GetAllStates().ToString());
-
-
-
-                //   tempStates.Add();
+                Console.WriteLine(_states);
 
             }
             catch (SqlException ex)

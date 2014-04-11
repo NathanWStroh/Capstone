@@ -259,15 +259,16 @@ namespace Unit_Test
         [Test]
         public void ValidateZipSendValidFiveNumberZip()
         {
-            Assert.IsTrue(Validation.ValidateZip("52533", "IA"));
+            Assert.IsTrue(Validation.ValidateZip("40000", "KY"));
         }
-      
+
         //fails ValidateZip
-        //[Test]
-        //public void ValidateZipSendInvalidFourNumberZip()
-        //{
-        //    Assert.IsFalse(Validation.ValidateZip("5240"));
-        //}
+        [Test]
+        public void ValidateZipSendInvalidFourNumberZip()
+        {
+            Assert.IsFalse(Validation.ValidateZip("5240", "IA"));
+        }
+
         //[Test]
         //public void ValidateZipSendInvalidSixNumberZip()
         //{

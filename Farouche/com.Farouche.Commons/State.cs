@@ -63,7 +63,7 @@ namespace com.Farouche.Commons
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return this.Id + " " + this.StateCode + " " + this.StateName + " " + this.FirstZipCode + " " + this.LastZipCode; 
         }
 
         public override string ToXml()
