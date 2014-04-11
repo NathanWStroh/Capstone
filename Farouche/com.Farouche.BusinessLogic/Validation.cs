@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using com.Farouche.Commons;
 
 
 //Author: Maggie - then Andrew
@@ -81,9 +82,40 @@ namespace com.Farouche.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public static Boolean ValidateZip(String zip)
+        public static Boolean ValidateZip(String zip, String sCode)
         {
-            return (IsInt(zip) && zip.Length == 5);
+            //ApplicationVariables appVariables = new ApplicationVariables();
+            //State state = new State(0);
+            //state.StateCode = sCode;
+            
+
+            //if (appVariables.States.Values.Contains(state)); 
+            //{
+            //    Console.WriteLine("bingo");
+            //}
+
+          
+
+
+            //for (int i = 0; i < appVariables.States.Count-1; i++)
+            //{
+            //    Console.WriteLine(appVariables.States.Values.ToString());   
+            //}
+
+            //foreach (appVariables.States state in appVariables.States)
+            //{
+		 
+            //}
+
+
+            //if (appVariables.States.Values.ElementAt(2).
+            //{
+                
+            //}
+
+
+
+            return true;
         }
 
 
