@@ -312,8 +312,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Reports\PackListReport.rdlc" />
-    <EmbeddedResource Include="Reports\PickReport.rdlc" />
     <None Include="app.config" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSLineItem.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSPackDetails.datasource" />
@@ -341,9 +339,7 @@
       <Name>com.Farouche.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
