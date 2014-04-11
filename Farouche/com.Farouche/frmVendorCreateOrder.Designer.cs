@@ -39,6 +39,7 @@
             this.lblShippments = new System.Windows.Forms.Label();
             this.comboQuanity = new System.Windows.Forms.ComboBox();
             this.lblOrderDate = new System.Windows.Forms.Label();
+            this.btSaveOrder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboProduct
@@ -51,15 +52,18 @@
             // 
             // btAddLineItem
             // 
+            this.btAddLineItem.Enabled = false;
             this.btAddLineItem.Location = new System.Drawing.Point(418, 70);
             this.btAddLineItem.Name = "btAddLineItem";
             this.btAddLineItem.Size = new System.Drawing.Size(75, 23);
             this.btAddLineItem.TabIndex = 9;
             this.btAddLineItem.Text = "Add Item";
             this.btAddLineItem.UseVisualStyleBackColor = true;
+            this.btAddLineItem.Click += new System.EventHandler(this.btAddLineItem_Click);
             // 
             // btRemove
             // 
+            this.btRemove.Enabled = false;
             this.btRemove.Location = new System.Drawing.Point(577, 99);
             this.btRemove.Name = "btRemove";
             this.btRemove.Size = new System.Drawing.Size(94, 23);
@@ -75,6 +79,7 @@
             this.btAddNewProduct.TabIndex = 6;
             this.btAddNewProduct.Text = "Add Product";
             this.btAddNewProduct.UseVisualStyleBackColor = true;
+            this.btAddNewProduct.Click += new System.EventHandler(this.btAddNewProduct_Click);
             // 
             // listView1
             // 
@@ -134,11 +139,21 @@
             this.lblOrderDate.TabIndex = 19;
             this.lblOrderDate.Text = "OrderDate";
             // 
+            // btSaveOrder
+            // 
+            this.btSaveOrder.Location = new System.Drawing.Point(577, 319);
+            this.btSaveOrder.Name = "btSaveOrder";
+            this.btSaveOrder.Size = new System.Drawing.Size(94, 23);
+            this.btSaveOrder.TabIndex = 20;
+            this.btSaveOrder.Text = "Save Order";
+            this.btSaveOrder.UseVisualStyleBackColor = true;
+            // 
             // frmVendorCreateOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(681, 364);
+            this.Controls.Add(this.btSaveOrder);
             this.Controls.Add(this.lblOrderDate);
             this.Controls.Add(this.comboQuanity);
             this.Controls.Add(this.lblShippments);
@@ -170,6 +185,7 @@
         private System.Windows.Forms.Label lblShippments;
         private System.Windows.Forms.ComboBox comboQuanity;
         private System.Windows.Forms.Label lblOrderDate;
+        private System.Windows.Forms.Button btSaveOrder;
 
     }
 }
