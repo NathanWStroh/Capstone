@@ -279,9 +279,11 @@
             this.Controls.Add(this.btnPressed);
             this.Controls.Add(this.btnVendorSource);
             this.Controls.Add(this.btnVendor);
+            this.MinimumSize = new System.Drawing.Size(850, 476);
             this.Name = "FrmProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmAddProduct_Load);
             this.tabProducts.ResumeLayout(false);
             this.tabProducts.PerformLayout();

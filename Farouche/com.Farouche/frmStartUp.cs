@@ -43,11 +43,8 @@ namespace com.Farouche.Presentation
         {
             FrmProduct frm = new FrmProduct(_myAccessToken);
             frm.MdiParent = this;
-            frm.WindowState = FormWindowState.Maximized;
             frm.Show();
- 
         }
-
-
+       
     }
 }

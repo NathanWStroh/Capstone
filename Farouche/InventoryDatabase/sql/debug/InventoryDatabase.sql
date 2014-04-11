@@ -12,9 +12,10 @@ GO
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
 GO
-:on error exit
-GO
 USE [master]
+
+GO
+:on error exit
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -145,6 +146,7 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
+
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -2893,23 +2895,18 @@ AS
 		AND [OnHand] = @OriginalOnHand
 		AND [Description] = @OriginalDescription
 		AND (([Location] = @OriginalLocation)
-		OR (@OriginalLocation IS NULL
-		AND @Location IS NULL))
+		OR (@OriginalLocation IS NULL))
 		AND [UnitPrice] = @OriginalUnitPrice
 		AND [ShortDesc] = @OriginalShortDesc
 		AND (([ReorderThreshold] = @OriginalReorderThreshold)
-		OR (@OriginalReorderThreshold IS NULL
-		AND @ReorderThreshold IS NULL))
+		OR (@OriginalReorderThreshold IS NULL))
 		AND (([ReorderAmount] = @OriginalReorderAmount)
-		OR (@OriginalReorderAmount IS NULL
-		AND @ReorderAmount IS NULL))
+		OR (@OriginalReorderAmount IS NULL))
 		AND [OnOrder] = @OriginalOnOrder
 		AND (([ShippingDimensions] = @OriginalShippingDimensions)
-		OR (@OriginalShippingDimensions IS NULL
-		AND @ShippingDimensions IS NULL))
+		OR (@OriginalShippingDimensions IS NULL))
 		AND (([ShippingWeight] = @OriginalShippingWeight)
-		OR (@OriginalShippingWeight IS NULL
-		AND @ShippingWeight IS NULL))
+		OR (@OriginalShippingWeight IS NULL))
 		AND [Active] = @OriginalActive
 	RETURN @@ROWCOUNT
 GO

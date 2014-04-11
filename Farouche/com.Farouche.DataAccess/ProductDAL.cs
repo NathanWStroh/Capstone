@@ -112,7 +112,7 @@ namespace com.Farouche.DataAccess
                 sqlCmd.Parameters.AddWithValue("@OriginalReorderAmount", originalProduct._reorderAmount ?? Convert.DBNull);
                 sqlCmd.Parameters.AddWithValue("@OriginalOnOrder", originalProduct._onOrder);
                 sqlCmd.Parameters.AddWithValue("@OriginalShippingDimensions", originalProduct._shippingDemensions ?? Convert.DBNull);
-                sqlCmd.Parameters.AddWithValue("@OriginalShippingWeight", product._shippingWeight ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@OriginalShippingWeight", originalProduct._shippingWeight ?? Convert.DBNull);
                 sqlCmd.Parameters.AddWithValue("@OriginalActive", originalProduct.Active ? 1 : 0);
                 //If the procedure returns 1 set to true, if 0 remain false.
                 if (sqlCmd.ExecuteNonQuery() == 1)
