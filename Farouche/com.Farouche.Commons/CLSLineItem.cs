@@ -1,42 +1,46 @@
 ﻿using System;
-
-//Author: Andrew
-//Date Created: 2/23/2014
-//Last Modified: 3/8/2014 
-//Last Modified By: Andrew Willhoit
-
-/*
-*                               Changelog
-* Date         By          Ticket          Version         Description
-* 
-* 
-*/
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace com.Farouche.Commons
 {
-    public class ShippingOrderLineItem
+    public class CLSLineItem : Entity
     {
         private int _shippingOrderId;
-        private int _productID;
-        private String _productName;
+        private int _productId;
+        private string _productName;
         private int _quantity;
-        private String _productLocation;
-        private Boolean _isPicked;
+        private string _productLocation;
+        private bool _isPicked;
 
-        public ShippingOrderLineItem()
+        public CLSLineItem(int shippingOrderId, int productId, string productName, int quantity, string productLocation, bool isPicked)
         {
-
+            _shippingOrderId = shippingOrderId;
+            _productId = productId;
+            _productName = productName;
+            _quantity = quantity;
+            _productLocation = productLocation;
+            _isPicked = isPicked;
         }
 
-        public ShippingOrderLineItem(int shippingOrderId, int productId)
+        public CLSLineItem()
         {
-            this.ShippingOrderID = shippingOrderId;
-            this.ProductId = productId;
+            _shippingOrderId = 0;
+            _productId = 0;
+            _productName = "";
+            _quantity = 0;
+            _productLocation = "";
+            _isPicked = false;
         }
 
-        public int ShippingOrderID
+        public CLSLineItem(int shippingOrderId)
         {
-            get
+            _shippingOrderId = shippingOrderId;
+        }
+        public int ShippingOrderId
+        {
+            get 
             {
                 return _shippingOrderId;
             }
@@ -49,11 +53,11 @@ namespace com.Farouche.Commons
         {
             get
             {
-                return _productID;
+                return _productId;
             }
             set
             {
-                _productID = value;
+                _productId = value;
             }
         }
         public string ProductName
@@ -78,7 +82,7 @@ namespace com.Farouche.Commons
                 _quantity = value;
             }
         }
-        public String ProductLocation
+        public string ProductLocation
         {
             get
             {
@@ -89,7 +93,7 @@ namespace com.Farouche.Commons
                 _productLocation = value;
             }
         }
-        public Boolean IsPicked
+        public bool IsPicked
         {
             get
             {
@@ -102,13 +106,13 @@ namespace com.Farouche.Commons
         }
         public override string ToString()
         {
-            return string.Format("ShippingOrderID: {0}, ProductId: {1}, ProductName, {2}, Quantity: {3}, ProductLocation: {4}, IsPicked: {5}", ShippingOrderID, ProductId, ProductName, Quantity, ProductLocation, IsPicked);
+            return string.Format("ShippingOrderID: {0}, ProductId: {1}, ProductName, {2}, Quantity: {3}, ProductLocation: {4}, IsPicked: {5}", Id, ProductId, ProductName, Quantity, ProductLocation, IsPicked);
         }
-        public Type GetType()
+        public override Type GetType()
         {
             throw new NotImplementedException();
         }
-        public string ToXml()
+        public override string ToXml()
         {
             throw new NotImplementedException();
         }

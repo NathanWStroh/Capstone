@@ -17,17 +17,7 @@
 			<Metadata Name="CompatibilityMode" Value="100" />
 		</CustomData>
 		<CustomData Category="Permissions" Type="XmlPermissions">
-
 			<Metadata Name="FileName" Value="E:\CAPSTONE\SPRINT3\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-
-			<Metadata Name="FileName" Value="C:\USERS\KALEB\GIT-REPOSITORIES\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-
-			<Metadata Name="FileName" Value="E:\GIT REPOSITORY AGAIN\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-
-			<Metadata Name="FileName" Value="C:\USERS\ANDREW\DESKTOP\GITCAPSTONE\CAPSTONE-2014\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-
-			<Metadata Name="FileName" Value="J:\CAPSTONE\CAPSTONE_CODE\FAROUCHE\INVENTORYDATABASE\PROPERTIES\DATABASE.SQLPERMISSIONS" />
-
 		</CustomData>
 	</Header>
 	<Model>
@@ -1972,6 +1962,118 @@ RETURN]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrderLineItemsByVendorOrder]&#xD;&#xA;&#x9;@VendorOrderID int&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetCLSPackDetails]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.ShippingOrderID, so.ShippingTermID, sv.ShippingVendorID, st.Description, sv.Name, st.Description, si.ProductID, pr.ShortDesc, si.Quantity, so.ShipDate, so.ShipToName, so.ShipToAddress, so.ShipToCity, so.ShipToState, so.ShipToZip
+	FROM [dbo].[ShippingTermsLookup] st, [dbo].[Products] pr, [dbo].[ShippingVendors] sv, [dbo].[ShippingOrders] so, [dbo].[ShippingOrderLineItems] si
+	WHERE so.ShippingOrderID = @ShippingOrderId AND so.ShippingTermID = st.ShippingTermID AND st.ShippingVendorID = sv.ShippingVendorID AND so.ShippingOrderID = si.ShippingOrderID AND si.ProductID = pr.ProductID
+RETURN]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShortDesc]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetCLSPackDetails].[@ShippingOrderId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetCLSPackDetails].[@ShippingOrderId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="684" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetCLSPackDetails]&#xD;&#xA;&#x9;(@ShippingOrderId int)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetExceptionItems]">

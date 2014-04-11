@@ -38,8 +38,8 @@
   <ItemGroup>
     <Compile Include="Authenticator.cs" />
     <Compile Include="ProductManager.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceivingManager.cs" />
+    <Compile Include="ReportList.cs" />
     <Compile Include="ShippingOrderLineItemManager.cs" />
     <Compile Include="ShippingOrderManager.cs" />
     <Compile Include="ShippingTermManager.cs" />
@@ -56,6 +56,9 @@
       <Project>{E366A3B6-F888-499D-86CC-EE7ED690C067}</Project>
       <Name>com.Farouche.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
