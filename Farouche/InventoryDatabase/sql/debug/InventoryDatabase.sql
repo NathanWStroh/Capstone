@@ -164,6 +164,18 @@ GO
 */
 
 GO
+PRINT N'Creating [dbo].[ApplicationVariables]...';
+
+
+GO
+CREATE TABLE [dbo].[ApplicationVariables] (
+    [ParameterKey]   VARCHAR (50)  NOT NULL,
+    [ParameterValue] VARCHAR (500) NOT NULL,
+    UNIQUE NONCLUSTERED ([ParameterKey] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
 PRINT N'Creating [dbo].[Categories]...';
 
 
@@ -947,6 +959,15 @@ AS
                 vsi.Active = 'true' and
                 vsi.VendorID = @VendorID  and
                 OnHand + OnOrder < ReorderThreshold
+GO
+PRINT N'Creating [dbo].[proc_GetAllApplicationVariables]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllApplicationVariables]
+AS
+	SELECT ParameterKey as 'Key', ParameterValue as 'Value'
+	from ApplicationVariables
 GO
 PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrders]...';
 

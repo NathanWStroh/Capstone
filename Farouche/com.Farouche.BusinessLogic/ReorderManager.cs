@@ -34,8 +34,17 @@ namespace com.Farouche.BusinessLogic
             return UpdateOrderList(reorder, true);
         }
 
-        public Boolean AddNewLineItem(Product product, VendorSourceItem vendorSrcItem)
+        public Boolean AddNewLineItem(Product product, VendorSourceItem vendorSrcItem, int caseAmt)
         {
+            if (product == null) throw new ArgumentNullException("Product is null");
+            if (vendorSrcItem == null) throw new ArgumentNullException("VendorSourceItem is null");
+            Reorder addOrder = new Reorder();
+            addOrder.Product = product;
+            addOrder.VendorSourceItem = vendorSrcItem;
+            addOrder.ShouldReorder = true;
+            addOrder.CasesToOrder = caseAmt;
+            addOrder.ReorderTotal = GetReorderRowTotal(addOrder);
+
             throw new NotImplementedException();
         }
         public Boolean AddToOrder(Reorder reorder)
@@ -50,10 +59,6 @@ namespace com.Farouche.BusinessLogic
         
         public Double UpdateReorderAmount(Reorder reorder, int amt)
         {
-            if (amt == null)
-            {
-                amt = 0;
-            }
             reorder.CasesToOrder = amt;
             if (UpdateOrderInCollection(reorder))
             {

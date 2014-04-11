@@ -5,8 +5,6 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Windows.Forms.VisualStyles;
 using com.Farouche.Commons;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace com.Farouche.DataAccess
 {
