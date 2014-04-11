@@ -33,6 +33,9 @@
             this.btnPressed = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tabProducts = new System.Windows.Forms.TabPage();
+            this.btnUpdateOnOrder = new System.Windows.Forms.Button();
+            this.btnUpdateReorderThreshold = new System.Windows.Forms.Button();
+            this.btnUpdateReorderAmount = new System.Windows.Forms.Button();
             this.btnDeactivateProduct = new System.Windows.Forms.Button();
             this.btnActivateProduct = new System.Windows.Forms.Button();
             this.cbProductStatusSearch = new System.Windows.Forms.ComboBox();
@@ -91,6 +94,9 @@
             // 
             // tabProducts
             // 
+            this.tabProducts.Controls.Add(this.btnUpdateOnOrder);
+            this.tabProducts.Controls.Add(this.btnUpdateReorderThreshold);
+            this.tabProducts.Controls.Add(this.btnUpdateReorderAmount);
             this.tabProducts.Controls.Add(this.btnDeactivateProduct);
             this.tabProducts.Controls.Add(this.btnActivateProduct);
             this.tabProducts.Controls.Add(this.cbProductStatusSearch);
@@ -108,6 +114,39 @@
             this.tabProducts.TabIndex = 0;
             this.tabProducts.Text = "Products";
             this.tabProducts.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateOnOrder
+            // 
+            this.btnUpdateOnOrder.Enabled = false;
+            this.btnUpdateOnOrder.Location = new System.Drawing.Point(6, 270);
+            this.btnUpdateOnOrder.Name = "btnUpdateOnOrder";
+            this.btnUpdateOnOrder.Size = new System.Drawing.Size(100, 40);
+            this.btnUpdateOnOrder.TabIndex = 21;
+            this.btnUpdateOnOrder.Text = "Adjust On Order Level";
+            this.btnUpdateOnOrder.UseVisualStyleBackColor = true;
+            this.btnUpdateOnOrder.Click += new System.EventHandler(this.btnUpdateOnOrder_Click);
+            // 
+            // btnUpdateReorderThreshold
+            // 
+            this.btnUpdateReorderThreshold.Enabled = false;
+            this.btnUpdateReorderThreshold.Location = new System.Drawing.Point(6, 178);
+            this.btnUpdateReorderThreshold.Name = "btnUpdateReorderThreshold";
+            this.btnUpdateReorderThreshold.Size = new System.Drawing.Size(100, 40);
+            this.btnUpdateReorderThreshold.TabIndex = 20;
+            this.btnUpdateReorderThreshold.Text = "Adjust Reorder Threshold";
+            this.btnUpdateReorderThreshold.UseVisualStyleBackColor = true;
+            this.btnUpdateReorderThreshold.Click += new System.EventHandler(this.btnUpdateReorderThreshold_Click);
+            // 
+            // btnUpdateReorderAmount
+            // 
+            this.btnUpdateReorderAmount.Enabled = false;
+            this.btnUpdateReorderAmount.Location = new System.Drawing.Point(6, 224);
+            this.btnUpdateReorderAmount.Name = "btnUpdateReorderAmount";
+            this.btnUpdateReorderAmount.Size = new System.Drawing.Size(100, 40);
+            this.btnUpdateReorderAmount.TabIndex = 19;
+            this.btnUpdateReorderAmount.Text = "Adjust Reorder Amount";
+            this.btnUpdateReorderAmount.UseVisualStyleBackColor = true;
+            this.btnUpdateReorderAmount.Click += new System.EventHandler(this.btnUpdateReorderAmount_Click);
             // 
             // btnDeactivateProduct
             // 
@@ -194,7 +233,7 @@
             this.lvProducts.Location = new System.Drawing.Point(112, 54);
             this.lvProducts.MultiSelect = false;
             this.lvProducts.Name = "lvProducts";
-            this.lvProducts.Size = new System.Drawing.Size(643, 253);
+            this.lvProducts.Size = new System.Drawing.Size(643, 256);
             this.lvProducts.TabIndex = 10;
             this.lvProducts.UseCompatibleStateImageBehavior = false;
             this.lvProducts.View = System.Windows.Forms.View.Details;
@@ -270,5 +309,8 @@
         private System.Windows.Forms.Button btnDeactivateProduct;
         private System.Windows.Forms.Button btnActivateProduct;
         private System.Windows.Forms.Button btnShipping;
+        private System.Windows.Forms.Button btnUpdateOnOrder;
+        private System.Windows.Forms.Button btnUpdateReorderThreshold;
+        private System.Windows.Forms.Button btnUpdateReorderAmount;
     }
 }

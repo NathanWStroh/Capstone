@@ -7,42 +7,77 @@ namespace com.Farouche.Commons
 {
     public class VendorOrder : Entity
     {
-        private string _dateOrdered;
-        private int _numberOfShipments;
-        private int _vendorOrderID;
-
-        public int VendorOrderID
+        private int _vendorId;
+		private DateTime _dateOrdered;
+		private int _numberOfShipments;
+		private List<VendorOrderLineItem> _lineItems;
+        private bool _finalized;
+        private double _orderTotal;
+        public VendorOrder(int vendorId)
         {
-            get { return _vendorOrderID; }
-            set { _vendorOrderID = value; }
+            VendorID = vendorId;
+            LineItems = new List<VendorOrderLineItem>();
         }
-
-        public string DateOrdered
+        public VendorOrder(int id, int vendorId)
+        {
+			Id = id;
+            VendorID = vendorId;
+            LineItems = new List<VendorOrderLineItem>();
+        }
+		public int VendorID 
+		{
+			get {return _vendorId;}
+			set {_vendorId = value;}
+		}
+		public int NumberOfShipments
+		{
+			get {return _numberOfShipments;}
+			set {_numberOfShipments = value;}
+		}
+		public List<VendorOrderLineItem> LineItems 
+		{
+			get{return _lineItems;}
+			set{_lineItems = value;}
+		}
+        public bool Finalized
+        {
+            get { return _finalized; }
+            set{_finalized = value;}
+        }
+        public DateTime DateOrdered
         {
             get { return _dateOrdered; }
             set { _dateOrdered = value; }
         }
-        
-
-        public int NumberOfShipments
+        public double OrderTotal
         {
-            get { return _numberOfShipments; }
-            set { _numberOfShipments = value; }
+            get 
+            {
+                _orderTotal = 0.0;
+                foreach (var item in _lineItems)
+                {
+                    _orderTotal += item.LineItemTotal; 
+                }
+                return _orderTotal;
+            }
+            set { _orderTotal = value; }
         }
-
-        public VendorOrder(int vendorId, int productId)
+		public void AddLineItem(VendorOrderLineItem lineItem)
+		{
+			_lineItems.Add(lineItem);
+		}
+        public void RemoveLineItem(VendorOrderLineItem lineItem)
         {
-            this.ProductID = productId;
-            this.VendorID = vendorId;
+            if (_lineItems.Contains(lineItem))
+            {
+                _lineItems.Remove(lineItem);
+            }
+            else
+            {
+                //not sure if we need to throw this. 
+                throw new ApplicationException("line item doesn't exsist");
+            }
         }
-
-        public VendorOrder()
-        {
-            // TODO: Complete member initialization
-        }
-        public int ProductID;
-        public int VendorID;
-
         public override string ToString()
         {
             throw new NotImplementedException();

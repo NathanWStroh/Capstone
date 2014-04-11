@@ -147,6 +147,13 @@ namespace com.Farouche
             {
                 MessageBox.Show("Please select an item from the list", "No Item Selected");
             }
-        }//End of BtnUnpick_Click(..)
+        }
+
+        private void FrmViewOrderDetails_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+      //End of BtnUnpick_Click(..)
     }
 }

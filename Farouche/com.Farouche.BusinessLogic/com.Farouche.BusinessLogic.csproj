@@ -36,15 +36,21 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationVariables.cs" />
     <Compile Include="Authenticator.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="ReceivingManager.cs" />
     <Compile Include="ReportList.cs" />
+    <Compile Include="ReorderManager.cs" />
+    <Compile Include="ReportManager.cs" />
     <Compile Include="ShippingOrderLineItemManager.cs" />
     <Compile Include="ShippingOrderManager.cs" />
     <Compile Include="ShippingTermManager.cs" />
     <Compile Include="ShippingVendorManager.cs" />
+    <Compile Include="StateManager.cs" />
+    <Compile Include="Validation.cs" />
     <Compile Include="VendorManager.cs" />
+    <Compile Include="VendorOrdersManager.cs" />
     <Compile Include="VendorSourceItemManager.cs" />
   </ItemGroup>
   <ItemGroup>

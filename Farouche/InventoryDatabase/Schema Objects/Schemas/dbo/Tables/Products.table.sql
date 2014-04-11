@@ -8,6 +8,7 @@
     [ShortDesc]          VARCHAR (50)  NOT NULL,
     [ReorderThreshold]   INT           NULL,
     [ReorderAmount]      INT           NULL,
+	[OnOrder]            INT           DEFAULT ((0)) NOT NULL,
     [ShippingDimensions] VARCHAR (50)  NULL,
     [ShippingWeight]     FLOAT         NULL,
     [Active]             BIT           DEFAULT ((1)) NOT NULL

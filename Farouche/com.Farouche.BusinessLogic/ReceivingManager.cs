@@ -11,14 +11,14 @@ namespace com.Farouche.BusinessLogic
 
         public List<VendorOrder> GetAllOpenOrders()
         {
-            var vendorOrders = VendorOrderDAL.GetAll();
+            var vendorOrders = VendorOrderDAL.GetAll(_connection);
             return vendorOrders ?? new List<VendorOrder>();
         }
 
         public List<VendorOrder> GetAllOpenOrdersByVendor(Vendor vendor)
         {
             if (vendor == null) throw new ApplicationException("No such Vendor");
-            var vendorOrders = VendorOrderDAL.GetAllByVendor(vendor);
+            var vendorOrders = VendorOrderDAL.GetAllOpenOrdersByVendor(vendor.Id, _connection);
             return vendorOrders ?? new List<VendorOrder>();
         }
 

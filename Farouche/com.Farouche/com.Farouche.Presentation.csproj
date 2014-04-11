@@ -97,6 +97,18 @@
     <Compile Include="frmReceivingNotes.Designer.cs">
       <DependentUpon>frmReceivingNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReorder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReorder.Designer.cs">
+      <DependentUpon>frmReorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReorderChangeLevels.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReorderChangeLevels.Designer.cs">
+      <DependentUpon>frmReorderChangeLevels.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmShipping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +144,24 @@
     </Compile>
     <Compile Include="frmStartUp.Designer.cs">
       <DependentUpon>frmStartUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderAmount.designer.cs">
+      <DependentUpon>FrmUpdateReorderAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderOnOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderOnOrder.designer.cs">
+      <DependentUpon>FrmUpdateReorderOnOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderThreshold.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderThreshold.designer.cs">
+      <DependentUpon>FrmUpdateReorderThreshold.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmUpdateShippingTerm.cs">
       <SubType>Form</SubType>
@@ -213,6 +243,12 @@
     <EmbeddedResource Include="frmReceivingNotes.resx">
       <DependentUpon>frmReceivingNotes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReorder.resx">
+      <DependentUpon>frmReorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReorderChangeLevels.resx">
+      <DependentUpon>frmReorderChangeLevels.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmShipping.resx">
       <DependentUpon>FrmShipping.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +266,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmStartUp.resx">
       <DependentUpon>frmStartUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderAmount.resx">
+      <DependentUpon>FrmUpdateReorderAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderOnOrder.resx">
+      <DependentUpon>FrmUpdateReorderOnOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderThreshold.resx">
+      <DependentUpon>FrmUpdateReorderThreshold.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateShippingTerm.resx">
       <DependentUpon>FrmUpdateShippingTerm.cs</DependentUpon>
@@ -296,7 +341,9 @@
       <Name>com.Farouche.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

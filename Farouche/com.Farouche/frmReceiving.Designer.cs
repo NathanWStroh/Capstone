@@ -114,6 +114,7 @@
             this.btnAddLineItemtoCurrentListView.TabIndex = 7;
             this.btnAddLineItemtoCurrentListView.Text = "Add Line Item";
             this.btnAddLineItemtoCurrentListView.UseVisualStyleBackColor = true;
+            this.btnAddLineItemtoCurrentListView.Click += new System.EventHandler(this.btnAddLineItemtoCurrentListView_Click);
             // 
             // btnAddNote
             // 
@@ -123,6 +124,7 @@
             this.btnAddNote.TabIndex = 8;
             this.btnAddNote.Text = "Add Note";
             this.btnAddNote.UseVisualStyleBackColor = true;
+            this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
             // 
             // btnUpdateLineItem
             // 
@@ -132,6 +134,7 @@
             this.btnUpdateLineItem.TabIndex = 9;
             this.btnUpdateLineItem.Text = "Update Line Item";
             this.btnUpdateLineItem.UseVisualStyleBackColor = true;
+            this.btnUpdateLineItem.Click += new System.EventHandler(this.btnUpdateLineItem_Click);
             // 
             // lblDateReceived
             // 
@@ -188,8 +191,9 @@
             this.btnUpdateOrder.Name = "btnUpdateOrder";
             this.btnUpdateOrder.Size = new System.Drawing.Size(161, 23);
             this.btnUpdateOrder.TabIndex = 16;
-            this.btnUpdateOrder.Text = "Update Order";
+            this.btnUpdateOrder.Text = "Update Vendor Order";
             this.btnUpdateOrder.UseVisualStyleBackColor = true;
+            this.btnUpdateOrder.Click += new System.EventHandler(this.btnUpdateOrder_Click);
             // 
             // btnCancel
             // 
@@ -199,6 +203,7 @@
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lvVendorOrderLineItems
             // 

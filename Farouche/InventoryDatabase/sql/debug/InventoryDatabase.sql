@@ -10,12 +10,17 @@ GO
 :setvar DatabaseName "InventoryDatabase"
 :setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
+<<<<<<< HEAD
 
 GO
 USE [master]
+=======
+>>>>>>> origin/master
 
 GO
 :on error exit
+GO
+USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -146,7 +151,6 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
-
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -278,6 +282,7 @@ CREATE TABLE [dbo].[Products] (
     [ShortDesc]          VARCHAR (50)  NOT NULL,
     [ReorderThreshold]   INT           NULL,
     [ReorderAmount]      INT           NULL,
+    [OnOrder]            INT           NOT NULL,
     [ShippingDimensions] VARCHAR (50)  NULL,
     [ShippingWeight]     FLOAT         NULL,
     [Active]             BIT           NOT NULL
@@ -400,6 +405,21 @@ CREATE TABLE [dbo].[ShippingVendors] (
     [Contact]          VARCHAR (50) NOT NULL,
     [ContactEmail]     VARCHAR (50) NULL,
     CONSTRAINT [PK_ShippingVendors] PRIMARY KEY CLUSTERED ([ShippingVendorID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
+) ON [PRIMARY];
+
+
+GO
+PRINT N'Creating [dbo].[States]...';
+
+
+GO
+CREATE TABLE [dbo].[States] (
+    [StateID]      INT          IDENTITY (1, 1) NOT NULL,
+    [StateCode]    CHAR (2)     NOT NULL,
+    [StateName]    VARCHAR (20) NOT NULL,
+    [FirstZipCode] INT          NOT NULL,
+    [LastZipCode]  INT          NOT NULL,
+    CONSTRAINT [PK_States] PRIMARY KEY CLUSTERED ([StateCode] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
 ) ON [PRIMARY];
 
 
@@ -628,6 +648,23 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 GO
 ALTER TABLE [dbo].[Products]
     ADD DEFAULT ((0)) FOR [OnHand];
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating On column: OnOrder...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+ALTER TABLE [dbo].[Products]
+    ADD DEFAULT ((0)) FOR [OnOrder];
 
 
 GO
@@ -901,6 +938,48 @@ ALTER TABLE [dbo].[VendorSourceItems] WITH NOCHECK
 
 
 GO
+PRINT N'Creating [dbo].[proc_GenerateReorderReports]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GenerateReorderReports]
+	@VendorID int
+AS
+	select p.ProductID, ReorderAmount, ReorderThreshold, vsi.VendorID, ItemsPerCase, UnitCost, UnitPrice, MinQtyToOrder
+    from Products p
+            Join VendorSourceItems vsi on 
+                vsi.ProductID = p.ProductID
+            where p.active = 'true' and
+                vsi.Active = 'true' and
+                vsi.VendorID = @VendorID  and
+                OnHand + OnOrder < ReorderThreshold
+GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrders]
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrdersByVendor]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllOpenVendorOrdersByVendor]
+	@VendorId int
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized]
+	FROM VendorOrders
+	Where [Finalized] = '0' 
+	AND [Active] = '1'
+	AND [VendorID] = @VendorId
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetAllShippingOrderLineItems]...';
 
 
@@ -1046,6 +1125,14 @@ AS
 	SELECT *
 	FROM [dbo].[ShippingVendors]
 GO
+PRINT N'Creating [dbo].[proc_GetAllStates]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllStates]
+AS
+	select * from [dbo].States
+GO
 PRINT N'Creating [dbo].[proc_GetAllVendorOrderLineItems]...';
 
 
@@ -1090,6 +1177,16 @@ AS
 	SELECT so.ShippingOrderID, so.ShippingTermID, sv.ShippingVendorID, st.Description, sv.Name, st.Description, si.ProductID, pr.ShortDesc, si.Quantity, so.ShipDate, so.ShipToName, so.ShipToAddress, so.ShipToCity, so.ShipToState, so.ShipToZip
 	FROM [dbo].[ShippingTermsLookup] st, [dbo].[Products] pr, [dbo].[ShippingVendors] sv, [dbo].[ShippingOrders] so, [dbo].[ShippingOrderLineItems] si
 	WHERE so.ShippingOrderID = @ShippingOrderId AND so.ShippingTermID = st.ShippingTermID AND st.ShippingVendorID = sv.ShippingVendorID AND so.ShippingOrderID = si.ShippingOrderID AND si.ProductID = pr.ProductID
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	From VendorOrders
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
@@ -1234,6 +1331,32 @@ AS
 	FROM [dbo].[ShippingVendors]
 	WHERE [ShippingVendorID] = @shippingVendorID
 GO
+PRINT N'Creating [dbo].[proc_getVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_getVendorOrder]
+	@VendorOrderId int 
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorOrderID] = @VendorOrderId
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetVendorOrderByVendorAndDate]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	FROM VendorOrders
+	WHERE [VendorID] = @VendorID
+	and [DateOrdered] = @DateOrdered
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetVendorOrderLineItem]...';
 
 
@@ -1347,6 +1470,57 @@ AS
            (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged)
 RETURN @@IDENTITY
 GO
+PRINT N'Creating [dbo].[proc_InsertVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]
+	@VendorID int, 
+	@DateOrdered date
+AS
+	Insert into [VendorOrders] (VendorID, DateOrdered)
+	Values (@VendorID, @DateOrdered)
+RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductOnOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductOnOrder]
+	(@ProductID		int,
+	@Amount			int)
+AS
+	UPDATE [dbo].[Products]
+	SET [OnOrder] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductReorderAmount]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductReorderAmount]
+	(@ProductID		int,
+	@Amount			int)
+AS
+	UPDATE [dbo].[Products]
+	SET [ReorderAmount] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductThreshold]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductThreshold]
+	(@ProductID		int,
+	@Amount			int)
+AS
+	UPDATE [dbo].[Products]
+	SET [ReorderThreshold] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_UpdateShippingOrder]...';
 
 
@@ -1390,16 +1564,23 @@ AS
 		[ShipToZip]		=	@shipToZip
 	WHERE
 		[ShippingOrderID]= 	@orig_ShippingOrderID AND
-		[PurchaseOrderID]= 	@orig_PurchaseOrderID AND
-		[UserID]		=	@orig_UserID AND
+		[PurchaseOrderID]= 	@orig_PurchaseOrderID AND		
+		((@orig_UserID IS NULL AND [UserID] IS NULL)
+			OR ([UserID]		=	@orig_UserID)) AND
 		[Picked]		=	@orig_Picked AND
-		[ShipDate]		=	@orig_ShipDate AND
-		[ShippingTermID]=   @orig_ShippingTermID AND
-		[ShipToName] 	=	@orig_ShipToName AND
-		[ShipToAddress] =	@orig_ShipToAddress AND
-		[ShipToCity]	=	@orig_ShipToCity AND
-		[ShipToState] 	= 	@orig_ShipToState AND
-		[ShipToZip] 	=	@orig_ShipToZip
+		((@orig_ShipDate IS NULL AND [ShipDate] IS NULL)
+			OR ([ShipDate]		=	@orig_ShipDate)) AND		
+		[ShippingTermID]=   @orig_ShippingTermID AND		
+		((@orig_ShipToName IS NULL and [ShipToName] IS NULL)
+			OR ([ShipToName] 	=	@orig_ShipToName )) AND		
+		((@orig_ShipToAddress IS NULL AND [ShipToAddress] IS NULL)
+			OR ([ShipToAddress] =	@orig_ShipToAddress)) AND		
+		((@orig_ShipToCity IS NULL AND [ShipToCity] IS NULL)
+			OR ([ShipToCity]	=	@orig_ShipToCity)) AND		
+		((@orig_ShipToState IS NULL  AND [ShipToState] IS NULL)
+			OR ([ShipToState] 	= 	@orig_ShipToState)) AND		
+		((@orig_ShipToZip IS NULL AND [ShipToZip] IS NULL)
+			OR ([ShipToZip] 	=	@orig_ShipToZip))
 	RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateShippingOrderLineItem]...';
@@ -1617,6 +1798,30 @@ AS
 		[ContactEmail] = @orig_ContactEmail
 	RETURN @@ROWCOUNT
 GO
+PRINT N'Creating [dbo].[proc_UpdateVendorOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateVendorOrder]
+	(@VendorOrderID int,
+	 @VendorID int,
+	 @DateOrdered datetime,
+	 @AmountOfShipments int,
+	 @Finalized bit,
+	 @orig_AmountOfShipments int,
+	 @orig_Finalized bit)
+AS
+	UPDATE [dbo].[VendorOrders]
+	SET [AmountOfShipments] = @AmountOfShipments,
+	    [Finalized] = @Finalized
+	WHERE [VendorOrderID] = @VendorOrderID
+	  and [VendorID] = @VendorID
+	  and [DateOrdered] = @DateOrdered
+	  and [AmountOfShipments] = @orig_AmountOfShipments
+	  and [Finalized] = @orig_Finalized
+	
+RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_UpdateVendorOrderLineItems]...';
 
 
@@ -1832,8 +2037,6 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
-
-/*Object:  StoredProcedure [dbo].[sp_DeleteProduct]*/
 CREATE PROCEDURE [dbo].[sp_DeleteProduct]
 	(@ProductID				Int,
 	@Available				Int,
@@ -1844,6 +2047,7 @@ CREATE PROCEDURE [dbo].[sp_DeleteProduct]
 	@ShortDesc				VarChar(50),
 	@ReorderThreshold		int,
 	@ReorderAmount			int,
+	@OnOrder				int,
 	@ShippingDimensions		varchar(50),
 	@ShippingWeight			float,
 	@Active					Bit)
@@ -1858,6 +2062,7 @@ AS
 	AND [ShortDesc] = @ShortDesc
 	AND [ReorderThreshold] = @ReorderThreshold
 	AND [ReorderAmount] = @ReorderAmount
+	AND [OnOrder] = @OnOrder
 	AND [ShippingDimensions] = @ShippingDimensions
 	AND [ShippingWeight] = @ShippingWeight
 	AND [Active] = @Active
@@ -2367,19 +2572,20 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 GO
 CREATE PROCEDURE [dbo].[sp_InsertIntoProducts]
 	(@Available			Int,
-	@OnHand			Int,
+	@OnHand				Int,
 	@Description		VarChar(250),
 	@Location			varchar(250),
 	@UnitPrice			Money,
 	@ShortDesc			VarChar(50),
 	@ReorderThreshold	int,
 	@ReorderAmount		int,
+	@OnOrder			int,
 	@ShippingDimensions varchar(50),
 	@ShippingWeight		float,
 	@Active				Bit)
 AS
-	INSERT IntO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[ShippingDimensions],[ShippingWeight],[Active])
-	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @ShippingDimensions, @ShippingWeight, @Active)
+	INSERT INTO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[OnOrder],[ShippingDimensions],[ShippingWeight],[Active])
+	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @OnOrder, @ShippingDimensions, @ShippingWeight, @Active)
 	RETURN @@ROWCOUNT
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
@@ -2660,47 +2866,69 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
 GO
-
-/*Object:  StoredProcedure [dbo].[sp_UpdateProducts]*/
 CREATE PROCEDURE [dbo].[sp_UpdateProducts]
-	(@ProductID				Int,
-	@Available				Int,
-	@OriginalAvailable		Int,
-	@OnHand				Int,
-	@OriginalOnHand		Int,
-	@Description			VarChar(250),
-	@OriginalDescription	VarChar(250),
-	@Location				varchar(250),
-	@OriginalLocation		varchar(250),
-	@UnitPrice				Money,
-	@OriginalUnitPrice		Money,
-	@ShortDesc				VarChar(50),
-	@OriginalShortDesc		VarChar(50),
-	@ReorderThreshold		int,
-	@OriginalReorderThreshold int,
-	@ReorderAmount			int,
-	@OriginalReorderAmount	int,
-	@ShippingDimensions		varchar(50),
-	@OriginalShippingDimensions varchar(50),
-	@ShippingWeight			float,
-	@OriginalShippingWeight	float,
-	@Active					Bit,
-	@OriginalActive			Bit)
+	(@ProductID						Int,
+	@Available						Int,
+	@OnHand							Int,
+	@Description					VarChar(250),
+	@Location						varchar(250),
+	@UnitPrice						Money,
+	@ShortDesc						VarChar(50),
+	@ReorderThreshold				int,
+	@ReorderAmount					int,
+	@OnOrder						int,
+	@ShippingDimensions				varchar(50),
+	@ShippingWeight					float,
+	@Active							Bit,
+	@OriginalAvailable				Int,
+	@OriginalOnHand					Int,
+	@OriginalDescription			VarChar(250),
+	@OriginalLocation				varchar(250),
+	@OriginalUnitPrice				Money,
+	@OriginalShortDesc				VarChar(50),
+	@OriginalReorderThreshold 		int,
+	@OriginalReorderAmount			int,
+	@OriginalOnOrder				int,
+	@OriginalShippingDimensions 	varchar(50),
+	@OriginalShippingWeight			float,
+	@OriginalActive					Bit)
 AS
 	UPDATE [dbo].[Products]
-	SET [Available] = @Available, [OnHand] = @OnHand, [Description] = @Description, [Location] = @Location, [UnitPrice] = @UnitPrice, [ShortDesc] = @ShortDesc, [ReorderThreshold] = @ReorderThreshold, [ReorderAmount] = @ReorderAmount, [ShippingDimensions] = @ShippingDimensions, [ShippingWeight] = @ShippingWeight, [Active] = @Active
+	SET [Available] = @Available, 
+		[OnHand] = @OnHand, 
+		[Description] = @Description, 
+		[Location] = @Location, 
+		[UnitPrice] = @UnitPrice, 
+		[ShortDesc] = @ShortDesc, 
+		[ReorderThreshold] = @ReorderThreshold, 
+		[ReorderAmount] = @ReorderAmount, 
+		[ShippingDimensions] = @ShippingDimensions, 
+		[ShippingWeight] = @ShippingWeight, 
+		[Active] = @Active, 
+		[OnOrder] = @OnOrder
 	WHERE [ProductID] = @ProductID
-	AND [Available] = @OriginalAvailable
-	AND [OnHand] = @OriginalOnHand
-	AND [Description] = @OriginalDescription
-	AND [Location] = @OriginalLocation
-	AND [UnitPrice] = @OriginalUnitPrice
-	AND [ShortDesc] = @OriginalShortDesc
-	AND [ReorderThreshold] = @OriginalReorderThreshold
-	AND [ReorderAmount] = @OriginalReorderAmount
-	AND [ShippingDimensions] = @OriginalShippingDimensions
-	AND	[ShippingWeight] = @OriginalShippingWeight
-	AND [Active] = @OriginalActive
+		AND [Available] = @OriginalAvailable
+		AND [OnHand] = @OriginalOnHand
+		AND [Description] = @OriginalDescription
+		AND (([Location] = @OriginalLocation)
+		OR (@OriginalLocation IS NULL
+		AND @Location IS NULL))
+		AND [UnitPrice] = @OriginalUnitPrice
+		AND [ShortDesc] = @OriginalShortDesc
+		AND (([ReorderThreshold] = @OriginalReorderThreshold)
+		OR (@OriginalReorderThreshold IS NULL
+		AND @ReorderThreshold IS NULL))
+		AND (([ReorderAmount] = @OriginalReorderAmount)
+		OR (@OriginalReorderAmount IS NULL
+		AND @ReorderAmount IS NULL))
+		AND [OnOrder] = @OriginalOnOrder
+		AND (([ShippingDimensions] = @OriginalShippingDimensions)
+		OR (@OriginalShippingDimensions IS NULL
+		AND @ShippingDimensions IS NULL))
+		AND (([ShippingWeight] = @OriginalShippingWeight)
+		OR (@OriginalShippingWeight IS NULL
+		AND @ShippingWeight IS NULL))
+		AND [Active] = @OriginalActive
 	RETURN @@ROWCOUNT
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
@@ -3028,7 +3256,59 @@ INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity])
 INSERT [dbo].[ShippingOrderLineItems] ([ShippingOrderID],[ProductID],[Quantity],[Picked]) VALUES (5,5,5,'1')
 GO
 
-
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'AK', N'Alaska', 99500, 99999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'AL', N'Alabama', 35000, 36999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'AR', N'Arkansas', 71600, 72999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'AZ', N'Arizona', 85000, 86599)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'CA', N'California', 90000, 96699)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'CO', N'Colorado', 80000, 81699)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'CT', N'Connecticut', 6000, 6999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'DC', N'District of Columbia', 20000, 20599)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'DE', N'Delaware', 19700, 19999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'FL', N'Florida', 32000, 34999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'GA', N'Georgia', 30000, 31999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'HI', N'Hawaii', 96700, 96899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'IA', N'Iowa', 50000, 52899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'ID', N'Idaho', 83200, 83899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'IL', N'Illinois', 60000, 62999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'IN', N'Indiana', 46000, 47999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'KS', N'Kansas', 66000, 67999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'KY', N'Kentucky', 40000, 42799)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'LA', N'Lousiana', 70000, 71499)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'MA', N'Massachusetts', 1000, 2799)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'MD', N'Maryland', 20600, 21999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'ME', N'Maine', 3900, 4999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'MI', N'Michigan', 48000, 49999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'MN', N'Minnesota', 55000, 56799)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'MO', N'Missouri', 63000, 65899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'MS', N'Mississippi', 38600, 39799)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'MT', N'Montana', 59000, 59999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'NC', N'North Carolina', 27000, 28999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'ND', N'North Dakota', 58000, 58899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'NE', N'Nebraska', 68000, 69399)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'NH', N'New Hampshire', 3000, 3899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'NJ', N'New Jersey', 7000, 8999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'NM', N'New Mexico', 87000, 88499)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'NV', N'Nevada', 89000, 89899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'NY', N'New York', 9000, 14999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'OH', N'Ohio', 43000, 45899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'OK', N'Oklahoma', 73000, 74999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'OR', N'Oregon', 97000, 97999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'PA', N'Pennsylvania', 15000, 19699)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'RI', N'Rhode Island', 2800, 2999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'SC', N'South Carolina', 29000, 29999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'SD', N'South Dakota', 57000, 57799)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'TN', N'Tennessee', 37000, 38599)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'TX', N'Texas', 75000, 79999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'UT', N'Utah', 84000, 84799)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'VA', N'Virginia', 22000, 24699)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'VI', N'Virgin Islands', 801, 850)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'VT', N'Vermont', 5000, 5999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WA', N'Washington', 98000, 99499)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WI', N'Wisconsin', 53000, 54999)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WV', N'West Virginia', 24700, 26899)
+INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WY', N'Wyoming', 82000, 83199)
+GO
 
 GO
 PRINT N'Checking existing data against newly created constraints';

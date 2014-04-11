@@ -32,8 +32,8 @@
             this.lblVendorOrderID = new System.Windows.Forms.Label();
             this.txtVendorOrderID = new System.Windows.Forms.TextBox();
             this.btnUpdatedNote = new System.Windows.Forms.Button();
-            this.lblSelectedItemRow = new System.Windows.Forms.Label();
-            this.txtSelectedLineItem = new System.Windows.Forms.TextBox();
+            this.lblProductID = new System.Windows.Forms.Label();
+            this.txtProductID = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtNotes
@@ -69,31 +69,32 @@
             this.btnUpdatedNote.TabIndex = 3;
             this.btnUpdatedNote.Text = "Update Notes";
             this.btnUpdatedNote.UseVisualStyleBackColor = true;
+            this.btnUpdatedNote.Click += new System.EventHandler(this.btnUpdatedNote_Click);
             // 
-            // lblSelectedItemRow
+            // lblProductID
             // 
-            this.lblSelectedItemRow.AutoSize = true;
-            this.lblSelectedItemRow.Location = new System.Drawing.Point(104, 46);
-            this.lblSelectedItemRow.Name = "lblSelectedItemRow";
-            this.lblSelectedItemRow.Size = new System.Drawing.Size(77, 13);
-            this.lblSelectedItemRow.TabIndex = 4;
-            this.lblSelectedItemRow.Text = "Selected Row:";
+            this.lblProductID.AutoSize = true;
+            this.lblProductID.Location = new System.Drawing.Point(104, 46);
+            this.lblProductID.Name = "lblProductID";
+            this.lblProductID.Size = new System.Drawing.Size(58, 13);
+            this.lblProductID.TabIndex = 4;
+            this.lblProductID.Text = "ProductID:";
             // 
-            // txtSelectedLineItem
+            // txtProductID
             // 
-            this.txtSelectedLineItem.Location = new System.Drawing.Point(200, 43);
-            this.txtSelectedLineItem.Name = "txtSelectedLineItem";
-            this.txtSelectedLineItem.ReadOnly = true;
-            this.txtSelectedLineItem.Size = new System.Drawing.Size(134, 20);
-            this.txtSelectedLineItem.TabIndex = 5;
+            this.txtProductID.Location = new System.Drawing.Point(200, 43);
+            this.txtProductID.Name = "txtProductID";
+            this.txtProductID.ReadOnly = true;
+            this.txtProductID.Size = new System.Drawing.Size(134, 20);
+            this.txtProductID.TabIndex = 5;
             // 
             // frmReceivingNotes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 350);
-            this.Controls.Add(this.txtSelectedLineItem);
-            this.Controls.Add(this.lblSelectedItemRow);
+            this.Controls.Add(this.txtProductID);
+            this.Controls.Add(this.lblProductID);
             this.Controls.Add(this.btnUpdatedNote);
             this.Controls.Add(this.txtVendorOrderID);
             this.Controls.Add(this.lblVendorOrderID);
@@ -111,7 +112,7 @@
         private System.Windows.Forms.Label lblVendorOrderID;
         private System.Windows.Forms.TextBox txtVendorOrderID;
         private System.Windows.Forms.Button btnUpdatedNote;
-        private System.Windows.Forms.Label lblSelectedItemRow;
-        private System.Windows.Forms.TextBox txtSelectedLineItem;
+        private System.Windows.Forms.Label lblProductID;
+        private System.Windows.Forms.TextBox txtProductID;
     }
 }

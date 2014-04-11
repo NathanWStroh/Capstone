@@ -22,7 +22,7 @@ namespace com.Farouche.DataAccess
                     CommandType = CommandType.StoredProcedure
                 };
                 mySqlCommand.Parameters.AddWithValue("@VendorOrderID", vendorOrder.Id);
-                mySqlCommand.Parameters.AddWithValue("@ProductID", vendorOrder.ProductID);
+                mySqlCommand.Parameters.AddWithValue("@ProductID", product.Id);
 
                 myConnection.Open();
 
