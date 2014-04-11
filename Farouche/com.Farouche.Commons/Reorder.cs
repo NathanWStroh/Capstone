@@ -25,7 +25,7 @@ namespace com.Farouche.Commons
         private Product _product;
         private VendorSourceItem _vendorSourceItem;
         private Boolean _shouldReorder;
-        private int _reorderTotal;
+        private Double _reorderTotal;
         private int _casesToOrder;
 
         public int CasesToOrder
@@ -36,8 +36,8 @@ namespace com.Farouche.Commons
 
         public Product Product
         {
-            get { return Product; }
-            set { Product = value; }
+            get { return _product; }
+            set { _product = value; }
         }
         public Boolean ShouldReorder
         {
@@ -45,15 +45,15 @@ namespace com.Farouche.Commons
             set { _shouldReorder = value;  }
         }
 
-        public int ReorderTotal
+        public Double ReorderTotal
         {
             get { return _reorderTotal; }
             set { _reorderTotal = value; }
         }
         public VendorSourceItem VendorSourceItem 
         {
-            get { return VendorSourceItem; }
-            set {VendorSourceItem = value; }
+            get { return _vendorSourceItem; }
+            set { _vendorSourceItem = value; }
         }
         
     }
