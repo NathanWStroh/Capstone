@@ -659,7 +659,7 @@
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetCLSPackDetails.proc.sql">
       <SubType>Code</SubType>
-    </Build>    
+    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetAllStates.proc.sql">
       <SubType>Code</SubType>
     </Build>
@@ -670,6 +670,12 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateProductThreshold.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetAllApplicationVariables.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\ApplicationVariables.table.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>
