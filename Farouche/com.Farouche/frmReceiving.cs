@@ -32,9 +32,11 @@ namespace com.Farouche
         {
             InitializeComponent();
             this.vendorOrder = vendorOrder;
+            
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
             txtVendorName.Text = vendorOrder.Name;
             txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
+
             //Do cast
             // txtDateOrdered.Text = vendorOrder.DateOrdered;
             //VendorOrderLineItem vendorOrderLineItem1 = new VendorOrderLineItem(vendorOrder.VendorOrderID, vendorOrder.ProductID);
@@ -42,6 +44,7 @@ namespace com.Farouche
             //vendorOrderLineItem1.ProductID = vendorOrder.ProductID;
             //vendorOrderLineItem1.Name = "mouse";
             //vendorOrderLineItem1.QtyOrdered = 25;
+
 
 
             vendorOrderLineItemList = new List<VendorOrderLineItem>();
@@ -59,7 +62,8 @@ namespace com.Farouche
         private void populateVendorOrderLineItems(ListView lv, VendorOrder vendorOrder)
         {
             receivingManager = new ReceivingManager();
-            //vendorOrderLineItemList = receivingManager.GetAllLineItemsByVendorOrder(vendorOrder);
+            
+            vendorOrderLineItemList = receivingManager.GetAllLineItemsByVendorOrder(vendorOrder);
             lv.Items.Clear();
             lv.Columns.Clear();
             foreach (var vendorOrderLineItem in vendorOrderLineItemList)
@@ -99,6 +103,10 @@ namespace com.Farouche
             lvVendorOrderLineItems.FullRowSelect = true;
             var selectedRow = lvVendorOrderLineItems.SelectedItems;
             int productID = Int32.Parse(selectedRow[0].Text);
+            var id = Int32.Parse(txtVendorOrderID.Text);
+            
+            _frmReceivingNotes = new frmReceivingNotes(vendorOrder.Id, productID);
+
             //vendorOrder.VendorOrderID = Int32.Parse(txtVendorOrderID.Text);
             
            // _frmReceivingNotes = new frmReceivingNotes(vendorOrder.VendorOrderID, productID);
@@ -109,6 +117,7 @@ namespace com.Farouche
 
         private void btnUpdateLineItem_Click(object sender, EventArgs e)
         {
+
 
         }
 

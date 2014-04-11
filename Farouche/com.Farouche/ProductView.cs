@@ -33,7 +33,6 @@ namespace com.Farouche.Presentation
     {
         private VendorManager _vendorManager;
         private ProductManager _productManager;
-        private Validation _validation;
         private VendorSourceItemManager _vendorSourceManager;
         private Product _currentProduct;
         private readonly AccessToken _myAccessToken;
@@ -45,7 +44,6 @@ namespace com.Farouche.Presentation
             _productManager = new ProductManager();
             _vendorManager = new VendorManager();
             _vendorSourceManager = new VendorSourceItemManager();
-            _validation = new Validation();
             this.Text = "Add Product";
             btMorph.Text = "Add Product";
             PopulateLocationCombo();
@@ -67,7 +65,6 @@ namespace com.Farouche.Presentation
             _productManager = new ProductManager();
             _vendorManager = new VendorManager();
             _vendorSourceManager = new VendorSourceItemManager();
-            _validation = new Validation();
             _currentProduct = ProductInfo;
             //Assigning the current product values to the appropriate controls.
             this.Text = "Update Product";
@@ -129,7 +126,7 @@ namespace com.Farouche.Presentation
             
             if (btMorph.Text == "Add Product")
             {
-                if (_validation.IsBlank(tbItemName.Text) || _validation.IsNullOrEmpty(tbItemName.Text))
+                if (Validation.IsBlank(tbItemName.Text) || Validation.IsNullOrEmpty(tbItemName.Text))
                 {
                     validProduct = false;
                     errorMessage += "\nEnter a short description.";
@@ -139,7 +136,7 @@ namespace com.Farouche.Presentation
                     validProduct = false;
                     errorMessage += "\nThe name must be 50 characters or less.";
                 }
-                if(_validation.IsBlank(tbDescription.Text) || _validation.IsNullOrEmpty(tbDescription.Text))
+                if (Validation.IsBlank(tbDescription.Text) || Validation.IsNullOrEmpty(tbDescription.Text))
                 {
                     validProduct = false;
                     errorMessage += "\nEnter a description.";
@@ -195,7 +192,7 @@ namespace com.Farouche.Presentation
             }
             else if (btMorph.Text == "Update Product")
             {
-                if (_validation.IsBlank(tbItemName.Text) || _validation.IsNullOrEmpty(tbItemName.Text))
+                if (Validation.IsBlank(tbItemName.Text) || Validation.IsNullOrEmpty(tbItemName.Text))
                 {
                     validProduct = false;
                     errorMessage += "\nEnter a short description.";
@@ -205,7 +202,7 @@ namespace com.Farouche.Presentation
                     validProduct = false;
                     errorMessage += "\nThe name must be 50 characters or less.";
                 }
-                if (_validation.IsBlank(tbDescription.Text) || _validation.IsNullOrEmpty(tbDescription.Text))
+                if (Validation.IsBlank(tbDescription.Text) || Validation.IsNullOrEmpty(tbDescription.Text))
                 {
                     validProduct = false;
                     errorMessage += "\nEnter a description.";

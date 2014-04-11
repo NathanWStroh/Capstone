@@ -25,7 +25,7 @@ namespace com.Farouche.BusinessLogic
         private readonly SqlConnection _connection = GetInventoryDbConnection();
         //Private member used to store the list of orders.
         private List<ShippingOrder> _orders = null;
-        //Privarte member used to store a single order.
+        //Private member used to store a single order.
         private ShippingOrder _order = null;
 
         //Used to retrieve the list of orders.

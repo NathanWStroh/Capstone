@@ -219,7 +219,7 @@ namespace com.Farouche.DataAccess
                 };
                 
                 mySqlCommand.Parameters.AddWithValue("@shippingOrderID", shippingOrder.ID);
-                mySqlCommand.Parameters.AddWithValue("@shipDate", shippingOrder.ShipDate);
+                mySqlCommand.Parameters.AddWithValue("@shipDate", DateTime.Now);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
