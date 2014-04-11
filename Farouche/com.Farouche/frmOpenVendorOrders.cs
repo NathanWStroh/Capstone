@@ -25,7 +25,7 @@ namespace com.Farouche
         public frmOpenVendorOrders()
         {
             InitializeComponent();
-            createVendorOrder();
+            
 
         }
 
@@ -35,7 +35,7 @@ namespace com.Farouche
             
             _receivingManager = new ReceivingManager();
 
-
+            createVendorOrder();
             fillVendorDropDown();
             fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
 
@@ -56,10 +56,10 @@ namespace com.Farouche
 
             foreach (VendorOrder v in vendorList)
             {
-              vendorListString = vendorListString + (v.VendorID.ToString() + "\r\n");
+                cbGetVendorsById.Items.Add(v.VendorID.ToString());
             }
 
-            cbGetVendorsById.Text = vendorListString;
+            
             
         }
 
@@ -77,7 +77,7 @@ namespace com.Farouche
                 var item = new ListViewItem();
 
 
-               // item.Text = vendorOrder.VendorOrderID.ToString();
+                item.Text = vendorOrder.Id.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
                 item.SubItems.Add(vendorOrder.Name);
                 item.SubItems.Add(vendorOrder.DateOrdered.ToString());
@@ -104,19 +104,20 @@ namespace com.Farouche
         {
             lvOpenVendorOrders.FullRowSelect = true;
             var selectedRow = lvOpenVendorOrders.SelectedItems;
+            if (selectedRow.Count != 0)
+            {
+                vendorOrder = new VendorOrder(Int32.Parse(selectedRow[0].SubItems[0].Text));
+                vendorOrder.VendorID = Int32.Parse(selectedRow[0].SubItems[1].Text);
+                vendorOrder.Name = selectedRow[0].SubItems[2].Text;
+                vendorOrder.DateOrdered = DateTime.Parse(selectedRow[0].SubItems[3].Text);
 
 
-            vendorOrder = new VendorOrder(Int32.Parse(selectedRow[0].Text));
-            vendorOrder.VendorID = Int32.Parse(selectedRow[1].Text);
-            vendorOrder.Name = selectedRow[2].Text;
-            vendorOrder.DateOrdered = DateTime.Parse(selectedRow[3].Text);
-            
-            
-            frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-            _frmReceiving.BringToFront();
-            _frmReceiving.Show();
+                frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
+                _frmReceiving.Show();
+                _frmReceiving.BringToFront();
+                
 
-               
+            }  
         }
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)
@@ -124,7 +125,7 @@ namespace com.Farouche
 
             
             
-            vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedText));
+            vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedItem.ToString()));
             orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
             fillListView(lvOpenVendorOrders, orderList);
 
@@ -136,10 +137,14 @@ namespace com.Farouche
 
 
             _vendorOrdersManager = new VendorOrderManager();
-            vendorOrder = new VendorOrder(10);
+            vendorOrder = new VendorOrder(1);
+
             vendorOrder.Name = "Target";
+
             vendorOrder.DateOrdered = DateTime.Today;
+            //vendorOrder.NumberOfShipments = 4;
             _vendorOrdersManager.AddVendorOrder(vendorOrder);
+
             //vendorOrderLineItem = new VendorOrderLineItem(1, 1);
             //vendorOrderLineItem.Name = "Target";
             //vendorOrderLineItem.QtyOrdered = 10;

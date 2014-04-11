@@ -320,6 +320,5 @@ namespace com.Farouche.DataAccess
             }
             return false;
         } // end DeleteVendor(..)
-
     } // end class VendorData
 } // end namespace

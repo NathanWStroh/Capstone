@@ -48,11 +48,8 @@ namespace com.Farouche.Presentation
         {
             FrmProduct frm = new FrmProduct(_myAccessToken);
             frm.MdiParent = this;
-            frm.WindowState = FormWindowState.Maximized;
             frm.Show();
- 
-        }
-        
+        }    
         //TSMI = Tool Strip Menu Item
         private void tsmiMyOrders_Click(object sender, EventArgs e)
         {
