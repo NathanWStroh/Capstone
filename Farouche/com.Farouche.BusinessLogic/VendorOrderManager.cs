@@ -8,7 +8,7 @@ using com.Farouche.DataAccess;
 
 namespace com.Farouche.BusinessLogic
 {
-    class VendorOrderManager : DatabaseConnection
+    public class VendorOrderManager : DatabaseConnection
     {
         private readonly SqlConnection _connection = GetInventoryDbConnection();
         public bool AddLineItem(VendorOrder order, Product product, int qty)

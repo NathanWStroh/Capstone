@@ -141,6 +141,7 @@ AppPackages/
 
 # Others
 # sql/ [commented out by JG]
+*.dbschema
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
@@ -187,4 +188,3 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-Farouche/InventoryDatabase/sql/debug/InventoryDatabase.dbschema

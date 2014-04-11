@@ -25,6 +25,7 @@ namespace com.Farouche.Commons
 
         public ShippingOrderLineItem()
         {
+
         }
 
         public ShippingOrderLineItem(int shippingOrderId, int productId)

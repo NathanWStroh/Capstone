@@ -56,13 +56,13 @@ namespace com.Farouche.BusinessLogic
 
         public bool Insert(ShippingOrderLineItem lineItem)
         {
-            //Need to do error checking... Try/Catch.
+            if (lineItem == null) throw new ApplicationException("ShippingOrderLineItem is null");
             return ShippingOrderLineItemDAL.AddShippingOrderLineItems(lineItem, _connection);
         }//End of Insert(.)
 
         public bool Update(ShippingOrderLineItem lineItem, ShippingOrderLineItem originalLineItem)
         {
-            //Need to do error checking... Try/Catch.
+            if (lineItem == null) throw new ApplicationException("ShippingOrderLineItem is null");
             return ShippingOrderLineItemDAL.UpdateShippingOrderLineItem(lineItem, originalLineItem, _connection);
         }//End of Update(..)
 

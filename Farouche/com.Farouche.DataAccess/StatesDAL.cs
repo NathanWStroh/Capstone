@@ -41,8 +41,8 @@ namespace com.Farouche.DataAccess
 
                         var state = new State(reader.GetInt32(0))
                         {
-                            StateName = reader.GetString(reader.GetOrdinal("StateName")),
                             StateCode = reader.GetString(reader.GetOrdinal("StateCode")),
+                            StateName = reader.GetString(reader.GetOrdinal("StateName")),
                             FirstZipCode = reader.GetInt32(reader.GetOrdinal("FirstZipCode")),
                             LastZipCode = reader.GetInt32(reader.GetOrdinal("LastZipCode"))
                         };
@@ -67,6 +67,10 @@ namespace com.Farouche.DataAccess
             {
                 conn.Close();
             }
+
+
+
+
             return states;
         }
     }

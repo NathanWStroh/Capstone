@@ -1,13 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
 <<<<<<< HEAD
-	As
-	SELECT [VendorOrderID],[VendorID],[DateOrdered],[AmountofShipments]
-	from [VendorOrders]
-RETURN 
 
 =======
+>>>>>>> origin/master
 AS
 	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	From VendorOrders
 RETURN
+<<<<<<< HEAD
+
+=======
 >>>>>>> origin/master
