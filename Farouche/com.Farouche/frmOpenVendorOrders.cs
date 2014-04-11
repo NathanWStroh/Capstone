@@ -25,7 +25,7 @@ namespace com.Farouche
         public frmOpenVendorOrders()
         {
             InitializeComponent();
-            createVendorOrder();
+            
 
         }
 
@@ -35,7 +35,7 @@ namespace com.Farouche
             
             _receivingManager = new ReceivingManager();
 
-
+            createVendorOrder();
             fillVendorDropDown();
             fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
 
@@ -77,7 +77,7 @@ namespace com.Farouche
                 var item = new ListViewItem();
 
 
-               // item.Text = vendorOrder.VendorOrderID.ToString();
+                item.Text = vendorOrder.Id.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
                 item.SubItems.Add(vendorOrder.Name);
                 item.SubItems.Add(vendorOrder.DateOrdered.ToString());
@@ -136,10 +136,12 @@ namespace com.Farouche
 
 
             _vendorOrdersManager = new VendorOrderManager();
-            vendorOrder = new VendorOrder(10);
-            vendorOrder.Name = "Target";
+            vendorOrder = new VendorOrder(1);
+            //vendorOrder.Name = "Target";
             vendorOrder.DateOrdered = DateTime.Today;
+            //vendorOrder.NumberOfShipments = 4;
             _vendorOrdersManager.AddVendorOrder(vendorOrder);
+
             //vendorOrderLineItem = new VendorOrderLineItem(1, 1);
             //vendorOrderLineItem.Name = "Target";
             //vendorOrderLineItem.QtyOrdered = 10;

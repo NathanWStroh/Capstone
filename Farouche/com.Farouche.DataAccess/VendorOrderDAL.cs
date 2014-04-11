@@ -245,7 +245,7 @@ namespace com.Farouche.DataAccess
             connection = connection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_UpdateVendorOrder", connection)
+                var mySqlCommand = new SqlCommand("proc_InsertVendorOrder", connection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -321,7 +321,7 @@ namespace com.Farouche.DataAccess
             {
                 connection.Close();
             }
-            
+
             throw new ApplicationException("Vendor Order from vendor: " 
                     + vendorId + ", on date: " + date + ", not found");
         }

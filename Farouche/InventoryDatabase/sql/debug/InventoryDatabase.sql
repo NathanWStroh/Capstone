@@ -11,12 +11,11 @@ GO
 :setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
-
+GO
+USE [master]
 
 GO
 :on error exit
-GO
-USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -147,6 +146,7 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
+
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -1163,6 +1163,17 @@ AS
 	where [VendorOrderID] = @VendorOrderID
 RETURN
 GO
+PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
+
+AS
+	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	From VendorOrders
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetCLSPackDetails]...';
 
 
@@ -1173,20 +1184,6 @@ AS
 	SELECT so.ShippingOrderID, so.ShippingTermID, sv.ShippingVendorID, st.Description, sv.Name, st.Description, si.ProductID, pr.ShortDesc, si.Quantity, so.ShipDate, so.ShipToName, so.ShipToAddress, so.ShipToCity, so.ShipToState, so.ShipToZip
 	FROM [dbo].[ShippingTermsLookup] st, [dbo].[Products] pr, [dbo].[ShippingVendors] sv, [dbo].[ShippingOrders] so, [dbo].[ShippingOrderLineItems] si
 	WHERE so.ShippingOrderID = @ShippingOrderId AND so.ShippingTermID = st.ShippingTermID AND st.ShippingVendorID = sv.ShippingVendorID AND so.ShippingOrderID = si.ShippingOrderID AND si.ProductID = pr.ProductID
-RETURN
-GO
-PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
-
-
-GO
-CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
-AS
-	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
-	From VendorOrders
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
@@ -1482,7 +1479,6 @@ AS
 	Values (@VendorID, @DateOrdered)
 RETURN @@ROWCOUNT
 GO
-
 PRINT N'Creating [dbo].[proc_UpdateProductOnOrder]...';
 
 
@@ -1522,7 +1518,6 @@ AS
 	WHERE [ProductID] = @ProductID
 	RETURN @@ROWCOUNT
 GO
-
 PRINT N'Creating [dbo].[proc_UpdateShippingOrder]...';
 
 
