@@ -24,7 +24,6 @@ namespace com.Farouche.Commons
         private string _stateName;
         private int _firstZipCode;
         private int _lastZipCode;
-        private int p;
 
         public State(int id)
         {
