@@ -3,8 +3,10 @@
 CREATE PROCEDURE [sp_GetVendorSourceItemsByProduct]
 	(@productID int)
 AS
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
 	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-		AND [ProductID] = @productID
+	INNER JOIN [dbo].[Vendors]
+	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
+	WHERE [VendorSourceItems].[Active] = 1
+	AND [ProductID] = @productID
 	RETURN

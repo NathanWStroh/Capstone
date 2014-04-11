@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
+using System.Collections.Generic;
 
 //Author: Nathan S
 //Date Created: null
@@ -22,23 +23,29 @@ using com.Farouche.Commons;
 * 04/02/2014   Kaleb                                        Corrected code to correctly add a product and update a product.
 *
 * 04/10/2014   Kaleb                                        Adjusted the form to have numericUpDown controls rather than text boxes for certain fields.
+* 
+* 04/10/2014   Kaleb                                        Added data validation to the form.
 */
 
 namespace com.Farouche.Presentation
 {
     public partial class ProductView : Form
     {
-        private VendorManager _vendorManager = new VendorManager();
-        private ProductManager _productManager = new ProductManager();
+        private VendorManager _vendorManager;
+        private ProductManager _productManager;
+        private Validation _validation;
+        private VendorSourceItemManager _vendorSourceManager;
         private Product _currentProduct;
-        private Validation _validation = new Validation();
-
         private readonly AccessToken _myAccessToken;
 
         public ProductView(AccessToken accToken)
         {
             InitializeComponent();
             _myAccessToken = accToken;
+            _productManager = new ProductManager();
+            _vendorManager = new VendorManager();
+            _vendorSourceManager = new VendorSourceItemManager();
+            _validation = new Validation();
             this.Text = "Add Product";
             btMorph.Text = "Add Product";
             PopulateLocationCombo();
@@ -46,7 +53,7 @@ namespace com.Farouche.Presentation
             tbProductID.Enabled = false;
             tbProductID.Text = "The ID will automatically be created.";
             this.lblVendors.Visible = false;
-            this.nudShippingWeight.Visible = false;
+            this.lvVendors.Visible = false;
             this.btAddVendor.Visible = false;
             lblPriceDisplay.Text = String.Format("{0:C}", 0);
             lblWeightDisplay.Text = "0.0 lbs";
@@ -57,6 +64,10 @@ namespace com.Farouche.Presentation
         {
             InitializeComponent();
             _myAccessToken = accToken;
+            _productManager = new ProductManager();
+            _vendorManager = new VendorManager();
+            _vendorSourceManager = new VendorSourceItemManager();
+            _validation = new Validation();
             _currentProduct = ProductInfo;
             //Assigning the current product values to the appropriate controls.
             this.Text = "Update Product";
@@ -74,6 +85,7 @@ namespace com.Farouche.Presentation
             nudWeight.Value = (decimal)ProductInfo._shippingWeight;
             PopulateActiveCombo();
             PopulateLocationCombo();
+            PopulateListView(lvVendors, ProductInfo.Id);
             this.btnClear.Enabled = false;
             lblPriceDisplay.Text = String.Format("{0:C}", ProductInfo.unitPrice);
             tbItemName.Focus();
@@ -98,11 +110,6 @@ namespace com.Farouche.Presentation
             }
         }//ProductView(.)
 
-        private void lvVendor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btAddVendor.Enabled = false;
-        }//ProductView
-
         private void btClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -110,7 +117,9 @@ namespace com.Farouche.Presentation
 
         private void btAddVendor_Click(object sender, EventArgs e)
         {
-            AddVendorWindow newWindow = new AddVendorWindow(tbProductID.Text);
+            FrmAttachVendorSource frmVendorSource = new FrmAttachVendorSource(_currentProduct);
+            frmVendorSource.ShowDialog();
+            PopulateListView(lvVendors, _currentProduct.Id);
         }//End of btAddVendor_Click(..)
 
         private void btMorph_Click(object sender, EventArgs e)
@@ -321,5 +330,29 @@ namespace com.Farouche.Presentation
         {
             lblWeightDisplay.Text = nudWeight.Value.ToString() + " lbs";
         }//End of nudWeight_ValueChanged(..)
+        
+        //Populates a list view.
+        private void PopulateListView(ListView lv, int productID)
+        {
+            List<VendorSourceItem> vendorSourceList = _vendorSourceManager.GetVendorSourceItemsByProduct(productID);
+            lv.Items.Clear();
+            lv.Columns.Clear();
+            foreach (var vendorSource in vendorSourceList)
+            {
+                var item = new ListViewItem();
+                item.Text = vendorSource.Name;
+                item.SubItems.Add(String.Format("{0:C}", vendorSource.UnitCost));
+                item.SubItems.Add(vendorSource.MinQtyToOrder.ToString());
+                item.SubItems.Add(vendorSource.ItemsPerCase.ToString());
+                item.SubItems.Add(vendorSource.Active.ToString());
+                lv.Items.Add(item);
+            }
+            lv.Columns.Add("Vendor Name");
+            lv.Columns.Add("Unit Cost");
+            lv.Columns.Add("Min Order Qty");
+            lv.Columns.Add("Case Qty");
+            lv.Columns.Add("Active");
+            lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }//End of populateListView(..)
     }//public partial class ProductView : Form
 }

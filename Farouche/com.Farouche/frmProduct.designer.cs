@@ -283,7 +283,6 @@
             this.Name = "FrmProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmAddProduct_Load);
             this.tabProducts.ResumeLayout(false);
             this.tabProducts.PerformLayout();

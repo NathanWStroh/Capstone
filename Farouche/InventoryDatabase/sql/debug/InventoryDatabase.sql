@@ -2415,10 +2415,12 @@ GO
 CREATE PROCEDURE [sp_GetVendorSourceItemsByProduct]
 	(@productID int)
 AS
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
 	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-		AND [ProductID] = @productID
+	INNER JOIN [dbo].[Vendors]
+	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
+	WHERE [VendorSourceItems].[Active] = 1
+	AND [ProductID] = @productID
 	RETURN
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
@@ -2620,14 +2622,15 @@ GO
 /* VendorSourceItems Stored Procedures */
 /*Object: StoredProcedure [dbo].[sp_InsertIntoVendorSourceItems]*/
 CREATE PROCEDURE [sp_InsertIntoVendorSourceItems]
-	(@productID int,
-	@vendorID 	int,
-	@unitCost	money,
-	@minQtyToOrder		int,
-	@itemsPerCase  int,
-	@active		bit)
+	(@productID		int,
+	@vendorID 		int,
+	@unitCost		money,
+	@minQtyToOrder	int,
+	@itemsPerCase	int,
+	@active			bit)
 AS
-	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
+	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) 
+	VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
 	RETURN @@IDENTITY
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;

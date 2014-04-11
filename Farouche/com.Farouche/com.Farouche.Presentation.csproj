@@ -60,6 +60,12 @@
     <Compile Include="FrmAddShippingVendor.designer.cs">
       <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAttachVendorSource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAttachVendorSource.Designer.cs">
+      <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddShippingVendor.resx">
       <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAttachVendorSource.resx">
+      <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>

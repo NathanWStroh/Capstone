@@ -40,7 +40,6 @@
             this.tbProductID = new System.Windows.Forms.TextBox();
             this.lblProductID = new System.Windows.Forms.Label();
             this.comboWHSL = new System.Windows.Forms.ComboBox();
-            this.nudShippingWeight = new System.Windows.Forms.ListView();
             this.lblVendors = new System.Windows.Forms.Label();
             this.btAddVendor = new System.Windows.Forms.Button();
             this.lblOnHand = new System.Windows.Forms.Label();
@@ -64,6 +63,7 @@
             this.nudUnitPrice = new System.Windows.Forms.NumericUpDown();
             this.lblPriceDisplay = new System.Windows.Forms.Label();
             this.lblWeightDisplay = new System.Windows.Forms.Label();
+            this.lvVendors = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.nudAvailableQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOnHandQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudReorderThreshold)).BeginInit();
@@ -179,17 +179,6 @@
             this.comboWHSL.Size = new System.Drawing.Size(247, 21);
             this.comboWHSL.TabIndex = 11;
             // 
-            // nudShippingWeight
-            // 
-            this.nudShippingWeight.FullRowSelect = true;
-            this.nudShippingWeight.GridLines = true;
-            this.nudShippingWeight.Location = new System.Drawing.Point(389, 151);
-            this.nudShippingWeight.Name = "nudShippingWeight";
-            this.nudShippingWeight.Size = new System.Drawing.Size(358, 154);
-            this.nudShippingWeight.TabIndex = 14;
-            this.nudShippingWeight.UseCompatibleStateImageBehavior = false;
-            this.nudShippingWeight.SelectedIndexChanged += new System.EventHandler(this.lvVendor_SelectedIndexChanged);
-            // 
             // lblVendors
             // 
             this.lblVendors.AutoSize = true;
@@ -202,7 +191,6 @@
             // 
             // btAddVendor
             // 
-            this.btAddVendor.Enabled = false;
             this.btAddVendor.Location = new System.Drawing.Point(500, 323);
             this.btAddVendor.Name = "btAddVendor";
             this.btAddVendor.Size = new System.Drawing.Size(129, 23);
@@ -384,7 +372,7 @@
             // 
             this.nudWeight.DecimalPlaces = 2;
             this.nudWeight.Increment = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             65536});
@@ -429,6 +417,18 @@
             this.lblWeightDisplay.Size = new System.Drawing.Size(0, 13);
             this.lblWeightDisplay.TabIndex = 45;
             // 
+            // lvVendors
+            // 
+            this.lvVendors.FullRowSelect = true;
+            this.lvVendors.GridLines = true;
+            this.lvVendors.Location = new System.Drawing.Point(389, 157);
+            this.lvVendors.MultiSelect = false;
+            this.lvVendors.Name = "lvVendors";
+            this.lvVendors.Size = new System.Drawing.Size(358, 154);
+            this.lvVendors.TabIndex = 46;
+            this.lvVendors.UseCompatibleStateImageBehavior = false;
+            this.lvVendors.View = System.Windows.Forms.View.Details;
+            // 
             // ProductView
             // 
             this.AcceptButton = this.btMorph;
@@ -436,6 +436,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btClose;
             this.ClientSize = new System.Drawing.Size(769, 366);
+            this.Controls.Add(this.lvVendors);
             this.Controls.Add(this.lblWeightDisplay);
             this.Controls.Add(this.nudUnitPrice);
             this.Controls.Add(this.lblPriceDisplay);
@@ -459,7 +460,6 @@
             this.Controls.Add(this.lblOnHand);
             this.Controls.Add(this.btAddVendor);
             this.Controls.Add(this.lblVendors);
-            this.Controls.Add(this.nudShippingWeight);
             this.Controls.Add(this.comboWHSL);
             this.Controls.Add(this.tbProductID);
             this.Controls.Add(this.lblProductID);
@@ -501,7 +501,6 @@
         private System.Windows.Forms.TextBox tbProductID;
         private System.Windows.Forms.Label lblProductID;
         private System.Windows.Forms.ComboBox comboWHSL;
-        private System.Windows.Forms.ListView nudShippingWeight;
         private System.Windows.Forms.Label lblVendors;
         private System.Windows.Forms.Button btAddVendor;
         private System.Windows.Forms.Label lblOnHand;
@@ -525,5 +524,6 @@
         private System.Windows.Forms.NumericUpDown nudUnitPrice;
         private System.Windows.Forms.Label lblPriceDisplay;
         private System.Windows.Forms.Label lblWeightDisplay;
+        private System.Windows.Forms.ListView lvVendors;
     }
 }
