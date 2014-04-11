@@ -16,6 +16,7 @@ namespace com.Farouche
         private ShippingOrderLineItemManager _myOrderDetails;
         private ShippingOrderManager _myOrderManager;
         private ShippingOrder _myOrder;
+        private List<ShippingOrderLineItem> pickList;
         private int _myOrderId;
         private AccessToken _myAccessToken;
 
@@ -41,6 +42,7 @@ namespace com.Farouche
             lv.Items.Clear();
             lv.Columns.Clear();
             _myOrderDetails.LineItems = orderItemList;
+            pickList = new List<ShippingOrderLineItem>();
             foreach (var orderItem in _myOrderDetails.LineItems)
             {
                 if (orderItem.IsPicked == value)
@@ -51,6 +53,7 @@ namespace com.Farouche
                     item.SubItems.Add(orderItem.Quantity.ToString());
                     item.SubItems.Add(orderItem.ProductLocation);
                     lv.Items.Add(item);
+                    pickList.Add(orderItem);
                 }
             }
             lv.Columns.Add("ProductID");
@@ -62,7 +65,8 @@ namespace com.Farouche
 
         private void BtnPrintDetails_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Printing order details to nearest printer...", "Printing");
+            frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId);
+            print.Show();
         }//End of BtnPrintDetails_Click(..)
 
         private void BtnComplete_Click(object sender, EventArgs e)

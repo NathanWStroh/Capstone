@@ -3,15 +3,26 @@ using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using com.Farouche.Commons;
-//Author: Caleb
+
+//Author: Kaleb Wendel
 //Date Created: 1/31/2014
-//Last Modified: 1/31/2014
-//Last Modified By: Adam Chandler
+//Last Modified:04/01/2014
+//Last Modified By: Kaleb Wendel
 
 /*
 *                               Changelog
 * Date         By          Ticket          Version         Description
 * 1/31/2014   Adam                          0.0.1b         Updated Instantiation of new objects to use id as parameter
+* 
+*03/30/2014    Kaleb                                       Updated existing methods to account for the onOrder value added to the Products table.
+*
+*03/30/2014    Kaleb                                       Added the UpdateThreshold, UpdateReorderAmount, and UpdateOnOrder functions.
+*
+*04/01/2014    Kaleb                                       Added null data checks when passing parameters and reading data in through a reader object.
+*
+*04/01/2014    Kaleb                                       Adjusted the caught exceptions to be thrown rather than Console.WriteLine. 
+*
+*04/02/2014    Kaleb                                       Added fetchLocations method.
 */
 namespace com.Farouche.DataAccess
 {
@@ -32,16 +43,15 @@ namespace com.Farouche.DataAccess
                 sqlCmd.Parameters.AddWithValue("@OnHand", product.reserved);
                 sqlCmd.Parameters.AddWithValue("@Available", product.available);
                 sqlCmd.Parameters.AddWithValue("@Description", product.description);
-                sqlCmd.Parameters.AddWithValue("@Location", product.location);
+                sqlCmd.Parameters.AddWithValue("@Location", product.location ?? Convert.DBNull);
                 sqlCmd.Parameters.AddWithValue("@UnitPrice", product.unitPrice);
                 sqlCmd.Parameters.AddWithValue("@ShortDesc", product.Name);
-                sqlCmd.Parameters.AddWithValue("@ReorderThreshold", product._reorderThreshold);
-                sqlCmd.Parameters.AddWithValue("@ReorderAmount", product._reorderAmount);
-                sqlCmd.Parameters.AddWithValue("@ShippingDimensions", product._shippingDemensions);
-                sqlCmd.Parameters.AddWithValue("@ShippingWeight", product._shippingWeight);
+                sqlCmd.Parameters.AddWithValue("@ReorderThreshold", product._reorderThreshold ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@ReorderAmount", product._reorderAmount ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@OnOrder", product._onOrder);
+                sqlCmd.Parameters.AddWithValue("@ShippingDimensions", product._shippingDemensions ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@ShippingWeight", product._shippingWeight ?? Convert.DBNull);
                 sqlCmd.Parameters.AddWithValue("@Active", product.Active ? 1 : 0);
-
-
                 //If the procedure returns 1 set to true, if 0 remain false.
                 if (sqlCmd.ExecuteNonQuery() == 1)
                 {
@@ -50,15 +60,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -79,30 +89,31 @@ namespace com.Farouche.DataAccess
                 //Creates the command object, passing the SP and connection object.
                 SqlCommand sqlCmd = new SqlCommand("sp_UpdateProducts", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@ProductID", product.Id);
+                sqlCmd.Parameters.AddWithValue("@ProductID", originalProduct.Id);
                 sqlCmd.Parameters.AddWithValue("@OnHand", product.reserved);
                 sqlCmd.Parameters.AddWithValue("@Available", product.available);
                 sqlCmd.Parameters.AddWithValue("@Description", product.description);
-                sqlCmd.Parameters.AddWithValue("@Location", product.location);
+                sqlCmd.Parameters.AddWithValue("@Location", product.location ?? Convert.DBNull);
                 sqlCmd.Parameters.AddWithValue("@UnitPrice", product.unitPrice);
                 sqlCmd.Parameters.AddWithValue("@ShortDesc", product.Name);
-                sqlCmd.Parameters.AddWithValue("@ReorderThreshold", product._reorderThreshold);
-                sqlCmd.Parameters.AddWithValue("@ReorderAmount", product._reorderAmount);
-                sqlCmd.Parameters.AddWithValue("@ShippingDimensions", product._shippingDemensions);
-                sqlCmd.Parameters.AddWithValue("@ShippingWeight", product._shippingWeight);
-                sqlCmd.Parameters.AddWithValue("@Active", product.Active);
+                sqlCmd.Parameters.AddWithValue("@ReorderThreshold", product._reorderThreshold ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@ReorderAmount", product._reorderAmount ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@OnOrder", product._onOrder);
+                sqlCmd.Parameters.AddWithValue("@ShippingDimensions", product._shippingDemensions ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@ShippingWeight", product._shippingWeight ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@Active", product.Active ? 1 : 0);
                 sqlCmd.Parameters.AddWithValue("@OriginalOnHand", originalProduct.reserved);
                 sqlCmd.Parameters.AddWithValue("@OriginalAvailable", originalProduct.available);
                 sqlCmd.Parameters.AddWithValue("@OriginalDescription", originalProduct.description);
-                sqlCmd.Parameters.AddWithValue("@OriginalLocation", originalProduct.location);
+                sqlCmd.Parameters.AddWithValue("@OriginalLocation", originalProduct.location ?? Convert.DBNull);
                 sqlCmd.Parameters.AddWithValue("@OriginalUnitPrice", originalProduct.unitPrice);
                 sqlCmd.Parameters.AddWithValue("@OriginalShortDesc", originalProduct.Name);
-                sqlCmd.Parameters.AddWithValue("@OriginalReorderThreshold", originalProduct._reorderThreshold);
-                sqlCmd.Parameters.AddWithValue("@OriginalReorderAmount", originalProduct._reorderAmount);
-                sqlCmd.Parameters.AddWithValue("@OriginalShippingDimensions", originalProduct._shippingDemensions);
-                sqlCmd.Parameters.AddWithValue("@OriginalShippingWeight", originalProduct._shippingWeight);
-                sqlCmd.Parameters.AddWithValue("@OriginalActive", originalProduct.Active);
-
+                sqlCmd.Parameters.AddWithValue("@OriginalReorderThreshold", originalProduct._reorderThreshold ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@OriginalReorderAmount", originalProduct._reorderAmount ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@OriginalOnOrder", originalProduct._onOrder);
+                sqlCmd.Parameters.AddWithValue("@OriginalShippingDimensions", originalProduct._shippingDemensions ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@OriginalShippingWeight", product._shippingWeight ?? Convert.DBNull);
+                sqlCmd.Parameters.AddWithValue("@OriginalActive", originalProduct.Active ? 1 : 0);
                 //If the procedure returns 1 set to true, if 0 remain false.
                 if (sqlCmd.ExecuteNonQuery() == 1)
                 {
@@ -111,15 +122,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -150,15 +161,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -189,15 +200,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -227,6 +238,7 @@ namespace com.Farouche.DataAccess
                 sqlCmd.Parameters.AddWithValue("@ShortDesc", product.Name);
                 sqlCmd.Parameters.AddWithValue("@ReorderThreshold", product._reorderThreshold);
                 sqlCmd.Parameters.AddWithValue("@ReorderAmount", product._reorderAmount);
+                sqlCmd.Parameters.AddWithValue("@OnOrder", product._onOrder);
                 sqlCmd.Parameters.AddWithValue("@ShippingDimensions", product._shippingDemensions);
                 sqlCmd.Parameters.AddWithValue("@ShippingWeight", product._shippingWeight);
                 sqlCmd.Parameters.AddWithValue("@Active", product.Active);
@@ -239,15 +251,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -281,14 +293,15 @@ namespace com.Farouche.DataAccess
                             available = reader.GetInt32(1),
                             reserved = reader.GetInt32(2),
                             description = reader.GetString(3),
-                            location = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                            location = reader[4] as string,
                             unitPrice = (Decimal)reader.GetSqlMoney(5),
                             Name = reader.GetString(6),
-                            _reorderThreshold = reader.GetInt32(7),
-                            _reorderAmount = reader.GetInt32(8),
-                            _shippingDemensions = reader.GetString(9),
-                            _shippingWeight = reader.GetDouble(10),
-                            Active = reader.GetBoolean(11)
+                            _reorderThreshold = reader[7] as int?,
+                            _reorderAmount = reader[8] as int?,
+                            _onOrder = reader.GetInt32(9),
+                            _shippingDemensions = reader[10] as string,
+                            _shippingWeight = reader[11] as double?,
+                            Active = reader.GetBoolean(12)
                         };
                         //Add the current product to the list.
                         products.Add(product);
@@ -298,15 +311,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -341,14 +354,15 @@ namespace com.Farouche.DataAccess
                             available = reader.GetInt32(1),
                             reserved = reader.GetInt32(2),
                             description = reader.GetString(3),
-                            location = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                            location = reader[4] as string,
                             unitPrice = (Decimal)reader.GetSqlMoney(5),
                             Name = reader.GetString(6),
-                            _reorderThreshold = reader.GetInt32(7),
-                            _reorderAmount = reader.GetInt32(8),
-                            _shippingDemensions = reader.GetString(9),
-                            _shippingWeight = reader.GetDouble(10),
-                            Active = reader.GetBoolean(11)
+                            _reorderThreshold = reader[7] as int?,
+                            _reorderAmount = reader[8] as int?,
+                            _onOrder = reader.GetInt32(9),
+                            _shippingDemensions = reader[10] as string,
+                            _shippingWeight = reader[11] as double?,
+                            Active = reader.GetBoolean(12)
                         };
                     }
                 }
@@ -356,15 +370,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -394,19 +408,20 @@ namespace com.Farouche.DataAccess
                 {
                     while (reader.Read())
                     {
-                         var product = new Product(reader.GetInt32(0))
+                        var product = new Product(reader.GetInt32(0))
                         {
                             available = reader.GetInt32(1),
                             reserved = reader.GetInt32(2),
                             description = reader.GetString(3),
-                            location = reader.IsDBNull(4) ? "" : reader.GetString(4), 
+                            location = reader[4] as string,
                             unitPrice = (Decimal)reader.GetSqlMoney(5),
                             Name = reader.GetString(6),
-                            _reorderThreshold = reader.GetInt32(7),
-                            _reorderAmount = reader.GetInt32(8),
-                            _shippingDemensions = reader.GetString(9),
-                            _shippingWeight = reader.GetDouble(10),
-                            Active = reader.GetBoolean(11)
+                            _reorderThreshold = reader[7] as int?,
+                            _reorderAmount = reader[8] as int?,
+                            _onOrder = reader.GetInt32(9),
+                            _shippingDemensions = reader[10] as string,
+                            _shippingWeight = reader[11] as double?,
+                            Active = reader.GetBoolean(12)
                         };
                         //Add the current product to the list.
                         products.Add(product);
@@ -417,15 +432,15 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SqlException. " + ex.Message);
+                throw ex;
             }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -434,25 +449,166 @@ namespace com.Farouche.DataAccess
             return products;
         }//End of fetchProductsByActive(..)
 
-
         // start of new methods - 3.28.14
-        public Boolean UpdateThreshold(int amount)
+        public static Boolean UpdateThreshold(int thresholdAmount, int productID, SqlConnection connection)
         {
-            throw new NotImplementedException();
-            // proc_UpdateProductThreshold
-        }
+            //If the connection is null a new connection will be returned.
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_UpdateProductThreshold", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ProductID", productID);
+                sqlCmd.Parameters.AddWithValue("@Amount", thresholdAmount);
 
-        public Boolean UpdateReorderAmount(int amount)
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//End of UpdateThreshold(..)
+
+        public static Boolean UpdateReorderAmount(int reorderAmount, int productID, SqlConnection connection)
         {
-            throw new NotImplementedException();
-            // proc_UpdateProductReorderAmount
-        }
+            //If the connection is null a new connection will be returned.
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_UpdateProductReorderAmount", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ProductID", productID);
+                sqlCmd.Parameters.AddWithValue("@Amount", reorderAmount);
 
-        public Boolean UpdateOnOrder(int amount)
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//End of UpdateReorderAmount(..)
+
+        public static Boolean UpdateOnOrder(int onOrderAmount, int productID, SqlConnection connection)
         {
-            throw new NotImplementedException();
-            // proc_UpdateProductOnOrder
-        }
+            //If the connection is null a new connection will be returned.
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_UpdateProductOnOrder", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ProductID", productID);
+                sqlCmd.Parameters.AddWithValue("@Amount", onOrderAmount);
 
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//End of UpdateOnOrder(..)
+
+        public static List<String> FetchLocations(SqlConnection connection)
+        {
+            List<String> locations = new List<String>();
+            //?? Null-coalescing operator.
+            //If the connection is null a new connection will be returned.
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("sp_GetLocations", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                //Creates the reader object by ExecutingReader on the cmd object.
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var currentLocation = reader.GetString(0);
+                        locations.Add(currentLocation);
+                    }
+                }
+                reader.Close();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return locations;
+        }//End of fetchProducts(.)
     }
 }
