@@ -14,10 +14,9 @@
 
 namespace com.Farouche.Commons
 {
-    public class ShippingTerm
+    public class ShippingTerm : Entity
     {
 
-        private int _Id;
         private int _shippingVendorID;
         private string _description;
 
@@ -29,16 +28,14 @@ namespace com.Farouche.Commons
         {
             this.Id = Id;
         }
-
-
         public int Id
         {
-            get 
-            { 
-                return _Id; 
+            get
+            {
+                return _Id;
             }
             set
-            { 
+            {
                 _Id = value;
             }
         }
@@ -68,11 +65,11 @@ namespace com.Farouche.Commons
         {
             return string.Format("ID: {0}, ShippingVendorId: {1}, Description, {2}", Id, ShippingVendorId, Description);
         }
-        public Type GetType()
+        public override Type GetType()
         {
             throw new NotImplementedException();
         }
-        public string ToXml()
+        public override string ToXml()
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,7 @@
 ﻿//Author: Nathan Stroh
 //Date Created: 3/30/2014
-//Last Modified:  
-//Last Modified By:
+//Last Modified:  4/4/14
+//Last Modified By: Ben Grimes
 
 /*
 *                               Changelog
@@ -20,6 +20,11 @@ namespace com.Farouche.Presentation
     public partial class frmStartUp : Form
     {
         private readonly AccessToken _myAccessToken;
+
+        public FrmShippingAllOrders AllShippingOrders;
+        public FrmShippingMyOrders ShippingMyOrders;
+        public FrmShippingPickList ShippingPickList;
+        public FrmShippingPackList ShippingPackList;
 
         public frmStartUp( AccessToken acctoken)
         {
@@ -47,7 +52,38 @@ namespace com.Farouche.Presentation
             frm.Show();
  
         }
+        
+        //TSMI = Tool Strip Menu Item
+        private void tsmiMyOrders_Click(object sender, EventArgs e)
+        {
+            ShippingMyOrders = new FrmShippingMyOrders(_myAccessToken);
+            ShippingMyOrders.MdiParent = this;
+            ShippingMyOrders.WindowState = FormWindowState.Maximized;
+            ShippingMyOrders.Show();
+        }
 
+        private void tsmiAllShippingOrders_Click(object sender, EventArgs e)
+        {
+            AllShippingOrders = new FrmShippingAllOrders(_myAccessToken);
+            AllShippingOrders.MdiParent = this;
+            AllShippingOrders.WindowState = FormWindowState.Maximized;
+            AllShippingOrders.Show();
+        }
 
+        private void tsmiPickList_Click(object sender, EventArgs e)
+        {
+            ShippingPickList = new FrmShippingPickList(_myAccessToken);
+            ShippingPickList.MdiParent = this;
+            ShippingPickList.WindowState = FormWindowState.Maximized;
+            ShippingPickList.Show();
+        }
+
+        private void tsmiPackList_Click(object sender, EventArgs e)
+        {
+            ShippingPackList = new FrmShippingPackList(_myAccessToken);
+            ShippingPackList.MdiParent = this;
+            ShippingPackList.WindowState = FormWindowState.Maximized;
+            ShippingPackList.Show();
+        }
     }
 }

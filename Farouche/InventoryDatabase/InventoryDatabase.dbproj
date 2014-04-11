@@ -646,9 +646,9 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendorOrderByVendorAndDate.proc.sql">
-	  <SubType>Code</SubType>
+      <SubType>Code</SubType>
     </Build>
-	<Build Include="Schema Objects\Schemas\dbo\Tables\States.table.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Tables\States.table.sql">
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GenerateReorderReports.proc.sql">
@@ -657,9 +657,20 @@
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetShippingOrderLineItem.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetCLSPackDetails.proc.sql">
+      <SubType>Code</SubType>
+    </Build>    
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetAllStates.proc.sql">
       <SubType>Code</SubType>
     </Build>
-
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateProductReorderAmount.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateProductOnOrder.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateProductThreshold.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>

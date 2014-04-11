@@ -34,10 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -59,6 +66,18 @@
     </Compile>
     <Compile Include="FrmAddShippingVendor.designer.cs">
       <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintOrderDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintOrderDetails.Designer.cs">
+      <DependentUpon>frmPrintOrderDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintPackReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintPackReport.Designer.cs">
+      <DependentUpon>frmPrintPackReport.cs</DependentUpon>
     </Compile>
     <Compile Include="frmProduct.cs">
       <SubType>Form</SubType>
@@ -96,11 +115,53 @@
     <Compile Include="FrmShipping.designer.cs">
       <DependentUpon>FrmShipping.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmShippingAllOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingAllOrders.Designer.cs">
+      <DependentUpon>FrmShippingAllOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShippingMyOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingMyOrders.Designer.cs">
+      <DependentUpon>FrmShippingMyOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShippingPackList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingPackList.Designer.cs">
+      <DependentUpon>FrmShippingPackList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShippingPickList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingPickList.Designer.cs">
+      <DependentUpon>FrmShippingPickList.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmStartUp.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmStartUp.Designer.cs">
       <DependentUpon>frmStartUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderAmount.designer.cs">
+      <DependentUpon>FrmUpdateReorderAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderOnOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderOnOrder.designer.cs">
+      <DependentUpon>FrmUpdateReorderOnOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateReorderThreshold.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateReorderThreshold.designer.cs">
+      <DependentUpon>FrmUpdateReorderThreshold.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmUpdateShippingTerm.cs">
       <SubType>Form</SubType>
@@ -167,6 +228,12 @@
     <EmbeddedResource Include="FrmAddShippingVendor.resx">
       <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintOrderDetails.resx">
+      <DependentUpon>frmPrintOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintPackReport.resx">
+      <DependentUpon>frmPrintPackReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProduct.resx">
       <DependentUpon>frmProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,8 +252,29 @@
     <EmbeddedResource Include="FrmShipping.resx">
       <DependentUpon>FrmShipping.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingAllOrders.resx">
+      <DependentUpon>FrmShippingAllOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingMyOrders.resx">
+      <DependentUpon>FrmShippingMyOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingPackList.resx">
+      <DependentUpon>FrmShippingPackList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingPickList.resx">
+      <DependentUpon>FrmShippingPickList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmStartUp.resx">
       <DependentUpon>frmStartUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderAmount.resx">
+      <DependentUpon>FrmUpdateReorderAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderOnOrder.resx">
+      <DependentUpon>FrmUpdateReorderOnOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateReorderThreshold.resx">
+      <DependentUpon>FrmUpdateReorderThreshold.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateShippingTerm.resx">
       <DependentUpon>FrmUpdateShippingTerm.cs</DependentUpon>
@@ -224,6 +312,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reports\PackListReport.rdlc" />
+    <EmbeddedResource Include="Reports\PickReport.rdlc" />
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\com.Farouche.Commons.CLSLineItem.datasource" />
+    <None Include="Properties\DataSources\com.Farouche.Commons.CLSPackDetails.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

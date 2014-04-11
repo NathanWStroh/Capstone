@@ -36,16 +36,19 @@ namespace com.Farouche
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
             txtVendorName.Text = vendorOrder.Name;
             txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
-            txtDateOrdered.Text = vendorOrder.DateOrdered.ToString();
+
+            //Do cast
+            // txtDateOrdered.Text = vendorOrder.DateOrdered;
             //VendorOrderLineItem vendorOrderLineItem1 = new VendorOrderLineItem(vendorOrder.VendorOrderID, vendorOrder.ProductID);
-            //vendorOrderLineItem1.VendorOrderId = VendorOrder.Id.ToString();
+            //vendorOrderLineItem1.VendorOrderId = vendorOrder.VendorOrderID;
             //vendorOrderLineItem1.ProductID = vendorOrder.ProductID;
             //vendorOrderLineItem1.Name = "mouse";
             //vendorOrderLineItem1.QtyOrdered = 25;
 
 
-            //vendorOrderLineItemList = new List<VendorOrderLineItem>();
-            //vendorOrderLineItemList.Add(vendorOrderLineItem1);
+
+            vendorOrderLineItemList = new List<VendorOrderLineItem>();
+           // vendorOrderLineItemList.Add(vendorOrderLineItem1);
             populateVendorOrderLineItems(lvVendorOrderLineItems, vendorOrder);
             
         }
@@ -103,6 +106,10 @@ namespace com.Farouche
             var id = Int32.Parse(txtVendorOrderID.Text);
             
             _frmReceivingNotes = new frmReceivingNotes(vendorOrder.Id, productID);
+
+            //vendorOrder.VendorOrderID = Int32.Parse(txtVendorOrderID.Text);
+            
+           // _frmReceivingNotes = new frmReceivingNotes(vendorOrder.VendorOrderID, productID);
             _frmReceivingNotes.BringToFront();
             _frmReceivingNotes.Show();
 

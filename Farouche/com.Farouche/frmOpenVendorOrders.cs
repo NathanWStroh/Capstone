@@ -35,8 +35,10 @@ namespace com.Farouche
             
             _receivingManager = new ReceivingManager();
 
+
             fillVendorDropDown();
             fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
+
             
             
         }
@@ -74,7 +76,8 @@ namespace com.Farouche
             {
                 var item = new ListViewItem();
 
-                item.Text = vendorOrder.Id.ToString();
+
+               // item.Text = vendorOrder.VendorOrderID.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
                 item.SubItems.Add(vendorOrder.Name);
                 item.SubItems.Add(vendorOrder.DateOrdered.ToString());
@@ -118,16 +121,19 @@ namespace com.Farouche
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)
         {
+
             
             
             vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedText));
             orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
             fillListView(lvOpenVendorOrders, orderList);
 
+
         }
 
         private void createVendorOrder()
         {
+
 
             _vendorOrdersManager = new VendorOrderManager();
             vendorOrder = new VendorOrder(10);
