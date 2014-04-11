@@ -242,3 +242,5 @@ INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) 
 INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WV', N'West Virginia', 24700, 26899)
 INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WY', N'Wyoming', 82000, 83199)
 GO
+
+/*Inserts for VendorOrders*/
