@@ -33,7 +33,7 @@ namespace com.Farouche.DataAccess
                 };
                 mySqlCommand.Parameters.AddWithValue("@productID", vendorSrcItem.ProductID);
                 mySqlCommand.Parameters.AddWithValue("@vendorID", vendorSrcItem.VendorID);
-                mySqlCommand.Parameters.AddWithValue("@unitCost", (SqlMoney)vendorSrcItem.UnitCost);
+                mySqlCommand.Parameters.AddWithValue("@unitCost", vendorSrcItem.UnitCost);
                 mySqlCommand.Parameters.AddWithValue("@minQtyToOrder", vendorSrcItem.MinQtyToOrder);
                 mySqlCommand.Parameters.AddWithValue("@itemsPerCase", vendorSrcItem.ItemsPerCase);
                 mySqlCommand.Parameters.AddWithValue("@active", vendorSrcItem.Active ? 1 : 0); //Change to bit, Ternary Operator 
@@ -42,7 +42,6 @@ namespace com.Farouche.DataAccess
                 {
                     return true;
                 }
-
             }
             catch (DataException ex)
             {
@@ -403,6 +402,7 @@ namespace com.Farouche.DataAccess
                             UnitCost = (Decimal) mySqlReader.GetSqlMoney(2),
                             MinQtyToOrder = mySqlReader.GetInt32(3),
                             ItemsPerCase = mySqlReader.GetInt32(4),
+                            Name = mySqlReader.GetString(5),
                             Active = true
                         };
 

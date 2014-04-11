@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
+using System.Collections.Generic;
 
 //Author: Nathan S
 //Date Created: null
@@ -20,31 +21,40 @@ using com.Farouche.Commons;
 * 04/02/2014   Kaleb                                        Added PopulateActiveCombo, PopulateLocationCombo, ResetDefaults methods.
 *
 * 04/02/2014   Kaleb                                        Corrected code to correctly add a product and update a product.
+*
+* 04/10/2014   Kaleb                                        Adjusted the form to have numericUpDown controls rather than text boxes for certain fields.
+* 
+* 04/10/2014   Kaleb                                        Added data validation to the form.
 */
 
 namespace com.Farouche.Presentation
 {
     public partial class ProductView : Form
     {
-        private VendorManager _vendorManager = new VendorManager();
-        private ProductManager _productManager = new ProductManager();
+        private VendorManager _vendorManager;
+        private ProductManager _productManager;
+        private VendorSourceItemManager _vendorSourceManager;
         private Product _currentProduct;
-
         private readonly AccessToken _myAccessToken;
 
         public ProductView(AccessToken accToken)
         {
             InitializeComponent();
             _myAccessToken = accToken;
+            _productManager = new ProductManager();
+            _vendorManager = new VendorManager();
+            _vendorSourceManager = new VendorSourceItemManager();
             this.Text = "Add Product";
             btMorph.Text = "Add Product";
             PopulateLocationCombo();
             PopulateActiveCombo();
             tbProductID.Enabled = false;
-            tbProductID.Text = "The id will automatically be assigned.";
+            tbProductID.Text = "The ID will automatically be created.";
             this.lblVendors.Visible = false;
-            this.lvVendor.Visible = false;
+            this.lvVendors.Visible = false;
             this.btAddVendor.Visible = false;
+            lblPriceDisplay.Text = String.Format("{0:C}", 0);
+            lblWeightDisplay.Text = "0.0 lbs";
             tbProductID.Focus();
         }//End of ProductView(.)
 
@@ -52,25 +62,29 @@ namespace com.Farouche.Presentation
         {
             InitializeComponent();
             _myAccessToken = accToken;
+            _productManager = new ProductManager();
+            _vendorManager = new VendorManager();
+            _vendorSourceManager = new VendorSourceItemManager();
             _currentProduct = ProductInfo;
-
             //Assigning the current product values to the appropriate controls.
             this.Text = "Update Product";
             btMorph.Text = "Update Product";
             tbProductID.Text = ProductInfo.Id.ToString();
             tbDescription.Text = ProductInfo.description;
             tbItemName.Text = ProductInfo.Name;
-            tbUnitPrice.Text = ProductInfo.unitPrice.ToString();
-            tbQuantity.Text = ProductInfo.available.ToString();
-            txtOnHand.Text = ProductInfo.reserved.ToString();
-            txtThreshold.Text = ProductInfo._reorderThreshold.ToString();
-            txtReorder.Text = ProductInfo._reorderAmount.ToString();
-            txtOnOrder.Text = ProductInfo._onOrder.ToString();
+            nudUnitPrice.Value = ProductInfo.unitPrice;
+            nudAvailableQty.Value = ProductInfo.available;
+            nudOnHandQty.Value = ProductInfo.reserved;
+            nudReorderThreshold.Value = (decimal)ProductInfo._reorderThreshold;
+            nudReorderAmount.Value = (decimal)ProductInfo._reorderAmount;
+            nudOnOrderAmount.Value = ProductInfo._onOrder;
             txtDimensions.Text = ProductInfo._shippingDemensions;
-            txtWeight.Text = ProductInfo._shippingWeight.ToString();
+            nudWeight.Value = (decimal)ProductInfo._shippingWeight;
             PopulateActiveCombo();
             PopulateLocationCombo();
+            PopulateListView(lvVendors, ProductInfo.Id);
             this.btnClear.Enabled = false;
+            lblPriceDisplay.Text = String.Format("{0:C}", ProductInfo.unitPrice);
             tbItemName.Focus();
         }//End of ProductView(..)
 
@@ -93,11 +107,6 @@ namespace com.Farouche.Presentation
             }
         }//ProductView(.)
 
-        private void lvVendor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btAddVendor.Enabled = false;
-        }//ProductView
-
         private void btClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -105,79 +114,146 @@ namespace com.Farouche.Presentation
 
         private void btAddVendor_Click(object sender, EventArgs e)
         {
-            AddVendorWindow newWindow = new AddVendorWindow(tbProductID.Text);
+            FrmAttachVendorSource frmVendorSource = new FrmAttachVendorSource(_currentProduct);
+            frmVendorSource.ShowDialog();
+            PopulateListView(lvVendors, _currentProduct.Id);
         }//End of btAddVendor_Click(..)
 
         private void btMorph_Click(object sender, EventArgs e)
         {
+            bool validProduct = true;
+            string errorMessage = "Please correct the following errors:\n";
+            
             if (btMorph.Text == "Add Product")
             {
-                //Add Error handling!
-                Product newProduct = new Product()
+                if (Validation.IsBlank(tbItemName.Text) || Validation.IsNullOrEmpty(tbItemName.Text))
                 {
-                    description = tbDescription.Text,
-                    Name = tbItemName.Text,
-                    unitPrice = Convert.ToDecimal(tbUnitPrice.Text),
-                    available = Convert.ToInt32(tbQuantity.Text),
-                    reserved = Convert.ToInt32(txtOnHand.Text),
-                    _reorderThreshold = txtThreshold.Text == null || txtThreshold.Text == "" ? (int?)null : Convert.ToInt32(txtThreshold.Text),
-                    _reorderAmount = txtReorder.Text == null || txtReorder.Text == "" ? (int?)null : Convert.ToInt32(txtReorder.Text),
-                    _onOrder = Convert.ToInt32(txtOnOrder.Text),
-                    location = comboWHSL.SelectedIndex == 0 ? null : comboWHSL.SelectedItem.ToString(),
-                    _shippingWeight = txtWeight.Text == null || txtWeight.Text == "" ? (double?)null : Convert.ToDouble(txtWeight.Text),
-                    _shippingDemensions = txtDimensions.Text == null || txtDimensions.Text == "" ? null : txtDimensions.Text,
-                    Active = Convert.ToBoolean(cbActive.SelectedItem)
-                };
-                try
+                    validProduct = false;
+                    errorMessage += "\nEnter a short description.";
+                }
+                if (tbItemName.Text.Length > 50)
                 {
-                    if (_productManager.AddProduct(newProduct))
+                    validProduct = false;
+                    errorMessage += "\nThe name must be 50 characters or less.";
+                }
+                if (Validation.IsBlank(tbDescription.Text) || Validation.IsNullOrEmpty(tbDescription.Text))
+                {
+                    validProduct = false;
+                    errorMessage += "\nEnter a description.";
+                }
+                if(tbDescription.Text.Length > 250)
+                {
+                    validProduct = false;
+                    errorMessage += "\nThe description must be 250 characters or less.";
+                }
+                if(txtDimensions.Text.Length > 50)
+                {
+                    validProduct = false;
+                    errorMessage += "\nThe shipping dimensions must be 50 characters or less.";
+                }
+                if (validProduct)
+                {
+                    Product newProduct = new Product()
                     {
-                        this.DialogResult = DialogResult.OK;
-                        MessageBox.Show("The product was added to inventory.");
+                        description = tbDescription.Text,
+                        Name = tbItemName.Text,
+                        unitPrice = nudUnitPrice.Value,
+                        available = (int)nudAvailableQty.Value,
+                        reserved = (int)nudOnHandQty.Value,
+                        _reorderThreshold = (int?)nudReorderThreshold.Value,
+                        _reorderAmount = (int?)nudReorderAmount.Value,
+                        _onOrder = (int)nudOnOrderAmount.Value,
+                        location = comboWHSL.SelectedIndex == 0 ? null : comboWHSL.SelectedItem.ToString(),
+                        _shippingWeight = (double)nudWeight.Value,
+                        _shippingDemensions = txtDimensions.Text == null || txtDimensions.Text == "" ? null : txtDimensions.Text,
+                        Active = Convert.ToBoolean(cbActive.SelectedItem)
+                    };
+                    try
+                    {
+                        if (_productManager.AddProduct(newProduct))
+                        {
+                            this.DialogResult = DialogResult.OK;
+                            MessageBox.Show("The product was added to inventory.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("The product was not added to inventory.\nPlease try again.");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("The product was not added to inventory.\nPlease try again.");
+                        MessageBox.Show("Error has Occured. Error Message: " + ex.Message);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error has Occured. Error Message: " + ex.Message);
+                    MessageBox.Show(errorMessage);
                 }
             }
             else if (btMorph.Text == "Update Product")
             {
-                //Add error handling!
-                Product newProduct = new Product()
+                if (Validation.IsBlank(tbItemName.Text) || Validation.IsNullOrEmpty(tbItemName.Text))
                 {
-                    description = tbDescription.Text,
-                    Name = tbItemName.Text,
-                    unitPrice = Convert.ToDecimal(tbUnitPrice.Text),
-                    available = Convert.ToInt32(tbQuantity.Text),
-                    reserved = Convert.ToInt32(txtOnHand.Text),
-                    _reorderThreshold = txtThreshold.Text == null || txtThreshold.Text == "" ? (int?)null : Convert.ToInt32(txtThreshold.Text),
-                    _reorderAmount = txtReorder.Text == null || txtReorder.Text == "" ? (int?)null : Convert.ToInt32(txtReorder.Text),
-                    _onOrder = Convert.ToInt32(txtOnOrder.Text),
-                    location = comboWHSL.SelectedIndex == 0 ? null : comboWHSL.SelectedItem.ToString(),
-                    _shippingWeight = txtWeight.Text == null || txtWeight.Text == "" ? (double?)null : Convert.ToDouble(txtWeight.Text),
-                    _shippingDemensions = txtDimensions.Text == null || txtDimensions.Text == "" ? null : txtDimensions.Text,
-                    Active = Convert.ToBoolean(cbActive.SelectedItem)
-                };
-                try
+                    validProduct = false;
+                    errorMessage += "\nEnter a short description.";
+                }
+                if (tbItemName.Text.Length > 50)
                 {
-                    if (_productManager.UpdateProduct(newProduct, _currentProduct))
+                    validProduct = false;
+                    errorMessage += "\nThe name must be 50 characters or less.";
+                }
+                if (Validation.IsBlank(tbDescription.Text) || Validation.IsNullOrEmpty(tbDescription.Text))
+                {
+                    validProduct = false;
+                    errorMessage += "\nEnter a description.";
+                }
+                if (tbDescription.Text.Length > 250)
+                {
+                    validProduct = false;
+                    errorMessage += "\nThe description must be 250 characters or less.";
+                }
+                if (txtDimensions.Text.Length > 50)
+                {
+                    validProduct = false;
+                    errorMessage += "\nThe shipping dimensions must be 50 characters or less.";
+                }
+                if (validProduct)
+                {
+                    Product newProduct = new Product()
                     {
-                        this.DialogResult = DialogResult.OK;
-                        MessageBox.Show("The product was updated.");
+                        description = tbDescription.Text,
+                        Name = tbItemName.Text,
+                        unitPrice = nudUnitPrice.Value,
+                        available = (int)nudAvailableQty.Value,
+                        reserved = (int)nudOnHandQty.Value,
+                        _reorderThreshold = (int?)nudReorderThreshold.Value,
+                        _reorderAmount = (int?)nudReorderAmount.Value,
+                        _onOrder = (int)nudOnOrderAmount.Value,
+                        location = comboWHSL.SelectedIndex == 0 ? null : comboWHSL.SelectedItem.ToString(),
+                        _shippingWeight = (double)nudWeight.Value,
+                        _shippingDemensions = txtDimensions.Text == null || txtDimensions.Text == "" ? null : txtDimensions.Text,
+                        Active = Convert.ToBoolean(cbActive.SelectedItem)
+                    };
+                    try
+                    {
+                        if (_productManager.UpdateProduct(newProduct, _currentProduct))
+                        {
+                            this.DialogResult = DialogResult.OK;
+                            MessageBox.Show("The product was updated.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("The product was not updated.\nAnother user may have already updated this product.");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("The product was not updated.\nPlease try again.");
+                        MessageBox.Show("Error has Occured. Error Message: " + ex.Message);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error has Occured. Error Message: " + ex.Message);
+                    MessageBox.Show(errorMessage);
                 }
             }
         }//End of btMorph_Click(..)
@@ -224,14 +300,14 @@ namespace com.Farouche.Presentation
         {
             tbDescription.Text = "";
             tbItemName.Text = "";
-            tbUnitPrice.Text = "";
-            tbQuantity.Text = "";
-            txtOnHand.Text = "";
-            txtThreshold.Text = "";
-            txtReorder.Text = "";
-            txtOnOrder.Text = "";
+            nudUnitPrice.Value = 0;
+            nudAvailableQty.Value = 0;
+            nudOnHandQty.Value = 0;
+            nudReorderThreshold.Value = 0;
+            nudReorderAmount.Value = 0;
+            nudOnOrderAmount.Value = 0;
             txtDimensions.Text = "";
-            txtWeight.Text = "";
+            nudWeight.Value = 0;
             comboWHSL.SelectedIndex = 0;
             cbActive.SelectedIndex = 0;
         }
@@ -240,6 +316,40 @@ namespace com.Farouche.Presentation
         private void btnClear_Click(object sender, EventArgs e)
         {
             ResetDefaults();
-        }//End of ResetDefaults()
+        }//End of ResetDefaults(..)
+
+        private void nudUnitPrice_ValueChanged(object sender, EventArgs e)
+        {
+            lblPriceDisplay.Text = String.Format("{0:C}", nudUnitPrice.Value);
+        }//End of nudUnitPrice_ValueChanged(..)
+
+        private void nudWeight_ValueChanged(object sender, EventArgs e)
+        {
+            lblWeightDisplay.Text = nudWeight.Value.ToString() + " lbs";
+        }//End of nudWeight_ValueChanged(..)
+        
+        //Populates a list view.
+        private void PopulateListView(ListView lv, int productID)
+        {
+            List<VendorSourceItem> vendorSourceList = _vendorSourceManager.GetVendorSourceItemsByProduct(productID);
+            lv.Items.Clear();
+            lv.Columns.Clear();
+            foreach (var vendorSource in vendorSourceList)
+            {
+                var item = new ListViewItem();
+                item.Text = vendorSource.Name;
+                item.SubItems.Add(String.Format("{0:C}", vendorSource.UnitCost));
+                item.SubItems.Add(vendorSource.MinQtyToOrder.ToString());
+                item.SubItems.Add(vendorSource.ItemsPerCase.ToString());
+                item.SubItems.Add(vendorSource.Active.ToString());
+                lv.Items.Add(item);
+            }
+            lv.Columns.Add("Vendor Name");
+            lv.Columns.Add("Unit Cost");
+            lv.Columns.Add("Min Order Qty");
+            lv.Columns.Add("Case Qty");
+            lv.Columns.Add("Active");
+            lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }//End of populateListView(..)
     }//public partial class ProductView : Form
 }

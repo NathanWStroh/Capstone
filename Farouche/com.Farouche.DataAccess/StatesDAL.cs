@@ -25,7 +25,7 @@ namespace com.Farouche.DataAccess
     {
         public static Dictionary<int, State> GetAllStates(SqlConnection connection)
         {
-            Dictionary<int, State> states = null;
+            Dictionary<int, State> states = new Dictionary<int, State>();
             SqlConnection conn = connection ?? GetInventoryDbConnection();
             try
             {

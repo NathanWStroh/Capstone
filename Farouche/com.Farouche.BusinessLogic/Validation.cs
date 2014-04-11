@@ -84,38 +84,47 @@ namespace com.Farouche.BusinessLogic
 
         public static Boolean ValidateZip(String zip, String sCode)
         {
-            //ApplicationVariables appVariables = new ApplicationVariables();
-            //State state = new State(0);
-            //state.StateCode = sCode;
-            
+            int intZip;
+            int firstZip = 0;
+            int lastZip = 0;
 
-            //if (appVariables.States.Values.Contains(state)); 
-            //{
-            //    Console.WriteLine("bingo");
-            //}
-
-          
+            if (!IsInt(zip))
+            {
+                throw new ArgumentException("Zip is not a valid zip code");
+            }
 
 
-            //for (int i = 0; i < appVariables.States.Count-1; i++)
-            //{
-            //    Console.WriteLine(appVariables.States.Values.ToString());   
-            //}
+            intZip = Convert.ToInt32(zip);
 
-            //foreach (appVariables.States state in appVariables.States)
-            //{
-		 
-            //}
-
-
-            //if (appVariables.States.Values.ElementAt(2).
-            //{
-                
-            //}
+            var appVariables = ApplicationVariables.Instance;
 
 
 
-            return true;
+            for (int i = 1; i <= appVariables.States.Count; i++)
+            {
+
+                if (appVariables.States[i].StateCode.Equals(sCode))
+                {
+                    firstZip = appVariables.States[i].FirstZipCode;
+                    lastZip = appVariables.States[i].LastZipCode;
+                }
+
+            }
+
+
+
+            if (intZip >= firstZip && intZip <= lastZip)
+            {
+                return true;
+            }
+
+
+            return false;
+
+
+
+
+
         }
 
 

@@ -166,6 +166,18 @@ GO
 */
 
 GO
+PRINT N'Creating [dbo].[ApplicationVariables]...';
+
+
+GO
+CREATE TABLE [dbo].[ApplicationVariables] (
+    [ParameterKey]   VARCHAR (50)  NOT NULL,
+    [ParameterValue] VARCHAR (500) NOT NULL,
+    UNIQUE NONCLUSTERED ([ParameterKey] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
 PRINT N'Creating [dbo].[Categories]...';
 
 
@@ -477,12 +489,12 @@ PRINT N'Creating [dbo].[VendorOrders]...';
 
 GO
 CREATE TABLE [dbo].[VendorOrders] (
-    [VendorOrderID]     INT           IDENTITY (1, 1) NOT NULL,
-    [VendorID]          INT           NOT NULL,
-    [DateOrdered]       SMALLDATETIME NOT NULL,
-    [AmountOfShipments] INT           NOT NULL,
-    [Finalized]         BIT           NOT NULL,
-    [Active]            BIT           NOT NULL,
+    [VendorOrderID]     INT      IDENTITY (1, 1) NOT NULL,
+    [VendorID]          INT      NOT NULL,
+    [DateOrdered]       DATETIME NOT NULL,
+    [AmountOfShipments] INT      NOT NULL,
+    [Finalized]         BIT      NOT NULL,
+    [Active]            BIT      NOT NULL,
     CONSTRAINT [PK_VendorOrders] PRIMARY KEY CLUSTERED ([VendorOrderID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
 ) ON [PRIMARY];
 
@@ -949,6 +961,15 @@ AS
                 vsi.Active = 'true' and
                 vsi.VendorID = @VendorID  and
                 OnHand + OnOrder < ReorderThreshold
+GO
+PRINT N'Creating [dbo].[proc_GetAllApplicationVariables]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetAllApplicationVariables]
+AS
+	SELECT ParameterKey as 'Key', ParameterValue as 'Value'
+	from ApplicationVariables
 GO
 PRINT N'Creating [dbo].[proc_GetAllOpenVendorOrders]...';
 
@@ -2428,10 +2449,12 @@ GO
 CREATE PROCEDURE [sp_GetVendorSourceItemsByProduct]
 	(@productID int)
 AS
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
 	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-		AND [ProductID] = @productID
+	INNER JOIN [dbo].[Vendors]
+	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
+	WHERE [VendorSourceItems].[Active] = 1
+	AND [ProductID] = @productID
 	RETURN
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
@@ -2633,14 +2656,15 @@ GO
 /* VendorSourceItems Stored Procedures */
 /*Object: StoredProcedure [dbo].[sp_InsertIntoVendorSourceItems]*/
 CREATE PROCEDURE [sp_InsertIntoVendorSourceItems]
-	(@productID int,
-	@vendorID 	int,
-	@unitCost	money,
-	@minQtyToOrder		int,
-	@itemsPerCase  int,
-	@active		bit)
+	(@productID		int,
+	@vendorID 		int,
+	@unitCost		money,
+	@minQtyToOrder	int,
+	@itemsPerCase	int,
+	@active			bit)
 AS
-	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
+	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) 
+	VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
 	RETURN @@IDENTITY
 GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
@@ -2908,23 +2932,18 @@ AS
 		AND [OnHand] = @OriginalOnHand
 		AND [Description] = @OriginalDescription
 		AND (([Location] = @OriginalLocation)
-		OR (@OriginalLocation IS NULL
-		AND @Location IS NULL))
+		OR (@OriginalLocation IS NULL))
 		AND [UnitPrice] = @OriginalUnitPrice
 		AND [ShortDesc] = @OriginalShortDesc
 		AND (([ReorderThreshold] = @OriginalReorderThreshold)
-		OR (@OriginalReorderThreshold IS NULL
-		AND @ReorderThreshold IS NULL))
+		OR (@OriginalReorderThreshold IS NULL))
 		AND (([ReorderAmount] = @OriginalReorderAmount)
-		OR (@OriginalReorderAmount IS NULL
-		AND @ReorderAmount IS NULL))
+		OR (@OriginalReorderAmount IS NULL))
 		AND [OnOrder] = @OriginalOnOrder
 		AND (([ShippingDimensions] = @OriginalShippingDimensions)
-		OR (@OriginalShippingDimensions IS NULL
-		AND @ShippingDimensions IS NULL))
+		OR (@OriginalShippingDimensions IS NULL))
 		AND (([ShippingWeight] = @OriginalShippingWeight)
-		OR (@OriginalShippingWeight IS NULL
-		AND @ShippingWeight IS NULL))
+		OR (@OriginalShippingWeight IS NULL))
 		AND [Active] = @OriginalActive
 	RETURN @@ROWCOUNT
 GO
@@ -3306,6 +3325,14 @@ INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) 
 INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WV', N'West Virginia', 24700, 26899)
 INSERT [dbo].[States] ([StateCode], [StateName], [FirstZipCode], [LastZipCode]) VALUES (N'WY', N'Wyoming', 82000, 83199)
 GO
+
+/*Inserts for VendorOrders*/
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (1, '2014-01-01T12:29:04') 
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (1, '2014-02-07T09:45:59')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (2, '2014-03-28T10:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (2, '2014-04-01T18:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (3, '2013-11-28T20:44:08')
+INSERT [dbo].[VendorOrders] ([VendorID],[DateOrdered]) VALUES (3, '2013-12-28T23:44:08')
 
 GO
 PRINT N'Checking existing data against newly created constraints';
