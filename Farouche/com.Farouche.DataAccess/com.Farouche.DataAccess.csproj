@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationVariablesDAL.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="FlexListDAL.cs" />
     <Compile Include="ProductDAL.cs" />

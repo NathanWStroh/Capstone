@@ -171,6 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(790, 319);
             this.Controls.Add(this.btnUpdateOnOrder);
             this.Controls.Add(this.btnUpdateReorderThreshold);
@@ -185,6 +186,16 @@
             this.Controls.Add(this.lblProductIDSearch);
             this.Controls.Add(this.lvProducts);
             this.Controls.Add(this.btnAddProduct);
+=======
+            this.ClientSize = new System.Drawing.Size(834, 437);
+            this.Controls.Add(this.btnShipping);
+            this.Controls.Add(this.btnLogout);
+            this.Controls.Add(this.tabControlProducts);
+            this.Controls.Add(this.btnPressed);
+            this.Controls.Add(this.btnVendorSource);
+            this.Controls.Add(this.btnVendor);
+            this.MinimumSize = new System.Drawing.Size(850, 476);
+>>>>>>> origin/master
             this.Name = "FrmProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product";

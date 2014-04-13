@@ -24,7 +24,6 @@ namespace com.Farouche.Commons
         private string _stateName;
         private int _firstZipCode;
         private int _lastZipCode;
-        private int p;
 
         public State(int id)
         {
@@ -63,7 +62,7 @@ namespace com.Farouche.Commons
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return this.Id + " " + this.StateCode + " " + this.StateName + " " + this.FirstZipCode + " " + this.LastZipCode; 
         }
 
         public override string ToXml()

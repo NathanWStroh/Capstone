@@ -5,8 +5,6 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Windows.Forms.VisualStyles;
 using com.Farouche.Commons;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace com.Farouche.DataAccess
 {
@@ -32,7 +30,7 @@ namespace com.Farouche.DataAccess
                         var newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                          {
                              DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                             NumberOfShipments = myReader.GetInt16(3),
+                             NumberOfShipments = myReader.GetInt32(3),
                              Finalized = myReader.GetBoolean(4),
                              Active = myReader.GetBoolean(5)
                          };
@@ -81,7 +79,7 @@ namespace com.Farouche.DataAccess
                         var newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            NumberOfShipments = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt32(3),
                             Finalized = myReader.GetBoolean(4)
                         };
                         allOpenOrders.Add(newVendorOrder);
@@ -127,7 +125,7 @@ namespace com.Farouche.DataAccess
                         var newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            NumberOfShipments = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt32(3),
                             Finalized = myReader.GetBoolean(4)
                         };
                         allOpenOrders.Add(newVendorOrder);
@@ -173,7 +171,7 @@ namespace com.Farouche.DataAccess
                         newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            NumberOfShipments = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt32(3),
                             Finalized = myReader.GetBoolean(4),
                             Active = myReader.GetBoolean(5)
                         };
@@ -245,7 +243,7 @@ namespace com.Farouche.DataAccess
             connection = connection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("proc_UpdateVendorOrder", connection)
+                var mySqlCommand = new SqlCommand("proc_InsertVendorOrder", connection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -296,7 +294,7 @@ namespace com.Farouche.DataAccess
                         newVendorOrder = new VendorOrder(myReader.GetInt32(0), myReader.GetInt32(1))
                         {
                             DateOrdered = (DateTime)myReader.GetSqlDateTime(2),
-                            NumberOfShipments = myReader.GetInt16(3),
+                            NumberOfShipments = myReader.GetInt32(3),
                             Finalized = myReader.GetBoolean(4),
                             Active = myReader.GetBoolean(5)
                         };
@@ -313,15 +311,15 @@ namespace com.Farouche.DataAccess
             {
                 Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
-            }
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+            //}
             finally
             {
                 connection.Close();
             }
-            
+
             throw new ApplicationException("Vendor Order from vendor: " 
                     + vendorId + ", on date: " + date + ", not found");
         }
