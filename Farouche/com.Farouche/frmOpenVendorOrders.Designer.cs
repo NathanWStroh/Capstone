@@ -1,4 +1,4 @@
-﻿namespace com.Farouche
+﻿namespace com.Farouche.Presentation
 {
     partial class frmOpenVendorOrders
     {

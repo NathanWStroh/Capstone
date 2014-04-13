@@ -62,11 +62,8 @@
             this.reportsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-<<<<<<< HEAD
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
-=======
             this.menuStrip1.Size = new System.Drawing.Size(1354, 24);
->>>>>>> origin/master
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -226,11 +223,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(984, 561);
-=======
 			this.ClientSize = new System.Drawing.Size(1354, 575);
->>>>>>> origin/master
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MinimumSize = new System.Drawing.Size(1000, 600);

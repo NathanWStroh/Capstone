@@ -112,17 +112,10 @@ namespace com.Farouche.Presentation
             }
         }//ProductView(.)
 
-<<<<<<< HEAD
         private void lvVendor_SelectedIndexChanged(object sender, EventArgs e)
         {
             btAddVendor.Enabled = false;
         }//ProductView
-=======
-        private void btClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }//End of btClose_Click
->>>>>>> origin/master
 
         private void btAddVendor_Click(object sender, EventArgs e)
         {

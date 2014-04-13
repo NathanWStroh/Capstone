@@ -8,19 +8,13 @@ SET ANSI_NULLS, ANSI_PADDING, ANSI_WARNINGS, ARITHABORT, CONCAT_NULL_YIELDS_NULL
 
 GO
 :setvar DatabaseName "InventoryDatabase"
-<<<<<<< HEAD
 :setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\"
 :setvar DefaultLogPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\"
-=======
-:setvar DefaultDataPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
-:setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
-
-GO
-USE [master]
->>>>>>> origin/master
 
 GO
 :on error exit
+GO
+USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -151,7 +145,6 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
-
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -1194,10 +1187,7 @@ PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
 
 GO
 CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 AS
 	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	From VendorOrders
@@ -1375,7 +1365,7 @@ PRINT N'Creating [dbo].[proc_GetVendorOrderByVendorAndDate]...';
 GO
 CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
 	@VendorID int, 
-	@DateOrdered date
+	@DateOrdered datetime
 AS
 	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	FROM VendorOrders

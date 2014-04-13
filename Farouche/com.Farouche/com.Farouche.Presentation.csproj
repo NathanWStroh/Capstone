@@ -72,7 +72,7 @@
     </Compile>
     <Compile Include="FrmAttachVendorSource.Designer.cs">
       <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="frmPrintOrderDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,7 +243,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAttachVendorSource.resx">
       <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrintOrderDetails.resx">
       <DependentUpon>frmPrintOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -337,6 +337,8 @@
     <EmbeddedResource Include="FrmVendorAddUpdate.resx">
       <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PackListReport.rdlc" />
+    <EmbeddedResource Include="Reports\PickReport.rdlc" />
     <None Include="app.config" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSLineItem.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSPackDetails.datasource" />

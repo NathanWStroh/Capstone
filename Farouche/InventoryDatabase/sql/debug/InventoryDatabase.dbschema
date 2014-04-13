@@ -37,6 +37,25 @@
 				</Entry>
 			</Relationship>
 		</Element>
+		<Element Type="ISql100UniqueConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ApplicationVariables].[ParameterKey]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ApplicationVariables]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="3" />
+		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[((1))]]></Value>
@@ -51,7 +70,7 @@
 					<References Name="[dbo].[Users].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="3" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -67,7 +86,7 @@
 					<References Name="[dbo].[VendorOrders].[AmountOfShipments]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -83,7 +102,7 @@
 					<References Name="[dbo].[VendorOrders].[Finalized]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -99,7 +118,7 @@
 					<References Name="[dbo].[VendorOrders].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -115,7 +134,7 @@
 					<References Name="[dbo].[VendorOrderLineItems].[QtyOrdered]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -131,7 +150,7 @@
 					<References Name="[dbo].[VendorOrderLineItems].[QtyReceived]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -147,7 +166,7 @@
 					<References Name="[dbo].[VendorOrderLineItems].[QtyDamaged]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -163,7 +182,7 @@
 					<References Name="[dbo].[Products].[Available]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -179,7 +198,7 @@
 					<References Name="[dbo].[Products].[OnHand]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -195,7 +214,7 @@
 					<References Name="[dbo].[Products].[OnOrder]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -211,7 +230,7 @@
 					<References Name="[dbo].[Locations].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -227,7 +246,7 @@
 					<References Name="[dbo].[Categories].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -243,7 +262,7 @@
 					<References Name="[dbo].[ProductCategories].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -259,7 +278,7 @@
 					<References Name="[dbo].[Vendors].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -275,7 +294,7 @@
 					<References Name="[dbo].[VendorSourceItems].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -291,7 +310,7 @@
 					<References Name="[dbo].[ShippingOrders].[Picked]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -307,7 +326,7 @@
 					<References Name="[dbo].[ShippingOrderLineItems].[Picked]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
 		</Element>
 		<Element Type="ISql90DefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -323,11 +342,56 @@
 					<References Name="[dbo].[Products].[Active]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
 		</Element>
 		<Element Type="ISql90Route" Name="[AutoCreatedLocal]">
 			<Property Name="Address" Value="LOCAL" />
 			<Relationship Name="Authorizer">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Table" Name="[dbo].[ApplicationVariables]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ApplicationVariables].[ParameterKey]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="3" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[ApplicationVariables].[ParameterValue]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="500" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
 				<Entry>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
@@ -367,7 +431,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="14" />
+						<AttachedAnnotation Disambiguator="15" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -719,7 +783,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="13" />
+						<AttachedAnnotation Disambiguator="14" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -859,7 +923,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingOrders]">
 			<Relationship Name="ColumnSpecifications">
@@ -883,7 +947,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingTermsLookup]">
 			<Relationship Name="ColumnSpecifications">
@@ -907,7 +971,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_ShippingVendors]">
 			<Relationship Name="ColumnSpecifications">
@@ -931,7 +995,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_States]">
 			<Relationship Name="ColumnSpecifications">
@@ -955,7 +1019,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Users]">
 			<Relationship Name="ColumnSpecifications">
@@ -1006,7 +1070,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_VendorOrders]">
 			<Relationship Name="ColumnSpecifications">
@@ -1030,7 +1094,7 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Vendors]">
 			<Relationship Name="ColumnSpecifications">
@@ -1167,6 +1231,36 @@
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GenerateReorderReports]&#xD;&#xA;&#x9;@VendorID int&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllApplicationVariables]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT ParameterKey as 'Key', ParameterValue as 'Value'
+	from ApplicationVariables]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ApplicationVariables]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ApplicationVariables].[ParameterKey]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ApplicationVariables].[ParameterValue]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="146" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllApplicationVariables]&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllOpenVendorOrders]">
@@ -2267,10 +2361,10 @@ RETURN]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="176" />
+				<Property Name="Length" Value="178" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetCLSPackDetails]">
@@ -3199,7 +3293,7 @@ RETURN]]></Value>
 								<Element Type="ISql90TypeSpecifier">
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[date]" />
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -3209,10 +3303,10 @@ RETURN]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="291" />
+				<Property Name="Length" Value="295" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]&#xD;&#xA;&#x9;@VendorID int, &#xD;&#xA;&#x9;@DateOrdered date&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]&#xD;&#xA;&#x9;@VendorID int, &#xD;&#xA;&#x9;@DateOrdered datetime&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorOrderLineItem]">
@@ -6534,7 +6628,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="15" />
+						<AttachedAnnotation Disambiguator="16" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -6578,7 +6672,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="10" />
+						<AttachedAnnotation Disambiguator="11" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -6595,7 +6689,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="11" />
+						<AttachedAnnotation Disambiguator="12" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -6708,7 +6802,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="12" />
+						<AttachedAnnotation Disambiguator="13" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -6756,7 +6850,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="20" />
+						<AttachedAnnotation Disambiguator="21" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -6894,7 +6988,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="19" />
+						<AttachedAnnotation Disambiguator="20" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -6908,7 +7002,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="21" />
+			<AttachedAnnotation Disambiguator="22" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[ShippingOrders]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -7006,7 +7100,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="18" />
+						<AttachedAnnotation Disambiguator="19" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -7100,7 +7194,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="22" />
+			<AttachedAnnotation Disambiguator="23" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[ShippingTermsLookup]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -7166,7 +7260,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="23" />
+			<AttachedAnnotation Disambiguator="24" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[ShippingVendors]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
@@ -7351,7 +7445,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="24" />
+			<AttachedAnnotation Disambiguator="25" />
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateCategory]">
 			<Property Name="BodyScript">
@@ -8923,10 +9017,12 @@ RETURN @@ROWCOUNT]]></Value>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorSourceItemsByProduct]">
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
 	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-		AND [ProductID] = @productID
+	INNER JOIN [dbo].[Vendors]
+	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
+	WHERE [VendorSourceItems].[Active] = 1
+	AND [ProductID] = @productID
 	RETURN]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -8935,7 +9031,13 @@ RETURN @@ROWCOUNT]]></Value>
 					<References Name="[dbo].[VendorSourceItems]" />
 				</Entry>
 				<Entry>
+					<References Name="[dbo].[Vendors]" />
+				</Entry>
+				<Entry>
 					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors].[VendorID]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
@@ -8948,6 +9050,9 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors].[Name]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[VendorSourceItems].[Active]" />
@@ -8980,7 +9085,7 @@ RETURN @@ROWCOUNT]]></Value>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
 				<Property Name="CreateOffset" Value="74" />
-				<Property Name="Length" Value="321" />
+				<Property Name="Length" Value="466" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="&#x9;&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItemsByProduct] */&#xD;&#xA;CREATE PROCEDURE [sp_GetVendorSourceItemsByProduct]&#xD;&#xA;&#x9;(@productID int)&#xD;&#xA;AS" />
@@ -9741,7 +9846,8 @@ RETURN @@ROWCOUNT]]></Value>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoVendorSourceItems]">
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
+	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) 
+	VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
 	RETURN @@IDENTITY]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -9885,10 +9991,10 @@ RETURN @@ROWCOUNT]]></Value>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
 				<Property Name="CreateOffset" Value="115" />
-				<Property Name="Length" Value="485" />
+				<Property Name="Length" Value="490" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;&#xD;&#xA;/* VendorSourceItems Stored Procedures */&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_InsertIntoVendorSourceItems]*/&#xD;&#xA;CREATE PROCEDURE [sp_InsertIntoVendorSourceItems]&#xD;&#xA;&#x9;(@productID int,&#xD;&#xA;&#x9;@vendorID &#x9;int,&#xD;&#xA;&#x9;@unitCost&#x9;money,&#xD;&#xA;&#x9;@minQtyToOrder&#x9;&#x9;int,&#xD;&#xA;&#x9;@itemsPerCase  int,&#xD;&#xA;&#x9;@active&#x9;&#x9;bit)&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;&#xD;&#xA;/* VendorSourceItems Stored Procedures */&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_InsertIntoVendorSourceItems]*/&#xD;&#xA;CREATE PROCEDURE [sp_InsertIntoVendorSourceItems]&#xD;&#xA;&#x9;(@productID&#x9;&#x9;int,&#xD;&#xA;&#x9;@vendorID &#x9;&#x9;int,&#xD;&#xA;&#x9;@unitCost&#x9;&#x9;money,&#xD;&#xA;&#x9;@minQtyToOrder&#x9;int,&#xD;&#xA;&#x9;@itemsPerCase&#x9;int,&#xD;&#xA;&#x9;@active&#x9;&#x9;&#x9;bit)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_ReactivateCategory]">
@@ -10528,23 +10634,18 @@ RETURN @@ROWCOUNT]]></Value>
 		AND [OnHand] = @OriginalOnHand
 		AND [Description] = @OriginalDescription
 		AND (([Location] = @OriginalLocation)
-		OR (@OriginalLocation IS NULL
-		AND @Location IS NULL))
+		OR (@OriginalLocation IS NULL))
 		AND [UnitPrice] = @OriginalUnitPrice
 		AND [ShortDesc] = @OriginalShortDesc
 		AND (([ReorderThreshold] = @OriginalReorderThreshold)
-		OR (@OriginalReorderThreshold IS NULL
-		AND @ReorderThreshold IS NULL))
+		OR (@OriginalReorderThreshold IS NULL))
 		AND (([ReorderAmount] = @OriginalReorderAmount)
-		OR (@OriginalReorderAmount IS NULL
-		AND @ReorderAmount IS NULL))
+		OR (@OriginalReorderAmount IS NULL))
 		AND [OnOrder] = @OriginalOnOrder
 		AND (([ShippingDimensions] = @OriginalShippingDimensions)
-		OR (@OriginalShippingDimensions IS NULL
-		AND @ShippingDimensions IS NULL))
+		OR (@OriginalShippingDimensions IS NULL))
 		AND (([ShippingWeight] = @OriginalShippingWeight)
-		OR (@OriginalShippingWeight IS NULL
-		AND @ShippingWeight IS NULL))
+		OR (@OriginalShippingWeight IS NULL))
 		AND [Active] = @OriginalActive
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
@@ -11059,7 +11160,7 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="2162" />
+				<Property Name="Length" Value="2008" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[sp_UpdateProducts]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Available&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OnOrder&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions&#x9;&#x9;&#x9;&#x9;varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Bit,&#xD;&#xA;&#x9;@OriginalAvailable&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OriginalOnHand&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OriginalDescription&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@OriginalLocation&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@OriginalUnitPrice&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@OriginalShortDesc&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@OriginalReorderThreshold &#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalReorderAmount&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalOnOrder&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalShippingDimensions &#x9;varchar(50),&#xD;&#xA;&#x9;@OriginalShippingWeight&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@OriginalActive&#x9;&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
@@ -11920,7 +12021,7 @@ RETURN @@ROWCOUNT]]></Value>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="25" />
+			<AttachedAnnotation Disambiguator="26" />
 		</Element>
 		<Element Type="ISql100UniqueConstraint" Name="[dbo].[UQ_ProductID_Category]">
 			<Relationship Name="ColumnSpecifications">
@@ -12198,7 +12299,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="3" />
+						<AttachedAnnotation Disambiguator="4" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -12257,7 +12358,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="7" />
+						<AttachedAnnotation Disambiguator="8" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -12274,7 +12375,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="8" />
+						<AttachedAnnotation Disambiguator="9" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -12291,8 +12392,8 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="26" />
-						<AttachedAnnotation Disambiguator="9" />
+						<AttachedAnnotation Disambiguator="27" />
+						<AttachedAnnotation Disambiguator="10" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -12351,7 +12452,7 @@ RETURN @@ROWCOUNT]]></Value>
 								<Element Type="ISql90TypeSpecifier">
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[smalldatetime]" />
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -12373,7 +12474,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="4" />
+						<AttachedAnnotation Disambiguator="5" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -12390,7 +12491,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="5" />
+						<AttachedAnnotation Disambiguator="6" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -12407,8 +12508,8 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="27" />
-						<AttachedAnnotation Disambiguator="6" />
+						<AttachedAnnotation Disambiguator="28" />
+						<AttachedAnnotation Disambiguator="7" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -12610,7 +12711,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="16" />
+						<AttachedAnnotation Disambiguator="17" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -12717,7 +12818,7 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="17" />
+						<AttachedAnnotation Disambiguator="18" />
 					</Element>
 				</Entry>
 			</Relationship>

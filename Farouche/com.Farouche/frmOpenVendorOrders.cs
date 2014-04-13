@@ -9,7 +9,9 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
-namespace com.Farouche
+
+//commented out 38-46. When I merged it, it was broken.
+namespace com.Farouche.Presentation
 {
     public partial class frmOpenVendorOrders : Form
     {
@@ -35,42 +37,37 @@ namespace com.Farouche
             
             _receivingManager = new ReceivingManager();
 
-            createVendorOrder();
-            fillVendorDropDown();
-            fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
+            //createVendorOrder();
+            //fillVendorDropDown();
+            //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
 
-<<<<<<< HEAD
-            vendorOrder1.VendorOrderID = 1;
-            vendorOrder1.VendorID = 1;
-            vendorOrder1.ProductID = 1;
-            vendorOrder1.Name = "Sam's";
-            vendorOrder1.DateOrdered = "1/24/2014";
-            vendorOrder1.NumberOfShipments = 3;
+            //vendorOrder1.VendorOrderID = 1;
+            //vendorOrder1.VendorID = 1;
+            //vendorOrder1.ProductID = 1;
+            //vendorOrder1.Name = "Sam's";
+            //vendorOrder1.DateOrdered = "1/24/2014";
+            //vendorOrder1.NumberOfShipments = 3;
 
-            vendorOrder2.VendorOrderID = 2;
-            vendorOrder2.VendorID = 2;
-            vendorOrder2.ProductID = 2;
-            vendorOrder2.Name = "Target";
-            vendorOrder2.DateOrdered = "1/25/2014";
-            vendorOrder2.NumberOfShipments = 1;*/
+            //vendorOrder2.VendorOrderID = 2;
+            //vendorOrder2.VendorID = 2;
+            //vendorOrder2.ProductID = 2;
+            //vendorOrder2.Name = "Target";
+            //vendorOrder2.DateOrdered = "1/25/2014";
+            //vendorOrder2.NumberOfShipments = 1;
 
-            orderList = _receivingManager.GetAllOpenOrders();
+            //orderList = _receivingManager.GetAllOpenOrders();
 
-            vendorList = new List<Vendor>();
-            var vendor1 = new Vendor();
-            var vendor2 = new Vendor();
-            //vendor1.Name = vendorOrder1.Name;
-            //vendor2.Name = vendorOrder2.Name;
-            vendorList.Add(vendor1);
-            vendorList.Add(vendor2);
-            fillVendorDropDown(vendorList);
+            //vendorList = new List<Vendor>();
+            //var vendor1 = new Vendor();
+            //var vendor2 = new Vendor();
+            ////vendor1.Name = vendorOrder1.Name;
+            ////vendor2.Name = vendorOrder2.Name;
+            //vendorList.Add(vendor1);
+            //vendorList.Add(vendor2);
+            //fillVendorDropDown(vendorList);
 
             fillListView(lvOpenVendorOrders, orderList);
             //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
-=======
->>>>>>> origin/master
-            
-            
         }
 
         
@@ -128,7 +125,7 @@ namespace com.Farouche
      
         }
 
-       
+
 
         private void lvOpenVendorOrders_Click(object sender, EventArgs e)
         {
@@ -145,31 +142,8 @@ namespace com.Farouche
                 frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
                 _frmReceiving.Show();
                 _frmReceiving.BringToFront();
-                
 
-<<<<<<< HEAD
-        private void lvOpenVendorOrders_Click(object sender, EventArgs e)
-        {
-            lvOpenVendorOrders.FullRowSelect = true;
-            var selectedRow = lvOpenVendorOrders.SelectedItems;
-  
-             //  vendorOrder = new VendorOrder();
-               foreach (ListViewItem item in selectedRow)
-               {
-                   //Use the correct constructor here 
-                //   vendorOrder.Id = Int32.Parse(item.SubItems[0].Text);
-                   vendorOrder.VendorID = Int32.Parse(item.SubItems[1].Text);
-                   vendorOrder.Name = item.SubItems[2].Text;
-                 //  vendorOrder.DateOrdered = item.SubItems[3].Text;
-                   vendorOrder.NumberOfShipments = Int32.Parse(item.SubItems[4].Text);
-               }
-               frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-               _frmReceiving.BringToFront();
-               _frmReceiving.Show();
-
-=======
-            }  
->>>>>>> origin/master
+            }
         }
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)

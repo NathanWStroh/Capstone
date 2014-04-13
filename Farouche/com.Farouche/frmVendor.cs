@@ -38,7 +38,8 @@ namespace com.Farouche.Presentation
 
         private void btnUpdateVendor_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.lvVendors.SelectedIndices[0];
+            //have to add 1 to current index so it grabs the proper vendor id.
+            int currentIndex = this.lvVendors.SelectedIndices[0]+1;
             Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
             FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
             frm.ShowDialog();
