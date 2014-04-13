@@ -26,10 +26,11 @@ namespace com.Farouche.Presentation
         public FrmShippingPickList ShippingPickList;
         public FrmShippingPackList ShippingPackList;
 
-        public frmStartUp( AccessToken acctoken)
+        public frmStartUp(AccessToken acctoken)
         {
             InitializeComponent();
             _myAccessToken = acctoken;
+            this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,15 +48,6 @@ namespace com.Farouche.Presentation
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmProduct frm = new FrmProduct(_myAccessToken);
-            frm.MdiParent = this;
-            this.Text = frm.Text;
-            frm.WindowState = FormWindowState.Maximized;
-            frm.Show();
-        }
-
-        private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmVendorCreateOrder frm = new frmVendorCreateOrder(_myAccessToken);
             frm.MdiParent = this;
             this.Text = frm.Text;
             frm.WindowState = FormWindowState.Maximized;
@@ -99,6 +91,34 @@ namespace com.Farouche.Presentation
             ShippingPackList.MdiParent = this;
             ShippingPackList.WindowState = FormWindowState.Maximized;
             ShippingPackList.Show();
+        }
+
+        private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmVendor frm = new FrmVendor(_myAccessToken);
+            frm.MdiParent = this;
+            this.Text = frm.Text;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void newOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVendorCreateOrder frm = new frmVendorCreateOrder(_myAccessToken);
+            frm.MdiParent = this;
+            this.Text = frm.Text;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void viewOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //no accesstoken used
+            frmOpenVendorOrders frm = new frmOpenVendorOrders();
+            frm.MdiParent = this;
+            this.Text = frm.Text;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
         }
     }
 }

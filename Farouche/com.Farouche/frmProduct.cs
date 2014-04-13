@@ -47,7 +47,7 @@ namespace com.Farouche.Presentation
 
         private void frmAddProduct_Load(object sender, EventArgs e)
         {
-            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            //Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
 
             //Populates the active combo box. 
             this.populateActiveCombo();
@@ -155,11 +155,7 @@ namespace com.Farouche.Presentation
         {
             ProductView frm = new ProductView(_myAccessToken);
             frm.ShowDialog();
-<<<<<<< HEAD
             findActiveSelection();
-=======
-            //this.Close();
->>>>>>> nathan
         }//End of btnAdd_Click(..)
 
         //Need to make sure that this links up with Nathan's code correctly.
@@ -169,11 +165,7 @@ namespace com.Farouche.Presentation
             Product thisProduct = _myProductManager.Products[currentIndex];
             ProductView frm = new ProductView(_myAccessToken, thisProduct);
             frm.ShowDialog();
-<<<<<<< HEAD
             findActiveSelection();
-=======
-            //this.Close();   
->>>>>>> nathan
         }//End of btnUpdateProduct_Click(..)
 
         private void btnVendorSource_Click(object sender, EventArgs e)

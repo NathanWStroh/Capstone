@@ -63,20 +63,6 @@ namespace com.Farouche
             vendorList.Add(vendor2);
             fillVendorDropDown(vendorList);
 
-            
-
-            
-
-            
-
-            
-            
-
-           
-
-
-
-            
             fillListView(lvOpenVendorOrders, orderList);
             //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
             
@@ -184,7 +170,6 @@ namespace com.Farouche
                _frmReceiving.BringToFront();
                _frmReceiving.Show();
 
-               
         }
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)
@@ -197,17 +182,6 @@ namespace com.Farouche
             fillListViewByVendor(lvOpenVendorOrders, orderList);
 
         }
-        
-
-       
-        
-
-        
-
-
-
-
-            
         
     }
 }

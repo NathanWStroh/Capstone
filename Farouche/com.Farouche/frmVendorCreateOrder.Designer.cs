@@ -32,7 +32,7 @@
             this.btAddLineItem = new System.Windows.Forms.Button();
             this.btRemove = new System.Windows.Forms.Button();
             this.btAddNewProduct = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvOrderItems = new System.Windows.Forms.ListView();
             this.tbOrderDate = new System.Windows.Forms.TextBox();
             this.comboVendor = new System.Windows.Forms.ComboBox();
             this.comboShipments = new System.Windows.Forms.ComboBox();
@@ -52,7 +52,6 @@
             // 
             // btAddLineItem
             // 
-            this.btAddLineItem.Enabled = false;
             this.btAddLineItem.Location = new System.Drawing.Point(418, 70);
             this.btAddLineItem.Name = "btAddLineItem";
             this.btAddLineItem.Size = new System.Drawing.Size(75, 23);
@@ -63,13 +62,13 @@
             // 
             // btRemove
             // 
-            this.btRemove.Enabled = false;
             this.btRemove.Location = new System.Drawing.Point(577, 99);
             this.btRemove.Name = "btRemove";
             this.btRemove.Size = new System.Drawing.Size(94, 23);
             this.btRemove.TabIndex = 8;
             this.btRemove.Text = "Remove Line";
             this.btRemove.UseVisualStyleBackColor = true;
+            this.btRemove.Click += new System.EventHandler(this.btRemove_Click);
             // 
             // btAddNewProduct
             // 
@@ -81,19 +80,21 @@
             this.btAddNewProduct.UseVisualStyleBackColor = true;
             this.btAddNewProduct.Click += new System.EventHandler(this.btAddNewProduct_Click);
             // 
-            // listView1
+            // lvOrderItems
             // 
-            this.listView1.Location = new System.Drawing.Point(95, 99);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(476, 243);
-            this.listView1.TabIndex = 12;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvOrderItems.FullRowSelect = true;
+            this.lvOrderItems.Location = new System.Drawing.Point(95, 99);
+            this.lvOrderItems.Name = "lvOrderItems";
+            this.lvOrderItems.Size = new System.Drawing.Size(476, 243);
+            this.lvOrderItems.TabIndex = 12;
+            this.lvOrderItems.UseCompatibleStateImageBehavior = false;
+            this.lvOrderItems.View = System.Windows.Forms.View.Details;
             // 
             // tbOrderDate
             // 
             this.tbOrderDate.Location = new System.Drawing.Point(490, 11);
             this.tbOrderDate.Name = "tbOrderDate";
+            this.tbOrderDate.ReadOnly = true;
             this.tbOrderDate.Size = new System.Drawing.Size(100, 20);
             this.tbOrderDate.TabIndex = 13;
             // 
@@ -147,6 +148,7 @@
             this.btSaveOrder.TabIndex = 20;
             this.btSaveOrder.Text = "Save Order";
             this.btSaveOrder.UseVisualStyleBackColor = true;
+            this.btSaveOrder.Click += new System.EventHandler(this.btSaveOrder_Click);
             // 
             // frmVendorCreateOrder
             // 
@@ -160,7 +162,7 @@
             this.Controls.Add(this.comboShipments);
             this.Controls.Add(this.comboVendor);
             this.Controls.Add(this.tbOrderDate);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lvOrderItems);
             this.Controls.Add(this.comboProduct);
             this.Controls.Add(this.btAddLineItem);
             this.Controls.Add(this.btRemove);
@@ -178,7 +180,7 @@
         private System.Windows.Forms.Button btAddLineItem;
         private System.Windows.Forms.Button btRemove;
         private System.Windows.Forms.Button btAddNewProduct;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvOrderItems;
         private System.Windows.Forms.TextBox tbOrderDate;
         private System.Windows.Forms.ComboBox comboVendor;
         private System.Windows.Forms.ComboBox comboShipments;

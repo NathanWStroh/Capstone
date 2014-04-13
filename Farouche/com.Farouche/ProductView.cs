@@ -61,7 +61,6 @@ namespace com.Farouche.Presentation
             tbDescription.Text = ProductInfo.description;
             tbItemName.Text = ProductInfo.Name;
             tbUnitPrice.Text = ProductInfo.unitPrice.ToString();
-<<<<<<< HEAD
             tbQuantity.Text = ProductInfo.available.ToString();
             txtOnHand.Text = ProductInfo.reserved.ToString();
             txtThreshold.Text = ProductInfo._reorderThreshold.ToString();
@@ -74,18 +73,11 @@ namespace com.Farouche.Presentation
             this.btnClear.Enabled = false;
             tbItemName.Focus();
         }//End of ProductView(..)
-=======
 
-            this.Text = "Update " + this.Text;
-
-            btMorph.Text = "Update";
-
-        }
         private void btClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }//btClose_Click
->>>>>>> nathan
 
         public ProductView(String itemName)
         {
@@ -110,11 +102,6 @@ namespace com.Farouche.Presentation
         {
             btAddVendor.Enabled = false;
         }//ProductView
-
-        private void btClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }//End of btClose_Click
 
         private void btAddVendor_Click(object sender, EventArgs e)
         {

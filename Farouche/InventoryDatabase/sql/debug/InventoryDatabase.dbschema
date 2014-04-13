@@ -2273,6 +2273,118 @@ RETURN]]></Value>
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetCLSPackDetails]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	SELECT so.ShippingOrderID, so.ShippingTermID, sv.ShippingVendorID, st.Description, sv.Name, st.Description, si.ProductID, pr.ShortDesc, si.Quantity, so.ShipDate, so.ShipToName, so.ShipToAddress, so.ShipToCity, so.ShipToState, so.ShipToZip
+	FROM [dbo].[ShippingTermsLookup] st, [dbo].[Products] pr, [dbo].[ShippingVendors] sv, [dbo].[ShippingOrders] so, [dbo].[ShippingOrderLineItems] si
+	WHERE so.ShippingOrderID = @ShippingOrderId AND so.ShippingTermID = st.ShippingTermID AND st.ShippingVendorID = sv.ShippingVendorID AND so.ShippingOrderID = si.ShippingOrderID AND si.ProductID = pr.ProductID
+RETURN]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingVendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShortDesc]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToAddress]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToCity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToState]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrders].[ShipToZip]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetCLSPackDetails].[@ShippingOrderId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingTermID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingTermsLookup].[ShippingVendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ShippingOrderLineItems].[ShippingOrderID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetCLSPackDetails].[@ShippingOrderId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="684" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetCLSPackDetails]&#xD;&#xA;&#x9;(@ShippingOrderId int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetExceptionItems]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -4042,6 +4154,216 @@ RETURN @@ROWCOUNT]]></Value>
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]&#xD;&#xA;&#x9;@VendorID int, &#xD;&#xA;&#x9;@DateOrdered date&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateProductOnOrder]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[Products]
+	SET [OnOrder] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[OnOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateProductOnOrder].[@Amount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateProductOnOrder].[@ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateProductOnOrder].[@ProductID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateProductOnOrder].[@Amount]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="196" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_UpdateProductOnOrder]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;int,&#xD;&#xA;&#x9;@Amount&#x9;&#x9;&#x9;int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateProductReorderAmount]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[Products]
+	SET [ReorderAmount] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateProductReorderAmount].[@Amount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateProductReorderAmount].[@ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateProductReorderAmount].[@ProductID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateProductReorderAmount].[@Amount]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="208" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_UpdateProductReorderAmount]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;int,&#xD;&#xA;&#x9;@Amount&#x9;&#x9;&#x9;int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateProductThreshold]">
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	UPDATE [dbo].[Products]
+	SET [ReorderThreshold] = @Amount
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ReorderThreshold]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateProductThreshold].[@Amount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_UpdateProductThreshold].[@ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateProductThreshold].[@ProductID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_UpdateProductThreshold].[@Amount]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="207" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_UpdateProductThreshold]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;int,&#xD;&#xA;&#x9;@Amount&#x9;&#x9;&#x9;int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_UpdateShippingOrder]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -4060,16 +4382,23 @@ RETURN @@ROWCOUNT]]></Value>
 		[ShipToZip]		=	@shipToZip
 	WHERE
 		[ShippingOrderID]= 	@orig_ShippingOrderID AND
-		[PurchaseOrderID]= 	@orig_PurchaseOrderID AND
-		[UserID]		=	@orig_UserID AND
+		[PurchaseOrderID]= 	@orig_PurchaseOrderID AND		
+		((@orig_UserID IS NULL AND [UserID] IS NULL)
+			OR ([UserID]		=	@orig_UserID)) AND
 		[Picked]		=	@orig_Picked AND
-		[ShipDate]		=	@orig_ShipDate AND
-		[ShippingTermID]=   @orig_ShippingTermID AND
-		[ShipToName] 	=	@orig_ShipToName AND
-		[ShipToAddress] =	@orig_ShipToAddress AND
-		[ShipToCity]	=	@orig_ShipToCity AND
-		[ShipToState] 	= 	@orig_ShipToState AND
-		[ShipToZip] 	=	@orig_ShipToZip
+		((@orig_ShipDate IS NULL AND [ShipDate] IS NULL)
+			OR ([ShipDate]		=	@orig_ShipDate)) AND		
+		[ShippingTermID]=   @orig_ShippingTermID AND		
+		((@orig_ShipToName IS NULL and [ShipToName] IS NULL)
+			OR ([ShipToName] 	=	@orig_ShipToName )) AND		
+		((@orig_ShipToAddress IS NULL AND [ShipToAddress] IS NULL)
+			OR ([ShipToAddress] =	@orig_ShipToAddress)) AND		
+		((@orig_ShipToCity IS NULL AND [ShipToCity] IS NULL)
+			OR ([ShipToCity]	=	@orig_ShipToCity)) AND		
+		((@orig_ShipToState IS NULL  AND [ShipToState] IS NULL)
+			OR ([ShipToState] 	= 	@orig_ShipToState)) AND		
+		((@orig_ShipToZip IS NULL AND [ShipToZip] IS NULL)
+			OR ([ShipToZip] 	=	@orig_ShipToZip))
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
 			<Relationship Name="BodyDependencies">
@@ -4506,7 +4835,7 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="1501" />
+				<Property Name="Length" Value="1952" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_UpdateShippingOrder]&#xD;&#xA;(&#xD;&#xA;&#x9;@purchaseOrderID int,&#xD;&#xA;&#x9;@userID int,&#xD;&#xA;&#x9;@picked&#x9;&#x9;bit,&#xD;&#xA;    @shipDate  date,&#xD;&#xA;    @shippingTermID int,&#xD;&#xA;    @shipToName  varchar(50),&#xD;&#xA;    @shipToAddress varchar(250),&#xD;&#xA;    @shipToCity   varchar(50),&#xD;&#xA;    @shipToState   varchar(50),&#xD;&#xA;    @shipToZip  varchar(10),&#x9;&#x9;  &#xD;&#xA;    @orig_ShippingOrderID int,&#xD;&#xA;    @orig_PurchaseOrderID int,&#xD;&#xA;    @orig_UserID&#x9;&#x9;int,&#xD;&#xA;    @orig_Picked&#x9;&#x9;bit,&#xD;&#xA;    @orig_ShipDate   date,&#xD;&#xA;    @orig_ShippingTermID int,&#xD;&#xA;&#x9;@orig_ShipToName  varchar(50),&#xD;&#xA;    @orig_ShipToAddress varchar(250),&#xD;&#xA;    @orig_ShipToCity varchar(50),&#xD;&#xA;    @orig_ShipToState  varchar(50),&#xD;&#xA;    @orig_ShipToZip  varchar(10)&#xD;&#xA;)&#xD;&#xA;AS" />
@@ -6270,23 +6599,6 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SimpleColumn" Name="[dbo].[Products].[OnOrder]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="12" />
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="ISql100SimpleColumn" Name="[dbo].[Products].[Description]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
@@ -6380,6 +6692,23 @@ RETURN @@ROWCOUNT]]></Value>
 								</Element>
 							</Entry>
 						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Products].[OnOrder]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="12" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -7502,6 +7831,7 @@ RETURN @@ROWCOUNT]]></Value>
 	AND [ShortDesc] = @ShortDesc
 	AND [ReorderThreshold] = @ReorderThreshold
 	AND [ReorderAmount] = @ReorderAmount
+	AND [OnOrder] = @OnOrder
 	AND [ShippingDimensions] = @ShippingDimensions
 	AND [ShippingWeight] = @ShippingWeight
 	AND [Active] = @Active
@@ -7565,6 +7895,12 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[sp_DeleteProduct].[@ReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[OnOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[sp_DeleteProduct].[@OnOrder]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[Products].[ShippingDimensions]" />
@@ -7730,6 +8066,21 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@OnOrder]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@ShippingDimensions]">
 						<Relationship Name="Type">
 							<Entry>
@@ -7777,11 +8128,10 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="57" />
-				<Property Name="Length" Value="872" />
+				<Property Name="Length" Value="861" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_DeleteProduct]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_DeleteProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Available&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions&#x9;&#x9;varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[sp_DeleteProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Available&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OnOrder&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions&#x9;&#x9;varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteProductCategory]">
@@ -8880,8 +9230,8 @@ RETURN @@ROWCOUNT]]></Value>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoProducts]">
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	INSERT IntO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[ShippingDimensions],[ShippingWeight],[Active])
-	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @ShippingDimensions, @ShippingWeight, @Active)
+	INSERT INTO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[OnOrder],[ShippingDimensions],[ShippingWeight],[Active])
+	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @OnOrder, @ShippingDimensions, @ShippingWeight, @Active)
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -8912,6 +9262,9 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[Products].[ReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[OnOrder]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[Products].[ShippingDimensions]" />
@@ -8945,6 +9298,9 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[sp_InsertIntoProducts].[@ReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[sp_InsertIntoProducts].[@OnOrder]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[sp_InsertIntoProducts].[@ShippingDimensions]" />
@@ -9086,6 +9442,21 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_InsertIntoProducts].[@OnOrder]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_InsertIntoProducts].[@ShippingDimensions]">
 						<Relationship Name="Type">
 							<Entry>
@@ -9133,10 +9504,10 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="690" />
+				<Property Name="Length" Value="729" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[sp_InsertIntoProducts]&#xD;&#xA;&#x9;(@Available&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[sp_InsertIntoProducts]&#xD;&#xA;&#x9;(@Available&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;int,&#xD;&#xA;&#x9;@OnOrder&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoVendor]">
@@ -10140,19 +10511,41 @@ RETURN @@ROWCOUNT]]></Value>
 			<Property Name="BodyScript">
 				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
 	UPDATE [dbo].[Products]
-	SET [Available] = @Available, [OnHand] = @OnHand, [Description] = @Description, [Location] = @Location, [UnitPrice] = @UnitPrice, [ShortDesc] = @ShortDesc, [ReorderThreshold] = @ReorderThreshold, [ReorderAmount] = @ReorderAmount, [ShippingDimensions] = @ShippingDimensions, [ShippingWeight] = @ShippingWeight, [Active] = @Active
+	SET [Available] = @Available, 
+		[OnHand] = @OnHand, 
+		[Description] = @Description, 
+		[Location] = @Location, 
+		[UnitPrice] = @UnitPrice, 
+		[ShortDesc] = @ShortDesc, 
+		[ReorderThreshold] = @ReorderThreshold, 
+		[ReorderAmount] = @ReorderAmount, 
+		[ShippingDimensions] = @ShippingDimensions, 
+		[ShippingWeight] = @ShippingWeight, 
+		[Active] = @Active, 
+		[OnOrder] = @OnOrder
 	WHERE [ProductID] = @ProductID
-	AND [Available] = @OriginalAvailable
-	AND [OnHand] = @OriginalOnHand
-	AND [Description] = @OriginalDescription
-	AND [Location] = @OriginalLocation
-	AND [UnitPrice] = @OriginalUnitPrice
-	AND [ShortDesc] = @OriginalShortDesc
-	AND [ReorderThreshold] = @OriginalReorderThreshold
-	AND [ReorderAmount] = @OriginalReorderAmount
-	AND [ShippingDimensions] = @OriginalShippingDimensions
-	AND	[ShippingWeight] = @OriginalShippingWeight
-	AND [Active] = @OriginalActive
+		AND [Available] = @OriginalAvailable
+		AND [OnHand] = @OriginalOnHand
+		AND [Description] = @OriginalDescription
+		AND (([Location] = @OriginalLocation)
+		OR (@OriginalLocation IS NULL
+		AND @Location IS NULL))
+		AND [UnitPrice] = @OriginalUnitPrice
+		AND [ShortDesc] = @OriginalShortDesc
+		AND (([ReorderThreshold] = @OriginalReorderThreshold)
+		OR (@OriginalReorderThreshold IS NULL
+		AND @ReorderThreshold IS NULL))
+		AND (([ReorderAmount] = @OriginalReorderAmount)
+		OR (@OriginalReorderAmount IS NULL
+		AND @ReorderAmount IS NULL))
+		AND [OnOrder] = @OriginalOnOrder
+		AND (([ShippingDimensions] = @OriginalShippingDimensions)
+		OR (@OriginalShippingDimensions IS NULL
+		AND @ShippingDimensions IS NULL))
+		AND (([ShippingWeight] = @OriginalShippingWeight)
+		OR (@OriginalShippingWeight IS NULL
+		AND @ShippingWeight IS NULL))
+		AND [Active] = @OriginalActive
 	RETURN @@ROWCOUNT]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -10227,6 +10620,12 @@ RETURN @@ROWCOUNT]]></Value>
 					<References Name="[dbo].[sp_UpdateProducts].[@Active]" />
 				</Entry>
 				<Entry>
+					<References Name="[dbo].[Products].[OnOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[sp_UpdateProducts].[@OnOrder]" />
+				</Entry>
+				<Entry>
 					<References Name="[dbo].[Products].[ProductID]" />
 				</Entry>
 				<Entry>
@@ -10255,6 +10654,9 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[sp_UpdateProducts].[@OriginalReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[sp_UpdateProducts].[@OriginalOnOrder]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[sp_UpdateProducts].[@OriginalShippingDimensions]" />
@@ -10303,21 +10705,6 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalAvailable]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OnHand]">
 						<Relationship Name="Type">
 							<Entry>
@@ -10333,38 +10720,7 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalOnHand]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@Description]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="250" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalDescription]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -10396,38 +10752,7 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalLocation]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="250" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@UnitPrice]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[money]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalUnitPrice]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -10458,38 +10783,7 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalShortDesc]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@ReorderThreshold]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalReorderThreshold]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -10519,7 +10813,7 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalReorderAmount]">
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OnOrder]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -10550,38 +10844,7 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalShippingDimensions]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@ShippingWeight]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[float]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalShippingWeight]">
 						<Relationship Name="Type">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -10611,6 +10874,175 @@ RETURN @@ROWCOUNT]]></Value>
 					</Element>
 				</Entry>
 				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalAvailable]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalOnHand]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalDescription]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalLocation]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalUnitPrice]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[money]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalShortDesc]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalReorderThreshold]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalReorderAmount]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalOnOrder]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalShippingDimensions]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalShippingWeight]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[float]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
 					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_UpdateProducts].[@OriginalActive]">
 						<Relationship Name="Type">
 							<Entry>
@@ -10627,11 +11059,10 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="58" />
-				<Property Name="Length" Value="1639" />
+				<Property Name="Length" Value="2162" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_UpdateProducts]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_UpdateProducts]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Available&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OriginalAvailable&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OriginalOnHand&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@OriginalDescription&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@OriginalLocation&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@OriginalUnitPrice&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@OriginalShortDesc&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalReorderThreshold int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalReorderAmount&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions&#x9;&#x9;varchar(50),&#xD;&#xA;&#x9;@OriginalShippingDimensions varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@OriginalShippingWeight&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;&#x9;Bit,&#xD;&#xA;&#x9;@OriginalActive&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[sp_UpdateProducts]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Available&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OnOrder&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions&#x9;&#x9;&#x9;&#x9;varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Bit,&#xD;&#xA;&#x9;@OriginalAvailable&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OriginalOnHand&#x9;&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OriginalDescription&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@OriginalLocation&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@OriginalUnitPrice&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@OriginalShortDesc&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@OriginalReorderThreshold &#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalReorderAmount&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalOnOrder&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OriginalShippingDimensions &#x9;varchar(50),&#xD;&#xA;&#x9;@OriginalShippingWeight&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@OriginalActive&#x9;&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_UpdateVendor]">
