@@ -52,6 +52,7 @@
             this.btnUpdateOnOrder.TabIndex = 34;
             this.btnUpdateOnOrder.Text = "Adjust On Order Level";
             this.btnUpdateOnOrder.UseVisualStyleBackColor = true;
+            this.btnUpdateOnOrder.Click += new System.EventHandler(this.btnUpdateOnOrder_Click);
             // 
             // btnUpdateReorderThreshold
             // 
@@ -62,6 +63,7 @@
             this.btnUpdateReorderThreshold.TabIndex = 33;
             this.btnUpdateReorderThreshold.Text = "Adjust Reorder Threshold";
             this.btnUpdateReorderThreshold.UseVisualStyleBackColor = true;
+            this.btnUpdateReorderThreshold.Click += new System.EventHandler(this.btnUpdateReorderThreshold_Click);
             // 
             // btnUpdateReorderAmount
             // 
@@ -72,6 +74,7 @@
             this.btnUpdateReorderAmount.TabIndex = 32;
             this.btnUpdateReorderAmount.Text = "Adjust Reorder Amount";
             this.btnUpdateReorderAmount.UseVisualStyleBackColor = true;
+            this.btnUpdateReorderAmount.Click += new System.EventHandler(this.btnUpdateReorderAmount_Click);
             // 
             // btnDeactivateProduct
             // 
@@ -82,6 +85,7 @@
             this.btnDeactivateProduct.TabIndex = 31;
             this.btnDeactivateProduct.Text = "Deactivate";
             this.btnDeactivateProduct.UseVisualStyleBackColor = true;
+            this.btnDeactivateProduct.Click += new System.EventHandler(this.btnDeactivate_Click);
             // 
             // btnActivateProduct
             // 
@@ -92,6 +96,7 @@
             this.btnActivateProduct.TabIndex = 30;
             this.btnActivateProduct.Text = "Activate";
             this.btnActivateProduct.UseVisualStyleBackColor = true;
+            this.btnActivateProduct.Click += new System.EventHandler(this.btnActivateProduct_Click);
             // 
             // cbProductStatusSearch
             // 
@@ -100,6 +105,8 @@
             this.cbProductStatusSearch.Name = "cbProductStatusSearch";
             this.cbProductStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbProductStatusSearch.TabIndex = 29;
+            this.cbProductStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbProductStatusSearch_SelectedIndexChanged);
+            this.cbProductStatusSearch.Click += new System.EventHandler(this.cbProductStatusSearch_Click);
             // 
             // lblProductActiveSearch
             // 
@@ -128,6 +135,7 @@
             this.btnUpdateProduct.TabIndex = 26;
             this.btnUpdateProduct.Text = "Update Product";
             this.btnUpdateProduct.UseVisualStyleBackColor = true;
+            this.btnUpdateProduct.Click += new System.EventHandler(this.btnUpdateProduct_Click);
             // 
             // txtProductIDSearch
             // 
@@ -157,6 +165,7 @@
             this.lvProducts.TabIndex = 23;
             this.lvProducts.UseCompatibleStateImageBehavior = false;
             this.lvProducts.View = System.Windows.Forms.View.Details;
+            this.lvProducts.Click += new System.EventHandler(this.lvProducts_Click);
             // 
             // btnAddProduct
             // 
@@ -166,6 +175,7 @@
             this.btnAddProduct.TabIndex = 22;
             this.btnAddProduct.Text = "Add Product";
             this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // FrmProduct
             // 
