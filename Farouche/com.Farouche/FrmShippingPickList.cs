@@ -93,7 +93,7 @@ namespace com.Farouche
         {
             FrmViewOrderDetails details = new FrmViewOrderDetails(_myOrderManager.GetOrderByID(selectedOrder).ID, _myAccessToken);
             details.FormClosed += new FormClosedEventHandler(Details_FormClosed);
-            details.Show();
+            details.ShowDialog();
         }//End initPick(.)
 
         private void Details_FormClosed(object sender, EventArgs e)
@@ -104,11 +104,6 @@ namespace com.Farouche
         private void RefreshPickView()
         {
             PopulatePickListView(lvPickList, _myOrderManager.GetNonPickedOrders());
-        }
-
-        private void lvPickList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

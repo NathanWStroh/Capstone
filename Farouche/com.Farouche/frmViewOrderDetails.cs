@@ -66,7 +66,7 @@ namespace com.Farouche
         private void BtnPrintDetails_Click(object sender, EventArgs e)
         {
             frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId);
-            print.Show();
+            print.ShowDialog();
         }//End of BtnPrintDetails_Click(..)
 
         private void BtnComplete_Click(object sender, EventArgs e)
@@ -147,11 +147,6 @@ namespace com.Farouche
             {
                 MessageBox.Show("Please select an item from the list", "No Item Selected");
             }
-        }
-
-        private void FrmViewOrderDetails_Load_1(object sender, EventArgs e)
-        {
-
         }
 
       //End of BtnUnpick_Click(..)
