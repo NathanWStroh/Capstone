@@ -19,6 +19,7 @@ namespace com.Farouche
             InitializeComponent();
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
+            PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
         }
 
         private void FrmShippingVendor_Load(object sender, EventArgs e)

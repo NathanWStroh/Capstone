@@ -24,6 +24,8 @@ using com.Farouche.Commons;
 * 
 * 04/01/2014   Kaleb                                        Adjusted populateListView to include OnOrder, Threshold, ReorderAmount, ShippingWeight, and ShippingDimension values. Also adjusted this method to account for nullable values. 
 * 
+* 04/10/2014   Kaleb                                        Adjusted populateListView to populate the list view in a different order to match the update/add form.
+* 
 */
 
 //Enumeration for active drop down.
@@ -47,7 +49,7 @@ namespace com.Farouche.Presentation
 
         private void frmAddProduct_Load(object sender, EventArgs e)
         {
-            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            //Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
 
             //Populates the active combo box. 
             this.populateActiveCombo();
@@ -74,38 +76,38 @@ namespace com.Farouche.Presentation
         private void populateListView(ListView lv, List<Product> productList)
         {
             _myProductManager.Products = productList;
-            lv.Items.Clear();
-            lv.Columns.Clear();
+            lv.Clear();
+            
             foreach (var product in productList)
             {
                 var item = new ListViewItem();
                 item.Text = product.Id.ToString();
                 item.SubItems.Add(product.Name);
                 item.SubItems.Add(product.description);
-                item.SubItems.Add(product.reserved.ToString());
+                item.SubItems.Add(String.Format("{0:C}",product.unitPrice));
                 item.SubItems.Add(product.available.ToString());
-                item.SubItems.Add(product.location == null ? "Null" : product.location.ToString());
-                item.SubItems.Add(product.unitPrice.ToString());
+                item.SubItems.Add(product.reserved.ToString());
                 item.SubItems.Add(product._reorderThreshold == null ? "Null" : product._reorderThreshold.ToString());
                 item.SubItems.Add(product._reorderAmount == null ? "Null" : product._reorderAmount.ToString());
                 item.SubItems.Add(product._onOrder.ToString());
-                item.SubItems.Add(product._shippingDemensions == null ? "Null" : product._shippingDemensions.ToString());
+                item.SubItems.Add(product.location == null ? "Null" : product.location.ToString());
                 item.SubItems.Add(product._shippingWeight == null ? "Null" : product._shippingWeight.ToString());
+                item.SubItems.Add(product._shippingDemensions == null ? "Null" : product._shippingDemensions.ToString());
                 item.SubItems.Add(product.Active.ToString());
                 lv.Items.Add(item);
             }
             lv.Columns.Add("Product ID");
             lv.Columns.Add("Short Description");
             lv.Columns.Add("Description");
-            lv.Columns.Add("On Hand");
-            lv.Columns.Add("Available");
-            lv.Columns.Add("Location ID");
             lv.Columns.Add("Unit Price");
-            lv.Columns.Add("Threshold");
+            lv.Columns.Add("Available");
+            lv.Columns.Add("On Hand");
+            lv.Columns.Add("Reorder Threshold");
             lv.Columns.Add("Reorder Amount");
             lv.Columns.Add("On Order");
-            lv.Columns.Add("Shipping Dimensions");
+            lv.Columns.Add("Location ID");
             lv.Columns.Add("Shipping Weight");
+            lv.Columns.Add("Shipping Dimensions");
             lv.Columns.Add("Active");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }//End of populateListView(..)
@@ -181,13 +183,6 @@ namespace com.Farouche.Presentation
             form.Show();
             Close();
         }//End of btnVendor_Click(..)
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            FrmLogin frm = new FrmLogin();
-            frm.Show();
-            Close();
-        }//End of btnLogout_Click(..)
 
         private void lvProducts_Click(object sender, EventArgs e)
         {

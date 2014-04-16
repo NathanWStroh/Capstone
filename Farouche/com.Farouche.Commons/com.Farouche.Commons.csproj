@@ -39,6 +39,12 @@
     <Compile Include="CLSLineItem.cs" />
     <Compile Include="CLSPackDetails.cs" />
     <Compile Include="Enity.cs" />
+    <Compile Include="ApplicationStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Messeges.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reorder.cs" />
@@ -51,6 +57,12 @@
     <Compile Include="VendorOrder.cs" />
     <Compile Include="VendorOrderLineItem.cs" />
     <Compile Include="VendorSourceItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ApplicationStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

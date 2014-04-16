@@ -5,8 +5,13 @@
 
 /*
 *                               Changelog
+<<<<<<< HEAD
 * Date         By          Ticket          Version         Description
 * 4/16/14   Ben Grimes                                      Added Shipping Vendors and Terms into Startup
+=======
+* Date         By           Ticket          Version         Description
+* 4-4-14       NathanStroh                  ???             Removed title from frame.
+>>>>>>> origin
 */
 
 using System;
@@ -28,10 +33,11 @@ namespace com.Farouche.Presentation
         public FrmShippingTerm ShippingTerm;
         public FrmShippingVendor ShippingVendor;
 
-        public frmStartUp( AccessToken acctoken)
+        public frmStartUp(AccessToken acctoken)
         {
             InitializeComponent();
             _myAccessToken = acctoken;
+            this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,9 +56,15 @@ namespace com.Farouche.Presentation
         {
             FrmProduct frm = new FrmProduct(_myAccessToken);
             frm.MdiParent = this;
+            this.Text = frm.Text;
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
- 
+        }
+
+        private void newProductToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProductView frm = new ProductView(_myAccessToken);
+            frm.ShowDialog();
         }
         
         //TSMI = Tool Strip Menu Item
@@ -102,6 +114,34 @@ namespace com.Farouche.Presentation
             ShippingTerm.MdiParent = this;
             ShippingTerm.WindowState = FormWindowState.Maximized;
             ShippingTerm.Show();
+        }
+
+        private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmVendor frm = new FrmVendor(_myAccessToken);
+            frm.MdiParent = this;
+            this.Text = frm.Text;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void newOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVendorCreateOrder frm = new frmVendorCreateOrder(_myAccessToken);
+            frm.MdiParent = this;
+            this.Text = frm.Text;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void viewOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //no accesstoken used
+            frmOpenVendorOrders frm = new frmOpenVendorOrders();
+            frm.MdiParent = this;
+            this.Text = frm.Text;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
         }
     }
 }

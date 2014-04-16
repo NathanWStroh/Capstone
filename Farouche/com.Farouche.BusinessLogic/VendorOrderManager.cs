@@ -1,4 +1,15 @@
-﻿using System;
+﻿//Author: Maggie John
+//Date Created: 04/11/2014
+//Last Modified: 04/11/2014
+//Last Modified By: Nathan W Stroh
+
+/*
+*                               Changelog
+* Date         By          Ticket          Version         Description
+* 04-11-2014   NWS         ???             ???             Added Public to class
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +19,10 @@ using com.Farouche.DataAccess;
 
 namespace com.Farouche.BusinessLogic
 {
-    class VendorOrderManager : DatabaseConnection
+    public class VendorOrderManager : DatabaseConnection
     {
         private readonly SqlConnection _connection = GetInventoryDbConnection();
+
         public bool AddLineItem(VendorOrder order, Product product, int qty)
         {
             if (order == null) throw new ApplicationException("Vendor Order is null");

@@ -34,8 +34,12 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newProductToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vendorOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippingOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAllShippingOrders = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +48,7 @@
             this.tsmiPackList = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShippingTerms = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShippingVendors = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,8 +58,8 @@
             this.fileToolStripMenuItem,
             this.productToolStripMenuItem,
             this.vendorToolStripMenuItem,
-            this.reportsToolStripMenuItem,
-            this.shippingToolStripMenuItem});
+            this.shippingToolStripMenuItem,
+            this.reportsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1284, 24);
@@ -87,7 +92,8 @@
             // productToolStripMenuItem
             // 
             this.productToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productsToolStripMenuItem});
+            this.productsToolStripMenuItem,
+            this.newProductToolStripMenuItem});
             this.productToolStripMenuItem.Name = "productToolStripMenuItem";
             this.productToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.productToolStripMenuItem.Text = "Product";
@@ -95,21 +101,55 @@
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.productsToolStripMenuItem.Text = "Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
+            // newProductToolStripMenuItem
+            // 
+            this.newProductToolStripMenuItem.Name = "newProductToolStripMenuItem";
+            this.newProductToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.newProductToolStripMenuItem.Text = "New Product";
+            this.newProductToolStripMenuItem.Click += new System.EventHandler(this.newProductToolStripMenuItem_Click);
+            // 
             // vendorToolStripMenuItem
             // 
+            this.vendorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vendorsToolStripMenuItem,
+            this.vendorOrderToolStripMenuItem});
             this.vendorToolStripMenuItem.Name = "vendorToolStripMenuItem";
             this.vendorToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.vendorToolStripMenuItem.Text = "Vendor";
             // 
-            // reportsToolStripMenuItem
+            // vendorsToolStripMenuItem
             // 
-            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.reportsToolStripMenuItem.Text = "Reports";
+            this.vendorsToolStripMenuItem.Name = "vendorsToolStripMenuItem";
+            this.vendorsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vendorsToolStripMenuItem.Text = "Vendors";
+            this.vendorsToolStripMenuItem.Click += new System.EventHandler(this.vendorsToolStripMenuItem_Click);
+            // 
+            // vendorOrderToolStripMenuItem
+            // 
+            this.vendorOrderToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newOrderToolStripMenuItem,
+            this.viewOrderToolStripMenuItem});
+            this.vendorOrderToolStripMenuItem.Name = "vendorOrderToolStripMenuItem";
+            this.vendorOrderToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.vendorOrderToolStripMenuItem.Text = "Vendor Order";
+            // 
+            // newOrderToolStripMenuItem
+            // 
+            this.newOrderToolStripMenuItem.Name = "newOrderToolStripMenuItem";
+            this.newOrderToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.newOrderToolStripMenuItem.Text = "New Order";
+            this.newOrderToolStripMenuItem.Click += new System.EventHandler(this.newOrderToolStripMenuItem_Click);
+            // 
+            // viewOrderToolStripMenuItem
+            // 
+            this.viewOrderToolStripMenuItem.Name = "viewOrderToolStripMenuItem";
+            this.viewOrderToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.viewOrderToolStripMenuItem.Text = "View Order";
+            this.viewOrderToolStripMenuItem.Click += new System.EventHandler(this.viewOrderToolStripMenuItem_Click);
             // 
             // shippingToolStripMenuItem
             // 
@@ -135,42 +175,50 @@
             // tsmiAllShippingOrders
             // 
             this.tsmiAllShippingOrders.Name = "tsmiAllShippingOrders";
-            this.tsmiAllShippingOrders.Size = new System.Drawing.Size(152, 22);
+            this.tsmiAllShippingOrders.Size = new System.Drawing.Size(135, 22);
             this.tsmiAllShippingOrders.Text = "All Orders";
             this.tsmiAllShippingOrders.Click += new System.EventHandler(this.tsmiAllShippingOrders_Click);
             // 
             // tsmiMyOrders
             // 
             this.tsmiMyOrders.Name = "tsmiMyOrders";
-            this.tsmiMyOrders.Size = new System.Drawing.Size(152, 22);
+            this.tsmiMyOrders.Size = new System.Drawing.Size(135, 22);
             this.tsmiMyOrders.Text = "My Orders";
             this.tsmiMyOrders.Click += new System.EventHandler(this.tsmiMyOrders_Click);
             // 
             // tsmiPickList
             // 
             this.tsmiPickList.Name = "tsmiPickList";
-            this.tsmiPickList.Size = new System.Drawing.Size(152, 22);
+            this.tsmiPickList.Size = new System.Drawing.Size(135, 22);
             this.tsmiPickList.Text = "Pick List";
             this.tsmiPickList.Click += new System.EventHandler(this.tsmiPickList_Click);
             // 
             // tsmiPackList
             // 
             this.tsmiPackList.Name = "tsmiPackList";
-            this.tsmiPackList.Size = new System.Drawing.Size(152, 22);
+            this.tsmiPackList.Size = new System.Drawing.Size(135, 22);
             this.tsmiPackList.Text = "Pack List";
-            this.tsmiPackList.Click += new System.EventHandler(tsmiPackList_Click);
+            this.tsmiPackList.Click += new System.EventHandler(this.tsmiPackList_Click);
             // 
             // tsmiShippingTerms
             // 
             this.tsmiShippingTerms.Name = "tsmiShippingTerms";
             this.tsmiShippingTerms.Size = new System.Drawing.Size(152, 22);
             this.tsmiShippingTerms.Text = "Terms";
+            this.tsmiShippingTerms.Click += new System.EventHandler(tsmiShippingTerms_Click);
             // 
             // tsmiShippingVendors
             // 
             this.tsmiShippingVendors.Name = "tsmiShippingVendors";
             this.tsmiShippingVendors.Size = new System.Drawing.Size(152, 22);
             this.tsmiShippingVendors.Text = "Vendors";
+            this.tsmiShippingVendors.Click += new System.EventHandler(this.tsmiShippingVendors_Click);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.reportsToolStripMenuItem.Text = "Reports";
             // 
             // frmStartUp
             // 
@@ -179,8 +227,8 @@
             this.ClientSize = new System.Drawing.Size(1284, 575);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmStartUp";
-            this.Text = "frmStartUp";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -206,6 +254,11 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiPackList;
         private System.Windows.Forms.ToolStripMenuItem tsmiShippingTerms;
         private System.Windows.Forms.ToolStripMenuItem tsmiShippingVendors;
+        private System.Windows.Forms.ToolStripMenuItem vendorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newProductToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vendorOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewOrderToolStripMenuItem;
 
     }
 }

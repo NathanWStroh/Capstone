@@ -67,6 +67,12 @@
     <Compile Include="FrmAddShippingVendor.designer.cs">
       <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAttachVendorSource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAttachVendorSource.Designer.cs">
+      <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPrintOrderDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,14 +237,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FrmVendorAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVendorAddUpdate.Designer.cs">
+      <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddVendorWindow.resx">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddShippingTerm.resx">
       <DependentUpon>FrmAddShippingTerm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddShippingVendor.resx">
       <DependentUpon>FrmAddShippingVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAttachVendorSource.resx">
+      <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintOrderDetails.resx">
       <DependentUpon>frmPrintOrderDetails.cs</DependentUpon>
@@ -299,27 +315,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmUpdateShippingVendor.resx">
       <DependentUpon>FrmUpdateShippingVendor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVendor.resx">
       <DependentUpon>frmVendor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReceiving.resx">
       <DependentUpon>frmReceiving.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVendorCreateOrder.resx">
       <DependentUpon>frmVendorCreateOrder.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVendorSource.resx">
       <DependentUpon>frmVendorSource.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmViewOrderDetails.resx">
       <DependentUpon>FrmViewOrderDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductView.resx">
       <DependentUpon>ProductView.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -330,6 +352,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmVendorAddUpdate.resx">
+      <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PackListReport.rdlc" />
     <EmbeddedResource Include="Reports\PickReport.rdlc" />
     <None Include="app.config" />

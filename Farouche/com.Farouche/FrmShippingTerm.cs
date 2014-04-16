@@ -19,6 +19,7 @@ namespace com.Farouche
             InitializeComponent();
             _myAccessToken = acctoken;
             _myTermManager = new ShippingTermManager();
+            PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
         }
 
         //Populates a list view.

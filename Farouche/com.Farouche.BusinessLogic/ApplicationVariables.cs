@@ -25,40 +25,38 @@ namespace com.Farouche.BusinessLogic
 {
     public class ApplicationVariables
     {
-        
-        private Dictionary<int,State> _states;
+        private static readonly ApplicationVariables _instance = new ApplicationVariables();
+        private Dictionary<int, State> _states;
+        private Dictionary<String, String> _variables;
 
-        public ApplicationVariables()
+        public Dictionary<String, String> Variables
+        {
+            get { return _variables;  }
+        }
+        public Dictionary<int, State> States
+        {
+            get { return _states; }
+            set { _states = value; }
+        }
+        public static ApplicationVariables Instance 
+        { 
+            get { return _instance; } 
+        }
+
+        private ApplicationVariables()
         {
             try
             {
-               StateManager stateManager = new StateManager();
-               Dictionary<int, State> tempStates = new Dictionary<int, State>();
+                _variables = ApplicationVariablesDAL.GetAllApplicationVariables();
+                StateManager stateManager = new StateManager();
+                _states = new Dictionary<int, State>(stateManager.GetAllStates());
 
-               // Dictionary<int, State> tempStates = new Dictionary<int, State>(stateManager.GetAllStates());
-
-              //  Dictionary<int, State> tempStates = new Dictionary<int, State>();
-              //  tempStates = stateManager.GetAllStates();
-
-
-              //  _states = new Dictionary<int, State>(tempStates);
-
-
-              // tempStates = StatesDAL.GetAllStates(_connection);
-
-
-              //     Console.WriteLine(stateManager.GetAllStates().ToString());
-                       
-
-
-            //   tempStates.Add();
-
-
+                Console.WriteLine(_states);
 
             }
             catch (SqlException ex)
             {
-               
+
                 Console.WriteLine("Database server or Connection error. Please conntact your system administrator" + ex.ToString());
                 //throw ex;
             }
@@ -70,25 +68,7 @@ namespace com.Farouche.BusinessLogic
             {
                 Console.WriteLine("EXCEPTION!! \n" + ex.ToString() + "\n" + ex.Message);
             }
+        
         }
-
-
-
-
-        public Dictionary<int, State > States
-        {
-            get { return _states; }
-            set { _states = value; }
-        }
-
-
-
-
-
-
-
-
-
-
     } //end ApplicationVariables class
 }

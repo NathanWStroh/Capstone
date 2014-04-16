@@ -1,4 +1,4 @@
-﻿namespace com.Farouche
+﻿namespace com.Farouche.Presentation
 {
     partial class frmOpenVendorOrders
     {
@@ -30,7 +30,7 @@
         {
             this.lvOpenVendorOrders = new System.Windows.Forms.ListView();
             this.lblGetAllOpenOrdersByVendor = new System.Windows.Forms.Label();
-            this.cbGetVendorsByName = new System.Windows.Forms.ComboBox();
+            this.cbGetVendorsById = new System.Windows.Forms.ComboBox();
             this.btngetAllOpenOrdersByVendor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -48,20 +48,20 @@
             // lblGetAllOpenOrdersByVendor
             // 
             this.lblGetAllOpenOrdersByVendor.AutoSize = true;
-            this.lblGetAllOpenOrdersByVendor.Location = new System.Drawing.Point(50, 18);
+            this.lblGetAllOpenOrdersByVendor.Location = new System.Drawing.Point(35, 21);
             this.lblGetAllOpenOrdersByVendor.Name = "lblGetAllOpenOrdersByVendor";
-            this.lblGetAllOpenOrdersByVendor.Size = new System.Drawing.Size(158, 13);
+            this.lblGetAllOpenOrdersByVendor.Size = new System.Drawing.Size(169, 13);
             this.lblGetAllOpenOrdersByVendor.TabIndex = 1;
-            this.lblGetAllOpenOrdersByVendor.Text = "View All Open Orders by Vendor";
+            this.lblGetAllOpenOrdersByVendor.Text = "View All Open Orders by VendorID";
             // 
-            // cbGetVendorsByName
+            // cbGetVendorsById
             // 
-            this.cbGetVendorsByName.FormattingEnabled = true;
-            this.cbGetVendorsByName.Location = new System.Drawing.Point(210, 18);
-            this.cbGetVendorsByName.Name = "cbGetVendorsByName";
-            this.cbGetVendorsByName.Size = new System.Drawing.Size(121, 21);
-            this.cbGetVendorsByName.TabIndex = 2;
-            this.cbGetVendorsByName.SelectedIndexChanged += new System.EventHandler(this.cbGetVendorsByName_SelectedIndexChanged);
+            this.cbGetVendorsById.FormattingEnabled = true;
+            this.cbGetVendorsById.Location = new System.Drawing.Point(210, 18);
+            this.cbGetVendorsById.Name = "cbGetVendorsById";
+            this.cbGetVendorsById.Size = new System.Drawing.Size(121, 21);
+            this.cbGetVendorsById.TabIndex = 2;
+            this.cbGetVendorsById.SelectedIndexChanged += new System.EventHandler(this.cbGetVendorsById_SelectedIndexChanged);
             // 
             // btngetAllOpenOrdersByVendor
             // 
@@ -79,7 +79,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 379);
             this.Controls.Add(this.btngetAllOpenOrdersByVendor);
-            this.Controls.Add(this.cbGetVendorsByName);
+            this.Controls.Add(this.cbGetVendorsById);
             this.Controls.Add(this.lblGetAllOpenOrdersByVendor);
             this.Controls.Add(this.lvOpenVendorOrders);
             this.Name = "frmOpenVendorOrders";
@@ -94,7 +94,7 @@
 
         private System.Windows.Forms.ListView lvOpenVendorOrders;
         private System.Windows.Forms.Label lblGetAllOpenOrdersByVendor;
-        private System.Windows.Forms.ComboBox cbGetVendorsByName;
+        private System.Windows.Forms.ComboBox cbGetVendorsById;
         private System.Windows.Forms.Button btngetAllOpenOrdersByVendor;
     }
 }
