@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace com.Farouche.Commons
 {
-    public class ShippingOrder
+    public class ShippingOrder : Entity
     {
         private int _Id;
         private int _purchaseOrderId;
@@ -230,11 +230,11 @@ namespace com.Farouche.Commons
             return string.Format("Id: {0}, PurchaseOrderId: {1}, UserId: {2}, UserLastName: {3}, UserFirstName: {4}, Picked: {5}, ShipDate: {6}, ShippingTermsId: {7}, ShippingTermsDesc: {8}, ShippingVendorName: {9}, ShipToName: {10}, ShipToAddress: {11}, ShipToCity: {12}, ShipToState: {13}, ShipToZip: {14}", ID, PurchaseOrderId, UserId, UserLastName, UserFirstName, Picked, ShipDate, ShippingTermId, ShippingTermDesc, ShippingVendorName, ShipToName, ShipToAddress, ShipToCity, ShipToState, ShipToZip);
         }
 
-        public Type GetType()
+        public override Type GetType()
         {
             throw new NotImplementedException();
         }
-        public string ToXml()
+        public override string ToXml()
         {
             throw new NotImplementedException();
         }

@@ -49,7 +49,7 @@ namespace com.Farouche.Presentation
 
         private void frmAddProduct_Load(object sender, EventArgs e)
         {
-            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            //Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
 
             //Populates the active combo box. 
             this.populateActiveCombo();
@@ -76,8 +76,8 @@ namespace com.Farouche.Presentation
         private void populateListView(ListView lv, List<Product> productList)
         {
             _myProductManager.Products = productList;
-            lv.Items.Clear();
-            lv.Columns.Clear();
+            lv.Clear();
+            
             foreach (var product in productList)
             {
                 var item = new ListViewItem();
@@ -183,13 +183,6 @@ namespace com.Farouche.Presentation
             form.Show();
             Close();
         }//End of btnVendor_Click(..)
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            FrmLogin frm = new FrmLogin();
-            frm.Show();
-            Close();
-        }//End of btnLogout_Click(..)
 
         private void lvProducts_Click(object sender, EventArgs e)
         {

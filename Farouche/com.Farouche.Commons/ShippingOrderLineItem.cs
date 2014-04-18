@@ -14,7 +14,7 @@
 
 namespace com.Farouche.Commons
 {
-    public class ShippingOrderLineItem
+    public class ShippingOrderLineItem : Entity
     {
         private int _shippingOrderId;
         private int _productID;
@@ -104,11 +104,11 @@ namespace com.Farouche.Commons
         {
             return string.Format("ShippingOrderID: {0}, ProductId: {1}, ProductName, {2}, Quantity: {3}, ProductLocation: {4}, IsPicked: {5}", ShippingOrderID, ProductId, ProductName, Quantity, ProductLocation, IsPicked);
         }
-        public Type GetType()
+        public override Type GetType()
         {
             throw new NotImplementedException();
         }
-        public string ToXml()
+        public override string ToXml()
         {
             throw new NotImplementedException();
         }

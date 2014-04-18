@@ -25,9 +25,6 @@ namespace com.Farouche
         {
             this.reportViewer1.RefreshReport();
             ReportList reportList = new ReportList();
-            List<CLSPackDetails> details;
-            details = reportList.FetchPackingDetails(_currentOrder);
-            MessageBox.Show(details[0].ToString());
             this.CLSPackDetailsBindingSource.DataSource = reportList.FetchPackingDetails(_currentOrder);
             this.reportViewer1.RefreshReport();
         }

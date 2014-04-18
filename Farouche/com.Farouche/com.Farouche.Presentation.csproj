@@ -72,7 +72,7 @@
     </Compile>
     <Compile Include="FrmAttachVendorSource.Designer.cs">
       <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="frmPrintOrderDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +144,18 @@
     </Compile>
     <Compile Include="FrmShippingPickList.Designer.cs">
       <DependentUpon>FrmShippingPickList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShippingTerm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingTerm.Designer.cs">
+      <DependentUpon>FrmShippingTerm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShippingVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingVendor.Designer.cs">
+      <DependentUpon>FrmShippingVendor.cs</DependentUpon>
     </Compile>
     <Compile Include="frmStartUp.cs">
       <SubType>Form</SubType>
@@ -225,6 +237,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FrmVendorAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVendorAddUpdate.Designer.cs">
+      <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddVendorWindow.resx">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -237,7 +255,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAttachVendorSource.resx">
       <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrintOrderDetails.resx">
       <DependentUpon>frmPrintOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -273,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmShippingPickList.resx">
       <DependentUpon>FrmShippingPickList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingTerm.resx">
+      <DependentUpon>FrmShippingTerm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingVendor.resx">
+      <DependentUpon>FrmShippingVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStartUp.resx">
       <DependentUpon>frmStartUp.cs</DependentUpon>
@@ -328,6 +352,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmVendorAddUpdate.resx">
+      <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PackListReport.rdlc" />
     <EmbeddedResource Include="Reports\PickReport.rdlc" />
     <None Include="app.config" />
@@ -357,9 +384,7 @@
       <Name>com.Farouche.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

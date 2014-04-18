@@ -66,15 +66,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"));
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"));
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"));
             }
             finally
             {

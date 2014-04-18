@@ -14,6 +14,9 @@ namespace com.Farouche.Presentation
         public FrmLogin()
         {
             InitializeComponent();
+            //added for faster access
+            //txtUserID.Text = "1";
+            //txtPassword.Text = "1111";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

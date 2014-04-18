@@ -82,7 +82,7 @@ namespace com.Farouche
         private void InitPick(int selectedOrder)
         {
             FrmViewOrderDetails details = new FrmViewOrderDetails(_myOrderManager.GetOrderByID(selectedOrder).ID, _myAccessToken);
-            details.Show();
+            details.ShowDialog();
         }//End InitPick(.)
     }
 }

@@ -44,7 +44,6 @@
             this.lvPickList.TabIndex = 4;
             this.lvPickList.UseCompatibleStateImageBehavior = false;
             this.lvPickList.View = System.Windows.Forms.View.Details;
-            this.lvPickList.SelectedIndexChanged += new System.EventHandler(this.lvPickList_SelectedIndexChanged);
             // 
             // btnStartPick
             // 

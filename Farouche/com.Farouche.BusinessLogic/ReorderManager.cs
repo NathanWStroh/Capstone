@@ -128,7 +128,7 @@ namespace com.Farouche.BusinessLogic
             }
             catch(Exception ex)
             {
-                throw new ArithmeticException("Calculating row total threw an exception");
+                throw new ArithmeticException("Calculating row total threw an exception." + ex.Message);
             }
         } //end GetReorderRowTotal(.)
     }

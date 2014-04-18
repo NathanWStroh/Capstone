@@ -41,11 +41,11 @@ namespace com.Farouche.DataAccess
                             ProductName = reader.GetString(7),
                             Quantity = reader.GetInt32(8),
                             ShipDate = reader.GetDateTime(9),
-                            ShipToName = reader.GetString(10),
-                            ShipToAddress = reader.GetString(11),
-                            ShipToCity = reader.GetString(12),
-                            ShipToState = reader.GetString(13),
-                            ShipToZip = reader.GetString(14)
+                            ShipToName = reader.IsDBNull(10) ? "" : reader.GetString(10),
+                            ShipToAddress = reader.IsDBNull(11) ? "" : reader.GetString(11),
+                            ShipToCity = reader.IsDBNull(12) ? "" : reader.GetString(12),
+                            ShipToState = reader.IsDBNull(13) ? "" : reader.GetString(13),
+                            ShipToZip = reader.IsDBNull(14) ? "" : reader.GetString(14)
                         };
                         reportLines.Add(reportLine);
                     }

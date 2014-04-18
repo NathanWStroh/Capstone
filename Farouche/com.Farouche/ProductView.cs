@@ -88,6 +88,11 @@ namespace com.Farouche.Presentation
             tbItemName.Focus();
         }//End of ProductView(..)
 
+        private void btClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }//btClose_Click
+
         public ProductView(String itemName)
         {
             String somePhrase = "";
@@ -107,10 +112,10 @@ namespace com.Farouche.Presentation
             }
         }//ProductView(.)
 
-        private void btClose_Click(object sender, EventArgs e)
+        private void lvVendor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Close();
-        }//End of btClose_Click
+            btAddVendor.Enabled = false;
+        }//ProductView
 
         private void btAddVendor_Click(object sender, EventArgs e)
         {

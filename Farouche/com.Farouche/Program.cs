@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using com.Farouche.Commons;
 namespace com.Farouche.Presentation
 {
     static class Program

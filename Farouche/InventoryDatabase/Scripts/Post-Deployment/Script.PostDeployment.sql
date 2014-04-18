@@ -157,8 +157,8 @@ GO
 
 /* Insert for ShippingOrders */
 SET IDENTITY_INSERT [dbo].[ShippingOrders] ON
-INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
-VALUES (1,1,1,1,'2014-02-22')
+INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate],[ShipToName],[ShipToAddress],[ShipToCity],[ShipToState],[ShipToZip]) 
+VALUES (1,1,1,1,'2014-02-22','Chit Richalds','1222 Decoy Street NW','Smalltown','IA','53004')
 INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
 VALUES (2,2,2,2,'2014-02-23')
 INSERT [dbo].[ShippingOrders] ([ShippingOrderID],[PurchaseOrderID],[ShippingTermID],[UserID],[ShipDate]) 
