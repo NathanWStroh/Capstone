@@ -111,7 +111,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_DeactivateVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_DeactivateVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };

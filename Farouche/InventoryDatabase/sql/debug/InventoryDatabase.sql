@@ -1010,6 +1010,77 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_DeactivateProductCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_DeactivateProductCategory] */
+CREATE PROCEDURE [proc_DeactivateProductCategory]
+	(@productID int,
+	 @category varchar(50))
+AS
+	UPDATE [dbo].[ProductCategories]
+		SET Active = 0
+		WHERE ProductID = @productID
+			AND Category = @category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeactivateVendor]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+
+/*Object: StoredProcedure [dbo].[proc_DeactivateVendor]*/
+CREATE PROCEDURE [proc_DeactivateVendor]
+	(@VendorID int)
+AS
+	UPDATE [dbo].[Vendors]
+		SET [Active] = 0
+	WHERE [VendorID] = @VendorID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeactivateVendorSourceItem]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_DeactivateVendorSourceItem]*/
+CREATE PROCEDURE [proc_DeactivateVendorSourceItem]
+	(@vendorID int,
+	 @productID int)
+AS
+	UPDATE [dbo].[VendorSourceItems]
+		SET [Active] = 0
+	WHERE [VendorID] = @vendorID
+		AND [ProductID] = @productID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_GenerateReorderReports]...';
 
 
@@ -1932,77 +2003,6 @@ AS
 		and [QtyDamaged] = @QtyDamaged
 		and [QtyReceived] = @QtyReceived
 RETURN @@ROWCOUNT
-GO
-PRINT N'Creating [dbo].[sp_DeactivateProductCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_DeactivateProductCategory] */
-CREATE PROCEDURE [sp_DeactivateProductCategory]
-	(@productID int,
-	 @category varchar(50))
-AS
-	UPDATE [dbo].[ProductCategories]
-		SET Active = 0
-		WHERE ProductID = @productID
-			AND Category = @category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeactivateVendor]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-
-/*Object: StoredProcedure [dbo].[sp_DeactivateVendor]*/
-CREATE PROCEDURE [sp_DeactivateVendor]
-	(@VendorID int)
-AS
-	UPDATE [dbo].[Vendors]
-		SET [Active] = 0
-	WHERE [VendorID] = @VendorID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeactivateVendorSourceItem]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_DeactivateVendorSourceItem]*/
-CREATE PROCEDURE [sp_DeactivateVendorSourceItem]
-	(@vendorID int,
-	 @productID int)
-AS
-	UPDATE [dbo].[VendorSourceItems]
-		SET [Active] = 0
-	WHERE [VendorID] = @vendorID
-		AND [ProductID] = @productID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
 GO
 PRINT N'Creating [dbo].[sp_DeleteCategory]...';
 
