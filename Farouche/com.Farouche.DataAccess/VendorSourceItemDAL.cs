@@ -278,7 +278,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_GetVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_GetVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };

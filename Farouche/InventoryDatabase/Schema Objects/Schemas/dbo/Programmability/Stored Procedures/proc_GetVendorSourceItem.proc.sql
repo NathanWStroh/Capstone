@@ -1,6 +1,6 @@
 ﻿
-/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItem] */
-CREATE PROCEDURE [sp_GetVendorSourceItem]
+/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItem] */
+CREATE PROCEDURE [proc_GetVendorSourceItem]
 	(@vendorID int,
 	 @productID int)
 AS
