@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sp_UpdateProducts]
+﻿CREATE PROCEDURE [dbo].[proc_UpdateProducts]
 	(@ProductID						Int,
 	@Available						Int,
 	@OnHand							Int,
