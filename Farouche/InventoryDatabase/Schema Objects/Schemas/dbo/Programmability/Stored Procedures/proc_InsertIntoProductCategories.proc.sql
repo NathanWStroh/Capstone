@@ -13,8 +13,8 @@ GO
 
 /* ProductCategories Stored Procedures */
 
-/*Object: StoredProcedure [dbo].[sp_InsertIntoProductCategories] */
-CREATE PROCEDURE [sp_InsertIntoProductCategories]
+/*Object: StoredProcedure [dbo].[proc_InsertIntoProductCategories] */
+CREATE PROCEDURE [proc_InsertIntoProductCategories]
 	(@productID int,
 	 @category varchar(50))
 AS
