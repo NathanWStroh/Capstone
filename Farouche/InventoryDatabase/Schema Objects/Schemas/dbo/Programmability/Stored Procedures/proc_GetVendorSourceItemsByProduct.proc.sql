@@ -1,6 +1,6 @@
 ﻿	
-/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItemsByProduct] */
-CREATE PROCEDURE [sp_GetVendorSourceItemsByProduct]
+/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItemsByProduct] */
+CREATE PROCEDURE [proc_GetVendorSourceItemsByProduct]
 	(@productID int)
 AS
 	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
