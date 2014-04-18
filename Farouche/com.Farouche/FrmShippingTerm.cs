@@ -75,6 +75,16 @@ namespace com.Farouche
         private void lvShippingTerms_Click(object sender, EventArgs e)
         {
             btnUpdateTerm.Enabled = true;
+        }
+
+        private void lvShippingTerms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnUpdateTerm.Enabled = true;
+        }
+
+        private void cbTermStatusSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }//End of lvShippingTerms_Click(..)
     }
 }

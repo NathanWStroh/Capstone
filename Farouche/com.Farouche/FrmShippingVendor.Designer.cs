@@ -46,6 +46,7 @@
             this.btnDeactivateVendor.TabIndex = 25;
             this.btnDeactivateVendor.Text = "Deactivate";
             this.btnDeactivateVendor.UseVisualStyleBackColor = true;
+            this.btnDeactivateVendor.Visible = false;
             // 
             // btnActivateVendor
             // 
@@ -56,6 +57,7 @@
             this.btnActivateVendor.TabIndex = 24;
             this.btnActivateVendor.Text = "Activate";
             this.btnActivateVendor.UseVisualStyleBackColor = true;
+            this.btnActivateVendor.Visible = false;
             // 
             // cbVendorStatusSearch
             // 
@@ -65,6 +67,7 @@
             this.cbVendorStatusSearch.Name = "cbVendorStatusSearch";
             this.cbVendorStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbVendorStatusSearch.TabIndex = 23;
+            this.cbVendorStatusSearch.Visible = false;
             // 
             // lblProductActiveSearch
             // 
@@ -74,6 +77,7 @@
             this.lblProductActiveSearch.Size = new System.Drawing.Size(40, 13);
             this.lblProductActiveSearch.TabIndex = 22;
             this.lblProductActiveSearch.Text = "Active:";
+            this.lblProductActiveSearch.Visible = false;
             // 
             // btnUpdateVendor
             // 
@@ -97,6 +101,7 @@
             this.lvShippingVendors.TabIndex = 20;
             this.lvShippingVendors.UseCompatibleStateImageBehavior = false;
             this.lvShippingVendors.View = System.Windows.Forms.View.Details;
+            this.lvShippingVendors.Click += new System.EventHandler(this.lvShippingVendors_Click);
             // 
             // btnAddVendor
             // 

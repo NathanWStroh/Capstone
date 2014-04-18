@@ -49,6 +49,7 @@
             this.btnDeactivateProduct.TabIndex = 44;
             this.btnDeactivateProduct.Text = "Deactivate";
             this.btnDeactivateProduct.UseVisualStyleBackColor = true;
+            this.btnDeactivateProduct.Visible = false;
             // 
             // btnActivateProduct
             // 
@@ -59,6 +60,7 @@
             this.btnActivateProduct.TabIndex = 43;
             this.btnActivateProduct.Text = "Activate";
             this.btnActivateProduct.UseVisualStyleBackColor = true;
+            this.btnActivateProduct.Visible = false;
             // 
             // cbVendortStatusSearch
             // 
@@ -67,6 +69,7 @@
             this.cbVendortStatusSearch.Name = "cbVendortStatusSearch";
             this.cbVendortStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbVendortStatusSearch.TabIndex = 42;
+            this.cbVendortStatusSearch.Visible = false;
             // 
             // lblProductActiveSearch
             // 
@@ -76,6 +79,7 @@
             this.lblProductActiveSearch.Size = new System.Drawing.Size(40, 13);
             this.lblProductActiveSearch.TabIndex = 41;
             this.lblProductActiveSearch.Text = "Active:";
+            this.lblProductActiveSearch.Visible = false;
             // 
             // btnGetProductByID
             // 
@@ -85,6 +89,7 @@
             this.btnGetProductByID.TabIndex = 40;
             this.btnGetProductByID.Text = "Find";
             this.btnGetProductByID.UseVisualStyleBackColor = true;
+            this.btnGetProductByID.Visible = false;
             // 
             // btnUpdateVendor
             // 
@@ -103,6 +108,7 @@
             this.txtVendorIDSearch.Name = "txtVendorIDSearch";
             this.txtVendorIDSearch.Size = new System.Drawing.Size(100, 20);
             this.txtVendorIDSearch.TabIndex = 38;
+            this.txtVendorIDSearch.Visible = false;
             // 
             // lblProductIDSearch
             // 
@@ -112,6 +118,7 @@
             this.lblProductIDSearch.Size = new System.Drawing.Size(61, 13);
             this.lblProductIDSearch.TabIndex = 37;
             this.lblProductIDSearch.Text = "Vendor ID: ";
+            this.lblProductIDSearch.Visible = false;
             // 
             // btnAddVendor
             // 

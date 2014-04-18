@@ -28,34 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDeactivateTerm = new System.Windows.Forms.Button();
-            this.btnActivateTerm = new System.Windows.Forms.Button();
             this.cbTermStatusSearch = new System.Windows.Forms.ComboBox();
             this.lblActive = new System.Windows.Forms.Label();
             this.btnUpdateTerm = new System.Windows.Forms.Button();
             this.lvShippingTerms = new System.Windows.Forms.ListView();
             this.btnAddTerm = new System.Windows.Forms.Button();
+            this.btnActivateTerm = new System.Windows.Forms.Button();
+            this.btnDeactivateTerm = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnDeactivateTerm
-            // 
-            this.btnDeactivateTerm.Enabled = false;
-            this.btnDeactivateTerm.Location = new System.Drawing.Point(18, 161);
-            this.btnDeactivateTerm.Name = "btnDeactivateTerm";
-            this.btnDeactivateTerm.Size = new System.Drawing.Size(100, 25);
-            this.btnDeactivateTerm.TabIndex = 32;
-            this.btnDeactivateTerm.Text = "Deactivate";
-            this.btnDeactivateTerm.UseVisualStyleBackColor = true;
-            // 
-            // btnActivateTerm
-            // 
-            this.btnActivateTerm.Enabled = false;
-            this.btnActivateTerm.Location = new System.Drawing.Point(18, 130);
-            this.btnActivateTerm.Name = "btnActivateTerm";
-            this.btnActivateTerm.Size = new System.Drawing.Size(100, 25);
-            this.btnActivateTerm.TabIndex = 31;
-            this.btnActivateTerm.Text = "Activate";
-            this.btnActivateTerm.UseVisualStyleBackColor = true;
             // 
             // cbTermStatusSearch
             // 
@@ -65,6 +45,8 @@
             this.cbTermStatusSearch.Name = "cbTermStatusSearch";
             this.cbTermStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbTermStatusSearch.TabIndex = 30;
+            this.cbTermStatusSearch.Visible = false;
+            this.cbTermStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbTermStatusSearch_SelectedIndexChanged);
             // 
             // lblActive
             // 
@@ -74,6 +56,7 @@
             this.lblActive.Size = new System.Drawing.Size(40, 13);
             this.lblActive.TabIndex = 29;
             this.lblActive.Text = "Active:";
+            this.lblActive.Visible = false;
             // 
             // btnUpdateTerm
             // 
@@ -97,6 +80,7 @@
             this.lvShippingTerms.TabIndex = 27;
             this.lvShippingTerms.UseCompatibleStateImageBehavior = false;
             this.lvShippingTerms.View = System.Windows.Forms.View.Details;
+            this.lvShippingTerms.SelectedIndexChanged += new System.EventHandler(this.lvShippingTerms_SelectedIndexChanged);
             // 
             // btnAddTerm
             // 
@@ -107,6 +91,28 @@
             this.btnAddTerm.Text = "Add Term";
             this.btnAddTerm.UseVisualStyleBackColor = true;
             this.btnAddTerm.Click += new System.EventHandler(this.btnAddTerm_Click);
+            // 
+            // btnActivateTerm
+            // 
+            this.btnActivateTerm.Enabled = false;
+            this.btnActivateTerm.Location = new System.Drawing.Point(18, 130);
+            this.btnActivateTerm.Name = "btnActivateTerm";
+            this.btnActivateTerm.Size = new System.Drawing.Size(100, 25);
+            this.btnActivateTerm.TabIndex = 31;
+            this.btnActivateTerm.Text = "Activate";
+            this.btnActivateTerm.UseVisualStyleBackColor = true;
+            this.btnActivateTerm.Visible = false;
+            // 
+            // btnDeactivateTerm
+            // 
+            this.btnDeactivateTerm.Enabled = false;
+            this.btnDeactivateTerm.Location = new System.Drawing.Point(18, 161);
+            this.btnDeactivateTerm.Name = "btnDeactivateTerm";
+            this.btnDeactivateTerm.Size = new System.Drawing.Size(100, 25);
+            this.btnDeactivateTerm.TabIndex = 32;
+            this.btnDeactivateTerm.Text = "Deactivate";
+            this.btnDeactivateTerm.UseVisualStyleBackColor = true;
+            this.btnDeactivateTerm.Visible = false;
             // 
             // FrmShippingTerm
             // 
@@ -129,12 +135,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDeactivateTerm;
-        private System.Windows.Forms.Button btnActivateTerm;
         private System.Windows.Forms.ComboBox cbTermStatusSearch;
         private System.Windows.Forms.Label lblActive;
         private System.Windows.Forms.Button btnUpdateTerm;
         private System.Windows.Forms.ListView lvShippingTerms;
         private System.Windows.Forms.Button btnAddTerm;
+        private System.Windows.Forms.Button btnActivateTerm;
+        private System.Windows.Forms.Button btnDeactivateTerm;
     }
 }

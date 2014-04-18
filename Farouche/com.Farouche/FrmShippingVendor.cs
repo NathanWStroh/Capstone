@@ -83,18 +83,18 @@ namespace com.Farouche
 
         private void lvShippingVendors_Click(object sender, EventArgs e)
         {
-            //int currentIndex = this.lvShippingVendors.SelectedItems[0].Index;
-            //ShippingVendor thisVendor = _myVendorManager.ShippingVendors[currentIndex];
-            //if (thisVendor.Active == true)
-            //{
-            //    btnActivateVendor.Enabled = false;
-            //    btnDeactivateVendor.Enabled = true;
-            //}
-            //else
-            //{
-            //    btnActivateVendor.Enabled = true;
-            //    btnDeactivateVendor.Enabled = false;
-            //}
+            int currentIndex = this.lvShippingVendors.SelectedItems[0].Index;
+            ShippingVendor thisVendor = _myVendorManager.ShippingVendors[currentIndex];
+            if (thisVendor.Active == true)
+            {
+                btnActivateVendor.Enabled = false;
+                btnDeactivateVendor.Enabled = true;
+            }
+            else
+            {
+                btnActivateVendor.Enabled = true;
+                btnDeactivateVendor.Enabled = false;
+            }
             btnUpdateVendor.Enabled = true;
         }//End of lvShippingVendors_Click(..)
 
