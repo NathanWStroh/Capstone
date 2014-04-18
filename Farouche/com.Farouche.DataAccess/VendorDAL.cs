@@ -69,7 +69,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_GetVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_GetVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@VendorID", vendorId);
                 myConnection.Open();
