@@ -1,8 +1,8 @@
 ﻿
 
 /* VendorSourceItems Stored Procedures */
-/*Object: StoredProcedure [dbo].[sp_InsertIntoVendorSourceItems]*/
-CREATE PROCEDURE [sp_InsertIntoVendorSourceItems]
+/*Object: StoredProcedure [dbo].[proc_InsertIntoVendorSourceItems]*/
+CREATE PROCEDURE [proc_InsertIntoVendorSourceItems]
 	(@productID		int,
 	@vendorID 		int,
 	@unitCost		money,
