@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sp_DeleteProduct]
+﻿CREATE PROCEDURE [dbo].[proc_DeleteProduct]
 	(@ProductID				Int,
 	@Available				Int,
 	@OnHand				int,

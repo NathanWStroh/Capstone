@@ -1506,6 +1506,106 @@
 				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_DeactivateVendorSourceItem]*/&#xD;&#xA;CREATE PROCEDURE [proc_DeactivateVendorSourceItem]&#xD;&#xA;&#x9;(@vendorID int,&#xD;&#xA;&#x9; @productID int)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_DeleteCategory]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	DELETE FROM[dbo].[Categories]
+	WHERE [Category] = @category
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Categories]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Categories].[Category]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteCategory].[@category]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteCategory].[@category]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="61" />
+				<Property Name="Length" Value="212" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value=" &#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_DeleteCategory] */&#xD;&#xA;CREATE PROCEDURE [proc_DeleteCategory]&#xD;&#xA;&#x9;(@category varchar(50))&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_DeleteLocation]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	DELETE FROM [dbo].[Locations]
+	WHERE [Location] = @location
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Locations]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Locations].[Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteLocation].[@location]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteLocation].[@location]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="58" />
+				<Property Name="Length" Value="210" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/*Object: StoredProcedure [dbo].[proc_DeleteLocation] */&#xD;&#xA;CREATE PROCEDURE [proc_DeleteLocation]&#xD;&#xA;&#x9;(@location varchar(250))&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GenerateReorderReports]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -7811,106 +7911,6 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<AttachedAnnotation Disambiguator="25" />
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteCategory]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	DELETE FROM[dbo].[Categories]
-	WHERE [Category] = @category
-	RETURN @@ROWCOUNT]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Categories]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Categories].[Category]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteCategory].[@category]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteCategory].[@category]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="59" />
-				<Property Name="Length" Value="208" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value=" &#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_DeleteCategory] */&#xD;&#xA;CREATE PROCEDURE [sp_DeleteCategory]&#xD;&#xA;&#x9;(@category varchar(50))&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteLocation]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	DELETE FROM [dbo].[Locations]
-	WHERE [Location] = @location
-	RETURN @@ROWCOUNT]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Locations]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Locations].[Location]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteLocation].[@location]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteLocation].[@location]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="250" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="56" />
-				<Property Name="Length" Value="206" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="/*Object: StoredProcedure [dbo].[sp_DeleteLocation] */&#xD;&#xA;CREATE PROCEDURE [sp_DeleteLocation]&#xD;&#xA;&#x9;(@location varchar(250))&#xD;&#xA;AS" />
-			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteProduct]">
 			<Property Name="BodyScript">
