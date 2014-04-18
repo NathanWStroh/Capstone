@@ -1,6 +1,6 @@
 ﻿	
-/*Object: StoredProcedure [dbo].[sp_UpdateCategory] */
-CREATE PROCEDURE [sp_UpdateCategory]
+/*Object: StoredProcedure [dbo].[proc_UpdateCategory] */
+CREATE PROCEDURE [proc_UpdateCategory]
 	(@category varchar(50),
 	 @orig_category varchar(50))
 AS
