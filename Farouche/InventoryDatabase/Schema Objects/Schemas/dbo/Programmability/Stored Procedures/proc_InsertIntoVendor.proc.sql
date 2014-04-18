@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sp_InsertIntoVendor]
+﻿CREATE PROCEDURE [dbo].[proc_InsertIntoVendor]
 	(@Name varchar(50),
 	 @Address varchar(50),
 	 @City varchar(50),

@@ -186,7 +186,7 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\PK_Products.pkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_InsertIntoVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_InsertIntoVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
