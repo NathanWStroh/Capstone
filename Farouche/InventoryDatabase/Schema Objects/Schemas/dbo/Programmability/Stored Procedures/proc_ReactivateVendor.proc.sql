@@ -1,6 +1,6 @@
 ﻿
-/* Object: StoredProcedure [dbo].[sp_ReactivateVendor] */
-CREATE PROCEDURE [sp_ReactivateVendor]
+/* Object: StoredProcedure [dbo].[proc_ReactivateVendor] */
+CREATE PROCEDURE [proc_ReactivateVendor]
 	(@VendorID int)
 AS
 	UPDATE [dbo].[Vendors]

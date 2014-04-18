@@ -260,7 +260,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_ReactivateVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_ReactivateVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@VendorID", vendor.Id);
                 myConnection.Open();
