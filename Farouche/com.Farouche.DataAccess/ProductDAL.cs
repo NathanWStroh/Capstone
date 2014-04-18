@@ -339,7 +339,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_GetProduct", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_GetProduct", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ProductID", productId);
 

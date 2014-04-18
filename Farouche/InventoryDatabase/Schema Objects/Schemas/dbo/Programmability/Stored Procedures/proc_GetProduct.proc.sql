@@ -1,6 +1,6 @@
 ﻿
-/*Object:  StoredProcedure [dbo].[sp_GetProduct]*/
-CREATE PROCEDURE [dbo].[sp_GetProduct]
+/*Object:  StoredProcedure [dbo].[proc_GetProduct]*/
+CREATE PROCEDURE [dbo].[proc_GetProduct]
 	(@ProductID		Int)
 AS
 	SELECT * FROM [dbo].[Products]
