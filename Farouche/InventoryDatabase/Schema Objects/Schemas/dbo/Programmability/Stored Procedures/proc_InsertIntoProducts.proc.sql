@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sp_InsertIntoProducts]
+﻿CREATE PROCEDURE [dbo].[proc_InsertIntoProducts]
 	(@Available			Int,
 	@OnHand				Int,
 	@Description		VarChar(250),

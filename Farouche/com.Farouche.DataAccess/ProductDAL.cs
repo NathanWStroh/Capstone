@@ -38,7 +38,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_InsertIntoProducts", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_InsertIntoProducts", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@OnHand", product.reserved);
                 sqlCmd.Parameters.AddWithValue("@Available", product.available);
