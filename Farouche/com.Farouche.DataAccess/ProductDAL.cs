@@ -578,7 +578,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_GetLocations", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_GetLocations", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 //Creates the reader object by ExecutingReader on the cmd object.
                 SqlDataReader reader = sqlCmd.ExecuteReader();
