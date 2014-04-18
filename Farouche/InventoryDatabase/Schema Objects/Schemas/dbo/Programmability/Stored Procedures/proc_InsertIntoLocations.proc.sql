@@ -14,8 +14,8 @@ GO
 
 /* Locations Stored Procedures */
 
-/*Object: StoredProcedure [dbo].[sp_InsertIntoLocations] */
-CREATE PROCEDURE [sp_InsertIntoLocations]
+/*Object: StoredProcedure [dbo].[proc_InsertIntoLocations] */
+CREATE PROCEDURE [proc_InsertIntoLocations]
 	(@location varchar(250))
 AS
 	INSERT INTO [dbo].[Locations]
