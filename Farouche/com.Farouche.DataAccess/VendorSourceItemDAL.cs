@@ -67,7 +67,7 @@ namespace com.Farouche.DataAccess
             try
             {
                 //Talk about checking data first in sql, Passing the old data and verifiy its still the same.
-                var mySqlCommand = new SqlCommand("sp_UpdateVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };

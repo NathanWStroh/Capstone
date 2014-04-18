@@ -2002,6 +2002,134 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_InsertIntoCategories]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+/* Categories Stored Procedures */
+
+/*Object: StoredProcedure [dbo].[proc_InsertIntoCategories] */
+CREATE PROCEDURE [proc_InsertIntoCategories]
+	(@category varchar(50))
+AS
+	INSERT INTO [dbo].[Categories]
+		([Category])
+	VALUES
+		(@Category)
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_InsertIntoLocations]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[sp_GetCategory] */
+/*No need for this anymore*/
+/*CREATE PROCEDURE [sp_GetCategory]
+	(@categoryID int)
+AS
+	SELECT [CategoryID], [Description]
+	FROM [dbo].[Categories]
+	WHERE [Active] = 1
+		AND [CategoryID] = @categoryID
+	RETURN
+GO
+*/
+
+/* Locations Stored Procedures */
+
+/*Object: StoredProcedure [dbo].[proc_InsertIntoLocations] */
+CREATE PROCEDURE [proc_InsertIntoLocations]
+	(@location varchar(250))
+AS
+	INSERT INTO [dbo].[Locations]
+		([Location])
+	VALUES
+		(@location)
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_InsertIntoProductCategories]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+/*Object: StoredProcedure [dbo].[sp_GetLocation] */
+/*No need for this either*/
+/*CREATE PROCEDURE [sp_GetLocation]
+	(@locationID int)
+AS
+	SELECT [LocationID], [Description]
+	FROM [dbo].[Locations]
+	WHERE [Active] = 1
+		AND [LocationID] = @locationID
+	RETURN
+GO
+*/
+
+/* ProductCategories Stored Procedures */
+
+/*Object: StoredProcedure [dbo].[proc_InsertIntoProductCategories] */
+CREATE PROCEDURE [proc_InsertIntoProductCategories]
+	(@productID int,
+	 @category varchar(50))
+AS
+	INSERT INTO [dbo].[ProductCategories]
+		([ProductID], [Category])
+	VALUES
+		(@productID, @category)
+	RETURN @@IDENTITY
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_InsertIntoProducts]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertIntoProducts]
+	(@Available			Int,
+	@OnHand				Int,
+	@Description		VarChar(250),
+	@Location			varchar(250),
+	@UnitPrice			Money,
+	@ShortDesc			VarChar(50),
+	@ReorderThreshold	int,
+	@ReorderAmount		int,
+	@OnOrder			int,
+	@ShippingDimensions varchar(50),
+	@ShippingWeight		float,
+	@Active				Bit)
+AS
+	INSERT INTO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[OnOrder],[ShippingDimensions],[ShippingWeight],[Active])
+	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @OnOrder, @ShippingDimensions, @ShippingWeight, @Active)
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_InsertIntoShippingOrderLineItems]...';
 
 
@@ -2080,6 +2208,37 @@ AS
 	INSERT INTO [dbo].[ShippingVendors]([Name],[Address],[City],[State],[Country],[Zip],[Phone],[Contact],[ContactEmail])
 	VALUES(@name,@address,@city,@state,@country,@zip,@phone,@contact,@contactEmail)
 GO
+PRINT N'Creating [dbo].[proc_InsertIntoVendor]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertIntoVendor]
+	(@Name varchar(50),
+	 @Address varchar(50),
+	 @City varchar(50),
+	 @State char(2),
+	 @Country VarChar(25),
+	 @Zip Char(10),
+	 @Phone Char(12),
+	 @Contact VarChar(50),
+	 @ContactEmail VarChar(50)
+	 )
+AS
+	INSERT INTO Vendors
+	    (Name, Address, City, State, Country, Zip, Phone, Contact, ContactEmail)
+	VALUES
+	    (@Name, @Address, @City, @State, @Country, @Zip, @Phone, @Contact, @ContactEmail)
+
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_InsertIntoVendorOrderLineItems]...';
 
 
@@ -2101,6 +2260,34 @@ AS
            (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged)
 RETURN @@IDENTITY
 GO
+PRINT N'Creating [dbo].[proc_InsertIntoVendorSourceItems]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+
+/* VendorSourceItems Stored Procedures */
+/*Object: StoredProcedure [dbo].[proc_InsertIntoVendorSourceItems]*/
+CREATE PROCEDURE [proc_InsertIntoVendorSourceItems]
+	(@productID		int,
+	@vendorID 		int,
+	@unitCost		money,
+	@minQtyToOrder	int,
+	@itemsPerCase	int,
+	@active			bit)
+AS
+	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) 
+	VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
+	RETURN @@IDENTITY
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_InsertVendorOrder]...';
 
 
@@ -2112,6 +2299,214 @@ AS
 	Insert into [VendorOrders] (VendorID, DateOrdered)
 	Values (@VendorID, @DateOrdered)
 RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_ReactivateCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_ReactivateCategory] */
+CREATE PROCEDURE [proc_ReactivateCategory]
+	(@category varchar(50))
+AS
+	UPDATE [dbo].[Categories]
+		SET [Active] = 1
+	WHERE [Category] = @category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_ReactivateLocation]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+/*Object: StoredProcedure [dbo].[proc_ReactivateLocation] */
+CREATE PROCEDURE [proc_ReactivateLocation]
+	(@location varchar(250))
+AS
+	UPDATE [dbo].[Locations]
+		SET [Active] = 1
+	WHERE [Location] = @location
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_ReactivateProduct]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_ReactivateProduct]*/
+CREATE PROCEDURE [dbo].[proc_ReactivateProduct]
+	(@ProductID		Int)
+AS
+	UPDATE [dbo].[Products]
+	SET [Active] = 1
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_ReactivateProductCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_ReactivateProductCategory] */
+CREATE PROCEDURE [proc_ReactivateProductCategory]
+	(@productID int,
+	 @category varchar(50))
+AS
+	UPDATE [dbo].[ProductCategories]
+		SET Active = 1
+		WHERE ProductID = @productID
+			AND Category = @category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_ReactivateVendor]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/* Object: StoredProcedure [dbo].[proc_ReactivateVendor] */
+CREATE PROCEDURE [proc_ReactivateVendor]
+	(@VendorID int)
+AS
+	UPDATE [dbo].[Vendors]
+		SET [Active] = 1
+	WHERE VendorID = @VendorID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_ReactivateVendorSourceItem]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/* Object: StoredProcedure [dbo].[proc_ReactivateVendorSourceItem] */
+CREATE PROCEDURE [proc_ReactivateVendorSourceItem]
+	(@vendorID int,
+	 @productID int)
+AS
+	UPDATE [dbo].[VendorSourceItems]
+		SET [Active] = 1
+	WHERE [VendorID] = @vendorID
+		AND [ProductID] = @productID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_UpdateCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+	
+/*Object: StoredProcedure [dbo].[proc_UpdateCategory] */
+CREATE PROCEDURE [proc_UpdateCategory]
+	(@category varchar(50),
+	 @orig_category varchar(50))
+AS
+	UPDATE [dbo].[Categories]
+		SET [Category] = @category
+	WHERE [Category] = @orig_category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_UpdateLocation]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+	
+/*Object: StoredProcedure [dbo].[proc_UpdateLocation] */
+CREATE PROCEDURE [proc_UpdateLocation]
+	(@location varchar(250),
+	 @orig_location varchar(250))
+AS
+	UPDATE [dbo].[Locations]
+		SET [Location] = @location
+	WHERE [Location] = @orig_location
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+	
+/*Object: StoredProcedure [dbo].[proc_UpdateProductCategory] */
+CREATE PROCEDURE [proc_UpdateProductCategory]
+	(@productID int,
+	 @category varchar(50),
+	 @orig_productID int,
+	 @orig_category varchar(50))
+AS
+	UPDATE [dbo].[ProductCategories]
+		SET ProductID = @productID,
+			Category = @category
+		WHERE ProductID = @orig_productID
+			AND Category = @orig_category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
 GO
 PRINT N'Creating [dbo].[proc_UpdateProductOnOrder]...';
 
@@ -2138,6 +2533,78 @@ AS
 	SET [ReorderAmount] = @Amount
 	WHERE [ProductID] = @ProductID
 	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateProducts]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProducts]
+	(@ProductID						Int,
+	@Available						Int,
+	@OnHand							Int,
+	@Description					VarChar(250),
+	@Location						varchar(250),
+	@UnitPrice						Money,
+	@ShortDesc						VarChar(50),
+	@ReorderThreshold				int,
+	@ReorderAmount					int,
+	@OnOrder						int,
+	@ShippingDimensions				varchar(50),
+	@ShippingWeight					float,
+	@Active							Bit,
+	@OriginalAvailable				Int,
+	@OriginalOnHand					Int,
+	@OriginalDescription			VarChar(250),
+	@OriginalLocation				varchar(250),
+	@OriginalUnitPrice				Money,
+	@OriginalShortDesc				VarChar(50),
+	@OriginalReorderThreshold 		int,
+	@OriginalReorderAmount			int,
+	@OriginalOnOrder				int,
+	@OriginalShippingDimensions 	varchar(50),
+	@OriginalShippingWeight			float,
+	@OriginalActive					Bit)
+AS
+	UPDATE [dbo].[Products]
+	SET [Available] = @Available, 
+		[OnHand] = @OnHand, 
+		[Description] = @Description, 
+		[Location] = @Location, 
+		[UnitPrice] = @UnitPrice, 
+		[ShortDesc] = @ShortDesc, 
+		[ReorderThreshold] = @ReorderThreshold, 
+		[ReorderAmount] = @ReorderAmount, 
+		[ShippingDimensions] = @ShippingDimensions, 
+		[ShippingWeight] = @ShippingWeight, 
+		[Active] = @Active, 
+		[OnOrder] = @OnOrder
+	WHERE [ProductID] = @ProductID
+		AND [Available] = @OriginalAvailable
+		AND [OnHand] = @OriginalOnHand
+		AND [Description] = @OriginalDescription
+		AND (([Location] = @OriginalLocation)
+		OR (@OriginalLocation IS NULL))
+		AND [UnitPrice] = @OriginalUnitPrice
+		AND [ShortDesc] = @OriginalShortDesc
+		AND (([ReorderThreshold] = @OriginalReorderThreshold)
+		OR (@OriginalReorderThreshold IS NULL))
+		AND (([ReorderAmount] = @OriginalReorderAmount)
+		OR (@OriginalReorderAmount IS NULL))
+		AND [OnOrder] = @OriginalOnOrder
+		AND (([ShippingDimensions] = @OriginalShippingDimensions)
+		OR (@OriginalShippingDimensions IS NULL))
+		AND (([ShippingWeight] = @OriginalShippingWeight)
+		OR (@OriginalShippingWeight IS NULL))
+		AND [Active] = @OriginalActive
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
 GO
 PRINT N'Creating [dbo].[proc_UpdateProductThreshold]...';
 
@@ -2429,6 +2896,90 @@ AS
 		[ContactEmail] = @orig_ContactEmail
 	RETURN @@ROWCOUNT
 GO
+PRINT N'Creating [dbo].[proc_UpdateVendor]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_UpdateVendor]*/
+CREATE PROCEDURE [dbo].[proc_UpdateVendor]
+	(@Name varchar(50),
+	 @Address varchar(50),
+	 @City varchar(50),
+	 @State char(2),
+	 @Country VarChar(25),
+	 @Zip char(10),
+	 @Phone char(12),
+	 @Contact varchar(50),
+	 @ContactEmail varchar(50),
+	 @original_VendorID int,
+	 @original_Name varchar(50),
+	 @original_Address varchar(50),
+	 @original_City varchar(50),
+	 @original_State char(2),
+	 @original_Country varchar(25),
+	 @original_Zip char(10),
+	 @original_Phone char(12),
+	 @original_Contact varchar(50),
+	 @original_ContactEmail varchar(50))
+AS
+	UPDATE Vendors
+	   SET Name = @Name,
+	       Address = @Address,
+	       City = @City,
+	       State = @State,
+	       Country = @Country,
+	       Zip = @Zip,
+	       Phone = @Phone,
+	       Contact = @Contact
+	WHERE VendorID = @original_VendorID
+	  AND Name = @original_Name
+	  AND Address = @original_Address
+	  AND City = @original_City
+	  AND State = @original_State
+	  AND Country = @original_Country
+	  AND Zip = @original_Zip
+	  AND Phone = @original_Phone
+	  AND Contact = @original_Contact
+	  AND ContactEmail = @original_ContactEmail
+	
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_UpdateVendorName]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+
+/*Object:  StoredProcedure [dbo].[proc_UpdateVendorName]*/
+CREATE PROCEDURE [dbo].[proc_UpdateVendorName]
+	(@Name varchar(50),
+	 @original_VendorID int,
+	 @original_Name varchar(50))
+AS
+	UPDATE Vendors
+	SET Name = @Name
+	WHERE VendorID = @original_VendorID
+	AND Name = @original_Name
+
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_UpdateVendorOrder]...';
 
 
@@ -2482,329 +3033,7 @@ AS
 		and [QtyReceived] = @QtyReceived
 RETURN @@ROWCOUNT
 GO
-PRINT N'Creating [dbo].[sp_InsertIntoCategories]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-/* Categories Stored Procedures */
-
-/*Object: StoredProcedure [dbo].[sp_InsertIntoCategories] */
-CREATE PROCEDURE [sp_InsertIntoCategories]
-	(@category varchar(50))
-AS
-	INSERT INTO [dbo].[Categories]
-		([Category])
-	VALUES
-		(@Category)
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_InsertIntoLocations]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetCategory] */
-/*No need for this anymore*/
-/*CREATE PROCEDURE [sp_GetCategory]
-	(@categoryID int)
-AS
-	SELECT [CategoryID], [Description]
-	FROM [dbo].[Categories]
-	WHERE [Active] = 1
-		AND [CategoryID] = @categoryID
-	RETURN
-GO
-*/
-
-/* Locations Stored Procedures */
-
-/*Object: StoredProcedure [dbo].[sp_InsertIntoLocations] */
-CREATE PROCEDURE [sp_InsertIntoLocations]
-	(@location varchar(250))
-AS
-	INSERT INTO [dbo].[Locations]
-		([Location])
-	VALUES
-		(@location)
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_InsertIntoProductCategories]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-/*Object: StoredProcedure [dbo].[sp_GetLocation] */
-/*No need for this either*/
-/*CREATE PROCEDURE [sp_GetLocation]
-	(@locationID int)
-AS
-	SELECT [LocationID], [Description]
-	FROM [dbo].[Locations]
-	WHERE [Active] = 1
-		AND [LocationID] = @locationID
-	RETURN
-GO
-*/
-
-/* ProductCategories Stored Procedures */
-
-/*Object: StoredProcedure [dbo].[sp_InsertIntoProductCategories] */
-CREATE PROCEDURE [sp_InsertIntoProductCategories]
-	(@productID int,
-	 @category varchar(50))
-AS
-	INSERT INTO [dbo].[ProductCategories]
-		([ProductID], [Category])
-	VALUES
-		(@productID, @category)
-	RETURN @@IDENTITY
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_InsertIntoProducts]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-CREATE PROCEDURE [dbo].[sp_InsertIntoProducts]
-	(@Available			Int,
-	@OnHand				Int,
-	@Description		VarChar(250),
-	@Location			varchar(250),
-	@UnitPrice			Money,
-	@ShortDesc			VarChar(50),
-	@ReorderThreshold	int,
-	@ReorderAmount		int,
-	@OnOrder			int,
-	@ShippingDimensions varchar(50),
-	@ShippingWeight		float,
-	@Active				Bit)
-AS
-	INSERT INTO [dbo].[Products]([Available],[OnHand],[Description],[Location],[UnitPrice],[ShortDesc],[ReorderThreshold],[ReorderAmount],[OnOrder],[ShippingDimensions],[ShippingWeight],[Active])
-	VALUES ( @Available, @OnHand, @Description, @Location, @UnitPrice, @ShortDesc, @ReorderThreshold, @ReorderAmount, @OnOrder, @ShippingDimensions, @ShippingWeight, @Active)
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_InsertIntoVendor]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-CREATE PROCEDURE [dbo].[sp_InsertIntoVendor]
-	(@Name varchar(50),
-	 @Address varchar(50),
-	 @City varchar(50),
-	 @State char(2),
-	 @Country VarChar(25),
-	 @Zip Char(10),
-	 @Phone Char(12),
-	 @Contact VarChar(50),
-	 @ContactEmail VarChar(50)
-	 )
-AS
-	INSERT INTO Vendors
-	    (Name, Address, City, State, Country, Zip, Phone, Contact, ContactEmail)
-	VALUES
-	    (@Name, @Address, @City, @State, @Country, @Zip, @Phone, @Contact, @ContactEmail)
-
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_InsertIntoVendorSourceItems]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-
-/* VendorSourceItems Stored Procedures */
-/*Object: StoredProcedure [dbo].[sp_InsertIntoVendorSourceItems]*/
-CREATE PROCEDURE [sp_InsertIntoVendorSourceItems]
-	(@productID		int,
-	@vendorID 		int,
-	@unitCost		money,
-	@minQtyToOrder	int,
-	@itemsPerCase	int,
-	@active			bit)
-AS
-	INSERT INTO VendorSourceItems(ProductID, VendorID, UnitCost, MinQtyToOrder,ItemsPerCase, Active) 
-	VALUES (@productID, @vendorID, @unitCost, @minQtyToOrder,@itemsPerCase, @active)
-	RETURN @@IDENTITY
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_ReactivateCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_ReactivateCategory] */
-CREATE PROCEDURE [sp_ReactivateCategory]
-	(@category varchar(50))
-AS
-	UPDATE [dbo].[Categories]
-		SET [Active] = 1
-	WHERE [Category] = @category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_ReactivateLocation]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-/*Object: StoredProcedure [dbo].[sp_ReactivateLocation] */
-CREATE PROCEDURE [sp_ReactivateLocation]
-	(@location varchar(250))
-AS
-	UPDATE [dbo].[Locations]
-		SET [Active] = 1
-	WHERE [Location] = @location
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_ReactivateProduct]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_ReactivateProduct]*/
-CREATE PROCEDURE [dbo].[sp_ReactivateProduct]
-	(@ProductID		Int)
-AS
-	UPDATE [dbo].[Products]
-	SET [Active] = 1
-	WHERE [ProductID] = @ProductID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_ReactivateProductCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_ReactivateProductCategory] */
-CREATE PROCEDURE [sp_ReactivateProductCategory]
-	(@productID int,
-	 @category varchar(50))
-AS
-	UPDATE [dbo].[ProductCategories]
-		SET Active = 1
-		WHERE ProductID = @productID
-			AND Category = @category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_ReactivateVendor]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/* Object: StoredProcedure [dbo].[sp_ReactivateVendor] */
-CREATE PROCEDURE [sp_ReactivateVendor]
-	(@VendorID int)
-AS
-	UPDATE [dbo].[Vendors]
-		SET [Active] = 1
-	WHERE VendorID = @VendorID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_ReactivateVendorSourceItem]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/* Object: StoredProcedure [dbo].[sp_ReactivateVendorSourceItem] */
-CREATE PROCEDURE [sp_ReactivateVendorSourceItem]
-	(@vendorID int,
-	 @productID int)
-AS
-	UPDATE [dbo].[VendorSourceItems]
-		SET [Active] = 1
-	WHERE [VendorID] = @vendorID
-		AND [ProductID] = @productID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_UpdateCategory]...';
+PRINT N'Creating [dbo].[proc_UpdateVendorSourceItem]...';
 
 
 GO
@@ -2813,237 +3042,8 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 GO
 	
-/*Object: StoredProcedure [dbo].[sp_UpdateCategory] */
-CREATE PROCEDURE [sp_UpdateCategory]
-	(@category varchar(50),
-	 @orig_category varchar(50))
-AS
-	UPDATE [dbo].[Categories]
-		SET [Category] = @category
-	WHERE [Category] = @orig_category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_UpdateLocation]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-	
-/*Object: StoredProcedure [dbo].[sp_UpdateLocation] */
-CREATE PROCEDURE [sp_UpdateLocation]
-	(@location varchar(250),
-	 @orig_location varchar(250))
-AS
-	UPDATE [dbo].[Locations]
-		SET [Location] = @location
-	WHERE [Location] = @orig_location
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_UpdateProductCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-	
-/*Object: StoredProcedure [dbo].[sp_UpdateProductCategory] */
-CREATE PROCEDURE [sp_UpdateProductCategory]
-	(@productID int,
-	 @category varchar(50),
-	 @orig_productID int,
-	 @orig_category varchar(50))
-AS
-	UPDATE [dbo].[ProductCategories]
-		SET ProductID = @productID,
-			Category = @category
-		WHERE ProductID = @orig_productID
-			AND Category = @orig_category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_UpdateProducts]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-CREATE PROCEDURE [dbo].[sp_UpdateProducts]
-	(@ProductID						Int,
-	@Available						Int,
-	@OnHand							Int,
-	@Description					VarChar(250),
-	@Location						varchar(250),
-	@UnitPrice						Money,
-	@ShortDesc						VarChar(50),
-	@ReorderThreshold				int,
-	@ReorderAmount					int,
-	@OnOrder						int,
-	@ShippingDimensions				varchar(50),
-	@ShippingWeight					float,
-	@Active							Bit,
-	@OriginalAvailable				Int,
-	@OriginalOnHand					Int,
-	@OriginalDescription			VarChar(250),
-	@OriginalLocation				varchar(250),
-	@OriginalUnitPrice				Money,
-	@OriginalShortDesc				VarChar(50),
-	@OriginalReorderThreshold 		int,
-	@OriginalReorderAmount			int,
-	@OriginalOnOrder				int,
-	@OriginalShippingDimensions 	varchar(50),
-	@OriginalShippingWeight			float,
-	@OriginalActive					Bit)
-AS
-	UPDATE [dbo].[Products]
-	SET [Available] = @Available, 
-		[OnHand] = @OnHand, 
-		[Description] = @Description, 
-		[Location] = @Location, 
-		[UnitPrice] = @UnitPrice, 
-		[ShortDesc] = @ShortDesc, 
-		[ReorderThreshold] = @ReorderThreshold, 
-		[ReorderAmount] = @ReorderAmount, 
-		[ShippingDimensions] = @ShippingDimensions, 
-		[ShippingWeight] = @ShippingWeight, 
-		[Active] = @Active, 
-		[OnOrder] = @OnOrder
-	WHERE [ProductID] = @ProductID
-		AND [Available] = @OriginalAvailable
-		AND [OnHand] = @OriginalOnHand
-		AND [Description] = @OriginalDescription
-		AND (([Location] = @OriginalLocation)
-		OR (@OriginalLocation IS NULL))
-		AND [UnitPrice] = @OriginalUnitPrice
-		AND [ShortDesc] = @OriginalShortDesc
-		AND (([ReorderThreshold] = @OriginalReorderThreshold)
-		OR (@OriginalReorderThreshold IS NULL))
-		AND (([ReorderAmount] = @OriginalReorderAmount)
-		OR (@OriginalReorderAmount IS NULL))
-		AND [OnOrder] = @OriginalOnOrder
-		AND (([ShippingDimensions] = @OriginalShippingDimensions)
-		OR (@OriginalShippingDimensions IS NULL))
-		AND (([ShippingWeight] = @OriginalShippingWeight)
-		OR (@OriginalShippingWeight IS NULL))
-		AND [Active] = @OriginalActive
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_UpdateVendor]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_UpdateVendor]*/
-CREATE PROCEDURE [dbo].[sp_UpdateVendor]
-	(@Name varchar(50),
-	 @Address varchar(50),
-	 @City varchar(50),
-	 @State char(2),
-	 @Country VarChar(25),
-	 @Zip char(10),
-	 @Phone char(12),
-	 @Contact varchar(50),
-	 @ContactEmail varchar(50),
-	 @original_VendorID int,
-	 @original_Name varchar(50),
-	 @original_Address varchar(50),
-	 @original_City varchar(50),
-	 @original_State char(2),
-	 @original_Country varchar(25),
-	 @original_Zip char(10),
-	 @original_Phone char(12),
-	 @original_Contact varchar(50),
-	 @original_ContactEmail varchar(50))
-AS
-	UPDATE Vendors
-	   SET Name = @Name,
-	       Address = @Address,
-	       City = @City,
-	       State = @State,
-	       Country = @Country,
-	       Zip = @Zip,
-	       Phone = @Phone,
-	       Contact = @Contact
-	WHERE VendorID = @original_VendorID
-	  AND Name = @original_Name
-	  AND Address = @original_Address
-	  AND City = @original_City
-	  AND State = @original_State
-	  AND Country = @original_Country
-	  AND Zip = @original_Zip
-	  AND Phone = @original_Phone
-	  AND Contact = @original_Contact
-	  AND ContactEmail = @original_ContactEmail
-	
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_UpdateVendorName]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-
-/*Object:  StoredProcedure [dbo].[sp_UpdateVendorName]*/
-CREATE PROCEDURE [dbo].[sp_UpdateVendorName]
-	(@Name varchar(50),
-	 @original_VendorID int,
-	 @original_Name varchar(50))
-AS
-	UPDATE Vendors
-	SET Name = @Name
-	WHERE VendorID = @original_VendorID
-	AND Name = @original_Name
-
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_UpdateVendorSourceItem]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-	
-/*Object: StoredProcedure [dbo].[sp_UpdateVendorSourceItem]*/
-CREATE PROCEDURE [sp_UpdateVendorSourceItem]
+/*Object: StoredProcedure [dbo].[proc_UpdateVendorSourceItem]*/
+CREATE PROCEDURE [proc_UpdateVendorSourceItem]
 	(@vendorID int,
 	 @productID int,
 	 @unitCost money,

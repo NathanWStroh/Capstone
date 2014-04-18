@@ -1,6 +1,6 @@
 ﻿	
-/*Object: StoredProcedure [dbo].[sp_UpdateVendorSourceItem]*/
-CREATE PROCEDURE [sp_UpdateVendorSourceItem]
+/*Object: StoredProcedure [dbo].[proc_UpdateVendorSourceItem]*/
+CREATE PROCEDURE [proc_UpdateVendorSourceItem]
 	(@vendorID int,
 	 @productID int,
 	 @unitCost money,
