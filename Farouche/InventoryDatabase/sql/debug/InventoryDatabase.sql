@@ -944,6 +944,28 @@ ALTER TABLE [dbo].[VendorSourceItems] WITH NOCHECK
 
 
 GO
+PRINT N'Creating [dbo].[proc_DeactivateCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_DeactivateCategory] */
+CREATE PROCEDURE [proc_DeactivateCategory]
+	(@category varchar(50))
+AS
+	UPDATE [dbo].[Categories]
+		SET [Active] = 0
+	WHERE [Category] = @category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_GenerateReorderReports]...';
 
 
@@ -1866,28 +1888,6 @@ AS
 		and [QtyDamaged] = @QtyDamaged
 		and [QtyReceived] = @QtyReceived
 RETURN @@ROWCOUNT
-GO
-PRINT N'Creating [dbo].[sp_DeactivateCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_DeactivateCategory] */
-CREATE PROCEDURE [sp_DeactivateCategory]
-	(@category varchar(50))
-AS
-	UPDATE [dbo].[Categories]
-		SET [Active] = 0
-	WHERE [Category] = @category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
 GO
 PRINT N'Creating [dbo].[sp_DeactivateLocation]...';
 
