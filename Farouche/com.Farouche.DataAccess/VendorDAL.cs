@@ -175,7 +175,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_UpdateVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_UpdateVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@Name", vendor.Name);
                 mySqlCommand.Parameters.AddWithValue("@Address", vendor.Address);

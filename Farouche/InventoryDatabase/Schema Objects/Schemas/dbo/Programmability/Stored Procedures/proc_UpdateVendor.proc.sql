@@ -1,6 +1,6 @@
 ﻿
-/*Object:  StoredProcedure [dbo].[sp_UpdateVendor]*/
-CREATE PROCEDURE [dbo].[sp_UpdateVendor]
+/*Object:  StoredProcedure [dbo].[proc_UpdateVendor]*/
+CREATE PROCEDURE [dbo].[proc_UpdateVendor]
 	(@Name varchar(50),
 	 @Address varchar(50),
 	 @City varchar(50),
