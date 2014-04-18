@@ -1,6 +1,6 @@
 ﻿	
-/*Object: StoredProcedure [dbo].[sp_UpdateLocation] */
-CREATE PROCEDURE [sp_UpdateLocation]
+/*Object: StoredProcedure [dbo].[proc_UpdateLocation] */
+CREATE PROCEDURE [proc_UpdateLocation]
 	(@location varchar(250),
 	 @orig_location varchar(250))
 AS
