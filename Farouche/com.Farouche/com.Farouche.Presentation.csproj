@@ -145,6 +145,18 @@
     <Compile Include="FrmShippingPickList.Designer.cs">
       <DependentUpon>FrmShippingPickList.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmShippingTerm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingTerm.Designer.cs">
+      <DependentUpon>FrmShippingTerm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShippingVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShippingVendor.Designer.cs">
+      <DependentUpon>FrmShippingVendor.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmStartUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmShippingPickList.resx">
       <DependentUpon>FrmShippingPickList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingTerm.resx">
+      <DependentUpon>FrmShippingTerm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShippingVendor.resx">
+      <DependentUpon>FrmShippingVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStartUp.resx">
       <DependentUpon>frmStartUp.cs</DependentUpon>

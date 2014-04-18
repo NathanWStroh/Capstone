@@ -1,12 +1,17 @@
 ﻿//Author: Nathan Stroh
 //Date Created: 3/30/2014
-//Last Modified:  4/4/14
+//Last Modified:  4/16/14
 //Last Modified By: Ben Grimes
 
 /*
 *                               Changelog
+<<<<<<< HEAD
+* Date         By          Ticket          Version         Description
+* 4/16/14   Ben Grimes                                      Added Shipping Vendors and Terms into Startup
+=======
 * Date         By           Ticket          Version         Description
 * 4-4-14       NathanStroh                  ???             Removed title from frame.
+>>>>>>> origin
 */
 
 using System;
@@ -25,6 +30,8 @@ namespace com.Farouche.Presentation
         public FrmShippingMyOrders ShippingMyOrders;
         public FrmShippingPickList ShippingPickList;
         public FrmShippingPackList ShippingPackList;
+        public FrmShippingTerm ShippingTerm;
+        public FrmShippingVendor ShippingVendor;
 
         public frmStartUp(AccessToken acctoken)
         {
@@ -93,6 +100,22 @@ namespace com.Farouche.Presentation
             ShippingPackList.Show();
         }
 
+        private void tsmiShippingVendors_Click(object sender, EventArgs e)
+        {
+            ShippingVendor = new FrmShippingVendor(_myAccessToken);
+            ShippingVendor.MdiParent = this;
+            ShippingVendor.WindowState = FormWindowState.Maximized;
+            ShippingVendor.Show();
+        }
+
+        private void tsmiShippingTerms_Click(object sender, EventArgs e)
+        {
+            ShippingTerm = new FrmShippingTerm(_myAccessToken);
+            ShippingTerm.MdiParent = this;
+            ShippingTerm.WindowState = FormWindowState.Maximized;
+            ShippingTerm.Show();
+        }
+
         private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmVendor frm = new FrmVendor(_myAccessToken);
@@ -119,6 +142,11 @@ namespace com.Farouche.Presentation
             this.Text = frm.Text;
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
+        }
+
+        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

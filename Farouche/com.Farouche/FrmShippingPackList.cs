@@ -79,7 +79,7 @@ namespace com.Farouche
                     MessageBox.Show("Now Printing Pack Slip", "Packing Complete");
                     RefreshPackView();
                     frmPrintPackReport packReport = new frmPrintPackReport(currentOrder);
-                    packReport.Show();
+                    packReport.ShowDialog();
                 }
                 else
                 {
