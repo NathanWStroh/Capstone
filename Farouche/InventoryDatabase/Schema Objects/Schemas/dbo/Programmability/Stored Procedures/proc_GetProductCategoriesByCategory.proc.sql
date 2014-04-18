@@ -1,6 +1,6 @@
 ﻿
-/*Object: StoredProcedure [dbo].[sp_GetProductCategoriesByCategory] */
-CREATE PROCEDURE [sp_GetProductCategoriesByCategory]
+/*Object: StoredProcedure [dbo].[proc_GetProductCategoriesByCategory] */
+CREATE PROCEDURE [proc_GetProductCategoriesByCategory]
 	(@category varchar(50))
 AS
 	SELECT [Category], [ProductCategories].[ProductID], [Products].[ShortDesc] 
