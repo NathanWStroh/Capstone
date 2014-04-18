@@ -1,6 +1,6 @@
 ﻿
-/*Object: StoredProcedure [dbo].[sp_DeactivateProductCategory] */
-CREATE PROCEDURE [sp_DeactivateProductCategory]
+/*Object: StoredProcedure [dbo].[proc_DeactivateProductCategory] */
+CREATE PROCEDURE [proc_DeactivateProductCategory]
 	(@productID int,
 	 @category varchar(50))
 AS

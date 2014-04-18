@@ -1249,6 +1249,59 @@
 				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_DeactivateLocation] */&#xD;&#xA;CREATE PROCEDURE [proc_DeactivateLocation]&#xD;&#xA;&#x9;(@location varchar(250))&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_DeactivateProduct]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	UPDATE [dbo].[Products]
+	SET [Active] = 0
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeactivateProduct].[@ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeactivateProduct].[@ProductID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="63" />
+				<Property Name="Length" Value="232" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[proc_DeactivateProduct]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[proc_DeactivateProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;Int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GenerateReorderReports]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -7554,59 +7607,6 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<AttachedAnnotation Disambiguator="25" />
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateProduct]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	UPDATE [dbo].[Products]
-	SET [Active] = 0
-	WHERE [ProductID] = @ProductID
-	RETURN @@ROWCOUNT]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Products]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeactivateProduct].[@ProductID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeactivateProduct].[@ProductID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="61" />
-				<Property Name="Length" Value="228" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_DeactivateProduct]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_DeactivateProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;Int)&#xD;&#xA;AS" />
-			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeactivateProductCategory]">
 			<Property Name="BodyScript">

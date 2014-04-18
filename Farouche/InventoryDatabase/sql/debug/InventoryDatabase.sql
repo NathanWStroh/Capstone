@@ -966,6 +966,50 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_DeactivateLocation]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_DeactivateLocation] */
+CREATE PROCEDURE [proc_DeactivateLocation]
+	(@location varchar(250))
+AS
+	UPDATE [dbo].[Locations]
+		SET [Active] = 0
+	WHERE [Location] = @location
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeactivateProduct]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_DeactivateProduct]*/
+CREATE PROCEDURE [dbo].[proc_DeactivateProduct]
+	(@ProductID		Int)
+AS
+	UPDATE [dbo].[Products]
+	SET [Active] = 0
+	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_GenerateReorderReports]...';
 
 
@@ -1888,50 +1932,6 @@ AS
 		and [QtyDamaged] = @QtyDamaged
 		and [QtyReceived] = @QtyReceived
 RETURN @@ROWCOUNT
-GO
-PRINT N'Creating [dbo].[sp_DeactivateLocation]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_DeactivateLocation] */
-CREATE PROCEDURE [sp_DeactivateLocation]
-	(@location varchar(250))
-AS
-	UPDATE [dbo].[Locations]
-		SET [Active] = 0
-	WHERE [Location] = @location
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeactivateProduct]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_DeactivateProduct]*/
-CREATE PROCEDURE [dbo].[sp_DeactivateProduct]
-	(@ProductID		Int)
-AS
-	UPDATE [dbo].[Products]
-	SET [Active] = 0
-	WHERE [ProductID] = @ProductID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
 GO
 PRINT N'Creating [dbo].[sp_DeactivateProductCategory]...';
 
