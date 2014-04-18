@@ -133,11 +133,9 @@ namespace com.Farouche.Presentation
             var selectedRow = lvOpenVendorOrders.SelectedItems;
             if (selectedRow.Count != 0)
             {
-                vendorOrder = new VendorOrder(Int32.Parse(selectedRow[0].SubItems[0].Text));
-                vendorOrder.VendorID = Int32.Parse(selectedRow[0].SubItems[1].Text);
-                vendorOrder.Name = selectedRow[0].SubItems[2].Text;
-                vendorOrder.DateOrdered = DateTime.Parse(selectedRow[0].SubItems[3].Text);
-
+                vendorOrder = new VendorOrder(Int32.Parse(selectedRow[0].Text), Int32.Parse(selectedRow[0].SubItems[1].Text));
+                vendorOrder.DateOrdered = Convert.ToDateTime(selectedRow[0].SubItems[3].Text);
+                vendorOrder.NumberOfShipments = Int32.Parse(selectedRow[0].SubItems[4].Text);
 
                 frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
                 _frmReceiving.Show();
@@ -163,27 +161,25 @@ namespace com.Farouche.Presentation
 
 
             _vendorOrdersManager = new VendorOrderManager();
+            
             vendorOrder = new VendorOrder(1);
 
             vendorOrder.Name = "Target";
 
+            
+
             vendorOrder.DateOrdered = DateTime.Today;
-            //vendorOrder.NumberOfShipments = 4;
+            vendorOrder.NumberOfShipments = 4;
             _vendorOrdersManager.AddVendorOrder(vendorOrder);
 
-            //vendorOrderLineItem = new VendorOrderLineItem(1, 1);
-            //vendorOrderLineItem.Name = "Target";
-            //vendorOrderLineItem.QtyOrdered = 10;
-            //vendorOrderLineItem.ProductID = 1;
-            //vendorOrderLineItem.VendorOrderId = 1;
-            //vendorOrderLineItem.LineItemTotal = 20.00;
-            //vendorOrder.AddLineItem(vendorOrderLineItem);
-
+            vendorOrderLineItem = new VendorOrderLineItem(1, 1);
+            vendorOrderLineItem.Name = "Target";
+            vendorOrderLineItem.QtyOrdered = 10;
+            vendorOrderLineItem.ProductID = 1;
+            vendorOrderLineItem.VendorOrderId = 1;
+            vendorOrderLineItem.LineItemTotal = 20.00;
+            vendorOrder.AddLineItem(vendorOrderLineItem);
             
-            
-
-
-
 
         }
 
@@ -192,5 +188,6 @@ namespace com.Farouche.Presentation
             fillVendorDropDown();
         }
         
+
     }
 }
