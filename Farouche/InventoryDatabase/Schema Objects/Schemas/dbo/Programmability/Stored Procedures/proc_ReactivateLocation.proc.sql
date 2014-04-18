@@ -1,5 +1,5 @@
-﻿/*Object: StoredProcedure [dbo].[sp_ReactivateLocation] */
-CREATE PROCEDURE [sp_ReactivateLocation]
+﻿/*Object: StoredProcedure [dbo].[proc_ReactivateLocation] */
+CREATE PROCEDURE [proc_ReactivateLocation]
 	(@location varchar(250))
 AS
 	UPDATE [dbo].[Locations]
