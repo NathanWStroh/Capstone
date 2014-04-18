@@ -1367,7 +1367,7 @@ PRINT N'Creating [dbo].[proc_GetVendorOrderByVendorAndDate]...';
 GO
 CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
 	@VendorID int, 
-	@DateOrdered date
+	@DateOrdered datetime
 AS
 	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	FROM VendorOrders
