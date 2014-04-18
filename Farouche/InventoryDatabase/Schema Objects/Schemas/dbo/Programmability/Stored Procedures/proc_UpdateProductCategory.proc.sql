@@ -1,6 +1,6 @@
 ﻿	
-/*Object: StoredProcedure [dbo].[sp_UpdateProductCategory] */
-CREATE PROCEDURE [sp_UpdateProductCategory]
+/*Object: StoredProcedure [dbo].[proc_UpdateProductCategory] */
+CREATE PROCEDURE [proc_UpdateProductCategory]
 	(@productID int,
 	 @category varchar(50),
 	 @orig_productID int,
