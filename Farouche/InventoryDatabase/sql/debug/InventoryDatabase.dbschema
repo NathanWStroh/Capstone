@@ -1606,6 +1606,514 @@
 				<Property Name="HeaderContents" Value="/*Object: StoredProcedure [dbo].[proc_DeleteLocation] */&#xD;&#xA;CREATE PROCEDURE [proc_DeleteLocation]&#xD;&#xA;&#x9;(@location varchar(250))&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_DeleteProduct]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	DELETE FROM [dbo].[Products]
+	WHERE [ProductID] = @ProductID
+	AND [Available] = @Available
+	AND [OnHand] = @OnHand
+	AND [Description] = @Description
+	AND [Location] = @Location
+	AND [UnitPrice] = @UnitPrice
+	AND [ShortDesc] = @ShortDesc
+	AND [ReorderThreshold] = @ReorderThreshold
+	AND [ReorderAmount] = @ReorderAmount
+	AND [OnOrder] = @OnOrder
+	AND [ShippingDimensions] = @ShippingDimensions
+	AND [ShippingWeight] = @ShippingWeight
+	AND [Active] = @Active
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Available]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@Available]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[OnHand]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@OnHand]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[UnitPrice]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@UnitPrice]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShortDesc]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@ShortDesc]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ReorderThreshold]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@ReorderThreshold]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@ReorderAmount]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[OnOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@OnOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShippingDimensions]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@ShippingDimensions]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShippingWeight]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@ShippingWeight]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProduct].[@Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@ProductID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@Available]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@OnHand]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@Description]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@Location]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="250" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@UnitPrice]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[money]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@ShortDesc]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@ReorderThreshold]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@ReorderAmount]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@OnOrder]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@ShippingDimensions]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@ShippingWeight]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[float]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProduct].[@Active]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[bit]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="863" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_DeleteProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Available&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OnOrder&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions&#x9;&#x9;varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_DeleteProductCategory]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	DELETE FROM [dbo].[ProductCategories]
+		WHERE ProductID = @productID
+			AND Category = @category
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ProductCategories]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProductCategory].[@productID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[Category]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteProductCategory].[@category]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProductCategory].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteProductCategory].[@category]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="67" />
+				<Property Name="Length" Value="282" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_DeleteProductCategory] */&#xD;&#xA;CREATE PROCEDURE [proc_DeleteProductCategory]&#xD;&#xA;&#x9;(@productID int,&#xD;&#xA;&#x9; @category varchar(50))&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_DeleteVendor]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	DELETE FROM [dbo].[Vendors]
+	WHERE [VendorID] = @VendorID
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Vendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteVendor].[@VendorID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteVendor].[@VendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="58" />
+				<Property Name="Length" Value="197" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_DeleteVendor] */&#xD;&#xA;CREATE PROCEDURE [proc_DeleteVendor]&#xD;&#xA;&#x9;(@VendorID int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_DeleteVendorSourceItem]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	DELETE FROM [dbo].[VendorSourceItems]
+	WHERE [VendorID] = @vendorID
+		AND [ProductID] = @productID
+	RETURN @@ROWCOUNT]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteVendorSourceItem].[@vendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_DeleteVendorSourceItem].[@productID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteVendorSourceItem].[@vendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_DeleteVendorSourceItem].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="68" />
+				<Property Name="Length" Value="278" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_DeleteVendorSourceItem] */&#xD;&#xA;CREATE PROCEDURE [proc_DeleteVendorSourceItem]&#xD;&#xA;&#x9;(@vendorID int,&#xD;&#xA;&#x9; @productID int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GenerateReorderReports]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -2832,6 +3340,84 @@ RETURN]]></Value>
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetAllVendorOrders]&#xD;&#xA;&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetAllVendorSourceItems]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	FROM [dbo].[VendorSourceItems]
+	WHERE [Active] = 1
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="66" />
+				<Property Name="Length" Value="258" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItems] */&#xD;&#xA;CREATE PROCEDURE [proc_GetAllVendorSourceItems]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetCategories]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [Category]
+	FROM [dbo].[Categories]
+	WHERE [Active] = 1
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Categories]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Categories].[Category]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Categories].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="59" />
+				<Property Name="Length" Value="176" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetCategories] */&#xD;&#xA;CREATE PROCEDURE [proc_GetCategories]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetCLSPackDetails]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -3116,6 +3702,331 @@ RETURN]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetExceptionItemsByVendorOrder]&#xD;&#xA;@VendorOrderID int&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetLocations]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [Location]
+	FROM [dbo].[Locations]
+	WHERE [Active] = 1
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Locations]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Locations].[Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Locations].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="56" />
+				<Property Name="Length" Value="171" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/*Object: StoredProcedure [dbo].[proc_GetLocations] */&#xD;&#xA;CREATE PROCEDURE [proc_GetLocations]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetProduct]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT * FROM [dbo].[Products]
+	WHERE [ProductID] = @ProductID
+	ORDER BY [ProductID]]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetProduct].[@ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetProduct].[@ProductID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="56" />
+				<Property Name="Length" Value="209" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[proc_GetProduct]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[proc_GetProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;Int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetProductCategories]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [ProductID], [Category]
+	FROM [dbo].[ProductCategories]
+	WHERE [Active] = 1
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ProductCategories]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[Category]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="66" />
+				<Property Name="Length" Value="210" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetProductCategories] */&#xD;&#xA;CREATE PROCEDURE [proc_GetProductCategories]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetProductCategoriesByCategory]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [Category], [ProductCategories].[ProductID], [Products].[ShortDesc] 
+	FROM [ProductCategories], [Products]
+	WHERE [Category] = @category
+		AND [ProductCategories].[ProductID] = [Products].[ProductID]
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ProductCategories]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[Category]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ShortDesc]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetProductCategoriesByCategory].[@category]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetProductCategoriesByCategory].[@category]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="76" />
+				<Property Name="Length" Value="381" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetProductCategoriesByCategory] */&#xD;&#xA;CREATE PROCEDURE [proc_GetProductCategoriesByCategory]&#xD;&#xA;&#x9;(@category varchar(50))&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetProductCategoriesByProduct]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [ProductID], [ProductCategories].[Category]
+	FROM [ProductCategories], [Categories]
+	WHERE [ProductID] = @productID
+		AND [ProductCategories].[Category] = [Categories].[Category]
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[ProductCategories]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Categories]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[ProductCategories].[Category]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetProductCategoriesByProduct].[@productID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Categories].[Category]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetProductCategoriesByProduct].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="75" />
+				<Property Name="Length" Value="351" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetProductCategoriesByProduct] */&#xD;&#xA;CREATE PROCEDURE [proc_GetProductCategoriesByProduct]&#xD;&#xA;&#x9;(@productID int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetProducts]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT * FROM [dbo].[Products]
+	ORDER BY [Active] DESC, [ProductID]]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="57" />
+				<Property Name="Length" Value="173" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[proc_GetProducts]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[proc_GetProducts]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetProductsByActive]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT * FROM [dbo].[Products]
+	WHERE [Active] = @Active
+	ORDER BY [ProductID]]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Products]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetProductsByActive].[@Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Products].[ProductID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetProductsByActive].[@Active]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="65" />
+				<Property Name="Length" Value="217" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[proc_GetProductsByActive]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[proc_GetProductsByActive]&#xD;&#xA;&#x9;(@Active&#x9;Int)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetShippingOrderByID]">
@@ -3627,6 +4538,56 @@ RETURN]]></Value>
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [proc_GetShippingVendorByID]&#xD;&#xA;(&#xD;&#xA;&#x9;@shippingVendorID int&#xD;&#xA;)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendor]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT *
+	FROM Vendors
+	WHERE VendorID = @VendorID
+	Return]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Vendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetVendor].[@VendorID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetVendor].[@VendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="57" />
+				<Property Name="Length" Value="182" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;&#xD;&#xA;/*Object:  StoredProcedure [dbo].[proc_GetVendor]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[proc_GetVendor]&#xD;&#xA;&#x9;(@VendorID int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_getVendorOrder]">
 			<Property Name="IsQuotedIdentifierOn" Value="False" />
 			<Property Name="BodyScript">
@@ -3852,6 +4813,290 @@ RETURN]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[proc_GetVendorOrderLineItem]&#xD;&#xA;&#x9;@VendorOrderID int, &#xD;&#xA;&#x9;@ProductID int&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendors]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT *
+	FROM Vendors 
+	Return]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Vendors]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="56" />
+				<Property Name="Length" Value="136" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[proc_GetVendors]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[proc_GetVendors]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorsActive]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT *
+	FROM Vendors
+	WHERE Active = 1
+	Return]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Vendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="62" />
+				<Property Name="Length" Value="166" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[proc_GetVendorsActive]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[proc_GetVendorsActive]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorSourceItem]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Active]
+	FROM [dbo].[VendorSourceItems]
+	WHERE [VendorID] = @vendorID
+		AND [ProductID] = @productID
+	RETURN @@ROWCOUNT
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetVendorSourceItem].[@vendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetVendorSourceItem].[@productID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetVendorSourceItem].[@vendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetVendorSourceItem].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="65" />
+				<Property Name="Length" Value="362" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItem] */&#xD;&#xA;CREATE PROCEDURE [proc_GetVendorSourceItem]&#xD;&#xA;&#x9;(@vendorID int,&#xD;&#xA;&#x9; @productID int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorSourceItemsByProduct]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
+	FROM [dbo].[VendorSourceItems]
+	INNER JOIN [dbo].[Vendors]
+	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
+	WHERE [VendorSourceItems].[Active] = 1
+	AND [ProductID] = @productID
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Vendors].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetVendorSourceItemsByProduct].[@productID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetVendorSourceItemsByProduct].[@productID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="76" />
+				<Property Name="Length" Value="470" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#x9;&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItemsByProduct] */&#xD;&#xA;CREATE PROCEDURE [proc_GetVendorSourceItemsByProduct]&#xD;&#xA;&#x9;(@productID int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="ISql100Procedure" Name="[dbo].[proc_GetVendorSourceItemsByVendor]">
+			<Property Name="BodyScript">
+				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
+	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	FROM [dbo].[VendorSourceItems]
+	WHERE [Active] = 1
+		AND [VendorID] = @vendorID
+	RETURN]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[VendorSourceItems].[Active]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[proc_GetVendorSourceItemsByVendor].[@vendorID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Owner">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="ISql100SubroutineParameter" Name="[dbo].[proc_GetVendorSourceItemsByVendor].[@vendorID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="74" />
+				<Property Name="Length" Value="319" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItemsByVendor] */&#xD;&#xA;CREATE PROCEDURE [proc_GetVendorSourceItemsByVendor]&#xD;&#xA;&#x9;(@vendorID int)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[proc_InsertIntoShippingOrderLineItems]">
@@ -7911,1251 +9156,6 @@ RETURN @@ROWCOUNT]]></Value>
 				</Entry>
 			</Relationship>
 			<AttachedAnnotation Disambiguator="25" />
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteProduct]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	DELETE FROM [dbo].[Products]
-	WHERE [ProductID] = @ProductID
-	AND [Available] = @Available
-	AND [OnHand] = @OnHand
-	AND [Description] = @Description
-	AND [Location] = @Location
-	AND [UnitPrice] = @UnitPrice
-	AND [ShortDesc] = @ShortDesc
-	AND [ReorderThreshold] = @ReorderThreshold
-	AND [ReorderAmount] = @ReorderAmount
-	AND [OnOrder] = @OnOrder
-	AND [ShippingDimensions] = @ShippingDimensions
-	AND [ShippingWeight] = @ShippingWeight
-	AND [Active] = @Active
-	RETURN @@ROWCOUNT]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Products]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[Available]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@Available]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[OnHand]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@OnHand]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[Description]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@Description]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[Location]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@Location]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[UnitPrice]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@UnitPrice]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ShortDesc]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@ShortDesc]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ReorderThreshold]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@ReorderThreshold]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ReorderAmount]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@ReorderAmount]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[OnOrder]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@OnOrder]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ShippingDimensions]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@ShippingDimensions]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ShippingWeight]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@ShippingWeight]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProduct].[@Active]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@ProductID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@Available]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@OnHand]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@Description]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="250" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@Location]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="250" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@UnitPrice]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[money]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@ShortDesc]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@ReorderThreshold]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@ReorderAmount]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@OnOrder]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@ShippingDimensions]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@ShippingWeight]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[float]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProduct].[@Active]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[bit]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="861" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[sp_DeleteProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@Available&#x9;&#x9;&#x9;&#x9;Int,&#xD;&#xA;&#x9;@OnHand&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@Description&#x9;&#x9;&#x9;VarChar(250),&#xD;&#xA;&#x9;@Location&#x9;&#x9;&#x9;&#x9;varchar(250),&#xD;&#xA;&#x9;@UnitPrice&#x9;&#x9;&#x9;&#x9;Money,&#xD;&#xA;&#x9;@ShortDesc&#x9;&#x9;&#x9;&#x9;VarChar(50),&#xD;&#xA;&#x9;@ReorderThreshold&#x9;&#x9;int,&#xD;&#xA;&#x9;@ReorderAmount&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@OnOrder&#x9;&#x9;&#x9;&#x9;int,&#xD;&#xA;&#x9;@ShippingDimensions&#x9;&#x9;varchar(50),&#xD;&#xA;&#x9;@ShippingWeight&#x9;&#x9;&#x9;float,&#xD;&#xA;&#x9;@Active&#x9;&#x9;&#x9;&#x9;&#x9;Bit)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteProductCategory]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	DELETE FROM [dbo].[ProductCategories]
-		WHERE ProductID = @productID
-			AND Category = @category
-	RETURN @@ROWCOUNT]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[ProductCategories]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProductCategory].[@productID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[Category]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteProductCategory].[@category]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProductCategory].[@productID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteProductCategory].[@category]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="65" />
-				<Property Name="Length" Value="278" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_DeleteProductCategory] */&#xD;&#xA;CREATE PROCEDURE [sp_DeleteProductCategory]&#xD;&#xA;&#x9;(@productID int,&#xD;&#xA;&#x9; @category varchar(50))&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteVendor]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	DELETE FROM [dbo].[Vendors]
-	WHERE [VendorID] = @VendorID
-	RETURN @@ROWCOUNT]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Vendors]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Vendors].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteVendor].[@VendorID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteVendor].[@VendorID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="56" />
-				<Property Name="Length" Value="193" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_DeleteVendor] */&#xD;&#xA;CREATE PROCEDURE [sp_DeleteVendor]&#xD;&#xA;&#x9;(@VendorID int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_DeleteVendorSourceItem]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	DELETE FROM [dbo].[VendorSourceItems]
-	WHERE [VendorID] = @vendorID
-		AND [ProductID] = @productID
-	RETURN @@ROWCOUNT]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteVendorSourceItem].[@vendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_DeleteVendorSourceItem].[@productID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteVendorSourceItem].[@vendorID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_DeleteVendorSourceItem].[@productID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="66" />
-				<Property Name="Length" Value="274" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_DeleteVendorSourceItem] */&#xD;&#xA;CREATE PROCEDURE [sp_DeleteVendorSourceItem]&#xD;&#xA;&#x9;(@vendorID int,&#xD;&#xA;&#x9; @productID int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetAllVendorSourceItems]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
-	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[Active]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="64" />
-				<Property Name="Length" Value="254" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItems] */&#xD;&#xA;CREATE PROCEDURE [sp_GetAllVendorSourceItems]&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetCategories]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [Category]
-	FROM [dbo].[Categories]
-	WHERE [Active] = 1
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Categories]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Categories].[Category]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Categories].[Active]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="57" />
-				<Property Name="Length" Value="172" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetCategories] */&#xD;&#xA;CREATE PROCEDURE [sp_GetCategories]&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetLocations]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [Location]
-	FROM [dbo].[Locations]
-	WHERE [Active] = 1
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Locations]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Locations].[Location]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Locations].[Active]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="54" />
-				<Property Name="Length" Value="167" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="/*Object: StoredProcedure [dbo].[sp_GetLocations] */&#xD;&#xA;CREATE PROCEDURE [sp_GetLocations]&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProduct]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT * FROM [dbo].[Products]
-	WHERE [ProductID] = @ProductID
-	ORDER BY [ProductID]]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Products]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetProduct].[@ProductID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetProduct].[@ProductID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="54" />
-				<Property Name="Length" Value="205" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_GetProduct]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_GetProduct]&#xD;&#xA;&#x9;(@ProductID&#x9;&#x9;Int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductCategories]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [ProductID], [Category]
-	FROM [dbo].[ProductCategories]
-	WHERE [Active] = 1
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[ProductCategories]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[Category]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[Active]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="64" />
-				<Property Name="Length" Value="206" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetProductCategories] */&#xD;&#xA;CREATE PROCEDURE [sp_GetProductCategories]&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductCategoriesByCategory]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [Category], [ProductCategories].[ProductID], [Products].[ShortDesc] 
-	FROM [ProductCategories], [Products]
-	WHERE [Category] = @category
-		AND [ProductCategories].[ProductID] = [Products].[ProductID]
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[ProductCategories]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[Category]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ShortDesc]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetProductCategoriesByCategory].[@category]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ProductID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetProductCategoriesByCategory].[@category]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="74" />
-				<Property Name="Length" Value="377" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetProductCategoriesByCategory] */&#xD;&#xA;CREATE PROCEDURE [sp_GetProductCategoriesByCategory]&#xD;&#xA;&#x9;(@category varchar(50))&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductCategoriesByProduct]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [ProductID], [ProductCategories].[Category]
-	FROM [ProductCategories], [Categories]
-	WHERE [ProductID] = @productID
-		AND [ProductCategories].[Category] = [Categories].[Category]
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[ProductCategories]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Categories]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[ProductCategories].[Category]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetProductCategoriesByProduct].[@productID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Categories].[Category]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetProductCategoriesByProduct].[@productID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="73" />
-				<Property Name="Length" Value="347" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetProductCategoriesByProduct] */&#xD;&#xA;CREATE PROCEDURE [sp_GetProductCategoriesByProduct]&#xD;&#xA;&#x9;(@productID int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProducts]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT * FROM [dbo].[Products]
-	ORDER BY [Active] DESC, [ProductID]]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Products]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ProductID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="55" />
-				<Property Name="Length" Value="169" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_GetProducts]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_GetProducts]&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetProductsByActive]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT * FROM [dbo].[Products]
-	WHERE [Active] = @Active
-	ORDER BY [ProductID]]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Products]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetProductsByActive].[@Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Products].[ProductID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetProductsByActive].[@Active]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="63" />
-				<Property Name="Length" Value="213" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_GetProductsByActive]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_GetProductsByActive]&#xD;&#xA;&#x9;(@Active&#x9;Int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendor]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT *
-	FROM Vendors
-	WHERE VendorID = @VendorID
-	Return]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Vendors]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Vendors].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetVendor].[@VendorID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetVendor].[@VendorID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="55" />
-				<Property Name="Length" Value="178" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_GetVendor]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_GetVendor]&#xD;&#xA;&#x9;(@VendorID int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendors]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT *
-	FROM Vendors 
-	Return]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Vendors]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="54" />
-				<Property Name="Length" Value="132" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_GetVendors]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_GetVendors]&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorsActive]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT *
-	FROM Vendors
-	WHERE Active = 1
-	Return]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[Vendors]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Vendors].[Active]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="60" />
-				<Property Name="Length" Value="162" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object:  StoredProcedure [dbo].[sp_GetVendorsActive]*/&#xD;&#xA;CREATE PROCEDURE [dbo].[sp_GetVendorsActive]&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorSourceItem]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Active]
-	FROM [dbo].[VendorSourceItems]
-	WHERE [VendorID] = @vendorID
-		AND [ProductID] = @productID
-	RETURN @@ROWCOUNT
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetVendorSourceItem].[@vendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetVendorSourceItem].[@productID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetVendorSourceItem].[@vendorID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetVendorSourceItem].[@productID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="63" />
-				<Property Name="Length" Value="358" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItem] */&#xD;&#xA;CREATE PROCEDURE [sp_GetVendorSourceItem]&#xD;&#xA;&#x9;(@vendorID int,&#xD;&#xA;&#x9; @productID int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorSourceItemsByProduct]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
-	FROM [dbo].[VendorSourceItems]
-	INNER JOIN [dbo].[Vendors]
-	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
-	WHERE [VendorSourceItems].[Active] = 1
-	AND [ProductID] = @productID
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Vendors]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Vendors].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[Vendors].[Name]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetVendorSourceItemsByProduct].[@productID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetVendorSourceItemsByProduct].[@productID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="74" />
-				<Property Name="Length" Value="466" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#x9;&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItemsByProduct] */&#xD;&#xA;CREATE PROCEDURE [sp_GetVendorSourceItemsByProduct]&#xD;&#xA;&#x9;(@productID int)&#xD;&#xA;AS" />
-			</Annotation>
-		</Element>
-		<Element Type="ISql100Procedure" Name="[dbo].[sp_GetVendorSourceItemsByVendor]">
-			<Property Name="BodyScript">
-				<Value QuotedIdentifiers="True" AnsiNulls="True"><![CDATA[
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
-	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-		AND [VendorID] = @vendorID
-	RETURN]]></Value>
-			</Property>
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="BodyDependencies">
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[VendorID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ProductID]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[UnitCost]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[MinQtyToOrder]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[ItemsPerCase]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[VendorSourceItems].[Active]" />
-				</Entry>
-				<Entry>
-					<References Name="[dbo].[sp_GetVendorSourceItemsByVendor].[@vendorID]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Owner">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="Parameters">
-				<Entry>
-					<Element Type="ISql100SubroutineParameter" Name="[dbo].[sp_GetVendorSourceItemsByVendor].[@vendorID]">
-						<Relationship Name="Type">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="CreateOffset" Value="72" />
-				<Property Name="Length" Value="315" />
-				<Property Name="StartLine" Value="1" />
-				<Property Name="StartColumn" Value="1" />
-				<Property Name="HeaderContents" Value="&#xD;&#xA;/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItemsByVendor] */&#xD;&#xA;CREATE PROCEDURE [sp_GetVendorSourceItemsByVendor]&#xD;&#xA;&#x9;(@vendorID int)&#xD;&#xA;AS" />
-			</Annotation>
 		</Element>
 		<Element Type="ISql100Procedure" Name="[dbo].[sp_InsertIntoCategories]">
 			<Property Name="BodyScript">

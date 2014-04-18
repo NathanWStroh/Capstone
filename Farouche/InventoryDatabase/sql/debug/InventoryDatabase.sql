@@ -1081,6 +1081,157 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_DeleteCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+ 
+/*Object: StoredProcedure [dbo].[proc_DeleteCategory] */
+CREATE PROCEDURE [proc_DeleteCategory]
+	(@category varchar(50))
+AS
+	DELETE FROM[dbo].[Categories]
+	WHERE [Category] = @category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeleteLocation]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+/*Object: StoredProcedure [dbo].[proc_DeleteLocation] */
+CREATE PROCEDURE [proc_DeleteLocation]
+	(@location varchar(250))
+AS
+	DELETE FROM [dbo].[Locations]
+	WHERE [Location] = @location
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeleteProduct]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_DeleteProduct]
+	(@ProductID				Int,
+	@Available				Int,
+	@OnHand				int,
+	@Description			VarChar(250),
+	@Location				varchar(250),
+	@UnitPrice				Money,
+	@ShortDesc				VarChar(50),
+	@ReorderThreshold		int,
+	@ReorderAmount			int,
+	@OnOrder				int,
+	@ShippingDimensions		varchar(50),
+	@ShippingWeight			float,
+	@Active					Bit)
+AS
+	DELETE FROM [dbo].[Products]
+	WHERE [ProductID] = @ProductID
+	AND [Available] = @Available
+	AND [OnHand] = @OnHand
+	AND [Description] = @Description
+	AND [Location] = @Location
+	AND [UnitPrice] = @UnitPrice
+	AND [ShortDesc] = @ShortDesc
+	AND [ReorderThreshold] = @ReorderThreshold
+	AND [ReorderAmount] = @ReorderAmount
+	AND [OnOrder] = @OnOrder
+	AND [ShippingDimensions] = @ShippingDimensions
+	AND [ShippingWeight] = @ShippingWeight
+	AND [Active] = @Active
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeleteProductCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_DeleteProductCategory] */
+CREATE PROCEDURE [proc_DeleteProductCategory]
+	(@productID int,
+	 @category varchar(50))
+AS
+	DELETE FROM [dbo].[ProductCategories]
+		WHERE ProductID = @productID
+			AND Category = @category
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeleteVendor]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_DeleteVendor] */
+CREATE PROCEDURE [proc_DeleteVendor]
+	(@VendorID int)
+AS
+	DELETE FROM [dbo].[Vendors]
+	WHERE [VendorID] = @VendorID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_DeleteVendorSourceItem]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_DeleteVendorSourceItem] */
+CREATE PROCEDURE [proc_DeleteVendorSourceItem]
+	(@vendorID int,
+	 @productID int)
+AS
+	DELETE FROM [dbo].[VendorSourceItems]
+	WHERE [VendorID] = @vendorID
+		AND [ProductID] = @productID
+	RETURN @@ROWCOUNT
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_GenerateReorderReports]...';
 
 
@@ -1330,6 +1481,48 @@ AS
 	From VendorOrders
 RETURN
 GO
+PRINT N'Creating [dbo].[proc_GetAllVendorSourceItems]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItems] */
+CREATE PROCEDURE [proc_GetAllVendorSourceItems]
+AS
+	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	FROM [dbo].[VendorSourceItems]
+	WHERE [Active] = 1
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetCategories]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_GetCategories] */
+CREATE PROCEDURE [proc_GetCategories]
+AS
+	SELECT [Category]
+	FROM [dbo].[Categories]
+	WHERE [Active] = 1
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_GetCLSPackDetails]...';
 
 
@@ -1381,6 +1574,154 @@ AS
 	and (QtyReceived > QtyOrdered
 	or QtyDamaged > 0)
 RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetLocations]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+/*Object: StoredProcedure [dbo].[proc_GetLocations] */
+CREATE PROCEDURE [proc_GetLocations]
+AS
+	SELECT [Location]
+	FROM [dbo].[Locations]
+	WHERE [Active] = 1
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetProduct]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_GetProduct]*/
+CREATE PROCEDURE [dbo].[proc_GetProduct]
+	(@ProductID		Int)
+AS
+	SELECT * FROM [dbo].[Products]
+	WHERE [ProductID] = @ProductID
+	ORDER BY [ProductID]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetProductCategories]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_GetProductCategories] */
+CREATE PROCEDURE [proc_GetProductCategories]
+AS
+	SELECT [ProductID], [Category]
+	FROM [dbo].[ProductCategories]
+	WHERE [Active] = 1
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetProductCategoriesByCategory]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_GetProductCategoriesByCategory] */
+CREATE PROCEDURE [proc_GetProductCategoriesByCategory]
+	(@category varchar(50))
+AS
+	SELECT [Category], [ProductCategories].[ProductID], [Products].[ShortDesc] 
+	FROM [ProductCategories], [Products]
+	WHERE [Category] = @category
+		AND [ProductCategories].[ProductID] = [Products].[ProductID]
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetProductCategoriesByProduct]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_GetProductCategoriesByProduct] */
+CREATE PROCEDURE [proc_GetProductCategoriesByProduct]
+	(@productID int)
+AS
+	SELECT [ProductID], [ProductCategories].[Category]
+	FROM [ProductCategories], [Categories]
+	WHERE [ProductID] = @productID
+		AND [ProductCategories].[Category] = [Categories].[Category]
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetProducts]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_GetProducts]*/
+CREATE PROCEDURE [dbo].[proc_GetProducts]
+AS
+	SELECT * FROM [dbo].[Products]
+	ORDER BY [Active] DESC, [ProductID]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetProductsByActive]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_GetProductsByActive]*/
+CREATE PROCEDURE [dbo].[proc_GetProductsByActive]
+	(@Active	Int)
+AS
+	SELECT * FROM [dbo].[Products]
+	WHERE [Active] = @Active
+	ORDER BY [ProductID]
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
 GO
 PRINT N'Creating [dbo].[proc_GetShippingOrderByID]...';
 
@@ -1484,6 +1825,29 @@ AS
 	FROM [dbo].[ShippingVendors]
 	WHERE [ShippingVendorID] = @shippingVendorID
 GO
+PRINT N'Creating [dbo].[proc_GetVendor]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+
+/*Object:  StoredProcedure [dbo].[proc_GetVendor]*/
+CREATE PROCEDURE [dbo].[proc_GetVendor]
+	(@VendorID int)
+AS
+	SELECT *
+	FROM Vendors
+	WHERE VendorID = @VendorID
+	Return
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating [dbo].[proc_getVendorOrder]...';
 
 
@@ -1523,6 +1887,120 @@ AS
 	where [VendorOrderID] = @VendorOrderID
 		and [ProductID] = @ProductID
 RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetVendors]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_GetVendors]*/
+CREATE PROCEDURE [dbo].[proc_GetVendors]
+AS
+	SELECT *
+	FROM Vendors 
+	Return
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetVendorsActive]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object:  StoredProcedure [dbo].[proc_GetVendorsActive]*/
+CREATE PROCEDURE [dbo].[proc_GetVendorsActive]
+AS
+	SELECT *
+	FROM Vendors
+	WHERE Active = 1
+	Return
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetVendorSourceItem]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItem] */
+CREATE PROCEDURE [proc_GetVendorSourceItem]
+	(@vendorID int,
+	 @productID int)
+AS
+	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Active]
+	FROM [dbo].[VendorSourceItems]
+	WHERE [VendorID] = @vendorID
+		AND [ProductID] = @productID
+	RETURN @@ROWCOUNT
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetVendorSourceItemsByProduct]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+	
+/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItemsByProduct] */
+CREATE PROCEDURE [proc_GetVendorSourceItemsByProduct]
+	(@productID int)
+AS
+	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
+	FROM [dbo].[VendorSourceItems]
+	INNER JOIN [dbo].[Vendors]
+	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
+	WHERE [VendorSourceItems].[Active] = 1
+	AND [ProductID] = @productID
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
+PRINT N'Creating [dbo].[proc_GetVendorSourceItemsByVendor]...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+
+/*Object: StoredProcedure [dbo].[proc_GetVendorSourceItemsByVendor] */
+CREATE PROCEDURE [proc_GetVendorSourceItemsByVendor]
+	(@vendorID int)
+AS
+	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
+	FROM [dbo].[VendorSourceItems]
+	WHERE [Active] = 1
+		AND [VendorID] = @vendorID
+	RETURN
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
 GO
 PRINT N'Creating [dbo].[proc_InsertIntoShippingOrderLineItems]...';
 
@@ -2003,484 +2481,6 @@ AS
 		and [QtyDamaged] = @QtyDamaged
 		and [QtyReceived] = @QtyReceived
 RETURN @@ROWCOUNT
-GO
-PRINT N'Creating [dbo].[sp_DeleteCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
- 
-/*Object: StoredProcedure [dbo].[sp_DeleteCategory] */
-CREATE PROCEDURE [sp_DeleteCategory]
-	(@category varchar(50))
-AS
-	DELETE FROM[dbo].[Categories]
-	WHERE [Category] = @category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeleteLocation]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-/*Object: StoredProcedure [dbo].[sp_DeleteLocation] */
-CREATE PROCEDURE [sp_DeleteLocation]
-	(@location varchar(250))
-AS
-	DELETE FROM [dbo].[Locations]
-	WHERE [Location] = @location
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeleteProduct]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-CREATE PROCEDURE [dbo].[sp_DeleteProduct]
-	(@ProductID				Int,
-	@Available				Int,
-	@OnHand				int,
-	@Description			VarChar(250),
-	@Location				varchar(250),
-	@UnitPrice				Money,
-	@ShortDesc				VarChar(50),
-	@ReorderThreshold		int,
-	@ReorderAmount			int,
-	@OnOrder				int,
-	@ShippingDimensions		varchar(50),
-	@ShippingWeight			float,
-	@Active					Bit)
-AS
-	DELETE FROM [dbo].[Products]
-	WHERE [ProductID] = @ProductID
-	AND [Available] = @Available
-	AND [OnHand] = @OnHand
-	AND [Description] = @Description
-	AND [Location] = @Location
-	AND [UnitPrice] = @UnitPrice
-	AND [ShortDesc] = @ShortDesc
-	AND [ReorderThreshold] = @ReorderThreshold
-	AND [ReorderAmount] = @ReorderAmount
-	AND [OnOrder] = @OnOrder
-	AND [ShippingDimensions] = @ShippingDimensions
-	AND [ShippingWeight] = @ShippingWeight
-	AND [Active] = @Active
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeleteProductCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_DeleteProductCategory] */
-CREATE PROCEDURE [sp_DeleteProductCategory]
-	(@productID int,
-	 @category varchar(50))
-AS
-	DELETE FROM [dbo].[ProductCategories]
-		WHERE ProductID = @productID
-			AND Category = @category
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeleteVendor]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_DeleteVendor] */
-CREATE PROCEDURE [sp_DeleteVendor]
-	(@VendorID int)
-AS
-	DELETE FROM [dbo].[Vendors]
-	WHERE [VendorID] = @VendorID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_DeleteVendorSourceItem]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_DeleteVendorSourceItem] */
-CREATE PROCEDURE [sp_DeleteVendorSourceItem]
-	(@vendorID int,
-	 @productID int)
-AS
-	DELETE FROM [dbo].[VendorSourceItems]
-	WHERE [VendorID] = @vendorID
-		AND [ProductID] = @productID
-	RETURN @@ROWCOUNT
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetAllVendorSourceItems]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItems] */
-CREATE PROCEDURE [sp_GetAllVendorSourceItems]
-AS
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
-	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetCategories]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetCategories] */
-CREATE PROCEDURE [sp_GetCategories]
-AS
-	SELECT [Category]
-	FROM [dbo].[Categories]
-	WHERE [Active] = 1
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetLocations]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-/*Object: StoredProcedure [dbo].[sp_GetLocations] */
-CREATE PROCEDURE [sp_GetLocations]
-AS
-	SELECT [Location]
-	FROM [dbo].[Locations]
-	WHERE [Active] = 1
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetProduct]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_GetProduct]*/
-CREATE PROCEDURE [dbo].[sp_GetProduct]
-	(@ProductID		Int)
-AS
-	SELECT * FROM [dbo].[Products]
-	WHERE [ProductID] = @ProductID
-	ORDER BY [ProductID]
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetProductCategories]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetProductCategories] */
-CREATE PROCEDURE [sp_GetProductCategories]
-AS
-	SELECT [ProductID], [Category]
-	FROM [dbo].[ProductCategories]
-	WHERE [Active] = 1
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetProductCategoriesByCategory]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetProductCategoriesByCategory] */
-CREATE PROCEDURE [sp_GetProductCategoriesByCategory]
-	(@category varchar(50))
-AS
-	SELECT [Category], [ProductCategories].[ProductID], [Products].[ShortDesc] 
-	FROM [ProductCategories], [Products]
-	WHERE [Category] = @category
-		AND [ProductCategories].[ProductID] = [Products].[ProductID]
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetProductCategoriesByProduct]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetProductCategoriesByProduct] */
-CREATE PROCEDURE [sp_GetProductCategoriesByProduct]
-	(@productID int)
-AS
-	SELECT [ProductID], [ProductCategories].[Category]
-	FROM [ProductCategories], [Categories]
-	WHERE [ProductID] = @productID
-		AND [ProductCategories].[Category] = [Categories].[Category]
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetProducts]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_GetProducts]*/
-CREATE PROCEDURE [dbo].[sp_GetProducts]
-AS
-	SELECT * FROM [dbo].[Products]
-	ORDER BY [Active] DESC, [ProductID]
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetProductsByActive]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_GetProductsByActive]*/
-CREATE PROCEDURE [dbo].[sp_GetProductsByActive]
-	(@Active	Int)
-AS
-	SELECT * FROM [dbo].[Products]
-	WHERE [Active] = @Active
-	ORDER BY [ProductID]
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetVendor]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-
-/*Object:  StoredProcedure [dbo].[sp_GetVendor]*/
-CREATE PROCEDURE [dbo].[sp_GetVendor]
-	(@VendorID int)
-AS
-	SELECT *
-	FROM Vendors
-	WHERE VendorID = @VendorID
-	Return
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetVendors]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_GetVendors]*/
-CREATE PROCEDURE [dbo].[sp_GetVendors]
-AS
-	SELECT *
-	FROM Vendors 
-	Return
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetVendorsActive]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object:  StoredProcedure [dbo].[sp_GetVendorsActive]*/
-CREATE PROCEDURE [dbo].[sp_GetVendorsActive]
-AS
-	SELECT *
-	FROM Vendors
-	WHERE Active = 1
-	Return
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetVendorSourceItem]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItem] */
-CREATE PROCEDURE [sp_GetVendorSourceItem]
-	(@vendorID int,
-	 @productID int)
-AS
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Active]
-	FROM [dbo].[VendorSourceItems]
-	WHERE [VendorID] = @vendorID
-		AND [ProductID] = @productID
-	RETURN @@ROWCOUNT
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetVendorSourceItemsByProduct]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-	
-/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItemsByProduct] */
-CREATE PROCEDURE [sp_GetVendorSourceItemsByProduct]
-	(@productID int)
-AS
-	SELECT [VendorSourceItems].[VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase], [Vendors].[Name]
-	FROM [dbo].[VendorSourceItems]
-	INNER JOIN [dbo].[Vendors]
-	ON [VendorSourceItems].[VendorID] = [Vendors].[VendorID]
-	WHERE [VendorSourceItems].[Active] = 1
-	AND [ProductID] = @productID
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
-GO
-PRINT N'Creating [dbo].[sp_GetVendorSourceItemsByVendor]...';
-
-
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
-
-
-GO
-
-/*Object: StoredProcedure [dbo].[sp_GetVendorSourceItemsByVendor] */
-CREATE PROCEDURE [sp_GetVendorSourceItemsByVendor]
-	(@vendorID int)
-AS
-	SELECT [VendorID], [ProductID], [UnitCost], [MinQtyToOrder], [ItemsPerCase]
-	FROM [dbo].[VendorSourceItems]
-	WHERE [Active] = 1
-		AND [VendorID] = @vendorID
-	RETURN
-GO
-SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
-
-
 GO
 PRINT N'Creating [dbo].[sp_InsertIntoCategories]...';
 
