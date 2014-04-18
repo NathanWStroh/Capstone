@@ -1,6 +1,6 @@
 ﻿
-/*Object:  StoredProcedure [dbo].[sp_DeactivateProduct]*/
-CREATE PROCEDURE [dbo].[sp_DeactivateProduct]
+/*Object:  StoredProcedure [dbo].[proc_DeactivateProduct]*/
+CREATE PROCEDURE [dbo].[proc_DeactivateProduct]
 	(@ProductID		Int)
 AS
 	UPDATE [dbo].[Products]
