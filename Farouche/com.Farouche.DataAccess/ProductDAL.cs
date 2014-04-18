@@ -38,7 +38,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_InsertIntoProducts", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_InsertIntoProducts", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@OnHand", product.reserved);
                 sqlCmd.Parameters.AddWithValue("@Available", product.available);
@@ -87,7 +87,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_UpdateProducts", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_UpdateProducts", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ProductID", originalProduct.Id);
                 sqlCmd.Parameters.AddWithValue("@OnHand", product.reserved);
@@ -149,7 +149,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_ReactivateProduct", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_ReactivateProduct", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ProductID", product.Id);
 
@@ -188,7 +188,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_DeactivateProduct", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_DeactivateProduct", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ProductID", product.Id);
 
@@ -227,7 +227,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_DeleteProduct", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_DeleteProduct", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ProductID", product.Id);
                 sqlCmd.Parameters.AddWithValue("@OnHand", product.reserved);
@@ -279,7 +279,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_GetProducts", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_GetProducts", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 //Creates the reader object by ExecutingReader on the cmd object.
                 SqlDataReader reader = sqlCmd.ExecuteReader();
@@ -339,7 +339,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_GetProduct", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_GetProduct", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ProductID", productId);
 
@@ -398,7 +398,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_GetProductsByActive", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_GetProductsByActive", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@Active", activeState ? 1 : 0);
 
@@ -578,7 +578,7 @@ namespace com.Farouche.DataAccess
                 //Establishes the connection.
                 conn.Open();
                 //Creates the command object, passing the SP and connection object.
-                SqlCommand sqlCmd = new SqlCommand("sp_GetLocations", conn);
+                SqlCommand sqlCmd = new SqlCommand("proc_GetLocations", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 //Creates the reader object by ExecutingReader on the cmd object.
                 SqlDataReader reader = sqlCmd.ExecuteReader();

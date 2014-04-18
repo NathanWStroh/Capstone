@@ -186,232 +186,232 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\PK_Products.pkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_InsertIntoVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_InsertIntoVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetProductCategoriesByCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetProductCategoriesByCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetProductCategoriesByProduct.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetProductCategoriesByProduct.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetProductCategories.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetProductCategories.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeleteProductCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeleteProductCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_ReactivateProductCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_ReactivateProductCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeactivateProductCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeactivateProductCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_UpdateProductCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateProductCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_InsertIntoProductCategories.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_InsertIntoProductCategories.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetLocations.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetLocations.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeleteLocation.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeleteLocation.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_ReactivateLocation.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_ReactivateLocation.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeactivateLocation.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeactivateLocation.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_UpdateLocation.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateLocation.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_InsertIntoLocations.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_InsertIntoLocations.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetCategories.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetCategories.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeleteCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeleteCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_ReactivateCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_ReactivateCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeactivateCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeactivateCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_UpdateCategory.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateCategory.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_InsertIntoCategories.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_InsertIntoCategories.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetVendorSourceItemsByProduct.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendorSourceItemsByProduct.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetVendorSourceItemsByVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendorSourceItemsByVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetVendorSourceItem.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendorSourceItem.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetAllVendorSourceItems.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetAllVendorSourceItems.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeleteVendorSourceItem.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeleteVendorSourceItem.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_ReactivateVendorSourceItem.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_ReactivateVendorSourceItem.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeactivateVendorSourceItem.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeactivateVendorSourceItem.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_UpdateVendorSourceItem.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateVendorSourceItem.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_InsertIntoVendorSourceItems.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_InsertIntoVendorSourceItems.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetProductsByActive.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetProductsByActive.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetProduct.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetProduct.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetProducts.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetProducts.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeleteProduct.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeleteProduct.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_ReactivateProduct.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_ReactivateProduct.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeactivateProduct.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeactivateProduct.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_UpdateProducts.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateProducts.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_InsertIntoProducts.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_InsertIntoProducts.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetVendorsActive.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendorsActive.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetVendors.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendors.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_GetVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeleteVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeleteVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_ReactivateVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_ReactivateVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_DeactivateVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeactivateVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_UpdateVendor.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateVendor.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\sp_UpdateVendorName.proc.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateVendorName.proc.sql">
       <SubType>Code</SubType>
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
