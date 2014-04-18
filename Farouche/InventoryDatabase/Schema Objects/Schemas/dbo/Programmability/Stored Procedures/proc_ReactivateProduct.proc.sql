@@ -1,6 +1,6 @@
 ﻿
-/*Object:  StoredProcedure [dbo].[sp_ReactivateProduct]*/
-CREATE PROCEDURE [dbo].[sp_ReactivateProduct]
+/*Object:  StoredProcedure [dbo].[proc_ReactivateProduct]*/
+CREATE PROCEDURE [dbo].[proc_ReactivateProduct]
 	(@ProductID		Int)
 AS
 	UPDATE [dbo].[Products]
