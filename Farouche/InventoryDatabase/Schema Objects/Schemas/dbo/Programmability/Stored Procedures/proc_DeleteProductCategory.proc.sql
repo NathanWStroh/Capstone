@@ -1,6 +1,6 @@
 ﻿
-/*Object: StoredProcedure [dbo].[sp_DeleteProductCategory] */
-CREATE PROCEDURE [sp_DeleteProductCategory]
+/*Object: StoredProcedure [dbo].[proc_DeleteProductCategory] */
+CREATE PROCEDURE [proc_DeleteProductCategory]
 	(@productID int,
 	 @category varchar(50))
 AS
