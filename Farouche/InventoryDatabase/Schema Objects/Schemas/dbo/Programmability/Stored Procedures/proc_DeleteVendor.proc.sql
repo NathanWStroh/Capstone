@@ -1,6 +1,6 @@
 ﻿
-/*Object: StoredProcedure [dbo].[sp_DeleteVendor] */
-CREATE PROCEDURE [sp_DeleteVendor]
+/*Object: StoredProcedure [dbo].[proc_DeleteVendor] */
+CREATE PROCEDURE [proc_DeleteVendor]
 	(@VendorID int)
 AS
 	DELETE FROM [dbo].[Vendors]
