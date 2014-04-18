@@ -143,5 +143,10 @@ namespace com.Farouche.Presentation
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
         }
+
+        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

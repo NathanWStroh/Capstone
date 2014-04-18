@@ -4,8 +4,6 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
-//Created By: Ben Grimes
-//Created Date: 4/16/14
 
 namespace com.Farouche
 {
