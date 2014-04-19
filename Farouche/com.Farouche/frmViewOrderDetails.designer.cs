@@ -135,6 +135,7 @@
             this.Controls.Add(this.btnPick);
             this.Controls.Add(this.lvItemsForPick);
             this.Name = "FrmViewOrderDetails";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Shipping Order Details";
             this.ResumeLayout(false);
             this.PerformLayout();

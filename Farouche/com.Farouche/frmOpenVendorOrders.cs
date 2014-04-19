@@ -9,32 +9,32 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
+/*
+*                               Changelog
+* Date         By               Ticket          Version          Description
+* 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
+*/
 
-//commented out 38-46. When I merged it, it was broken.
 namespace com.Farouche.Presentation
 {
     public partial class frmOpenVendorOrders : Form
-    {
-        
+    {     
         private VendorOrderManager _vendorOrdersManager;
         private ReceivingManager _receivingManager;
         private Vendor vendor;
         private VendorOrder vendorOrder;
         private List<VendorOrder> orderList;
         private VendorOrderLineItem vendorOrderLineItem;
-        
+        public static frmOpenVendorOrders Instance;
 
         public frmOpenVendorOrders()
         {
             InitializeComponent();
-            
-
+            Instance = this;
         }
 
         private void frmOpenVendorOrders_Load(object sender, EventArgs e)
         {
-
-            
             _receivingManager = new ReceivingManager();
 
             //createVendorOrder();
@@ -70,47 +70,29 @@ namespace com.Farouche.Presentation
             //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
         }
 
-        
-           
         private void fillVendorDropDown()
         {
-           
             string vendorListString = "";
-          
             List<VendorOrder> vendorList = new List<VendorOrder>();
-
             vendorList = _receivingManager.GetAllOpenOrders();
-
             foreach (VendorOrder v in vendorList)
             {
                 cbGetVendorsById.Items.Add(v.VendorID.ToString());
             }
-
-            
-            
         }
 
-            
-
-        
-
         private void fillListView(ListView lv, List<VendorOrder> orderList)
-        {
-            
+        {      
             lv.Items.Clear();
             lv.Columns.Clear();
             foreach (var vendorOrder in orderList)
             {
                 var item = new ListViewItem();
-
-
                 item.Text = vendorOrder.Id.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
                 item.SubItems.Add(vendorOrder.Name);
                 item.SubItems.Add(vendorOrder.DateOrdered.ToString());
                 item.SubItems.Add(vendorOrder.NumberOfShipments.ToString());
-
-
                 lv.Items.Add(item);
             }
 
@@ -119,13 +101,8 @@ namespace com.Farouche.Presentation
             lv.Columns.Add("Vendor Name");
             lv.Columns.Add("Date Ordered");
             lv.Columns.Add("Number of Shipments");
-
-
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-     
         }
-
-
 
         private void lvOpenVendorOrders_Click(object sender, EventArgs e)
         {
@@ -136,42 +113,27 @@ namespace com.Farouche.Presentation
                 vendorOrder = new VendorOrder(Int32.Parse(selectedRow[0].Text), Int32.Parse(selectedRow[0].SubItems[1].Text));
                 vendorOrder.DateOrdered = Convert.ToDateTime(selectedRow[0].SubItems[3].Text);
                 vendorOrder.NumberOfShipments = Int32.Parse(selectedRow[0].SubItems[4].Text);
-
                 frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
                 _frmReceiving.Show();
                 _frmReceiving.BringToFront();
-
             }
         }
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)
         {
-
-            
-            
             vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedItem.ToString()));
             orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
             fillListView(lvOpenVendorOrders, orderList);
-
-
         }
 
         private void createVendorOrder()
         {
-
-
             _vendorOrdersManager = new VendorOrderManager();
-            
             vendorOrder = new VendorOrder(1);
-
             vendorOrder.Name = "Target";
-
-            
-
             vendorOrder.DateOrdered = DateTime.Today;
             vendorOrder.NumberOfShipments = 4;
             _vendorOrdersManager.AddVendorOrder(vendorOrder);
-
             vendorOrderLineItem = new VendorOrderLineItem(1, 1);
             vendorOrderLineItem.Name = "Target";
             vendorOrderLineItem.QtyOrdered = 10;
@@ -179,15 +141,16 @@ namespace com.Farouche.Presentation
             vendorOrderLineItem.VendorOrderId = 1;
             vendorOrderLineItem.LineItemTotal = 20.00;
             vendorOrder.AddLineItem(vendorOrderLineItem);
-            
-
         }
 
         private void cbGetVendorsById_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillVendorDropDown();
         }
-        
 
+        private void frmOpenVendorOrders_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }
     }
 }

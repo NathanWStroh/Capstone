@@ -4,13 +4,18 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
-
+/*
+*                               Changelog
+* Date         By               Ticket          Version          Description
+* 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
+*/
 namespace com.Farouche
 {
     public partial class FrmShippingMyOrders : Form
     {
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
+        public static FrmShippingMyOrders Instance;
 
         public FrmShippingMyOrders(AccessToken accToken)
         {
@@ -18,6 +23,7 @@ namespace com.Farouche
             _myAccessToken = accToken;
             _myOrderManager = new ShippingOrderManager();
             RefreshMyOrdersView();
+            Instance = this;
         }//End FrmShippingMyOrders(.)
 
         private void FrmShippingMyOrders_Load(object sender, EventArgs e)
@@ -84,5 +90,10 @@ namespace com.Farouche
             FrmViewOrderDetails details = new FrmViewOrderDetails(_myOrderManager.GetOrderByID(selectedOrder).ID, _myAccessToken);
             details.ShowDialog();
         }//End InitPick(.)
+
+        private void FrmShippingMyOrders_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }//End of FrmShippingMyOrders_FormClosed(..)
     }
 }

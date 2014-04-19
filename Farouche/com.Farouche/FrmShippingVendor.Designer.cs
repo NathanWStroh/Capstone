@@ -127,6 +127,7 @@
             this.Controls.Add(this.btnAddVendor);
             this.Name = "FrmShippingVendor";
             this.Text = "FrmShippingVendor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingVendor_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

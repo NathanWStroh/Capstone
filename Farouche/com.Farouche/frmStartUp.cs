@@ -12,6 +12,8 @@
 * Date         By           Ticket          Version         Description
 * 4-4-14       NathanStroh                  ???             Removed title from frame.
 >>>>>>> origin
+*
+* 04/19/2014   Kaleb Wendel                                 Adjusted the class to check to see if the form in question was instantiated before.  If the form has an instance already it will bring the form to the front. If there is no instance it will instantiate the form.
 */
 
 using System;
@@ -38,13 +40,14 @@ namespace com.Farouche.Presentation
             InitializeComponent();
             _myAccessToken = acctoken;
             this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmLogin frm = new FrmLogin();
             frm.Visible = true;
-            Hide();
+            this.Hide();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,99 +57,193 @@ namespace com.Farouche.Presentation
 
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmProduct frm = new FrmProduct(_myAccessToken);
-            frm.MdiParent = this;
-            this.Text = frm.Text;
-            frm.WindowState = FormWindowState.Maximized;
-            frm.Show();
+            FrmProduct frmProduct;
+            if(FrmProduct.Instance == null)
+            {
+                frmProduct = new FrmProduct(_myAccessToken);
+                frmProduct.MdiParent = this;
+                frmProduct.StartPosition = FormStartPosition.CenterScreen;
+                frmProduct.Show();
+            }
+            else
+            {
+                FrmProduct.Instance.WindowState = FormWindowState.Normal;
+                FrmProduct.Instance.Show();
+                FrmProduct.Instance.BringToFront();       
+            }
         }
 
-        private void newProductToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ProductView frm = new ProductView(_myAccessToken);
-            frm.ShowDialog();
-        }
-        
         //TSMI = Tool Strip Menu Item
         private void tsmiMyOrders_Click(object sender, EventArgs e)
         {
-            ShippingMyOrders = new FrmShippingMyOrders(_myAccessToken);
-            ShippingMyOrders.MdiParent = this;
-            ShippingMyOrders.WindowState = FormWindowState.Maximized;
-            ShippingMyOrders.Show();
+            FrmShippingMyOrders frmShippingMyOrders;
+            if (FrmShippingMyOrders.Instance == null)
+            {
+                frmShippingMyOrders = new FrmShippingMyOrders(_myAccessToken);
+                frmShippingMyOrders.MdiParent = this;
+                frmShippingMyOrders.StartPosition = FormStartPosition.CenterScreen;
+                frmShippingMyOrders.Show();
+            }
+            else
+            {
+                FrmShippingMyOrders.Instance.WindowState = FormWindowState.Normal;
+                FrmShippingMyOrders.Instance.Show();
+                FrmShippingMyOrders.Instance.BringToFront();
+            }
         }
 
         private void tsmiAllShippingOrders_Click(object sender, EventArgs e)
         {
-            AllShippingOrders = new FrmShippingAllOrders(_myAccessToken);
-            AllShippingOrders.MdiParent = this;
-            AllShippingOrders.WindowState = FormWindowState.Maximized;
-            AllShippingOrders.Show();
+            FrmShippingAllOrders frmAllShippingOrders;
+            if (FrmShippingAllOrders.Instance == null)
+            {
+                frmAllShippingOrders = new FrmShippingAllOrders(_myAccessToken);
+                frmAllShippingOrders.MdiParent = this;
+                frmAllShippingOrders.StartPosition = FormStartPosition.CenterScreen;
+                frmAllShippingOrders.Show();
+            }
+            else
+            {
+                FrmShippingAllOrders.Instance.WindowState = FormWindowState.Normal;
+                FrmShippingAllOrders.Instance.Show();
+                FrmShippingAllOrders.Instance.BringToFront();
+            }
         }
 
         private void tsmiPickList_Click(object sender, EventArgs e)
         {
-            ShippingPickList = new FrmShippingPickList(_myAccessToken);
-            ShippingPickList.MdiParent = this;
-            ShippingPickList.WindowState = FormWindowState.Maximized;
-            ShippingPickList.Show();
+            FrmShippingPickList frmShippingPickList;
+            if (FrmShippingPickList.Instance == null)
+            {
+                frmShippingPickList = new FrmShippingPickList(_myAccessToken);
+                frmShippingPickList.MdiParent = this;
+                frmShippingPickList.StartPosition = FormStartPosition.CenterScreen;
+                frmShippingPickList.Show();
+            }
+            else
+            {
+                FrmShippingPickList.Instance.WindowState = FormWindowState.Normal;
+                FrmShippingPickList.Instance.Show();
+                FrmShippingPickList.Instance.BringToFront();
+            }
         }
 
         private void tsmiPackList_Click(object sender, EventArgs e)
         {
-            ShippingPackList = new FrmShippingPackList(_myAccessToken);
-            ShippingPackList.MdiParent = this;
-            ShippingPackList.WindowState = FormWindowState.Maximized;
-            ShippingPackList.Show();
+            FrmShippingPackList frmShippingPackList;
+            if (FrmShippingPackList.Instance == null)
+            {
+                frmShippingPackList = new FrmShippingPackList(_myAccessToken);
+                frmShippingPackList.MdiParent = this;
+                frmShippingPackList.StartPosition = FormStartPosition.CenterScreen;
+                frmShippingPackList.Show();
+            }
+            else
+            {
+                FrmShippingPackList.Instance.WindowState = FormWindowState.Normal;
+                FrmShippingPackList.Instance.Show();
+                FrmShippingPackList.Instance.BringToFront();
+            }
         }
 
         private void tsmiShippingVendors_Click(object sender, EventArgs e)
         {
-            ShippingVendor = new FrmShippingVendor(_myAccessToken);
-            ShippingVendor.MdiParent = this;
-            ShippingVendor.WindowState = FormWindowState.Maximized;
-            ShippingVendor.Show();
+            FrmShippingVendor frmShippingVendor;
+            if (FrmShippingVendor.Instance == null)
+            {
+                frmShippingVendor = new FrmShippingVendor(_myAccessToken);
+                frmShippingVendor.MdiParent = this;
+                frmShippingVendor.StartPosition = FormStartPosition.CenterScreen;
+                frmShippingVendor.Show();
+            }
+            else
+            {
+                FrmShippingVendor.Instance.WindowState = FormWindowState.Normal;
+                FrmShippingVendor.Instance.Show();
+                FrmShippingVendor.Instance.BringToFront();
+            }
         }
 
         private void tsmiShippingTerms_Click(object sender, EventArgs e)
         {
-            ShippingTerm = new FrmShippingTerm(_myAccessToken);
-            ShippingTerm.MdiParent = this;
-            ShippingTerm.WindowState = FormWindowState.Maximized;
-            ShippingTerm.Show();
+            FrmShippingTerm frmShippingTerm;
+            if (FrmShippingTerm.Instance == null)
+            {
+                frmShippingTerm = new FrmShippingTerm(_myAccessToken);
+                frmShippingTerm.MdiParent = this;
+                frmShippingTerm.StartPosition = FormStartPosition.CenterScreen;
+                frmShippingTerm.Show();
+            }
+            else
+            {
+                FrmShippingTerm.Instance.WindowState = FormWindowState.Normal;
+                FrmShippingTerm.Instance.Show();
+                FrmShippingTerm.Instance.BringToFront();
+            }
         }
 
         private void vendorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmVendor frm = new FrmVendor(_myAccessToken);
-            frm.MdiParent = this;
-            this.Text = frm.Text;
-            frm.WindowState = FormWindowState.Maximized;
-            frm.Show();
+            FrmVendor frmVendor;
+            if (FrmVendor.Instance == null)
+            {
+                frmVendor = new FrmVendor(_myAccessToken);
+                frmVendor.MdiParent = this;
+                frmVendor.StartPosition = FormStartPosition.CenterScreen;
+                frmVendor.Show();
+            }
+            else
+            {
+                FrmVendor.Instance.WindowState = FormWindowState.Normal;
+                FrmVendor.Instance.Show();
+                FrmVendor.Instance.BringToFront();
+            }
         }
 
         private void newOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmVendorCreateOrder frm = new frmVendorCreateOrder(_myAccessToken);
-            frm.MdiParent = this;
-            this.Text = frm.Text;
-            frm.WindowState = FormWindowState.Maximized;
-            frm.Show();
+            frmVendorCreateOrder frmVendorCreateOrder;
+            if (FrmVendor.Instance == null)
+            {
+                frmVendorCreateOrder = new frmVendorCreateOrder(_myAccessToken);
+                frmVendorCreateOrder.MdiParent = this;
+                frmVendorCreateOrder.StartPosition = FormStartPosition.CenterScreen;
+                frmVendorCreateOrder.Show();
+            }
+            else
+            {
+                frmVendorCreateOrder.Instance.WindowState = FormWindowState.Normal;
+                frmVendorCreateOrder.Instance.Show();
+                frmVendorCreateOrder.Instance.BringToFront();
+            }
         }
 
         private void viewOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //no accesstoken used
-            frmOpenVendorOrders frm = new frmOpenVendorOrders();
-            frm.MdiParent = this;
-            this.Text = frm.Text;
-            frm.WindowState = FormWindowState.Maximized;
-            frm.Show();
+            frmOpenVendorOrders frmOpenVendorOrders;
+            if (frmOpenVendorOrders.Instance == null)
+            {
+                frmOpenVendorOrders = new frmOpenVendorOrders();
+                frmOpenVendorOrders.MdiParent = this;
+                frmOpenVendorOrders.StartPosition = FormStartPosition.CenterScreen;
+                frmOpenVendorOrders.Show();
+            }
+            else
+            {
+                frmOpenVendorOrders.Instance.WindowState = FormWindowState.Normal;
+                frmOpenVendorOrders.Instance.Show();
+                frmOpenVendorOrders.Instance.BringToFront();
+            }
         }
 
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void frmStartUp_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }//End of frmStartUp_FormClosed(..)
     }
 }

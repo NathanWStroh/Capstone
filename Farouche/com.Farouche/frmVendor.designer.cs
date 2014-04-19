@@ -93,6 +93,7 @@
             // 
             // btnUpdateVendor
             // 
+            this.btnUpdateVendor.Enabled = false;
             this.btnUpdateVendor.Location = new System.Drawing.Point(33, 70);
             this.btnUpdateVendor.Name = "btnUpdateVendor";
             this.btnUpdateVendor.Size = new System.Drawing.Size(100, 25);
@@ -140,6 +141,7 @@
             this.lvVendors.TabIndex = 45;
             this.lvVendors.UseCompatibleStateImageBehavior = false;
             this.lvVendors.View = System.Windows.Forms.View.Details;
+            this.lvVendors.SelectedIndexChanged += new System.EventHandler(this.lvVendors_SelectedIndexChanged);
             // 
             // FrmVendor
             // 
@@ -159,6 +161,7 @@
             this.Name = "FrmVendor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vendor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmVendor_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -4,12 +4,19 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
+/*
+*                               Changelog
+* Date         By               Ticket          Version          Description
+* 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
+*/
+
 namespace com.Farouche
 {
     public partial class FrmShippingPickList : Form
     {
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
+        public static FrmShippingPickList Instance;
 
         public FrmShippingPickList(AccessToken accToken)
         {
@@ -17,6 +24,7 @@ namespace com.Farouche
             _myAccessToken = accToken;
             _myOrderManager = new ShippingOrderManager();
             RefreshPickView();
+            Instance = this;
         }
 
         private void FrmShippingPickList_Load(object sender, EventArgs e)
@@ -104,6 +112,11 @@ namespace com.Farouche
         private void RefreshPickView()
         {
             PopulatePickListView(lvPickList, _myOrderManager.GetNonPickedOrders());
+        }
+
+        private void FrmShippingPickList_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
         }
     }
 }

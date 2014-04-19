@@ -25,6 +25,8 @@ using System.Collections.Generic;
 * 04/10/2014   Kaleb                                        Adjusted the form to have numericUpDown controls rather than text boxes for certain fields.
 * 
 * 04/10/2014   Kaleb                                        Added data validation to the form.
+*
+* 04/19/2014   Kaleb                                        Adjusted class to implement a singleton pattern so only one form can be instantiated.
 */
 
 namespace com.Farouche.Presentation
@@ -36,6 +38,7 @@ namespace com.Farouche.Presentation
         private VendorSourceItemManager _vendorSourceManager;
         private Product _currentProduct;
         private readonly AccessToken _myAccessToken;
+        public static ProductView Instance;
 
         public ProductView(AccessToken accToken)
         {
@@ -56,6 +59,7 @@ namespace com.Farouche.Presentation
             lblPriceDisplay.Text = String.Format("{0:C}", 0);
             lblWeightDisplay.Text = "0.0 lbs";
             tbProductID.Focus();
+            Instance = this;
         }//End of ProductView(.)
 
         public ProductView(AccessToken accToken, Product ProductInfo)
@@ -86,6 +90,7 @@ namespace com.Farouche.Presentation
             this.btnClear.Enabled = false;
             lblPriceDisplay.Text = String.Format("{0:C}", ProductInfo.unitPrice);
             tbItemName.Focus();
+            Instance = this;
         }//End of ProductView(..)
 
         private void btClose_Click(object sender, EventArgs e)
@@ -356,5 +361,10 @@ namespace com.Farouche.Presentation
             lv.Columns.Add("Active");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }//End of populateListView(..)
+
+        private void ProductView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }//End of ProductView_FormClosed(..)
     }//public partial class ProductView : Form
 }

@@ -30,10 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.CLSPackDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)(this.CLSPackDetailsBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // CLSPackDetailsBindingSource
+            // 
+            this.CLSPackDetailsBindingSource.DataSource = typeof(com.Farouche.Commons.CLSPackDetails);
             // 
             // reportViewer1
             // 
@@ -46,10 +50,6 @@
             this.reportViewer1.Size = new System.Drawing.Size(943, 293);
             this.reportViewer1.TabIndex = 0;
             // 
-            // CLSPackDetailsBindingSource
-            // 
-            this.CLSPackDetailsBindingSource.DataSource = typeof(com.Farouche.Commons.CLSPackDetails);
-            // 
             // frmPrintPackReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -57,6 +57,7 @@
             this.ClientSize = new System.Drawing.Size(980, 326);
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintPackReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmPrintPackReport";
             this.Load += new System.EventHandler(this.frmPrintPackReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CLSPackDetailsBindingSource)).EndInit();

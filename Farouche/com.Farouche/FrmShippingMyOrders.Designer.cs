@@ -64,6 +64,7 @@
             this.Controls.Add(this.lvMyOrders);
             this.Name = "FrmShippingMyOrders";
             this.Text = "FrmShippingMyOrders";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingMyOrders_FormClosed);
             this.ResumeLayout(false);
 
         }

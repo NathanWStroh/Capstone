@@ -4,6 +4,11 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
+/*
+*                               Changelog
+* Date         By               Ticket          Version          Description
+* 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
+*/
 
 namespace com.Farouche
 {
@@ -11,6 +16,7 @@ namespace com.Farouche
     {
         private readonly AccessToken _myAccessToken;
         private ShippingTermManager _myTermManager;
+        public static FrmShippingTerm Instance;
 
         public FrmShippingTerm(AccessToken acctoken)
         {
@@ -18,6 +24,7 @@ namespace com.Farouche
             _myAccessToken = acctoken;
             _myTermManager = new ShippingTermManager();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
+            Instance = this;
         }
 
         //Populates a list view.
@@ -75,16 +82,16 @@ namespace com.Farouche
         private void lvShippingTerms_Click(object sender, EventArgs e)
         {
             btnUpdateTerm.Enabled = true;
-        }
+        }//End of lvShippingTerms_Click(..)
 
         private void lvShippingTerms_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnUpdateTerm.Enabled = true;
         }
 
-        private void cbTermStatusSearch_SelectedIndexChanged(object sender, EventArgs e)
+        private void FrmShippingTerm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
-        }//End of lvShippingTerms_Click(..)
+            Instance = null;
+        }
     }
 }

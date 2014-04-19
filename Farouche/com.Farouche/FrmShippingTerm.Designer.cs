@@ -46,7 +46,6 @@
             this.cbTermStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbTermStatusSearch.TabIndex = 30;
             this.cbTermStatusSearch.Visible = false;
-            this.cbTermStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbTermStatusSearch_SelectedIndexChanged);
             // 
             // lblActive
             // 
@@ -128,6 +127,7 @@
             this.Controls.Add(this.btnAddTerm);
             this.Name = "FrmShippingTerm";
             this.Text = "FrmShippingTerm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingTerm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

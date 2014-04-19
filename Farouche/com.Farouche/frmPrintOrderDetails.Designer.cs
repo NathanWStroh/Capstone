@@ -57,6 +57,7 @@
             this.ClientSize = new System.Drawing.Size(921, 270);
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintOrderDetails";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmPrintOrderDetails";
             this.Load += new System.EventHandler(this.frmPrintOrderDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CLSLineItemBindingSource)).EndInit();
