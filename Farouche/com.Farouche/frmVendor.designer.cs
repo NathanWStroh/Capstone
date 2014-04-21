@@ -30,12 +30,12 @@
         {
             this.btnDeactivateVendor = new System.Windows.Forms.Button();
             this.btnActivateVendor = new System.Windows.Forms.Button();
-            this.cbVendortStatusSearch = new System.Windows.Forms.ComboBox();
-            this.lblProductActiveSearch = new System.Windows.Forms.Label();
-            this.btnGetProductByID = new System.Windows.Forms.Button();
+            this.cbVendorStatusSearch = new System.Windows.Forms.ComboBox();
+            this.lblVendorActiveSearch = new System.Windows.Forms.Label();
+            this.btnGetVendorByID = new System.Windows.Forms.Button();
             this.btnUpdateVendor = new System.Windows.Forms.Button();
             this.txtVendorIDSearch = new System.Windows.Forms.TextBox();
-            this.lblProductIDSearch = new System.Windows.Forms.Label();
+            this.lblVendorIDSearch = new System.Windows.Forms.Label();
             this.btnAddVendor = new System.Windows.Forms.Button();
             this.lvVendors = new System.Windows.Forms.ListView();
             this.SuspendLayout();
@@ -62,33 +62,33 @@
             this.btnActivateVendor.UseVisualStyleBackColor = true;
             this.btnActivateVendor.Click += new System.EventHandler(this.btnActivateProduct_Click);
             // 
-            // cbVendortStatusSearch
+            // cbVendorStatusSearch
             // 
-            this.cbVendortStatusSearch.FormattingEnabled = true;
-            this.cbVendortStatusSearch.Location = new System.Drawing.Point(640, 14);
-            this.cbVendortStatusSearch.Name = "cbVendortStatusSearch";
-            this.cbVendortStatusSearch.Size = new System.Drawing.Size(121, 21);
-            this.cbVendortStatusSearch.TabIndex = 42;
-            this.cbVendortStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbVendortStatusSearch_SelectedIndexChanged);
+            this.cbVendorStatusSearch.FormattingEnabled = true;
+            this.cbVendorStatusSearch.Location = new System.Drawing.Point(640, 14);
+            this.cbVendorStatusSearch.Name = "cbVendorStatusSearch";
+            this.cbVendorStatusSearch.Size = new System.Drawing.Size(121, 21);
+            this.cbVendorStatusSearch.TabIndex = 42;
+            this.cbVendorStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbVendortStatusSearch_SelectedIndexChanged);
             // 
-            // lblProductActiveSearch
+            // lblVendorActiveSearch
             // 
-            this.lblProductActiveSearch.AutoSize = true;
-            this.lblProductActiveSearch.Location = new System.Drawing.Point(594, 18);
-            this.lblProductActiveSearch.Name = "lblProductActiveSearch";
-            this.lblProductActiveSearch.Size = new System.Drawing.Size(40, 13);
-            this.lblProductActiveSearch.TabIndex = 41;
-            this.lblProductActiveSearch.Text = "Active:";
+            this.lblVendorActiveSearch.AutoSize = true;
+            this.lblVendorActiveSearch.Location = new System.Drawing.Point(594, 18);
+            this.lblVendorActiveSearch.Name = "lblVendorActiveSearch";
+            this.lblVendorActiveSearch.Size = new System.Drawing.Size(40, 13);
+            this.lblVendorActiveSearch.TabIndex = 41;
+            this.lblVendorActiveSearch.Text = "Active:";
             // 
-            // btnGetProductByID
+            // btnGetVendorByID
             // 
-            this.btnGetProductByID.Location = new System.Drawing.Point(286, 8);
-            this.btnGetProductByID.Name = "btnGetProductByID";
-            this.btnGetProductByID.Size = new System.Drawing.Size(42, 25);
-            this.btnGetProductByID.TabIndex = 40;
-            this.btnGetProductByID.Text = "Find";
-            this.btnGetProductByID.UseVisualStyleBackColor = true;
-            this.btnGetProductByID.Visible = false;
+            this.btnGetVendorByID.Location = new System.Drawing.Point(286, 8);
+            this.btnGetVendorByID.Name = "btnGetVendorByID";
+            this.btnGetVendorByID.Size = new System.Drawing.Size(42, 25);
+            this.btnGetVendorByID.TabIndex = 40;
+            this.btnGetVendorByID.Text = "Find";
+            this.btnGetVendorByID.UseVisualStyleBackColor = true;
+            this.btnGetVendorByID.Click += new System.EventHandler(this.btnGetVendorByID_Click);
             // 
             // btnUpdateVendor
             // 
@@ -103,22 +103,19 @@
             // 
             // txtVendorIDSearch
             // 
-            this.txtVendorIDSearch.Enabled = false;
             this.txtVendorIDSearch.Location = new System.Drawing.Point(180, 11);
             this.txtVendorIDSearch.Name = "txtVendorIDSearch";
             this.txtVendorIDSearch.Size = new System.Drawing.Size(100, 20);
             this.txtVendorIDSearch.TabIndex = 38;
-            this.txtVendorIDSearch.Visible = false;
             // 
-            // lblProductIDSearch
+            // lblVendorIDSearch
             // 
-            this.lblProductIDSearch.AutoSize = true;
-            this.lblProductIDSearch.Location = new System.Drawing.Point(115, 14);
-            this.lblProductIDSearch.Name = "lblProductIDSearch";
-            this.lblProductIDSearch.Size = new System.Drawing.Size(61, 13);
-            this.lblProductIDSearch.TabIndex = 37;
-            this.lblProductIDSearch.Text = "Vendor ID: ";
-            this.lblProductIDSearch.Visible = false;
+            this.lblVendorIDSearch.AutoSize = true;
+            this.lblVendorIDSearch.Location = new System.Drawing.Point(115, 14);
+            this.lblVendorIDSearch.Name = "lblVendorIDSearch";
+            this.lblVendorIDSearch.Size = new System.Drawing.Size(61, 13);
+            this.lblVendorIDSearch.TabIndex = 37;
+            this.lblVendorIDSearch.Text = "Vendor ID: ";
             // 
             // btnAddVendor
             // 
@@ -151,12 +148,12 @@
             this.Controls.Add(this.lvVendors);
             this.Controls.Add(this.btnDeactivateVendor);
             this.Controls.Add(this.btnActivateVendor);
-            this.Controls.Add(this.cbVendortStatusSearch);
-            this.Controls.Add(this.lblProductActiveSearch);
-            this.Controls.Add(this.btnGetProductByID);
+            this.Controls.Add(this.cbVendorStatusSearch);
+            this.Controls.Add(this.lblVendorActiveSearch);
+            this.Controls.Add(this.btnGetVendorByID);
             this.Controls.Add(this.btnUpdateVendor);
             this.Controls.Add(this.txtVendorIDSearch);
-            this.Controls.Add(this.lblProductIDSearch);
+            this.Controls.Add(this.lblVendorIDSearch);
             this.Controls.Add(this.btnAddVendor);
             this.Name = "FrmVendor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -172,12 +169,12 @@
 
         private System.Windows.Forms.Button btnDeactivateVendor;
         private System.Windows.Forms.Button btnActivateVendor;
-        private System.Windows.Forms.ComboBox cbVendortStatusSearch;
-        private System.Windows.Forms.Label lblProductActiveSearch;
-        private System.Windows.Forms.Button btnGetProductByID;
+        private System.Windows.Forms.ComboBox cbVendorStatusSearch;
+        private System.Windows.Forms.Label lblVendorActiveSearch;
+        private System.Windows.Forms.Button btnGetVendorByID;
         private System.Windows.Forms.Button btnUpdateVendor;
         private System.Windows.Forms.TextBox txtVendorIDSearch;
-        private System.Windows.Forms.Label lblProductIDSearch;
+        private System.Windows.Forms.Label lblVendorIDSearch;
         private System.Windows.Forms.Button btnAddVendor;
         private System.Windows.Forms.ListView lvVendors;
 

@@ -64,5 +64,10 @@ namespace com.Farouche.BusinessLogic
         {
             return VendorDAL.AddVendor(vendor, _connection);
         }
+
+        public int GetMaxVendorID()
+        {
+            return VendorDAL.MaxID(_connection);
+        }
     }
 }

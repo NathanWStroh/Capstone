@@ -1848,6 +1848,17 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_GetVendorMaxID]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetVendorMaxID]
+
+AS
+	SELECT MAX(VendorID)
+	FROM Vendors
+	RETURN
+GO
 PRINT N'Creating [dbo].[proc_getVendorOrder]...';
 
 

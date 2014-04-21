@@ -375,5 +375,56 @@ namespace com.Farouche.DataAccess
             }
             return false;
         } // end DeleteVendor(..)
+
+        public static int MaxID(SqlConnection myConnection)
+        {
+
+            int maxID = -1;
+
+            myConnection = myConnection ?? GetInventoryDbConnection();
+            try
+            {
+                SqlCommand mySqlCommand = new SqlCommand("proc_GetVendorMaxID", myConnection);
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                myConnection.Open();
+
+                maxID = Convert.ToInt32(mySqlCommand.ExecuteScalar());
+
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            if (maxID == -1)
+            {
+                throw new ApplicationException("There was a problem getting the Max Vendor ID!");
+            }
+
+            return maxID;
+        }
+
+
+
+
+
+
+
+
+
+
     } // end class VendorData
 } // end namespace

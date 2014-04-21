@@ -52,31 +52,80 @@ namespace com.Farouche.Presentation
         {
             FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken);
             frm.ShowDialog();
+            setDefaults();
         }
 
         private void btnUpdateVendor_Click(object sender, EventArgs e)
         {
             //have to add 1 to current index so it grabs the proper vendor id.
-            int currentIndex = this.lvVendors.SelectedIndices[0]+1;
-            Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
-            FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
-            frm.ShowDialog();
+            //int currentIndex = this.lvVendors.SelectedIndices[0]+1;
+            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+            //FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
+            //frm.ShowDialog();
+
+            ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
+            if (selectedVendor.Count > 0)
+            {
+                int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
+
+               // MessageBox.Show(vendorID.ToString());
+                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
+                FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
+                frm.ShowDialog();
+                setDefaults();
+            }
         }
 
         private void btnActivateProduct_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
-            Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
-            Boolean success = _myVendorManager.ReactivateVendor(thisVendor);
-            if (success == true)
+            //int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
+            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+            //Boolean success = _myVendorManager.ReactivateVendor(thisVendor);
+
+            ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
+            if (selectedVendor.Count > 0)
             {
-                MessageBox.Show("The vendor was activated");
+                int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
+
+               // MessageBox.Show(vendorID.ToString());
+                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
+                Boolean success = _myVendorManager.ReactivateVendor(thisVendor);
+
+                if (success == true)
+                {
+                    MessageBox.Show("The vendor was activated");
+                }
+                findActiveSelection();
             }
-            findActiveSelection();
+
         }
 
         private void btnDeactivateProduct_Click(object sender, EventArgs e)
         {
+            //int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
+            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+            //Boolean success = _myVendorManager.DeactivateVendor(thisVendor);
+            //if (success == true)
+            //{
+            //    MessageBox.Show("The vendor was deactivated");
+            //}
+            //findActiveSelection();
+
+            ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
+            if (selectedVendor.Count > 0)
+            {
+                int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
+
+                MessageBox.Show(vendorID.ToString());
+                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
+                Boolean success = _myVendorManager.DeactivateVendor(thisVendor);
+
+                if (success == true)
+                {
+                    MessageBox.Show("The vendor was deactivated");
+                }
+                findActiveSelection();
+            }
 
         }
 
@@ -145,38 +194,37 @@ namespace com.Farouche.Presentation
             for (int i = 1; i >= 0; i--)
             {
                 active = (Active)i;
-                this.cbVendortStatusSearch.Items.Add(active);
+                this.cbVendorStatusSearch.Items.Add(active);
             }
-            this.cbVendortStatusSearch.Items.Add("Both");
-            this.cbVendortStatusSearch.SelectedIndex = 0;
+            this.cbVendorStatusSearch.Items.Add("Both");
+            this.cbVendorStatusSearch.SelectedIndex = 0;
         }
 
 
 
-        //private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
-        //    var selectedVendor = this.lvVendors.SelectedItems;
-        //    if (selectedVendor.Count > 0)
-        //    {
-        //        currentIndex = (int)selectedVendor[0].SubItems[0].Text;
+        private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
+            if (selectedVendor.Count > 0)
+            {
+                int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
 
-        //    }
-        //    Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+                //MessageBox.Show(vendorID.ToString());
+                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
+                if (thisVendor.Active == true)
+                {
+                    btnActivateVendor.Enabled = false;
+                    btnDeactivateVendor.Enabled = true;
+                }
+                else
+                {
+                    btnActivateVendor.Enabled = true;
+                    btnDeactivateVendor.Enabled = false;
 
-        //    if (thisVendor.Active == true)
-        //    {
-        //        btnActivateVendor.Enabled = false;
-        //        btnDeactivateVendor.Enabled = true;
-        //    }
-        //    else
-        //    {
-        //        btnActivateVendor.Enabled = false;
-        //        btnDeactivateVendor.Enabled = true;
-        //        //MessageBox.Show(thisVendor.ToString());   
-        //    }
-        //    btnUpdateVendor.Enabled = true;
-        //}
+                }
+                btnUpdateVendor.Enabled = true;
+            }
+        }
 
 
 
@@ -188,7 +236,7 @@ namespace com.Farouche.Presentation
         private void findActiveSelection()
         {
             Boolean active;
-            switch (this.cbVendortStatusSearch.SelectedIndex)
+            switch (this.cbVendorStatusSearch.SelectedIndex)
             {
                 case 0:
                     active = true; //True
@@ -207,25 +255,88 @@ namespace com.Farouche.Presentation
 
         private void lvVendors_Click(object sender, EventArgs e)
         {
-            int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
-            Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
-            
-            if (thisVendor.Active == true)
+            //int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
+            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+
+            ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
+            if (selectedVendor.Count > 0)
             {
-                btnActivateVendor.Enabled = false;
-                btnDeactivateVendor.Enabled = true;
+                int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
+                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
+
+                if (thisVendor.Active == true)
+                {
+                    btnActivateVendor.Enabled = false;
+                    btnDeactivateVendor.Enabled = true;
+                }
+                else
+                {
+                    btnActivateVendor.Enabled = true;
+                    btnDeactivateVendor.Enabled = false;
+
+                }
+                btnUpdateVendor.Enabled = true;
             }
-            else
-            {
-                btnActivateVendor.Enabled = false;
-                btnDeactivateVendor.Enabled = true;
-                //MessageBox.Show(thisVendor.ToString());   
-            }
-            btnUpdateVendor.Enabled = true;
+
         } //end lvVendors_Click(..)
 
 
 
+        private void btnGetVendorByID_Click(object sender, EventArgs e)
+        {
+            searchForVendorByID();
+
+        }
+
+        private void searchForVendorByID()
+        {
+            if (inputIsValid())
+            { 
+                String vendorIDString = this.txtVendorIDSearch.Text;
+                int vendorID = Convert.ToInt32(vendorIDString);
+                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
+                FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
+                frm.ShowDialog();
+                setDefaults();
+            }
+            
+        }
+
+        // does Validation on VendorID Search TextBox
+        private Boolean inputIsValid()
+        {
+            string errText = this.txtVendorIDSearch.Text;
+            if (Validation.IsBlank(this.txtVendorIDSearch.Text) || 
+                Validation.IsNullOrEmpty(this.txtVendorIDSearch.Text))
+            {
+                MessageBox.Show("There must be an Id to search for.");
+                this.txtVendorIDSearch.Focus();
+                this.txtVendorIDSearch.Clear();
+                return false;
+            }
+            else if (!Validation.IsInt(this.txtVendorIDSearch.Text))
+            {
+                
+                MessageBox.Show("'" + errText + "'" + " is not a valid Vendor ID. " + 
+                    "\nId must be a numeric value.");
+                this.txtVendorIDSearch.Focus();
+                this.txtVendorIDSearch.Clear();
+                return false;
+            } 
+            
+            int venID = Convert.ToInt32(txtVendorIDSearch.Text);
+            int maxID =  _myVendorManager.GetMaxVendorID();
+            if (!Validation.IsIntRange(1, maxID ,venID)) 
+            {
+                MessageBox.Show("'" + errText + "'" + " is not a valid Vendor ID. " +
+    "\nId must be greater than 0 but less than " + maxID );
+                this.txtVendorIDSearch.Focus();
+                this.txtVendorIDSearch.Clear();
+                return false;
+            }
+
+            return true;
+        }
 
 
 
