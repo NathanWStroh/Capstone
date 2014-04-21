@@ -65,6 +65,7 @@
             // 
             // cbVendorCountry
             // 
+            this.cbVendorCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVendorCountry.FormattingEnabled = true;
             this.cbVendorCountry.Location = new System.Drawing.Point(94, 189);
             this.cbVendorCountry.Name = "cbVendorCountry";
@@ -73,6 +74,7 @@
             // 
             // cbVendorState
             // 
+            this.cbVendorState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVendorState.FormattingEnabled = true;
             this.cbVendorState.Location = new System.Drawing.Point(94, 156);
             this.cbVendorState.Name = "cbVendorState";

@@ -28,6 +28,12 @@ namespace com.Farouche.BusinessLogic
             return vendorList;
         }
 
+        public List<Vendor> GetVendorsByActive(Boolean active)
+        {
+            List<Vendor> vendorList = VendorDAL.GetAllVendorsByActive(active, _connection);
+            return vendorList;
+        }
+
         public Vendor GetVendor(int vendorId)
         {
             return VendorDAL.GetVendor(vendorId, _connection);

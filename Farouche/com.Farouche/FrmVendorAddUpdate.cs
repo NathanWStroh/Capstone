@@ -20,10 +20,12 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctkn;
             btMorph.Text = "Add Vendor";
 
-            foreach (State state in _myStateList)
-            {
-                cbVendorState.Items.Add(state.Name);
-            }
+
+
+            PopulateStateCombo();
+            PopulateCountryCombo();
+
+
         }//Add window end
 
         public FrmVendorAddUpdate(AccessToken acctkn, Vendor vendor)
@@ -33,7 +35,11 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctkn;
             _myVendor = vendor;
 
+            this.Text = "Update Product";
             btMorph.Text = "Update Vendor";
+
+            PopulateStateCombo();
+            PopulateCountryCombo();
 
             txtVendorID.Text = vendor.Id.ToString();
             txtVendorName.Text = vendor.Name;
@@ -106,5 +112,45 @@ namespace com.Farouche.Presentation
                 }//end catch
             }
         }//morph button event
-    }
+
+
+
+
+
+        private void PopulateStateCombo()
+        {
+            var appVariables = ApplicationVariables.Instance;
+            cbVendorState.DisplayMember = "Value";
+            cbVendorState.ValueMember = "Key";
+
+            for (int i = 1; i <= appVariables.States.Count; i++)
+            {
+                cbVendorState.Items.Add(appVariables.States[i].StateCode);
+            }
+
+        }//End of PopulateStateCombo()
+
+
+
+        private void PopulateCountryCombo()
+        {
+            cbVendorCountry.Items.Add("United States");
+            cbVendorCountry.Items.Add("Canada");
+            cbVendorCountry.Items.Add("China");
+            cbVendorCountry.Items.Add("Japan");
+
+        }//End of PopulateCountryCombo()
+
+
+
+
+
+
+
+
+
+
+
+
+    } // end FrmVendorAddUpdate
 }

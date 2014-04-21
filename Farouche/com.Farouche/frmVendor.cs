@@ -15,6 +15,10 @@ using com.Farouche.Commons;
 * 
 * 04/19/2014  Kaleb Wendel                                 Adjusted class to implement a singleton pattern so only one form can beinstantiated.
 */
+
+
+
+
 namespace com.Farouche.Presentation
 //namespace CapstoneProject
 {
@@ -29,10 +33,20 @@ namespace com.Farouche.Presentation
         {
             InitializeComponent();
             _myAccessToken = acctoken;
-            _myVendorList = _myVendorManager.GetVendors();
-            populateListView(lvVendors, _myVendorList);
+          //  _myVendorList = _myVendorManager.GetVendors();
+          //  populateListView(lvVendors, _myVendorList);
             Instance = this;
         }
+
+
+        private void FrmVendor_Load(object sender, EventArgs e)
+        {
+            //Populates the active combo box. 
+            this.populateActiveCombo();
+
+            populateListView(this.lvVendors, _myVendorManager.GetVendorsByActive(true));
+        }
+
 
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
@@ -48,11 +62,29 @@ namespace com.Farouche.Presentation
             FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
             frm.ShowDialog();
         }
+
+        private void btnActivateProduct_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
+            Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+            Boolean success = _myVendorManager.ReactivateVendor(thisVendor);
+            if (success == true)
+            {
+                MessageBox.Show("The vendor was activated");
+            }
+            findActiveSelection();
+        }
+
+        private void btnDeactivateProduct_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void populateListView(ListView lv, List<Vendor> vendorList)
         {
             try
             {
-                vendorList = _myVendorList;
+              //  vendorList = _myVendorList;
                 lv.Clear();
 
                 foreach (var vendor in vendorList)
@@ -90,14 +122,119 @@ namespace com.Farouche.Presentation
             }//end of Catch
         }
 
-        private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
+
+
+
+        private void setDefaults()
         {
-            btnUpdateVendor.Enabled = true;
+            btnUpdateVendor.Enabled = false;
+            btnDeactivateVendor.Enabled = false;
+            btnActivateVendor.Enabled = false;
+            
+
+
         }
+
+
+
+        //Populates the Active combo box.
+        //Postcondition: The combo box will hold the values (Yes, No, Both).
+        private void populateActiveCombo()
+        {
+            Active active;
+            for (int i = 1; i >= 0; i--)
+            {
+                active = (Active)i;
+                this.cbVendortStatusSearch.Items.Add(active);
+            }
+            this.cbVendortStatusSearch.Items.Add("Both");
+            this.cbVendortStatusSearch.SelectedIndex = 0;
+        }
+
+
+
+        //private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
+        //    var selectedVendor = this.lvVendors.SelectedItems;
+        //    if (selectedVendor.Count > 0)
+        //    {
+        //        currentIndex = (int)selectedVendor[0].SubItems[0].Text;
+
+        //    }
+        //    Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+
+        //    if (thisVendor.Active == true)
+        //    {
+        //        btnActivateVendor.Enabled = false;
+        //        btnDeactivateVendor.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        btnActivateVendor.Enabled = false;
+        //        btnDeactivateVendor.Enabled = true;
+        //        //MessageBox.Show(thisVendor.ToString());   
+        //    }
+        //    btnUpdateVendor.Enabled = true;
+        //}
+
+
+
+        private void cbVendortStatusSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            findActiveSelection();
+        }
+
+        private void findActiveSelection()
+        {
+            Boolean active;
+            switch (this.cbVendortStatusSearch.SelectedIndex)
+            {
+                case 0:
+                    active = true; //True
+                    populateListView(this.lvVendors, _myVendorManager.GetVendorsByActive(active));
+                    break;
+                case 1:
+                    active = false; //False
+                    populateListView(this.lvVendors, _myVendorManager.GetVendorsByActive(active));
+                    break;
+                case 2:
+                    populateListView(this.lvVendors, _myVendorManager.GetVendors());
+                    break;
+            }
+            setDefaults();
+        }
+
+        private void lvVendors_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
+            Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
+            
+            if (thisVendor.Active == true)
+            {
+                btnActivateVendor.Enabled = false;
+                btnDeactivateVendor.Enabled = true;
+            }
+            else
+            {
+                btnActivateVendor.Enabled = false;
+                btnDeactivateVendor.Enabled = true;
+                //MessageBox.Show(thisVendor.ToString());   
+            }
+            btnUpdateVendor.Enabled = true;
+        } //end lvVendors_Click(..)
+
+
+
+
+
+
 
         private void FrmVendor_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
         }
+
+
     }
 }

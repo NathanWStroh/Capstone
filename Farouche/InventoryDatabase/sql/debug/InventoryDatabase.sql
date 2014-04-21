@@ -12,10 +12,9 @@ GO
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
 GO
-USE [master]
-
-GO
 :on error exit
+GO
+USE [master]
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -146,7 +145,6 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
-
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -1930,6 +1928,17 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_GetVendorsByActive]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetVendorsByActive]
+	(@Active	Int)
+AS
+	SELECT * FROM [dbo].[Vendors]
+	WHERE [Active] = @Active
+	ORDER BY [VendorID]
 GO
 PRINT N'Creating [dbo].[proc_GetVendorSourceItem]...';
 
