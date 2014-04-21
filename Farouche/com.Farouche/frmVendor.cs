@@ -52,7 +52,7 @@ namespace com.Farouche.Presentation
         {
             FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken);
             frm.ShowDialog();
-            setDefaults();
+            findActiveSelection();
         }
 
         private void btnUpdateVendor_Click(object sender, EventArgs e)
@@ -72,7 +72,7 @@ namespace com.Farouche.Presentation
                 Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
                 FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
                 frm.ShowDialog();
-                setDefaults();
+                findActiveSelection();
             }
         }
 
@@ -180,8 +180,6 @@ namespace com.Farouche.Presentation
             btnDeactivateVendor.Enabled = false;
             btnActivateVendor.Enabled = false;
             
-
-
         }
 
 

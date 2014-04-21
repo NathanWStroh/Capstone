@@ -57,7 +57,7 @@
             // lblVendorZipCode
             // 
             this.lblVendorZipCode.AutoSize = true;
-            this.lblVendorZipCode.Location = new System.Drawing.Point(12, 230);
+            this.lblVendorZipCode.Location = new System.Drawing.Point(64, 210);
             this.lblVendorZipCode.Name = "lblVendorZipCode";
             this.lblVendorZipCode.Size = new System.Drawing.Size(53, 13);
             this.lblVendorZipCode.TabIndex = 104;
@@ -67,7 +67,7 @@
             // 
             this.cbVendorCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVendorCountry.FormattingEnabled = true;
-            this.cbVendorCountry.Location = new System.Drawing.Point(94, 189);
+            this.cbVendorCountry.Location = new System.Drawing.Point(123, 180);
             this.cbVendorCountry.Name = "cbVendorCountry";
             this.cbVendorCountry.Size = new System.Drawing.Size(121, 21);
             this.cbVendorCountry.TabIndex = 94;
@@ -76,64 +76,65 @@
             // 
             this.cbVendorState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVendorState.FormattingEnabled = true;
-            this.cbVendorState.Location = new System.Drawing.Point(94, 156);
+            this.cbVendorState.Location = new System.Drawing.Point(123, 153);
             this.cbVendorState.Name = "cbVendorState";
             this.cbVendorState.Size = new System.Drawing.Size(121, 21);
             this.cbVendorState.TabIndex = 92;
             // 
             // txtVendorContactPhone
             // 
-            this.txtVendorContactPhone.Location = new System.Drawing.Point(411, 90);
+            this.txtVendorContactPhone.Location = new System.Drawing.Point(448, 105);
             this.txtVendorContactPhone.Name = "txtVendorContactPhone";
             this.txtVendorContactPhone.Size = new System.Drawing.Size(206, 20);
             this.txtVendorContactPhone.TabIndex = 100;
             // 
             // txtVendorContactEmail
             // 
-            this.txtVendorContactEmail.Location = new System.Drawing.Point(411, 60);
+            this.txtVendorContactEmail.Location = new System.Drawing.Point(448, 79);
             this.txtVendorContactEmail.Name = "txtVendorContactEmail";
             this.txtVendorContactEmail.Size = new System.Drawing.Size(206, 20);
             this.txtVendorContactEmail.TabIndex = 98;
             // 
             // txtVendorContact
             // 
-            this.txtVendorContact.Location = new System.Drawing.Point(411, 28);
+            this.txtVendorContact.Location = new System.Drawing.Point(448, 53);
             this.txtVendorContact.Name = "txtVendorContact";
             this.txtVendorContact.Size = new System.Drawing.Size(206, 20);
             this.txtVendorContact.TabIndex = 96;
             // 
             // txtVendorID
             // 
-            this.txtVendorID.Enabled = false;
-            this.txtVendorID.Location = new System.Drawing.Point(94, 28);
+            this.txtVendorID.Location = new System.Drawing.Point(123, 50);
             this.txtVendorID.Name = "txtVendorID";
+            this.txtVendorID.ReadOnly = true;
             this.txtVendorID.Size = new System.Drawing.Size(206, 20);
             this.txtVendorID.TabIndex = 103;
             // 
             // txtVendorZipCode
             // 
-            this.txtVendorZipCode.Location = new System.Drawing.Point(94, 227);
+            this.txtVendorZipCode.Location = new System.Drawing.Point(123, 207);
+            this.txtVendorZipCode.MaxLength = 5;
             this.txtVendorZipCode.Name = "txtVendorZipCode";
             this.txtVendorZipCode.Size = new System.Drawing.Size(206, 20);
             this.txtVendorZipCode.TabIndex = 95;
             // 
             // txtVendorCity
             // 
-            this.txtVendorCity.Location = new System.Drawing.Point(94, 121);
+            this.txtVendorCity.Location = new System.Drawing.Point(123, 127);
             this.txtVendorCity.Name = "txtVendorCity";
             this.txtVendorCity.Size = new System.Drawing.Size(206, 20);
             this.txtVendorCity.TabIndex = 89;
             // 
             // txtVendorAddress
             // 
-            this.txtVendorAddress.Location = new System.Drawing.Point(94, 89);
+            this.txtVendorAddress.Location = new System.Drawing.Point(123, 101);
             this.txtVendorAddress.Name = "txtVendorAddress";
             this.txtVendorAddress.Size = new System.Drawing.Size(206, 20);
             this.txtVendorAddress.TabIndex = 87;
             // 
             // txtVendorName
             // 
-            this.txtVendorName.Location = new System.Drawing.Point(94, 58);
+            this.txtVendorName.Location = new System.Drawing.Point(123, 75);
             this.txtVendorName.Name = "txtVendorName";
             this.txtVendorName.Size = new System.Drawing.Size(206, 20);
             this.txtVendorName.TabIndex = 86;
@@ -141,7 +142,7 @@
             // lblVendorPhone
             // 
             this.lblVendorPhone.AutoSize = true;
-            this.lblVendorPhone.Location = new System.Drawing.Point(336, 90);
+            this.lblVendorPhone.Location = new System.Drawing.Point(401, 108);
             this.lblVendorPhone.Name = "lblVendorPhone";
             this.lblVendorPhone.Size = new System.Drawing.Size(41, 13);
             this.lblVendorPhone.TabIndex = 102;
@@ -150,7 +151,7 @@
             // lblVendorContactEmail
             // 
             this.lblVendorContactEmail.AutoSize = true;
-            this.lblVendorContactEmail.Location = new System.Drawing.Point(330, 63);
+            this.lblVendorContactEmail.Location = new System.Drawing.Point(367, 82);
             this.lblVendorContactEmail.Name = "lblVendorContactEmail";
             this.lblVendorContactEmail.Size = new System.Drawing.Size(75, 13);
             this.lblVendorContactEmail.TabIndex = 101;
@@ -159,7 +160,7 @@
             // lblVendorContact
             // 
             this.lblVendorContact.AutoSize = true;
-            this.lblVendorContact.Location = new System.Drawing.Point(330, 31);
+            this.lblVendorContact.Location = new System.Drawing.Point(395, 56);
             this.lblVendorContact.Name = "lblVendorContact";
             this.lblVendorContact.Size = new System.Drawing.Size(47, 13);
             this.lblVendorContact.TabIndex = 99;
@@ -168,7 +169,7 @@
             // lblVendorID
             // 
             this.lblVendorID.AutoSize = true;
-            this.lblVendorID.Location = new System.Drawing.Point(13, 35);
+            this.lblVendorID.Location = new System.Drawing.Point(59, 53);
             this.lblVendorID.Name = "lblVendorID";
             this.lblVendorID.Size = new System.Drawing.Size(58, 13);
             this.lblVendorID.TabIndex = 97;
@@ -177,7 +178,7 @@
             // lblVendorCountry
             // 
             this.lblVendorCountry.AutoSize = true;
-            this.lblVendorCountry.Location = new System.Drawing.Point(12, 198);
+            this.lblVendorCountry.Location = new System.Drawing.Point(71, 183);
             this.lblVendorCountry.Name = "lblVendorCountry";
             this.lblVendorCountry.Size = new System.Drawing.Size(46, 13);
             this.lblVendorCountry.TabIndex = 93;
@@ -186,7 +187,7 @@
             // lblVendorState
             // 
             this.lblVendorState.AutoSize = true;
-            this.lblVendorState.Location = new System.Drawing.Point(12, 165);
+            this.lblVendorState.Location = new System.Drawing.Point(82, 156);
             this.lblVendorState.Name = "lblVendorState";
             this.lblVendorState.Size = new System.Drawing.Size(35, 13);
             this.lblVendorState.TabIndex = 91;
@@ -195,7 +196,7 @@
             // lblVendorCity
             // 
             this.lblVendorCity.AutoSize = true;
-            this.lblVendorCity.Location = new System.Drawing.Point(12, 124);
+            this.lblVendorCity.Location = new System.Drawing.Point(90, 130);
             this.lblVendorCity.Name = "lblVendorCity";
             this.lblVendorCity.Size = new System.Drawing.Size(27, 13);
             this.lblVendorCity.TabIndex = 90;
@@ -204,7 +205,7 @@
             // lblVendorAddress
             // 
             this.lblVendorAddress.AutoSize = true;
-            this.lblVendorAddress.Location = new System.Drawing.Point(12, 92);
+            this.lblVendorAddress.Location = new System.Drawing.Point(69, 104);
             this.lblVendorAddress.Name = "lblVendorAddress";
             this.lblVendorAddress.Size = new System.Drawing.Size(48, 13);
             this.lblVendorAddress.TabIndex = 88;
@@ -213,7 +214,7 @@
             // lblVendorName
             // 
             this.lblVendorName.AutoSize = true;
-            this.lblVendorName.Location = new System.Drawing.Point(12, 58);
+            this.lblVendorName.Location = new System.Drawing.Point(42, 78);
             this.lblVendorName.Name = "lblVendorName";
             this.lblVendorName.Size = new System.Drawing.Size(75, 13);
             this.lblVendorName.TabIndex = 85;
@@ -221,7 +222,7 @@
             // 
             // btMorph
             // 
-            this.btMorph.Location = new System.Drawing.Point(553, 319);
+            this.btMorph.Location = new System.Drawing.Point(487, 323);
             this.btMorph.Name = "btMorph";
             this.btMorph.Size = new System.Drawing.Size(75, 23);
             this.btMorph.TabIndex = 106;
@@ -233,7 +234,7 @@
             // 
             this.lblProductInfo.AutoSize = true;
             this.lblProductInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductInfo.Location = new System.Drawing.Point(123, 9);
+            this.lblProductInfo.Location = new System.Drawing.Point(120, 25);
             this.lblProductInfo.Name = "lblProductInfo";
             this.lblProductInfo.Size = new System.Drawing.Size(138, 16);
             this.lblProductInfo.TabIndex = 107;
@@ -243,7 +244,7 @@
             // 
             this.lblShippingInfo.AutoSize = true;
             this.lblShippingInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShippingInfo.Location = new System.Drawing.Point(455, 9);
+            this.lblShippingInfo.Location = new System.Drawing.Point(448, 25);
             this.lblShippingInfo.Name = "lblShippingInfo";
             this.lblShippingInfo.Size = new System.Drawing.Size(140, 16);
             this.lblShippingInfo.TabIndex = 108;
@@ -252,7 +253,7 @@
             // btClose
             // 
             this.btClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btClose.Location = new System.Drawing.Point(12, 319);
+            this.btClose.Location = new System.Drawing.Point(123, 323);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(75, 23);
             this.btClose.TabIndex = 109;
@@ -264,7 +265,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 354);
+            this.ClientSize = new System.Drawing.Size(689, 366);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.lblShippingInfo);
             this.Controls.Add(this.lblProductInfo);
@@ -292,6 +293,7 @@
             this.Name = "FrmVendorAddUpdate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "VendorAddUpdate";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmVendorAddUpdate_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
