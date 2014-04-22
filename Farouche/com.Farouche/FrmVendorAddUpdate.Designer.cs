@@ -70,7 +70,7 @@
             this.cbVendorCountry.Location = new System.Drawing.Point(123, 180);
             this.cbVendorCountry.Name = "cbVendorCountry";
             this.cbVendorCountry.Size = new System.Drawing.Size(121, 21);
-            this.cbVendorCountry.TabIndex = 94;
+            this.cbVendorCountry.TabIndex = 4;
             // 
             // cbVendorState
             // 
@@ -79,28 +79,31 @@
             this.cbVendorState.Location = new System.Drawing.Point(123, 153);
             this.cbVendorState.Name = "cbVendorState";
             this.cbVendorState.Size = new System.Drawing.Size(121, 21);
-            this.cbVendorState.TabIndex = 92;
+            this.cbVendorState.TabIndex = 3;
             // 
             // txtVendorContactPhone
             // 
             this.txtVendorContactPhone.Location = new System.Drawing.Point(448, 105);
+            this.txtVendorContactPhone.MaxLength = 12;
             this.txtVendorContactPhone.Name = "txtVendorContactPhone";
             this.txtVendorContactPhone.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorContactPhone.TabIndex = 100;
+            this.txtVendorContactPhone.TabIndex = 8;
             // 
             // txtVendorContactEmail
             // 
             this.txtVendorContactEmail.Location = new System.Drawing.Point(448, 79);
+            this.txtVendorContactEmail.MaxLength = 50;
             this.txtVendorContactEmail.Name = "txtVendorContactEmail";
             this.txtVendorContactEmail.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorContactEmail.TabIndex = 98;
+            this.txtVendorContactEmail.TabIndex = 7;
             // 
             // txtVendorContact
             // 
             this.txtVendorContact.Location = new System.Drawing.Point(448, 53);
+            this.txtVendorContact.MaxLength = 50;
             this.txtVendorContact.Name = "txtVendorContact";
             this.txtVendorContact.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorContact.TabIndex = 96;
+            this.txtVendorContact.TabIndex = 6;
             // 
             // txtVendorID
             // 
@@ -108,7 +111,8 @@
             this.txtVendorID.Name = "txtVendorID";
             this.txtVendorID.ReadOnly = true;
             this.txtVendorID.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorID.TabIndex = 103;
+            this.txtVendorID.TabIndex = 20;
+            this.txtVendorID.TabStop = false;
             // 
             // txtVendorZipCode
             // 
@@ -116,28 +120,31 @@
             this.txtVendorZipCode.MaxLength = 5;
             this.txtVendorZipCode.Name = "txtVendorZipCode";
             this.txtVendorZipCode.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorZipCode.TabIndex = 95;
+            this.txtVendorZipCode.TabIndex = 5;
             // 
             // txtVendorCity
             // 
             this.txtVendorCity.Location = new System.Drawing.Point(123, 127);
+            this.txtVendorCity.MaxLength = 50;
             this.txtVendorCity.Name = "txtVendorCity";
             this.txtVendorCity.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorCity.TabIndex = 89;
+            this.txtVendorCity.TabIndex = 2;
             // 
             // txtVendorAddress
             // 
             this.txtVendorAddress.Location = new System.Drawing.Point(123, 101);
+            this.txtVendorAddress.MaxLength = 50;
             this.txtVendorAddress.Name = "txtVendorAddress";
             this.txtVendorAddress.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorAddress.TabIndex = 87;
+            this.txtVendorAddress.TabIndex = 1;
             // 
             // txtVendorName
             // 
             this.txtVendorName.Location = new System.Drawing.Point(123, 75);
+            this.txtVendorName.MaxLength = 50;
             this.txtVendorName.Name = "txtVendorName";
             this.txtVendorName.Size = new System.Drawing.Size(206, 20);
-            this.txtVendorName.TabIndex = 86;
+            this.txtVendorName.TabIndex = 0;
             // 
             // lblVendorPhone
             // 
@@ -225,7 +232,7 @@
             this.btMorph.Location = new System.Drawing.Point(487, 323);
             this.btMorph.Name = "btMorph";
             this.btMorph.Size = new System.Drawing.Size(75, 23);
-            this.btMorph.TabIndex = 106;
+            this.btMorph.TabIndex = 9;
             this.btMorph.Text = "btMorph";
             this.btMorph.UseVisualStyleBackColor = true;
             this.btMorph.Click += new System.EventHandler(this.btMorph_Click);
@@ -237,7 +244,7 @@
             this.lblProductInfo.Location = new System.Drawing.Point(120, 25);
             this.lblProductInfo.Name = "lblProductInfo";
             this.lblProductInfo.Size = new System.Drawing.Size(138, 16);
-            this.lblProductInfo.TabIndex = 107;
+            this.lblProductInfo.TabIndex = 21;
             this.lblProductInfo.Text = "Vendor Information";
             // 
             // lblShippingInfo
@@ -256,15 +263,17 @@
             this.btClose.Location = new System.Drawing.Point(123, 323);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(75, 23);
-            this.btClose.TabIndex = 109;
+            this.btClose.TabIndex = 10;
             this.btClose.Text = "Cancel";
             this.btClose.UseVisualStyleBackColor = true;
             this.btClose.Click += new System.EventHandler(this.btClose_Click);
             // 
             // FrmVendorAddUpdate
             // 
+            this.AcceptButton = this.btMorph;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btClose;
             this.ClientSize = new System.Drawing.Size(689, 366);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.lblShippingInfo);

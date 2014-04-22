@@ -46,7 +46,7 @@
             this.btnDeactivateVendor.Location = new System.Drawing.Point(12, 141);
             this.btnDeactivateVendor.Name = "btnDeactivateVendor";
             this.btnDeactivateVendor.Size = new System.Drawing.Size(100, 25);
-            this.btnDeactivateVendor.TabIndex = 44;
+            this.btnDeactivateVendor.TabIndex = 4;
             this.btnDeactivateVendor.Text = "Deactivate";
             this.btnDeactivateVendor.UseVisualStyleBackColor = true;
             this.btnDeactivateVendor.Click += new System.EventHandler(this.btnDeactivateProduct_Click);
@@ -57,7 +57,7 @@
             this.btnActivateVendor.Location = new System.Drawing.Point(12, 110);
             this.btnActivateVendor.Name = "btnActivateVendor";
             this.btnActivateVendor.Size = new System.Drawing.Size(100, 25);
-            this.btnActivateVendor.TabIndex = 43;
+            this.btnActivateVendor.TabIndex = 3;
             this.btnActivateVendor.Text = "Activate";
             this.btnActivateVendor.UseVisualStyleBackColor = true;
             this.btnActivateVendor.Click += new System.EventHandler(this.btnActivateProduct_Click);
@@ -68,7 +68,7 @@
             this.cbVendorStatusSearch.Location = new System.Drawing.Point(640, 14);
             this.cbVendorStatusSearch.Name = "cbVendorStatusSearch";
             this.cbVendorStatusSearch.Size = new System.Drawing.Size(121, 21);
-            this.cbVendorStatusSearch.TabIndex = 42;
+            this.cbVendorStatusSearch.TabIndex = 5;
             this.cbVendorStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbVendortStatusSearch_SelectedIndexChanged);
             // 
             // lblVendorActiveSearch
@@ -96,7 +96,7 @@
             this.btnUpdateVendor.Location = new System.Drawing.Point(12, 79);
             this.btnUpdateVendor.Name = "btnUpdateVendor";
             this.btnUpdateVendor.Size = new System.Drawing.Size(100, 25);
-            this.btnUpdateVendor.TabIndex = 39;
+            this.btnUpdateVendor.TabIndex = 2;
             this.btnUpdateVendor.Text = "Update Vendor";
             this.btnUpdateVendor.UseVisualStyleBackColor = true;
             this.btnUpdateVendor.Click += new System.EventHandler(this.btnUpdateVendor_Click);
@@ -106,7 +106,7 @@
             this.txtVendorIDSearch.Location = new System.Drawing.Point(180, 11);
             this.txtVendorIDSearch.Name = "txtVendorIDSearch";
             this.txtVendorIDSearch.Size = new System.Drawing.Size(100, 20);
-            this.txtVendorIDSearch.TabIndex = 38;
+            this.txtVendorIDSearch.TabIndex = 0;
             // 
             // lblVendorIDSearch
             // 
@@ -122,7 +122,7 @@
             this.btnAddVendor.Location = new System.Drawing.Point(12, 48);
             this.btnAddVendor.Name = "btnAddVendor";
             this.btnAddVendor.Size = new System.Drawing.Size(100, 25);
-            this.btnAddVendor.TabIndex = 35;
+            this.btnAddVendor.TabIndex = 1;
             this.btnAddVendor.Text = "Add Vendor";
             this.btnAddVendor.UseVisualStyleBackColor = true;
             this.btnAddVendor.Click += new System.EventHandler(this.btnAddVendor_Click);
@@ -142,6 +142,7 @@
             // 
             // FrmVendor
             // 
+            this.AcceptButton = this.btnGetVendorByID;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 319);

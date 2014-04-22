@@ -5,8 +5,8 @@ using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 //Author: Andrew
 //Date Created: 1/31/2014
-//Last Modified: 02/7/2014 
-//Last Modified By: Adam Chandler
+//Last Modified: 02/22/2014 
+//Last Modified By: Andrew Willhoit
 
 /*
 *                               Changelog
@@ -14,6 +14,10 @@ using com.Farouche.Commons;
 * 02/7/2014   Adam                          0.0.1b         Updated Instantiation of new objects to use id as parameter
 * 
 * 04/19/2014  Kaleb Wendel                                 Adjusted class to implement a singleton pattern so only one form can beinstantiated.
+* 
+*04/22/2014   Andrew Willhoit                              Fixed active/deactive/update/add buttons to show/hide appropriatly
+ *                                                         Added search by Vendor capabilites, added display vendors by list by active/deactive
+ *                                                         Added Validation. - Adjusted layout of form to match project.
 */
 
 
@@ -26,15 +30,12 @@ namespace com.Farouche.Presentation
     {
         private readonly AccessToken _myAccessToken;
         private VendorManager _myVendorManager = new VendorManager();
-        private List<Vendor> _myVendorList = new List<Vendor>();
         public static FrmVendor Instance;
 
         public FrmVendor(AccessToken acctoken)
         {
             InitializeComponent();
             _myAccessToken = acctoken;
-          //  _myVendorList = _myVendorManager.GetVendors();
-          //  populateListView(lvVendors, _myVendorList);
             Instance = this;
         }
 
@@ -43,7 +44,6 @@ namespace com.Farouche.Presentation
         {
             //Populates the active combo box. 
             this.populateActiveCombo();
-
             populateListView(this.lvVendors, _myVendorManager.GetVendorsByActive(true));
         }
 
@@ -57,18 +57,10 @@ namespace com.Farouche.Presentation
 
         private void btnUpdateVendor_Click(object sender, EventArgs e)
         {
-            //have to add 1 to current index so it grabs the proper vendor id.
-            //int currentIndex = this.lvVendors.SelectedIndices[0]+1;
-            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
-            //FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
-            //frm.ShowDialog();
-
             ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
             if (selectedVendor.Count > 0)
             {
                 int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
-
-               // MessageBox.Show(vendorID.ToString());
                 Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
                 FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
                 frm.ShowDialog();
@@ -78,54 +70,41 @@ namespace com.Farouche.Presentation
 
         private void btnActivateProduct_Click(object sender, EventArgs e)
         {
-            //int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
-            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
-            //Boolean success = _myVendorManager.ReactivateVendor(thisVendor);
-
             ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
             if (selectedVendor.Count > 0)
             {
                 int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
-
-               // MessageBox.Show(vendorID.ToString());
                 Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
                 Boolean success = _myVendorManager.ReactivateVendor(thisVendor);
 
                 if (success == true)
                 {
-                    MessageBox.Show("The vendor was activated");
+                    MessageBox.Show("The vendor " + thisVendor.Name + " was reactivated");
                 }
                 findActiveSelection();
             }
-
         }
 
         private void btnDeactivateProduct_Click(object sender, EventArgs e)
         {
-            //int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
-            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
-            //Boolean success = _myVendorManager.DeactivateVendor(thisVendor);
-            //if (success == true)
-            //{
-            //    MessageBox.Show("The vendor was deactivated");
-            //}
-            //findActiveSelection();
-
             ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
             if (selectedVendor.Count > 0)
             {
                 int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
-
-                MessageBox.Show(vendorID.ToString());
                 Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
                 Boolean success = _myVendorManager.DeactivateVendor(thisVendor);
 
                 if (success == true)
                 {
-                    MessageBox.Show("The vendor was deactivated");
+                    MessageBox.Show("The vendor " + thisVendor.Name + " was deactivated");
                 }
                 findActiveSelection();
             }
+        }
+
+        private void btnGetVendorByID_Click(object sender, EventArgs e)
+        {
+            searchForVendorByID();
 
         }
 
@@ -133,7 +112,6 @@ namespace com.Farouche.Presentation
         {
             try
             {
-              //  vendorList = _myVendorList;
                 lv.Clear();
 
                 foreach (var vendor in vendorList)
@@ -164,24 +142,19 @@ namespace com.Farouche.Presentation
                 lv.Columns.Add("Contact Phone");
                 lv.Columns.Add("Active");
                 lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            }//end of Try
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occured while loading the vendor listView. " + ex.ToString());
-            }//end of Catch
+            }
         }
-
-
-
 
         private void setDefaults()
         {
             btnUpdateVendor.Enabled = false;
             btnDeactivateVendor.Enabled = false;
             btnActivateVendor.Enabled = false;
-            
         }
-
 
 
         //Populates the Active combo box.
@@ -199,30 +172,6 @@ namespace com.Farouche.Presentation
         }
 
 
-
-        private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
-            if (selectedVendor.Count > 0)
-            {
-                int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
-
-                //MessageBox.Show(vendorID.ToString());
-                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
-                if (thisVendor.Active == true)
-                {
-                    btnActivateVendor.Enabled = false;
-                    btnDeactivateVendor.Enabled = true;
-                }
-                else
-                {
-                    btnActivateVendor.Enabled = true;
-                    btnDeactivateVendor.Enabled = false;
-
-                }
-                btnUpdateVendor.Enabled = true;
-            }
-        }
 
 
 
@@ -253,9 +202,6 @@ namespace com.Farouche.Presentation
 
         private void lvVendors_Click(object sender, EventArgs e)
         {
-            //int currentIndex = this.lvVendors.SelectedIndices[0] + 1;
-            //Vendor thisVendor = _myVendorManager.GetVendor(currentIndex);
-
             ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
             if (selectedVendor.Count > 0)
             {
@@ -275,16 +221,31 @@ namespace com.Farouche.Presentation
                 }
                 btnUpdateVendor.Enabled = true;
             }
-
         } //end lvVendors_Click(..)
 
-
-
-        private void btnGetVendorByID_Click(object sender, EventArgs e)
+        private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
         {
-            searchForVendorByID();
+            ListView.SelectedListViewItemCollection selectedVendor = this.lvVendors.SelectedItems;
+            if (selectedVendor.Count > 0)
+            {
+                int vendorID = Convert.ToInt32(selectedVendor[0].SubItems[0].Text);
+                Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
+                if (thisVendor.Active == true)
+                {
+                    btnActivateVendor.Enabled = false;
+                    btnDeactivateVendor.Enabled = true;
+                }
+                else
+                {
+                    btnActivateVendor.Enabled = true;
+                    btnDeactivateVendor.Enabled = false;
 
+                }
+                this.txtVendorIDSearch.Text = thisVendor.Id.ToString();
+                btnUpdateVendor.Enabled = true;
+            }
         }
+
 
         private void searchForVendorByID()
         {
@@ -314,7 +275,6 @@ namespace com.Farouche.Presentation
             }
             else if (!Validation.IsInt(this.txtVendorIDSearch.Text))
             {
-                
                 MessageBox.Show("'" + errText + "'" + " is not a valid Vendor ID. " + 
                     "\nId must be a numeric value.");
                 this.txtVendorIDSearch.Focus();
@@ -335,8 +295,6 @@ namespace com.Farouche.Presentation
 
             return true;
         }
-
-
 
 
         private void FrmVendor_FormClosed(object sender, FormClosedEventArgs e)

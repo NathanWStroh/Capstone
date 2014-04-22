@@ -3,7 +3,19 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
+//Author: ?
+//Date Created: ?
+//Last Modified: 02/22/2014 
+//Last Modified By: Andrew Willhoit
 
+/*
+*                               Changelog
+* Date         By          Ticket          Version         Description
+* 
+*04/22/2014   Andrew Willhoit                              Updating a Vendor now works. Adjusted layout of form to match project.
+ *                                                         Added Validation to both updating and adding vendors.
+ *                                                         Forms close when appropriate.
+*/
 namespace com.Farouche.Presentation
 {
     public partial class FrmVendorAddUpdate : Form
@@ -65,30 +77,7 @@ namespace com.Farouche.Presentation
         {
             if (btMorph.Text == "Add Vendor")
             {
-
                 addVendor();
-                //try
-                //{
-                //    _myVendor.Name = txtVendorName.Text.ToString();
-                //    _myVendor.Address = txtVendorAddress.Text;
-                //    _myVendor.City = txtVendorCity.Text;
-                //    _myVendor.State = cbVendorState.Text;
-                //    _myVendor.Country = cbVendorCountry.Text;
-                //    _myVendor.Zip = txtVendorZipCode.Text;
-
-                //    _myVendor.Contact = txtVendorContact.Text;
-                //    _myVendor.ContactEmail = txtVendorContactEmail.Text;
-                //    _myVendor.Phone = txtVendorContactPhone.Text;
-
-                //    _myVendorManager.AddVendor(_myVendor);
-
-                //    MessageBox.Show("Vendor was added");
-                //}//end try
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show("This is a generic message and should be changed" + ex.ToString());
-                //}//end catch
-
             }
             else
             {
@@ -118,51 +107,52 @@ namespace com.Farouche.Presentation
 
                     _myVendorManager.AddVendor(_myVendor);
 
-                    MessageBox.Show("Vendor "+ _myVendor.Name +"  was added");
+                    MessageBox.Show("Vendor "+ _myVendor.Name +"  was added.");
                     this.Close();
-                }//end try
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("An exception was thrown while adding vendor\n" + ex.ToString());
-                }//end catch
+                }
             }
 
-            
-        
         } // end addVendor()
 
 
         private void updateVendor()
         {
-            try
+            if (inputIsValid())
             {
-                _myUpdatedVendor.Name = txtVendorName.Text.ToString();
-                _myUpdatedVendor.Address = txtVendorAddress.Text;
-                _myUpdatedVendor.City = txtVendorCity.Text;
-                _myUpdatedVendor.State = cbVendorState.Text;
-                _myUpdatedVendor.Country = cbVendorCountry.Text;
-                _myUpdatedVendor.Zip = txtVendorZipCode.Text;
 
-                _myUpdatedVendor.Contact = txtVendorContact.Text;
-                _myUpdatedVendor.ContactEmail = txtVendorContactEmail.Text;
-                _myUpdatedVendor.Phone = txtVendorContactPhone.Text;
+                try
+                {
+                    _myUpdatedVendor.Name = txtVendorName.Text.ToString();
+                    _myUpdatedVendor.Address = txtVendorAddress.Text;
+                    _myUpdatedVendor.City = txtVendorCity.Text;
+                    _myUpdatedVendor.State = cbVendorState.Text;
+                    _myUpdatedVendor.Country = cbVendorCountry.Text;
+                    _myUpdatedVendor.Zip = txtVendorZipCode.Text;
 
-                _myVendorManager.UpdateVendor(_myUpdatedVendor, _myVendor);
+                    _myUpdatedVendor.Contact = txtVendorContact.Text;
+                    _myUpdatedVendor.ContactEmail = txtVendorContactEmail.Text;
+                    _myUpdatedVendor.Phone = txtVendorContactPhone.Text;
 
-                MessageBox.Show("Vendor was updated!");
-                this.Close();
-            }//end try
-            catch (Exception ex)
-            {
-                MessageBox.Show("This is a generic message and should be changed" + ex.ToString());
-            }//end catch
+                    _myVendorManager.UpdateVendor(_myUpdatedVendor, _myVendor);
+
+                    MessageBox.Show("Vendor " + _myUpdatedVendor.Name + "  was updated.");
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An exception was thrown while editing vendor\n" + ex.ToString());
+                }
+            }
         } // end updateVendor()
 
 
         private Boolean inputIsValid()
         {
             string errText = "";
-            int zip;
 
             if (Validation.IsBlank(this.txtVendorName.Text) ||
                 Validation.IsNullOrEmpty(this.txtVendorName.Text))
@@ -219,7 +209,6 @@ namespace com.Farouche.Presentation
                 return false;
             }
 
-           // zip = Convert.ToInt32(this.txtVendorZipCode.Text);
             if (!Validation.ValidateZip(this.txtVendorZipCode.Text, this.cbVendorState.Text))
             {
                 MessageBox.Show("'" + errText + "'" + " is not a valid Zip Code " +
@@ -234,7 +223,7 @@ namespace com.Farouche.Presentation
                 if (!Validation.IsEmail(txtVendorContactEmail.Text))
                 {
                     MessageBox.Show("The email address " + txtVendorContactEmail.Text + " is not valid." +
-                        "A Vendor Email address is not required, but must be valid.");
+                        "\nA Vendor Email address is not required, but must be valid.");
                     this.txtVendorContactEmail.Focus();
                     return false;
                 }
@@ -255,7 +244,7 @@ namespace com.Farouche.Presentation
                 if (!Validation.IsPhone(txtVendorContactPhone.Text))
                 {
                     MessageBox.Show("The phone number " + txtVendorContactPhone.Text + " is not valid." +
-                        "A Vendor Phone number is not required, but must be valid.");
+                        "\nA Vendor Phone number is not required, but must be valid.");
                     this.txtVendorContactPhone.Focus();
                     return false;
                 }
@@ -280,18 +269,8 @@ namespace com.Farouche.Presentation
                 }
             }
 
-            
-
             return true;
         } // end inputIsValid()
-
-
-
-
-
-
-
-
 
 
         private void PopulateStateCombo()
@@ -320,11 +299,6 @@ namespace com.Farouche.Presentation
         {
             Instance = null;
         }//End of PopulateCountryCombo()
-
-
-
-
-
 
 
     } // end FrmVendorAddUpdate
