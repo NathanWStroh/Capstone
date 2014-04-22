@@ -30,6 +30,7 @@
         {
             this.btnClearUser = new System.Windows.Forms.Button();
             this.lvAllOrders = new System.Windows.Forms.ListView();
+            this.btnAssignUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClearUser
@@ -55,11 +56,22 @@
             this.lvAllOrders.UseCompatibleStateImageBehavior = false;
             this.lvAllOrders.View = System.Windows.Forms.View.Details;
             // 
+            // btnAssignUser
+            // 
+            this.btnAssignUser.Location = new System.Drawing.Point(250, 252);
+            this.btnAssignUser.Name = "btnAssignUser";
+            this.btnAssignUser.Size = new System.Drawing.Size(127, 23);
+            this.btnAssignUser.TabIndex = 4;
+            this.btnAssignUser.Text = "Assign User";
+            this.btnAssignUser.UseVisualStyleBackColor = true;
+            this.btnAssignUser.Click += new System.EventHandler(this.btnAssignUser_Click);
+            // 
             // FrmShippingAllOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 281);
+            this.Controls.Add(this.btnAssignUser);
             this.Controls.Add(this.btnClearUser);
             this.Controls.Add(this.lvAllOrders);
             this.Name = "FrmShippingAllOrders";
@@ -73,5 +85,6 @@
 
         private System.Windows.Forms.Button btnClearUser;
         private System.Windows.Forms.ListView lvAllOrders;
+        private System.Windows.Forms.Button btnAssignUser;
     }
 }

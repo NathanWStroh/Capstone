@@ -95,6 +95,11 @@ namespace com.Farouche
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
 
+        }
+
+        private void btnAssignUser_Click(object sender, EventArgs e)
+        {
+
         }//End btnClearUser_Click(..)
     }
 }

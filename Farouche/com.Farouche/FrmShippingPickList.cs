@@ -31,23 +31,17 @@ namespace com.Farouche
             lv.Columns.Clear();
             foreach (var order in _myOrderManager.Orders)
             {
-                var item = new ListViewItem();
-                item.Text = order.ID.ToString();
-                item.SubItems.Add(order.ShippingVendorName);
-                if (order.UserId.HasValue)
+                if (!order.UserId.HasValue)
                 {
-                    item.SubItems.Add(order.UserId.ToString());
-                    item.SubItems.Add(order.UserFirstName.ToString());
-                    item.SubItems.Add(order.UserLastName.ToString());
+                    var item = new ListViewItem();
+                    item.Text = order.ID.ToString();
+                    item.SubItems.Add(order.ShippingVendorName);
+                    item.SubItems.Add(" ");
+                    item.SubItems.Add(" ");
+                    item.SubItems.Add(" ");
+                    item.SubItems.Add(order.Picked.ToString());
+                    lv.Items.Add(item);
                 }
-                else
-                {
-                    item.SubItems.Add(" ");
-                    item.SubItems.Add(" ");
-                    item.SubItems.Add(" ");
-                }
-                item.SubItems.Add(order.Picked.ToString());
-                lv.Items.Add(item);
             }
             lv.Columns.Add("OrderID");
             lv.Columns.Add("Vendor");
@@ -64,7 +58,7 @@ namespace com.Farouche
             {
                 int selectedOrder = (int)this.lvPickList.SelectedIndices[0] + 1;
                 ShippingOrder myOrder = _myOrderManager.GetOrderByID(selectedOrder);
-                if (myOrder.UserId.HasValue)
+                if (!myOrder.UserId.Equals(_myAccessToken.UserID) && myOrder.UserId.HasValue)
                 {
                     MessageBox.Show("Ownership belongs to another", "Already Assigned");
                 }
@@ -73,8 +67,8 @@ namespace com.Farouche
                     Boolean success = _myOrderManager.UpdateUserId(myOrder, _myAccessToken.UserID);
                     if (success == true)
                     {
-                        RefreshPickView();
                         InitPick(selectedOrder);
+                        RefreshPickView();
                     }
                     else
                     {
