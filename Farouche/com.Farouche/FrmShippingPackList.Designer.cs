@@ -64,6 +64,7 @@
             this.Controls.Add(this.lvPackList);
             this.Name = "FrmShippingPackList";
             this.Text = "FrmShippingPackList";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingPackList_FormClosed);
             this.ResumeLayout(false);
 
         }

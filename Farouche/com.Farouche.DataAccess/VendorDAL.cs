@@ -25,7 +25,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_InsertIntoVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_InsertIntoVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@Name", vendor.Name);
                 mySqlCommand.Parameters.AddWithValue("@Address", vendor.Address);
@@ -69,7 +69,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_GetVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_GetVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@VendorID", vendorId);
                 myConnection.Open();
@@ -122,7 +122,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_GetVendors", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_GetVendors", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 myConnection.Open();
 
@@ -175,7 +175,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_UpdateVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_UpdateVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@Name", vendor.Name);
                 mySqlCommand.Parameters.AddWithValue("@Address", vendor.Address);
@@ -227,7 +227,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_DeactivateVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_DeactivateVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@VendorID", vendor.Id);
                 myConnection.Open();
@@ -260,7 +260,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_ReactivateVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_ReactivateVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@VendorID", vendor.Id);
                 myConnection.Open();
@@ -293,7 +293,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                SqlCommand mySqlCommand = new SqlCommand("sp_DeleteVendor", myConnection);
+                SqlCommand mySqlCommand = new SqlCommand("proc_DeleteVendor", myConnection);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.AddWithValue("@VendorID", vendor.Id);
                 myConnection.Open();

@@ -49,6 +49,7 @@
             this.btnDeactivateProduct.TabIndex = 44;
             this.btnDeactivateProduct.Text = "Deactivate";
             this.btnDeactivateProduct.UseVisualStyleBackColor = true;
+            this.btnDeactivateProduct.Visible = false;
             // 
             // btnActivateProduct
             // 
@@ -59,6 +60,7 @@
             this.btnActivateProduct.TabIndex = 43;
             this.btnActivateProduct.Text = "Activate";
             this.btnActivateProduct.UseVisualStyleBackColor = true;
+            this.btnActivateProduct.Visible = false;
             // 
             // cbVendortStatusSearch
             // 
@@ -67,6 +69,7 @@
             this.cbVendortStatusSearch.Name = "cbVendortStatusSearch";
             this.cbVendortStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbVendortStatusSearch.TabIndex = 42;
+            this.cbVendortStatusSearch.Visible = false;
             // 
             // lblProductActiveSearch
             // 
@@ -76,6 +79,7 @@
             this.lblProductActiveSearch.Size = new System.Drawing.Size(40, 13);
             this.lblProductActiveSearch.TabIndex = 41;
             this.lblProductActiveSearch.Text = "Active:";
+            this.lblProductActiveSearch.Visible = false;
             // 
             // btnGetProductByID
             // 
@@ -85,9 +89,11 @@
             this.btnGetProductByID.TabIndex = 40;
             this.btnGetProductByID.Text = "Find";
             this.btnGetProductByID.UseVisualStyleBackColor = true;
+            this.btnGetProductByID.Visible = false;
             // 
             // btnUpdateVendor
             // 
+            this.btnUpdateVendor.Enabled = false;
             this.btnUpdateVendor.Location = new System.Drawing.Point(33, 70);
             this.btnUpdateVendor.Name = "btnUpdateVendor";
             this.btnUpdateVendor.Size = new System.Drawing.Size(100, 25);
@@ -103,6 +109,7 @@
             this.txtVendorIDSearch.Name = "txtVendorIDSearch";
             this.txtVendorIDSearch.Size = new System.Drawing.Size(100, 20);
             this.txtVendorIDSearch.TabIndex = 38;
+            this.txtVendorIDSearch.Visible = false;
             // 
             // lblProductIDSearch
             // 
@@ -112,6 +119,7 @@
             this.lblProductIDSearch.Size = new System.Drawing.Size(61, 13);
             this.lblProductIDSearch.TabIndex = 37;
             this.lblProductIDSearch.Text = "Vendor ID: ";
+            this.lblProductIDSearch.Visible = false;
             // 
             // btnAddVendor
             // 
@@ -133,6 +141,7 @@
             this.lvVendors.TabIndex = 45;
             this.lvVendors.UseCompatibleStateImageBehavior = false;
             this.lvVendors.View = System.Windows.Forms.View.Details;
+            this.lvVendors.SelectedIndexChanged += new System.EventHandler(this.lvVendors_SelectedIndexChanged);
             // 
             // FrmVendor
             // 
@@ -152,6 +161,7 @@
             this.Name = "FrmVendor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vendor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmVendor_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

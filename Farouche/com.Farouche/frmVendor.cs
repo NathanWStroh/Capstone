@@ -12,6 +12,8 @@ using com.Farouche.Commons;
 *                               Changelog
 * Date         By          Ticket          Version         Description
 * 02/7/2014   Adam                          0.0.1b         Updated Instantiation of new objects to use id as parameter
+* 
+* 04/19/2014  Kaleb Wendel                                 Adjusted class to implement a singleton pattern so only one form can beinstantiated.
 */
 namespace com.Farouche.Presentation
 //namespace CapstoneProject
@@ -21,6 +23,7 @@ namespace com.Farouche.Presentation
         private readonly AccessToken _myAccessToken;
         private VendorManager _myVendorManager = new VendorManager();
         private List<Vendor> _myVendorList = new List<Vendor>();
+        public static FrmVendor Instance;
 
         public FrmVendor(AccessToken acctoken)
         {
@@ -28,6 +31,7 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctoken;
             _myVendorList = _myVendorManager.GetVendors();
             populateListView(lvVendors, _myVendorList);
+            Instance = this;
         }
 
         private void btnAddVendor_Click(object sender, EventArgs e)
@@ -84,8 +88,16 @@ namespace com.Farouche.Presentation
             {
                 MessageBox.Show("An error occured while loading the vendor listView. " + ex.ToString());
             }//end of Catch
+        }
 
+        private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnUpdateVendor.Enabled = true;
+        }
 
+        private void FrmVendor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
         }
     }
 }

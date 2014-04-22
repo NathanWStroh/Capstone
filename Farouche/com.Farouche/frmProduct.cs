@@ -26,6 +26,7 @@ using com.Farouche.Commons;
 * 
 * 04/10/2014   Kaleb                                        Adjusted populateListView to populate the list view in a different order to match the update/add form.
 * 
+* 04/18/2014   Kaleb                                        Adjusted class to implement a singleton pattern so only one form can be instantiated.
 */
 
 //Enumeration for active drop down.
@@ -37,6 +38,7 @@ namespace com.Farouche.Presentation
     {
         private readonly AccessToken _myAccessToken;
         private ProductManager _myProductManager;
+        public static FrmProduct Instance;
 
         //Constructor with AccessToken as the only parameter.
         public FrmProduct(AccessToken acctoken)
@@ -45,6 +47,7 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctoken;
             //Instantiates a ProductManager.
             _myProductManager = new ProductManager();
+            Instance = this;
         }//End of FrmProduct(.)
 
         private void frmAddProduct_Load(object sender, EventArgs e)
@@ -263,5 +266,10 @@ namespace com.Farouche.Presentation
             frm.ShowDialog();
             findActiveSelection();
         }
+
+        private void FrmProduct_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }//End of FrmProduct_CormClosed(..)
     }
 }

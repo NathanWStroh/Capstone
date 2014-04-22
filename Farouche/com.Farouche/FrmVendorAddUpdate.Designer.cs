@@ -288,6 +288,7 @@
             this.Controls.Add(this.lblVendorAddress);
             this.Controls.Add(this.lblVendorName);
             this.Name = "FrmVendorAddUpdate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "VendorAddUpdate";
             this.ResumeLayout(false);
             this.PerformLayout();

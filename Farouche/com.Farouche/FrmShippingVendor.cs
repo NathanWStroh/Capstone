@@ -4,6 +4,11 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
+/*
+*                               Changelog
+* Date         By               Ticket          Version          Description
+* 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
+*/
 
 namespace com.Farouche
 {
@@ -11,6 +16,7 @@ namespace com.Farouche
     {
         private readonly AccessToken _myAccessToken;
         private ShippingVendorManager _myVendorManager;
+        public static FrmShippingVendor Instance;
 
         public FrmShippingVendor(AccessToken acctoken)
         {
@@ -18,6 +24,7 @@ namespace com.Farouche
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
+            Instance = this;
         }
 
         private void FrmShippingVendor_Load(object sender, EventArgs e)
@@ -83,18 +90,18 @@ namespace com.Farouche
 
         private void lvShippingVendors_Click(object sender, EventArgs e)
         {
-            //int currentIndex = this.lvShippingVendors.SelectedItems[0].Index;
-            //ShippingVendor thisVendor = _myVendorManager.ShippingVendors[currentIndex];
-            //if (thisVendor.Active == true)
-            //{
-            //    btnActivateVendor.Enabled = false;
-            //    btnDeactivateVendor.Enabled = true;
-            //}
-            //else
-            //{
-            //    btnActivateVendor.Enabled = true;
-            //    btnDeactivateVendor.Enabled = false;
-            //}
+            int currentIndex = this.lvShippingVendors.SelectedItems[0].Index;
+            ShippingVendor thisVendor = _myVendorManager.ShippingVendors[currentIndex];
+            if (thisVendor.Active == true)
+            {
+                btnActivateVendor.Enabled = false;
+                btnDeactivateVendor.Enabled = true;
+            }
+            else
+            {
+                btnActivateVendor.Enabled = true;
+                btnDeactivateVendor.Enabled = false;
+            }
             btnUpdateVendor.Enabled = true;
         }//End of lvShippingVendors_Click(..)
 
@@ -114,5 +121,10 @@ namespace com.Farouche
             SetDefaults();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
         }//End of btnUpdateVendor_Click(..)
+
+        private void FrmShippingVendor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }//End of FrmShippingVendor_FormClosed(..)
     }
 }

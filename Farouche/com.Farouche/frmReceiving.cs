@@ -36,6 +36,8 @@ namespace com.Farouche
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
             txtVendorName.Text = vendorOrder.Name;
             txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
+            txtDateOrdered.Text = vendorOrder.DateOrdered.ToString();
+            txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
 
             //Do cast
             // txtDateOrdered.Text = vendorOrder.DateOrdered;
@@ -70,23 +72,23 @@ namespace com.Farouche
             {
                 var item = new ListViewItem();
                 item.Text = vendorOrderLineItem.ProductID.ToString();
-                //item.SubItems.Add(vendorOrderLineItem.UnitPrice.ToString());
+                item.SubItems.Add(vendorOrderLineItem.Name.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyOrdered.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyReceived.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyReceived.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyDamaged.ToString());
-                //item.SubItems.Add(vendorOrderLineItem.TotalPrice.ToString());
+                item.SubItems.Add(vendorOrderLineItem.LineItemTotal.ToString());
                 item.SubItems.Add(vendorOrderLineItem.Note);
                 lv.Items.Add(item);
             }
 
             lv.Columns.Add("ProductID");
-            //lv.Columns.Add("Unit Price");
+            lv.Columns.Add("Name");
             lv.Columns.Add("Qty Ordered");
             lv.Columns.Add("Qty Received");
             lv.Columns.Add("Total Quantity");
             lv.Columns.Add("Qty Damaged");
-            //lv.Columns.Add("Total Price");
+            lv.Columns.Add("Price");
             lv.Columns.Add("Note");
 
 

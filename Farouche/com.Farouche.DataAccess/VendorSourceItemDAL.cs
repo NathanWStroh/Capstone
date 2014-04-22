@@ -27,7 +27,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_InsertIntoVendorSourceItems", myConnection)
+                var mySqlCommand = new SqlCommand("proc_InsertIntoVendorSourceItems", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -67,7 +67,7 @@ namespace com.Farouche.DataAccess
             try
             {
                 //Talk about checking data first in sql, Passing the old data and verifiy its still the same.
-                var mySqlCommand = new SqlCommand("sp_UpdateVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_UpdateVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -111,7 +111,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_DeactivateVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_DeactivateVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -147,7 +147,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_ReactivateVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_ReactivateVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -184,7 +184,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_DeleteVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_DeleteVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -223,7 +223,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_GetAllVendorSourceItems", myConnection)
+                var mySqlCommand = new SqlCommand("proc_GetAllVendorSourceItems", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -278,7 +278,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_GetVendorSourceItem", myConnection)
+                var mySqlCommand = new SqlCommand("proc_GetVendorSourceItem", myConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -332,7 +332,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_GetVendorSourceItemsByVendor", myConnection);
+                var mySqlCommand = new SqlCommand("proc_GetVendorSourceItemsByVendor", myConnection);
                 mySqlCommand.Parameters.AddWithValue("@vendorID", vendorId);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
 
@@ -386,7 +386,7 @@ namespace com.Farouche.DataAccess
             myConnection = myConnection ?? GetInventoryDbConnection();
             try
             {
-                var mySqlCommand = new SqlCommand("sp_GetVendorSourceItemsByProduct", myConnection);
+                var mySqlCommand = new SqlCommand("proc_GetVendorSourceItemsByProduct", myConnection);
                 mySqlCommand.Parameters.AddWithValue("@productID", productId);
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
 
