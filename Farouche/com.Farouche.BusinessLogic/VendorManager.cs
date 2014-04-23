@@ -28,6 +28,12 @@ namespace com.Farouche.BusinessLogic
             return vendorList;
         }
 
+        public List<Vendor> GetVendorsByActive(Boolean active)
+        {
+            List<Vendor> vendorList = VendorDAL.GetAllVendorsByActive(active, _connection);
+            return vendorList;
+        }
+
         public Vendor GetVendor(int vendorId)
         {
             return VendorDAL.GetVendor(vendorId, _connection);
@@ -57,6 +63,11 @@ namespace com.Farouche.BusinessLogic
         public Boolean AddVendor(Vendor vendor)
         {
             return VendorDAL.AddVendor(vendor, _connection);
+        }
+
+        public int GetMaxVendorID()
+        {
+            return VendorDAL.MaxID(_connection);
         }
     }
 }
