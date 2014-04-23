@@ -88,6 +88,7 @@ namespace com.Farouche
                     RefreshPackView();
                     frmPrintPackReport packReport = new frmPrintPackReport(currentOrder);
                     packReport.ShowDialog();
+                    packReport = null;
                 }
                 else
                 {

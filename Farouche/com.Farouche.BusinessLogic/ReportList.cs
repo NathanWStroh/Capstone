@@ -21,5 +21,10 @@ namespace com.Farouche.BusinessLogic
         {
             return ReportingDAL.FetchCLSPackDetails(order, _connection);
         }
+
+        public List<CLSEmployee> GetEmployeeDirectory()
+        {
+            return ReportingDAL.FetchCLSEmployees(_connection);
+        }
     }
 }

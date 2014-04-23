@@ -106,12 +106,49 @@ namespace com.Farouche
 
         private void btnAssignUser_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                int selectedOrderId = (int)this.lvAllOrders.SelectedIndices[0] + 1;
+                ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrderId);
+                if (currentOrder.Picked == true || currentOrder.UserId.HasValue)
+                {
+                    MessageBox.Show("That order is already assigned to someone.", "Cannot Change Employee");
+                }
+                else if (currentOrder.Picked == true && currentOrder.UserId.HasValue)
+                {
+                    MessageBox.Show("That order has already shipped.", "Cannot Change Employee");
+                }
+                else
+                {
+                    int employee = int.Parse(txtUserId.Text);
+                    Boolean success = _myOrderManager.UpdateUserId(currentOrder, employee);
+                    if (success == true)
+                    {
+                        PopulateMasterListView(lvAllOrders, _myOrderManager.GetAllShippingOrders());
+                        txtUserId.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot complete operation.", "Operation Failed");
+                    }
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Please select an order from the list", "No Order Selected");
+            }
         }//End btnAssignUser_Click(..)
 
         private void FrmShippingAllOrders_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
-        }//End of FrmShippingAllOrders_FormClosed(..)
+        }//End FrmShippingAllOrders_FormClosed(..)
+
+        private void btnUserDirectory_Click(object sender, EventArgs e)
+        {
+            frmEmployeeDirectory employeeReport = new frmEmployeeDirectory();
+            employeeReport.ShowDialog();
+            employeeReport = null;
+        }//End btnUserDirectory_Click(..)
     }
 }

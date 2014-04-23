@@ -70,5 +70,50 @@ namespace com.Farouche.DataAccess
             }
             return reportLines;
         }
+
+        public static List<CLSEmployee> FetchCLSEmployees(SqlConnection myConnection)
+        {
+            List<CLSEmployee> employees = new List<CLSEmployee>();
+            SqlConnection conn = myConnection;
+            try
+            {
+                conn.Open();
+                SqlCommand sqlCmd = new SqlCommand("proc_GetCLSEmployees", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var employee = new CLSEmployee(reader.GetInt32(0))
+                        {
+                            roleID = reader.GetInt32(1),
+                            title = reader.GetString(2),
+                            firstName = reader.GetString(3),
+                            lastName = reader.GetString(4)
+                        };
+                        employees.Add(employee);
+                    }
+                }
+                reader.Close();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("SqlException. " + ex.Message);
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine("DataException. " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GeneralException. " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return employees;
+        }
     }
 }

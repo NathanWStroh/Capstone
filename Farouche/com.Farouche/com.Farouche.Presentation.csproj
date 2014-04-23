@@ -73,6 +73,12 @@
     <Compile Include="FrmAttachVendorSource.Designer.cs">
       <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEmployeeDirectory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmployeeDirectory.Designer.cs">
+      <DependentUpon>frmEmployeeDirectory.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPrintOrderDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,9 @@
     <EmbeddedResource Include="FrmAttachVendorSource.resx">
       <DependentUpon>FrmAttachVendorSource.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEmployeeDirectory.resx">
+      <DependentUpon>frmEmployeeDirectory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrintOrderDetails.resx">
       <DependentUpon>frmPrintOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -355,9 +364,11 @@
     <EmbeddedResource Include="FrmVendorAddUpdate.resx">
       <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\EmployeeDirectory.rdlc" />
     <EmbeddedResource Include="Reports\PackListReport.rdlc" />
     <EmbeddedResource Include="Reports\PickReport.rdlc" />
     <None Include="app.config" />
+    <None Include="Properties\DataSources\com.Farouche.Commons.CLSEmployee.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSLineItem.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSPackDetails.datasource" />
     <None Include="Properties\Settings.settings">

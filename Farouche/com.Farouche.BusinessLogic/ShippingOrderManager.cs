@@ -100,11 +100,6 @@ namespace com.Farouche.BusinessLogic
         public bool UpdateUserId(ShippingOrder order, int employeeID)
         {
             //If the UserId of the current ShippingOrder is the same value as the new value do not call the update procedure.
-            if(order.UserId.Equals(employeeID))
-            {
-                return false;
-            }
-            else
             {
                 //Need to do error checking... Try/Catch.
                 return ShippingOrderDAL.AssignShippingOrder(order, employeeID, _connection);
