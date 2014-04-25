@@ -67,17 +67,17 @@ namespace com.Farouche.DataAccess
             catch (DataException ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new ApplicationException(Messeges.GetMessage("DatabaseException"));
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"),ex);
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new ApplicationException(Messeges.GetMessage("SqlException"));
+                throw new ApplicationException(Messeges.GetMessage("SqlException"),ex);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new ApplicationException(Messeges.GetMessage("Exception"));
+                throw new ApplicationException(Messeges.GetMessage("Exception"),ex);
             }
             finally
             {
