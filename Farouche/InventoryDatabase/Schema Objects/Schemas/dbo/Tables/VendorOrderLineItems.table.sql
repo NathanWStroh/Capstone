@@ -1,10 +1,11 @@
 ﻿/* VendorOrderLineItems */
 CREATE TABLE [dbo].[VendorOrderLineItems] (
-VendorOrderID 				[int]				NOT NULL,
-ProductID 				[int]				NOT NULL,
+VendorOrderID 	[int]				NOT NULL,
+ProductID 		[int]				NOT NULL,
 QtyOrdered		[int]				NOT NULL DEFAULT(1),
 QtyReceived		[int]				NOT NULL DEFAULT(1),
-QtyDamaged		[int]				NOT NULL DEFAULT(1)
+QtyDamaged		[int]				NOT NULL DEFAULT(1),
+Note			[varchar](250)		Null,
 CONSTRAINT [PK_VendorOrderLineItems] PRIMARY KEY CLUSTERED
 (
 	VendorOrderID,ProductID ASC 

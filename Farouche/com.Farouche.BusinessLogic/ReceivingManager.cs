@@ -66,10 +66,10 @@ namespace com.Farouche.BusinessLogic
         {
             if (currentLineItem == null) throw new ApplicationException("VendorOrderLineItem is null");
             if (note == null) note = "";
-            if (note.Length > 50) throw new ApplicationException("Note can only be 50 characters long.");
+            if (note.Length > 250) throw new ApplicationException("Note can only be 250 characters long.");
             var oldLineItem = currentLineItem;
             currentLineItem.Note = note;
-            var result = VendorOrderLineItemDAL.Update(oldLineItem, currentLineItem, _connection);
+            var result = VendorOrderLineItemDAL.UpdateNote(currentLineItem, _connection);
             return result;
         }
 

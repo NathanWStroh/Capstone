@@ -438,5 +438,45 @@ namespace com.Farouche.DataAccess
             }
             return false;
         }
+
+        public static bool UpdateNote(VendorOrderLineItem lineItem, SqlConnection myConnection)
+        {
+            myConnection = myConnection ?? GetInventoryDbConnection();
+            try
+            {
+                var mySqlCommand = new SqlCommand("proc_UpdateVendorOrderLineItemNote", myConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                mySqlCommand.Parameters.AddWithValue("@vendorOrderId", lineItem.VendorOrderId);  
+	            mySqlCommand.Parameters.AddWithValue("@productId", lineItem.ProductID);
+	            mySqlCommand.Parameters.AddWithValue("@note", lineItem.Note);
+                myConnection.Open();
+                if (mySqlCommand.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                myConnection.Close();
+            }    
+            return true;
+        }
     }
 }
