@@ -46,6 +46,7 @@ namespace com.Farouche.Presentation
             lvOrderItems.Columns.Add("ID");
             lvOrderItems.Columns.Add("Product");
             lvOrderItems.Columns.Add("Quantity");
+            
 
             for (int i = 0; i <= 100; i++)
             {
@@ -127,19 +128,27 @@ namespace com.Farouche.Presentation
                 List<VendorOrderLineItem> lineItemList = new List<VendorOrderLineItem>();
                 int index = comboVendor.SelectedItem.ToString().IndexOf(" ");
                 string id = comboVendor.SelectedItem.ToString().Substring(0, index);
+                string vendorName = comboVendor.SelectedItem.ToString().Substring(1, index);
 
+                //VendorOrder myVendorOrder = new VendorOrder(int.Parse(id));
                 VendorOrder myVendorOrder = new VendorOrder(int.Parse(id));
-                myVendorOrder.NumberOfShipments = int.Parse(comboShipments.Text);
+                myVendorOrder.NumberOfShipments = int.Parse(comboShipments.SelectedItem.ToString());
                 myVendorOrder.DateOrdered = DateTime.Parse(tbOrderDate.Text);
+                myVendorOrder.Name = vendorName;
 
                 for (int i = 0; i < lvOrderItems.Items.Count;i++)
                 {
-                    int productId = int.Parse(lvOrderItems.GetItemAt(1,i).ToString());
+                    int productId = int.Parse(lvOrderItems.Items[i].SubItems[0].Text);
                     VendorOrderLineItem item = new VendorOrderLineItem(int.Parse(id), productId);
+                    item.Name = lvOrderItems.Items[i].SubItems[1].Text; 
+                    item.QtyOrdered = int.Parse(lvOrderItems.Items[i].SubItems[2].Text);
                     lineItemList.Add(item);
+                    
                 }
                 myVendorOrder.LineItems = lineItemList;
+                
                 _myVendorOrderManager.AddVendorOrder(myVendorOrder);
+
                 MessageBox.Show("Order Added.");
 
             }

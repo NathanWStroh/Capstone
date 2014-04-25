@@ -16,9 +16,11 @@ namespace com.Farouche
         private Vendor vendor;
         private VendorOrder vendorOrder;
         private VendorOrderLineItem vendorOrderLineItem;
-        private ReceivingManager receivingManager;
+        private ReceivingManager _receivingManager;
         private List<VendorOrderLineItem> vendorOrderLineItemList;
         private frmReceivingNotes _frmReceivingNotes;
+        private VendorOrderManager _vendorOrderManager;
+        private FrmUpdateVendorOrderLineItem _frmUpdateVendorOrderLineItem;
         
 
 
@@ -30,65 +32,70 @@ namespace com.Farouche
 
         public frmReceiving(VendorOrder vendorOrder)
         {
-            InitializeComponent();
-            this.vendorOrder = vendorOrder;
             
+            InitializeComponent();
+
+            this.vendorOrder = vendorOrder;
+
+
+
+            
+
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
-            txtVendorName.Text = vendorOrder.Name;
+            //txtVendorName.Text = vendorOrder.Name;
             txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
             txtDateOrdered.Text = vendorOrder.DateOrdered.ToString();
-            txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
-
-            //Do cast
-            // txtDateOrdered.Text = vendorOrder.DateOrdered;
-            //VendorOrderLineItem vendorOrderLineItem1 = new VendorOrderLineItem(vendorOrder.VendorOrderID, vendorOrder.ProductID);
-            //vendorOrderLineItem1.VendorOrderId = vendorOrder.VendorOrderID;
-            //vendorOrderLineItem1.ProductID = vendorOrder.ProductID;
-            //vendorOrderLineItem1.Name = "mouse";
-            //vendorOrderLineItem1.QtyOrdered = 25;
+            //txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
 
 
 
-            vendorOrderLineItemList = new List<VendorOrderLineItem>();
-           // vendorOrderLineItemList.Add(vendorOrderLineItem1);
-            populateVendorOrderLineItems(lvVendorOrderLineItems, vendorOrder);
+
+
+            populateVendorOrderLineItems(lvVendorOrderLineItems, this.vendorOrder);
+            
+            
             
         }
 
         private void frmReceiving_Load(object sender, EventArgs e)
         {
-
+            
             
         }
 
         private void populateVendorOrderLineItems(ListView lv, VendorOrder vendorOrder)
         {
-            receivingManager = new ReceivingManager();
             
-            vendorOrderLineItemList = receivingManager.GetAllLineItemsByVendorOrder(vendorOrder);
+            
+            
             lv.Items.Clear();
             lv.Columns.Clear();
-            foreach (var vendorOrderLineItem in vendorOrderLineItemList)
+            _receivingManager = new ReceivingManager();
+            List<VendorOrderLineItem> vendorOrderLineItemList = new List<VendorOrderLineItem>();
+            vendorOrderLineItemList = _receivingManager.GetAllLineItemsByVendorOrder(vendorOrder);
+            
+            foreach(var vendorOrderLineItem in vendorOrderLineItemList)
             {
+                
                 var item = new ListViewItem();
                 item.Text = vendorOrderLineItem.ProductID.ToString();
-                item.SubItems.Add(vendorOrderLineItem.Name.ToString());
+                //item.SubItems.Add(vendorOrderLineItem.Name.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyOrdered.ToString());
-                item.SubItems.Add(vendorOrderLineItem.QtyReceived.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyReceived.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyDamaged.ToString());
                 item.SubItems.Add(vendorOrderLineItem.LineItemTotal.ToString());
-                item.SubItems.Add(vendorOrderLineItem.Note);
+                //item.SubItems.Add(vendorOrderLineItem.Note.ToString());
+
                 lv.Items.Add(item);
+
             }
 
             lv.Columns.Add("ProductID");
-            lv.Columns.Add("Name");
+            //lv.Columns.Add("Name");
             lv.Columns.Add("Qty Ordered");
             lv.Columns.Add("Qty Received");
-            lv.Columns.Add("Total Quantity");
             lv.Columns.Add("Qty Damaged");
-            lv.Columns.Add("Price");
+            lv.Columns.Add("LineItemTotal");
             lv.Columns.Add("Note");
 
 
@@ -97,41 +104,69 @@ namespace com.Farouche
 
         private void btnAddLineItemtoCurrentListView_Click(object sender, EventArgs e)
         {
-
+            FrmAddLineItemToVendorOrder _FrmAddLineItemToVendorOrder = new FrmAddLineItemToVendorOrder(vendorOrder);
+            _FrmAddLineItemToVendorOrder.Show();
+            _FrmAddLineItemToVendorOrder.BringToFront();
         }
 
         private void btnAddNote_Click(object sender, EventArgs e)
+        {
+            
+            lvVendorOrderLineItems.FullRowSelect = true;
+            var selectedRow = lvVendorOrderLineItems.SelectedItems;
+            if (selectedRow.Count != 0)
+            {
+                int productID = Int32.Parse(selectedRow[0].Text);
+                var id = Int32.Parse(txtVendorOrderID.Text);
+
+                _frmReceivingNotes = new frmReceivingNotes(id, productID);
+
+                
+                _frmReceivingNotes.BringToFront();
+                _frmReceivingNotes.Show();
+            }
+        }
+
+        private void btnUpdateLineItem_Click(object sender, EventArgs e)
         {
             lvVendorOrderLineItems.FullRowSelect = true;
             var selectedRow = lvVendorOrderLineItems.SelectedItems;
             int productID = Int32.Parse(selectedRow[0].Text);
             var id = Int32.Parse(txtVendorOrderID.Text);
-            
-            _frmReceivingNotes = new frmReceivingNotes(vendorOrder.Id, productID);
 
-            //vendorOrder.VendorOrderID = Int32.Parse(txtVendorOrderID.Text);
-            
-           // _frmReceivingNotes = new frmReceivingNotes(vendorOrder.VendorOrderID, productID);
-            _frmReceivingNotes.BringToFront();
-            _frmReceivingNotes.Show();
 
-        }
+            VendorOrderLineItem item = new VendorOrderLineItem(id, productID);
+            item.ProductID = Int32.Parse(selectedRow[0].SubItems[1].Text);
+            item.Name = selectedRow[0].SubItems[2].Text;
+            item.QtyOrdered = Int32.Parse(selectedRow[0].SubItems[3].Text);
+            item.QtyReceived = Int32.Parse(selectedRow[0].SubItems[4].Text);
+            item.QtyDamaged = Int32.Parse(selectedRow[0].SubItems[5].Text);
+            item.LineItemTotal = Double.Parse(selectedRow[0].SubItems[6].Text);
 
-        private void btnUpdateLineItem_Click(object sender, EventArgs e)
-        {
+            int newQuantityOrdered = item.QtyOrdered;
 
+           _frmUpdateVendorOrderLineItem = new FrmUpdateVendorOrderLineItem(item);
+           _frmUpdateVendorOrderLineItem.Show();
+           _frmUpdateVendorOrderLineItem.BringToFront();
 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnUpdateOrder_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void lvVendorOrderLineItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
 
        
     }

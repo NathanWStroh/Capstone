@@ -55,6 +55,12 @@
     <Compile Include="AddVendorWindow.Designer.cs">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAddLineItemToVendorOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddLineItemToVendorOrder.Designer.cs">
+      <DependentUpon>FrmAddLineItemToVendorOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddShippingTerm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,12 @@
     <Compile Include="FrmUpdateShippingVendor.designer.cs">
       <DependentUpon>FrmUpdateShippingVendor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmUpdateVendorOrderLineItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateVendorOrderLineItem.Designer.cs">
+      <DependentUpon>FrmUpdateVendorOrderLineItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVendor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +264,9 @@
     <EmbeddedResource Include="AddVendorWindow.resx">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddLineItemToVendorOrder.resx">
+      <DependentUpon>FrmAddLineItemToVendorOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddShippingTerm.resx">
       <DependentUpon>FrmAddShippingTerm.cs</DependentUpon>
@@ -325,6 +340,9 @@
     <EmbeddedResource Include="FrmUpdateShippingVendor.resx">
       <DependentUpon>FrmUpdateShippingVendor.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateVendorOrderLineItem.resx">
+      <DependentUpon>FrmUpdateVendorOrderLineItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVendor.resx">
       <DependentUpon>frmVendor.cs</DependentUpon>

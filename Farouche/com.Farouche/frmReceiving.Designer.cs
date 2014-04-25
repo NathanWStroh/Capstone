@@ -46,12 +46,6 @@
             this.btnUpdateOrder = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lvVendorOrderLineItems = new System.Windows.Forms.ListView();
-            this.chProductID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chQtyOrdered = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chQtyReceived = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chTotalQtyReceived = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chQtyDamaged = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chLineItemNotes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -207,58 +201,20 @@
             // 
             // lvVendorOrderLineItems
             // 
-            this.lvVendorOrderLineItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chProductID,
-            this.chQtyOrdered,
-            this.chQtyReceived,
-            this.chTotalQtyReceived,
-            this.chQtyDamaged,
-            this.chLineItemNotes});
-            this.lvVendorOrderLineItems.FullRowSelect = true;
             this.lvVendorOrderLineItems.GridLines = true;
-            this.lvVendorOrderLineItems.LabelWrap = false;
-            this.lvVendorOrderLineItems.Location = new System.Drawing.Point(12, 85);
+            this.lvVendorOrderLineItems.Location = new System.Drawing.Point(43, 85);
             this.lvVendorOrderLineItems.Name = "lvVendorOrderLineItems";
-            this.lvVendorOrderLineItems.Size = new System.Drawing.Size(658, 297);
+            this.lvVendorOrderLineItems.Size = new System.Drawing.Size(632, 260);
             this.lvVendorOrderLineItems.TabIndex = 18;
             this.lvVendorOrderLineItems.UseCompatibleStateImageBehavior = false;
             this.lvVendorOrderLineItems.View = System.Windows.Forms.View.Details;
-            // 
-            // chProductID
-            // 
-            this.chProductID.Text = "Product ID";
-            this.chProductID.Width = 75;
-            // 
-            // chQtyOrdered
-            // 
-            this.chQtyOrdered.Text = "Quantity Ordered";
-            this.chQtyOrdered.Width = 107;
-            // 
-            // chQtyReceived
-            // 
-            this.chQtyReceived.Text = "Quanity Received";
-            this.chQtyReceived.Width = 103;
-            // 
-            // chTotalQtyReceived
-            // 
-            this.chTotalQtyReceived.Text = "Total Quantity Delivered";
-            this.chTotalQtyReceived.Width = 128;
-            // 
-            // chQtyDamaged
-            // 
-            this.chQtyDamaged.Text = "Quantity Damaged";
-            this.chQtyDamaged.Width = 131;
-            // 
-            // chLineItemNotes
-            // 
-            this.chLineItemNotes.Text = "Notes";
-            this.chLineItemNotes.Width = 150;
+            this.lvVendorOrderLineItems.SelectedIndexChanged += new System.EventHandler(this.lvVendorOrderLineItems_SelectedIndexChanged);
             // 
             // frmReceiving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 423);
+            this.ClientSize = new System.Drawing.Size(915, 692);
             this.Controls.Add(this.lvVendorOrderLineItems);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdateOrder);
@@ -306,11 +262,5 @@
         private System.Windows.Forms.Button btnUpdateOrder;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ListView lvVendorOrderLineItems;
-        private System.Windows.Forms.ColumnHeader chProductID;
-        private System.Windows.Forms.ColumnHeader chQtyOrdered;
-        private System.Windows.Forms.ColumnHeader chQtyReceived;
-        private System.Windows.Forms.ColumnHeader chTotalQtyReceived;
-        private System.Windows.Forms.ColumnHeader chQtyDamaged;
-        private System.Windows.Forms.ColumnHeader chLineItemNotes;
     }
 }

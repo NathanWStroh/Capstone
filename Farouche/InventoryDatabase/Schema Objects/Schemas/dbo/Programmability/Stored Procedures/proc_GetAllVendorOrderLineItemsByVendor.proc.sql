@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[proc_GetAllVendorOrderLineItemsByVendor]
 	(@VendorID int)
 AS
-	SELECT [VendorOrderLineItems].[VendorOrderID],[ProductID],[QtyOrdered],[QtyReceived],[QtyDamaged]
+SELECT [VendorOrders].VendorID,[ProductID],[QtyOrdered],[QtyReceived],[QtyDamaged]
 	from [VendorOrderLineItems], [VendorOrders]
-	where [VendorID] = @VendorID
+	where [VendorOrders].VendorID = @VendorID
 RETURN
