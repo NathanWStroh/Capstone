@@ -26,5 +26,10 @@ namespace com.Farouche.BusinessLogic
         {
             return ReportingDAL.FetchCLSEmployees(_connection);
         }
+
+        public List<CLSVendorProduct> GetVendorProducts()
+        {
+            return ReportingDAL.FetchVendorProducts(_connection);
+        }
     }
 }
