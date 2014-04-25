@@ -36,11 +36,13 @@
             // 
             // lvOpenVendorOrders
             // 
+
             this.lvOpenVendorOrders.FullRowSelect = true;
             this.lvOpenVendorOrders.GridLines = true;
             this.lvOpenVendorOrders.Location = new System.Drawing.Point(55, 54);
             this.lvOpenVendorOrders.Name = "lvOpenVendorOrders";
             this.lvOpenVendorOrders.Size = new System.Drawing.Size(645, 288);
+            this.lvOpenVendorOrders.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvOpenVendorOrders.TabIndex = 0;
             this.lvOpenVendorOrders.UseCompatibleStateImageBehavior = false;
             this.lvOpenVendorOrders.View = System.Windows.Forms.View.Details;

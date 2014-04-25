@@ -54,6 +54,7 @@
             this.lvPackList.TabIndex = 2;
             this.lvPackList.UseCompatibleStateImageBehavior = false;
             this.lvPackList.View = System.Windows.Forms.View.Details;
+            this.lvPackList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPackList_ColumnClick);
             // 
             // FrmShippingPackList
             // 

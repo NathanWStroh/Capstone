@@ -31,6 +31,7 @@ namespace com.Farouche.Presentation
         private readonly AccessToken _myAccessToken;
         private VendorManager _myVendorManager = new VendorManager();
         public static FrmVendor Instance;
+        private int _sortColumn = -1;
 
         public FrmVendor(AccessToken acctoken)
         {
@@ -302,6 +303,37 @@ namespace com.Farouche.Presentation
             Instance = null;
         }
 
+        private void btnVendorReport_Click(object sender, EventArgs e)
+        {
+            frmVendorProductReport myForm = new frmVendorProductReport();
+            myForm.ShowDialog();
+        }
 
+        private void lvVendors_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != _sortColumn)
+            {
+                // Set the sort column to the new column.
+                _sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                lvVendors.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvVendors.Sorting == SortOrder.Ascending)
+                    lvVendors.Sorting = SortOrder.Descending;
+                else
+                    lvVendors.Sorting = SortOrder.Ascending;
+            }
+
+            // Call the sort method to manually sort.
+            lvVendors.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer
+            // object.
+            this.lvVendors.ListViewItemSorter = new ListViewItemComparer(e.Column,
+                                                              lvVendors.Sorting);
+        }
     }
 }

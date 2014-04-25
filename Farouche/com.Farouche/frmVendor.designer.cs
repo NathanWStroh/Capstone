@@ -38,6 +38,7 @@
             this.lblVendorIDSearch = new System.Windows.Forms.Label();
             this.btnAddVendor = new System.Windows.Forms.Button();
             this.lvVendors = new System.Windows.Forms.ListView();
+            this.btnVendorReport = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDeactivateVendor
@@ -137,8 +138,19 @@
             this.lvVendors.TabIndex = 45;
             this.lvVendors.UseCompatibleStateImageBehavior = false;
             this.lvVendors.View = System.Windows.Forms.View.Details;
+            this.lvVendors.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvVendors_ColumnClick);
             this.lvVendors.SelectedIndexChanged += new System.EventHandler(this.lvVendors_SelectedIndexChanged);
             this.lvVendors.Click += new System.EventHandler(this.lvVendors_Click);
+            // 
+            // btnVendorReport
+            // 
+            this.btnVendorReport.Location = new System.Drawing.Point(12, 279);
+            this.btnVendorReport.Name = "btnVendorReport";
+            this.btnVendorReport.Size = new System.Drawing.Size(100, 25);
+            this.btnVendorReport.TabIndex = 46;
+            this.btnVendorReport.Text = "Vendor Report";
+            this.btnVendorReport.UseVisualStyleBackColor = true;
+            this.btnVendorReport.Click += new System.EventHandler(this.btnVendorReport_Click);
             // 
             // FrmVendor
             // 
@@ -146,6 +158,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 319);
+            this.Controls.Add(this.btnVendorReport);
             this.Controls.Add(this.lvVendors);
             this.Controls.Add(this.btnDeactivateVendor);
             this.Controls.Add(this.btnActivateVendor);
@@ -178,6 +191,7 @@
         private System.Windows.Forms.Label lblVendorIDSearch;
         private System.Windows.Forms.Button btnAddVendor;
         private System.Windows.Forms.ListView lvVendors;
+        private System.Windows.Forms.Button btnVendorReport;
 
     }
 }

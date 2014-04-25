@@ -229,6 +229,12 @@
     <Compile Include="frmVendorCreateOrder.Designer.cs">
       <DependentUpon>frmVendorCreateOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmVendorProductReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVendorProductReport.Designer.cs">
+      <DependentUpon>frmVendorProductReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVendorSource.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,7 @@
     <Compile Include="FrmViewOrderDetails.designer.cs">
       <DependentUpon>FrmViewOrderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListViewItemComparer.cs" />
     <Compile Include="ProductView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +362,9 @@
       <DependentUpon>frmVendorCreateOrder.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmVendorProductReport.resx">
+      <DependentUpon>frmVendorProductReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVendorSource.resx">
       <DependentUpon>frmVendorSource.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -382,6 +392,7 @@
     <EmbeddedResource Include="FrmVendorAddUpdate.resx">
       <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VendorProductReport.rdlc" />
     <EmbeddedResource Include="Reports\EmployeeDirectory.rdlc" />
     <EmbeddedResource Include="Reports\PackListReport.rdlc" />
     <EmbeddedResource Include="Reports\PickReport.rdlc" />
@@ -389,6 +400,7 @@
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSEmployee.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSLineItem.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSPackDetails.datasource" />
+    <None Include="Properties\DataSources\com.Farouche.Commons.CLSVendorProduct.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
