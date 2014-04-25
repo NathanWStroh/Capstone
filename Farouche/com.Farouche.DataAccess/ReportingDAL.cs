@@ -52,17 +52,20 @@ namespace com.Farouche.DataAccess
                 }
                 reader.Close();
             }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("SqlException. " + ex.Message);
-            }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -97,17 +100,20 @@ namespace com.Farouche.DataAccess
                 }
                 reader.Close();
             }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("SqlException. " + ex.Message);
-            }
             catch (DataException ex)
             {
-                Console.WriteLine("DataException. " + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GeneralException. " + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {

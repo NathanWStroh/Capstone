@@ -46,15 +46,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -92,15 +95,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -131,15 +137,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -168,15 +177,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -222,15 +234,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message + ex.StackTrace + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -277,15 +292,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -327,15 +345,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {

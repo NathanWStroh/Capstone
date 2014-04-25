@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
+using com.Farouche.Commons;
 
 //Author: Steven Schuette
 //Date Created: 1/31/2014
@@ -59,18 +60,20 @@ namespace com.Farouche.DataAccess
                 }
                 mySqlDataReader.Close();
             }
-            catch (SqlException ex)
-            {
-               
-                MessageBox.Show("Database server or Connection error. Please conntact your system administrator" + ex.ToString());
-            }
             catch (DataException ex)
             {
-                MessageBox.Show("There was an error returning data. Please report this error to the department head." + ex.ToString());
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An unknown exception occured. Try again and report the error if it persists" + ex.ToString());
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
