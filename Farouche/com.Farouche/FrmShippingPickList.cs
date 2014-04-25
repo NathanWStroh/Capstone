@@ -4,12 +4,19 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
+/*
+*                               Changelog
+* Date         By               Ticket          Version          Description
+* 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
+*/
+
 namespace com.Farouche
 {
     public partial class FrmShippingPickList : Form
     {
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
+        public static FrmShippingPickList Instance;
 
         public FrmShippingPickList(AccessToken accToken)
         {
@@ -17,6 +24,7 @@ namespace com.Farouche
             _myAccessToken = accToken;
             _myOrderManager = new ShippingOrderManager();
             RefreshPickView();
+            Instance = this;
         }
 
         private void FrmShippingPickList_Load(object sender, EventArgs e)
@@ -64,9 +72,13 @@ namespace com.Farouche
             {
                 int selectedOrder = (int)this.lvPickList.SelectedIndices[0] + 1;
                 ShippingOrder myOrder = _myOrderManager.GetOrderByID(selectedOrder);
-                if (myOrder.UserId.HasValue)
+                if(myOrder.UserId.Equals(_myAccessToken.UserID))
                 {
-                    MessageBox.Show("Ownership belongs to another", "Already Assigned");
+                    MessageBox.Show("Order is already in your 'My Orders' queue", "Action Unnecessary");
+                }
+                else if(myOrder.UserId.HasValue)
+                {
+                    MessageBox.Show("Order already belongs to another person", "Action Failed");
                 }
                 else
                 {
@@ -104,6 +116,11 @@ namespace com.Farouche
         private void RefreshPickView()
         {
             PopulatePickListView(lvPickList, _myOrderManager.GetNonPickedOrders());
+        }
+
+        private void FrmShippingPickList_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
         }
     }
 }

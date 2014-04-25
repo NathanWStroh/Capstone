@@ -125,6 +125,7 @@
             this.btnGetProductByID.TabIndex = 27;
             this.btnGetProductByID.Text = "Find";
             this.btnGetProductByID.UseVisualStyleBackColor = true;
+            this.btnGetProductByID.Visible = false;
             // 
             // btnUpdateProduct
             // 
@@ -144,6 +145,7 @@
             this.txtProductIDSearch.Name = "txtProductIDSearch";
             this.txtProductIDSearch.Size = new System.Drawing.Size(100, 20);
             this.txtProductIDSearch.TabIndex = 25;
+            this.txtProductIDSearch.Visible = false;
             // 
             // lblProductIDSearch
             // 
@@ -153,6 +155,7 @@
             this.lblProductIDSearch.Size = new System.Drawing.Size(64, 13);
             this.lblProductIDSearch.TabIndex = 24;
             this.lblProductIDSearch.Text = "Product ID: ";
+            this.lblProductIDSearch.Visible = false;
             // 
             // lvProducts
             // 
@@ -198,6 +201,7 @@
             this.Name = "FrmProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmProduct_FormClosed);
             this.Load += new System.EventHandler(this.frmAddProduct_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

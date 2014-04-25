@@ -10,6 +10,8 @@
 *                                                            Including removing an item from product after it has been 
 *                                                            added to the lvOrderItem. Need to add in a way to add it
 *                                                            back into list if item is removed from lvOrderItem.
+*                                                            
+* 04/19/2014   Kaleb Wendel                                 Adjusted class to implement a singleton pattern so only one form can be instantiated.
 */
 
 using System;
@@ -29,6 +31,7 @@ namespace com.Farouche.Presentation
         private readonly List<Product> _productList;
         private ProductManager _myProductManager = new ProductManager();
         private VendorOrderManager _myVendorOrderManager = new VendorOrderManager();
+        public static frmVendorCreateOrder Instance;
 
         public frmVendorCreateOrder(AccessToken acctoken)
         {
@@ -64,6 +67,8 @@ namespace com.Farouche.Presentation
             {
                 comboProduct.Items.Add(product.Id + " " + product.Name);
             }
+
+            Instance = this;
         }
 
         private void btAddNewProduct_Click(object sender, EventArgs e)
@@ -151,6 +156,11 @@ namespace com.Farouche.Presentation
             {
                 MessageBox.Show("A Generic error as occured. You should fix this message " + ex.ToString());
             }
+        }
+
+        private void frmVendorCreateOrder_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
         }
     }
 }

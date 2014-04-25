@@ -169,6 +169,7 @@
             this.Controls.Add(this.btAddNewProduct);
             this.Name = "frmVendorCreateOrder";
             this.Text = "Create Order View";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmVendorCreateOrder_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

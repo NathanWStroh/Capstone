@@ -46,15 +46,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -98,15 +101,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -152,15 +158,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -169,6 +178,64 @@ namespace com.Farouche.DataAccess
 
             return VendorList;
         } // end GetAllVendors(.)
+
+        public static List<Vendor> GetAllVendorsByActive(Boolean active, SqlConnection myConnection)
+        {
+            List<Vendor> VendorList = new List<Vendor>();
+            myConnection = myConnection ?? GetInventoryDbConnection();
+            try
+            {
+                SqlCommand mySqlCommand = new SqlCommand("proc_GetVendorsByActive", myConnection);
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+                mySqlCommand.Parameters.AddWithValue("Active", active ? 1 : 0);
+                myConnection.Open();
+
+                SqlDataReader mySqlReader = mySqlCommand.ExecuteReader();
+                if (mySqlReader.HasRows)
+                {
+                    Vendor vendor;
+                    while (mySqlReader.Read())
+                    {
+                        vendor = new Vendor(mySqlReader.GetInt32(0));
+                        vendor.Name = mySqlReader.GetString(1);
+                        vendor.Address = mySqlReader.GetString(2);
+                        vendor.City = mySqlReader.GetString(3);
+                        vendor.State = mySqlReader.GetString(4);
+                        vendor.Country = mySqlReader.GetString(5);
+                        vendor.Zip = mySqlReader.GetString(6);
+                        vendor.Phone = mySqlReader.GetString(7);
+                        vendor.Contact = mySqlReader.GetString(8);
+                        vendor.ContactEmail = mySqlReader.GetString(9);
+                        vendor.Active = (Boolean)mySqlReader.GetSqlBoolean(10);
+
+                        VendorList.Add(vendor);
+                        vendor = null;
+                    }
+                }
+                mySqlReader.Close();
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            return VendorList;
+        } // end GetAllVendorsByActive(..)
 
         public static Boolean UpdateVendor(Vendor vendor, Vendor origVendor, SqlConnection myConnection)
         {
@@ -205,15 +272,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -238,15 +308,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -271,15 +344,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -304,15 +380,18 @@ namespace com.Farouche.DataAccess
             }
             catch (DataException ex)
             {
-                Console.WriteLine("A Data Exception Has Occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("A Database Connection Error Has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An Unknown Exception has occurred." + ex.Message);
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -320,5 +399,59 @@ namespace com.Farouche.DataAccess
             }
             return false;
         } // end DeleteVendor(..)
+
+        public static int MaxID(SqlConnection myConnection)
+        {
+
+            int maxID = -1;
+
+            myConnection = myConnection ?? GetInventoryDbConnection();
+            try
+            {
+                SqlCommand mySqlCommand = new SqlCommand("proc_GetVendorMaxID", myConnection);
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                myConnection.Open();
+
+                maxID = Convert.ToInt32(mySqlCommand.ExecuteScalar());
+
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            if (maxID == -1)
+            {
+                throw new ApplicationException("There was a problem getting the Max Vendor ID!");
+            }
+
+            return maxID;
+        }
+
+
+
+
+
+
+
+
+
+
     } // end class VendorData
 } // end namespace

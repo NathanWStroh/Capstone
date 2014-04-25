@@ -58,17 +58,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -120,17 +123,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -159,17 +165,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -198,17 +207,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -249,17 +261,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -309,17 +324,20 @@ namespace com.Farouche.DataAccess
                 }
                 reader.Close();
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -368,17 +386,20 @@ namespace com.Farouche.DataAccess
                 }
                 reader.Close();
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -430,17 +451,20 @@ namespace com.Farouche.DataAccess
                 }
                 reader.Close();
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -470,17 +494,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -509,17 +536,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -548,17 +578,20 @@ namespace com.Farouche.DataAccess
                     return true;
                 }
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
             }
             finally
             {
@@ -592,17 +625,20 @@ namespace com.Farouche.DataAccess
                 }
                 reader.Close();
             }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (DataException ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"));
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"));
             }
             finally
             {

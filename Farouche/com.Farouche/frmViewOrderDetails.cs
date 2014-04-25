@@ -61,6 +61,10 @@ namespace com.Farouche
             lv.Columns.Add("Quantity");
             lv.Columns.Add("Location");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            if (lvItemsForPick.Items.Count.Equals(0))
+            {
+                btnComplete.Enabled = true;
+            }
         }//End of PopulateListViews...)
 
         private void BtnPrintDetails_Click(object sender, EventArgs e)
@@ -97,6 +101,11 @@ namespace com.Farouche
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
+            PickItem();
+        }// End BtnPick_Click(..)
+
+        private void PickItem()
+        {
             try
             {
                 int selectedItem = this.lvItemsForPick.SelectedIndices[0];
@@ -116,17 +125,22 @@ namespace com.Farouche
                     btnComplete.Enabled = true;
                 }
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 MessageBox.Show("Please select an item from the list", "No Item Selected");
             }
-        }// End BtnPick_Click(..)
+        }
 
         private void BtnUnpick_Click(object sender, EventArgs e)
         {
+            UnpickItem();
+        }
+
+        private void UnpickItem()
+        {
             try
             {
-            int selectedItem = this.lvPickedItems.SelectedIndices[0];
+                int selectedItem = this.lvPickedItems.SelectedIndices[0];
                 int selectedItemId = Convert.ToInt32(lvPickedItems.Items[selectedItem].Text);
                 ShippingOrderLineItem currentItem = _myOrderDetails.GetLineItem(selectedItemId, _myOrderId);
                 Boolean success = _myOrderDetails.UpdatePickedFalse(currentItem);
@@ -149,6 +163,26 @@ namespace com.Farouche
             }
         }
 
-      //End of BtnUnpick_Click(..)
+        private void lvItemsForPick_DoubleClick(object sender, EventArgs e)
+        {
+            PickItem();
+        }
+
+        private void lvPickedItems_DoubleClick(object sender, EventArgs e)
+        {
+            UnpickItem();
+        }
+
+        private void lvItemsForPick_Click(object sender, EventArgs e)
+        {
+            btnUnpick.Enabled = false;
+            btnPick.Enabled = true;
+        }
+
+        private void lvPickedItems_Click(object sender, EventArgs e)
+        {
+            btnPick.Enabled = false;
+            btnUnpick.Enabled = true;
+        }
     }
 }

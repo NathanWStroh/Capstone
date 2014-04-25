@@ -64,6 +64,7 @@
             this.Controls.Add(this.btnStartPick);
             this.Name = "FrmShippingPickList";
             this.Text = "FrmShippingPickList";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingPickList_FormClosed);
             this.ResumeLayout(false);
 
         }

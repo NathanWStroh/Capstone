@@ -475,6 +475,7 @@
             this.Name = "ProductView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Product Window";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProductView_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.nudAvailableQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOnHandQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudReorderThreshold)).EndInit();

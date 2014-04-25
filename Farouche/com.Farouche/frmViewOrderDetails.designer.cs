@@ -49,9 +49,12 @@
             this.lvItemsForPick.TabIndex = 0;
             this.lvItemsForPick.UseCompatibleStateImageBehavior = false;
             this.lvItemsForPick.View = System.Windows.Forms.View.Details;
+            this.lvItemsForPick.Click += new System.EventHandler(this.lvItemsForPick_Click);
+            this.lvItemsForPick.DoubleClick += new System.EventHandler(this.lvItemsForPick_DoubleClick);
             // 
             // btnPick
             // 
+            this.btnPick.Enabled = false;
             this.btnPick.Location = new System.Drawing.Point(341, 98);
             this.btnPick.Name = "btnPick";
             this.btnPick.Size = new System.Drawing.Size(78, 61);
@@ -71,6 +74,8 @@
             this.lvPickedItems.TabIndex = 2;
             this.lvPickedItems.UseCompatibleStateImageBehavior = false;
             this.lvPickedItems.View = System.Windows.Forms.View.Details;
+            this.lvPickedItems.Click += new System.EventHandler(this.lvPickedItems_Click);
+            this.lvPickedItems.DoubleClick += new System.EventHandler(this.lvPickedItems_DoubleClick);
             // 
             // btnPrintDetails
             // 
@@ -113,6 +118,7 @@
             // 
             // btnUnpick
             // 
+            this.btnUnpick.Enabled = false;
             this.btnUnpick.Location = new System.Drawing.Point(341, 192);
             this.btnUnpick.Name = "btnUnpick";
             this.btnUnpick.Size = new System.Drawing.Size(78, 66);
@@ -135,6 +141,7 @@
             this.Controls.Add(this.btnPick);
             this.Controls.Add(this.lvItemsForPick);
             this.Name = "FrmViewOrderDetails";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Shipping Order Details";
             this.ResumeLayout(false);
             this.PerformLayout();
