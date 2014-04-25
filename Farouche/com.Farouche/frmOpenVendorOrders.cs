@@ -82,12 +82,13 @@ namespace com.Farouche.Presentation
 
             lv.Items.Clear();
             lv.Columns.Clear();
+            _vendorManager = new VendorManager();
             foreach (var vendorOrder in orderList)
             {
                 var item = new ListViewItem();
                 item.Text = vendorOrder.Id.ToString();
                 item.SubItems.Add(vendorOrder.VendorID.ToString());
-                item.SubItems.Add(vendorOrder.Name);
+                item.SubItems.Add(_vendorManager.GetVendor(vendorOrder.VendorID).Name);
                 item.SubItems.Add(vendorOrder.DateOrdered.ToString());
                 item.SubItems.Add(vendorOrder.NumberOfShipments.ToString());
 
@@ -121,7 +122,9 @@ namespace com.Farouche.Presentation
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)
         {
-            vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedItem.ToString()));
+            int index = cbGetVendorsById.SelectedItem.ToString().IndexOf(" ");
+            string id = cbGetVendorsById.SelectedItem.ToString().Substring(0, index);
+            vendor = new Vendor(Int32.Parse(id));
             orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
             fillListView(lvOpenVendorOrders, orderList);
         }
