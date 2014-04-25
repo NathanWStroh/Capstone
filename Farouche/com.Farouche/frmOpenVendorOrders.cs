@@ -18,6 +18,7 @@ namespace com.Farouche.Presentation
         
         private VendorOrderManager _vendorOrdersManager;
         private ReceivingManager _receivingManager;
+        private VendorManager _vendorManager;
         private Vendor vendor;
         private VendorOrder vendorOrder;
         private List<VendorOrder> orderList;
@@ -37,37 +38,23 @@ namespace com.Farouche.Presentation
             
             _receivingManager = new ReceivingManager();
 
-            //createVendorOrder();
-            //fillVendorDropDown();
-            //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
+            
+            fillVendorDropDown();
+            fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
 
-            //vendorOrder1.VendorOrderID = 1;
-            //vendorOrder1.VendorID = 1;
-            //vendorOrder1.ProductID = 1;
-            //vendorOrder1.Name = "Sam's";
-            //vendorOrder1.DateOrdered = "1/24/2014";
-            //vendorOrder1.NumberOfShipments = 3;
+            
 
-            //vendorOrder2.VendorOrderID = 2;
-            //vendorOrder2.VendorID = 2;
-            //vendorOrder2.ProductID = 2;
-            //vendorOrder2.Name = "Target";
-            //vendorOrder2.DateOrdered = "1/25/2014";
-            //vendorOrder2.NumberOfShipments = 1;
+           
 
-            //orderList = _receivingManager.GetAllOpenOrders();
+            orderList = _receivingManager.GetAllOpenOrders();
 
-            //vendorList = new List<Vendor>();
-            //var vendor1 = new Vendor();
-            //var vendor2 = new Vendor();
-            ////vendor1.Name = vendorOrder1.Name;
-            ////vendor2.Name = vendorOrder2.Name;
-            //vendorList.Add(vendor1);
-            //vendorList.Add(vendor2);
+            
             //fillVendorDropDown(vendorList);
 
             fillListView(lvOpenVendorOrders, orderList);
+            
             //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
+            
         }
 
         
@@ -75,15 +62,17 @@ namespace com.Farouche.Presentation
         private void fillVendorDropDown()
         {
            
-            string vendorListString = "";
+            
+
           
-            List<VendorOrder> vendorList = new List<VendorOrder>();
+            List<Vendor> vendorList = new List<Vendor>();
+            _vendorManager = new VendorManager();
 
-            vendorList = _receivingManager.GetAllOpenOrders();
+            vendorList = _vendorManager.GetVendors();
 
-            foreach (VendorOrder v in vendorList)
+            foreach (Vendor v in vendorList)
             {
-                cbGetVendorsById.Items.Add(v.VendorID.ToString());
+                cbGetVendorsById.Items.Add(v.Id.ToString() + " " + v.Name);
             }
 
             
@@ -96,6 +85,7 @@ namespace com.Farouche.Presentation
 
         private void fillListView(ListView lv, List<VendorOrder> orderList)
         {
+
             
             lv.Items.Clear();
             lv.Columns.Clear();
@@ -109,6 +99,8 @@ namespace com.Farouche.Presentation
                 item.SubItems.Add(vendorOrder.Name);
                 item.SubItems.Add(vendorOrder.DateOrdered.ToString());
                 item.SubItems.Add(vendorOrder.NumberOfShipments.ToString());
+                
+               
 
 
                 lv.Items.Add(item);
@@ -119,6 +111,7 @@ namespace com.Farouche.Presentation
             lv.Columns.Add("Vendor Name");
             lv.Columns.Add("Date Ordered");
             lv.Columns.Add("Number of Shipments");
+            
 
 
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -126,67 +119,56 @@ namespace com.Farouche.Presentation
         }
 
 
-
-        private void lvOpenVendorOrders_Click(object sender, EventArgs e)
-        {
-            lvOpenVendorOrders.FullRowSelect = true;
-            var selectedRow = lvOpenVendorOrders.SelectedItems;
-            if (selectedRow.Count != 0)
-            {
-                vendorOrder = new VendorOrder(Int32.Parse(selectedRow[0].Text), Int32.Parse(selectedRow[0].SubItems[1].Text));
-                vendorOrder.DateOrdered = Convert.ToDateTime(selectedRow[0].SubItems[3].Text);
-                vendorOrder.NumberOfShipments = Int32.Parse(selectedRow[0].SubItems[4].Text);
-
-                frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-                _frmReceiving.Show();
-                _frmReceiving.BringToFront();
-
-            }
-        }
+       
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)
         {
 
+            int index = cbGetVendorsById.SelectedItem.ToString().IndexOf(" ");
             
-            
-            vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedItem.ToString()));
+            vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedItem.ToString().Substring(0, index)));
             orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
             fillListView(lvOpenVendorOrders, orderList);
 
 
         }
 
-        private void createVendorOrder()
-        {
-
-
-            _vendorOrdersManager = new VendorOrderManager();
-            
-            vendorOrder = new VendorOrder(1);
-
-            vendorOrder.Name = "Target";
-
-            
-
-            vendorOrder.DateOrdered = DateTime.Today;
-            vendorOrder.NumberOfShipments = 4;
-            _vendorOrdersManager.AddVendorOrder(vendorOrder);
-
-            vendorOrderLineItem = new VendorOrderLineItem(1, 1);
-            vendorOrderLineItem.Name = "Target";
-            vendorOrderLineItem.QtyOrdered = 10;
-            vendorOrderLineItem.ProductID = 1;
-            vendorOrderLineItem.VendorOrderId = 1;
-            vendorOrderLineItem.LineItemTotal = 20.00;
-            vendorOrder.AddLineItem(vendorOrderLineItem);
-            
-
-        }
+        
 
         private void cbGetVendorsById_SelectedIndexChanged(object sender, EventArgs e)
         {
             fillVendorDropDown();
         }
+
+        private void lvOpenVendorOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            lvOpenVendorOrders.FullRowSelect = true;
+            var selectedItem = lvOpenVendorOrders.SelectedItems;
+            if (selectedItem.Count != 0)
+            {
+
+                VendorOrder selectedVendorOrder = new VendorOrder(Int32.Parse(selectedItem[0].Text.ToString()), Int32.Parse(selectedItem[0].SubItems[1].Text.ToString()));
+                selectedVendorOrder.DateOrdered = DateTime.Parse(selectedItem[0].SubItems[3].Text);
+                selectedVendorOrder.NumberOfShipments = Int32.Parse(selectedItem[0].SubItems[4].Text);
+                frmReceiving _frmReceiving = new frmReceiving(selectedVendorOrder);
+                _frmReceiving.Show();
+                _frmReceiving.BringToFront();
+            }
+            
+
+           
+            
+           
+            
+                
+            
+
+
+            
+        }
+
+       
         
 
     }
