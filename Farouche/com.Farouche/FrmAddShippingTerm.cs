@@ -87,6 +87,7 @@ namespace com.Farouche
                 comboVendor.Items.Add(vendor.Id);
             }
             comboVendor.SelectedIndex = 0;
-        }//End of PopulateVendorList()
+        }
+
     }
 }

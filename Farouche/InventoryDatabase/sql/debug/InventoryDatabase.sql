@@ -1523,6 +1523,18 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_GetCLSEmployees]...';
+
+
+GO
+/*Object: StoredProcedure [dbo].[proc_GetCLSEmployees] */
+CREATE PROCEDURE [proc_GetCLSEmployees]
+AS
+	SELECT u.[UserID], r.[RoleID], r.[Title], u.[FirstName], u.[LastName]
+	FROM [dbo].[Users] u, [dbo].[Roles] r
+	WHERE r.[RoleID] = u.[RoleID]
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetCLSPackDetails]...';
 
 
@@ -3138,6 +3150,8 @@ INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[Phone
 VALUES (1,1000,'1111','Bob','Ross','1-800-262-7677','314 Happy Tree Lane','Daytona Beach', 'Florida', '32114', '1')
 INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
 VALUES (2,1100,'1111','James Tiberius','Kirk','1-555-555-1701','NCC-1701 Enterprise','Riverside', 'Iowa', '57001', '1')
+INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
+VALUES (6,1000,'1111','Radaghast','The Brown','1-555-575-1761','Mirkwood','Forest', 'Middle-Earth', '57901', '1')
 INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
 VALUES (3,1200,'1111','Rose','Tyler','1-555-555-1963','42 Wibbly Wobbly Timey Wimey Road','Gallifrey', 'South Dakota', '32114', '1')
 INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
