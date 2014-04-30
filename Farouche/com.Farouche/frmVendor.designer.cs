@@ -65,6 +65,7 @@
             // 
             // cbVendorStatusSearch
             // 
+            this.cbVendorStatusSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbVendorStatusSearch.FormattingEnabled = true;
             this.cbVendorStatusSearch.Location = new System.Drawing.Point(640, 14);
             this.cbVendorStatusSearch.Name = "cbVendorStatusSearch";
@@ -74,6 +75,7 @@
             // 
             // lblVendorActiveSearch
             // 
+            this.lblVendorActiveSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVendorActiveSearch.AutoSize = true;
             this.lblVendorActiveSearch.Location = new System.Drawing.Point(594, 18);
             this.lblVendorActiveSearch.Name = "lblVendorActiveSearch";
@@ -130,6 +132,9 @@
             // 
             // lvVendors
             // 
+            this.lvVendors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvVendors.FullRowSelect = true;
             this.lvVendors.GridLines = true;
             this.lvVendors.Location = new System.Drawing.Point(118, 48);
@@ -141,6 +146,7 @@
             this.lvVendors.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvVendors_ColumnClick);
             this.lvVendors.SelectedIndexChanged += new System.EventHandler(this.lvVendors_SelectedIndexChanged);
             this.lvVendors.Click += new System.EventHandler(this.lvVendors_Click);
+            this.lvVendors.DoubleClick += new System.EventHandler(this.lvVendors_DoubleClick);
             // 
             // btnVendorReport
             // 

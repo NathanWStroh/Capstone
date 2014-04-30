@@ -52,6 +52,7 @@
             this.lblProductInfo = new System.Windows.Forms.Label();
             this.lblShippingInfo = new System.Windows.Forms.Label();
             this.btClose = new System.Windows.Forms.Button();
+            this.btnEditVendor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblVendorZipCode
@@ -268,6 +269,17 @@
             this.btClose.UseVisualStyleBackColor = true;
             this.btClose.Click += new System.EventHandler(this.btClose_Click);
             // 
+            // btnEditVendor
+            // 
+            this.btnEditVendor.Location = new System.Drawing.Point(385, 323);
+            this.btnEditVendor.Name = "btnEditVendor";
+            this.btnEditVendor.Size = new System.Drawing.Size(75, 23);
+            this.btnEditVendor.TabIndex = 109;
+            this.btnEditVendor.Text = "Edit Vendor";
+            this.btnEditVendor.UseVisualStyleBackColor = true;
+            this.btnEditVendor.Visible = false;
+            this.btnEditVendor.Click += new System.EventHandler(this.btnEditVendor_Click);
+            // 
             // FrmVendorAddUpdate
             // 
             this.AcceptButton = this.btMorph;
@@ -275,6 +287,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btClose;
             this.ClientSize = new System.Drawing.Size(689, 366);
+            this.Controls.Add(this.btnEditVendor);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.lblShippingInfo);
             this.Controls.Add(this.lblProductInfo);
@@ -334,6 +347,7 @@
         private System.Windows.Forms.Label lblProductInfo;
         private System.Windows.Forms.Label lblShippingInfo;
         private System.Windows.Forms.Button btClose;
+        private System.Windows.Forms.Button btnEditVendor;
 
     }
 }

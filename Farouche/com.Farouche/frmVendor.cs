@@ -247,6 +247,10 @@ namespace com.Farouche.Presentation
             }
         }
 
+        private void lvVendors_DoubleClick(object sender, EventArgs e)
+        {
+            searchForVendorByID();
+        }
 
         private void searchForVendorByID()
         {
@@ -255,9 +259,10 @@ namespace com.Farouche.Presentation
                 String vendorIDString = this.txtVendorIDSearch.Text;
                 int vendorID = Convert.ToInt32(vendorIDString);
                 Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
-                FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
+                FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor, true);
                 frm.ShowDialog();
-                setDefaults();
+               // setDefaults();
+                findActiveSelection();
             }
             
         }
@@ -335,5 +340,8 @@ namespace com.Farouche.Presentation
             this.lvVendors.ListViewItemSorter = new ListViewItemComparer(e.Column,
                                                               lvVendors.Sorting);
         }
+
+
+
     }
 }
