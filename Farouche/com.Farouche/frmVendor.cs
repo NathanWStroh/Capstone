@@ -32,6 +32,7 @@ namespace com.Farouche.Presentation
         private VendorManager _myVendorManager = new VendorManager();
         public static FrmVendor Instance;
         private int _sortColumn = -1;
+        private int _searchIndexStart = 0;
 
         public FrmVendor(AccessToken acctoken)
         {
@@ -155,6 +156,11 @@ namespace com.Farouche.Presentation
             btnUpdateVendor.Enabled = false;
             btnDeactivateVendor.Enabled = false;
             btnActivateVendor.Enabled = false;
+          //  txtVendorSearch.Text = "";
+            txtVendorSearch.Clear();
+            txtVendorIDSearch.Text = "";
+            _searchIndexStart = 0;
+            txtVendorIDSearch.Focus();
         }
 
 
@@ -267,6 +273,70 @@ namespace com.Farouche.Presentation
             
         }
 
+        private void btnGetNext_Click(object sender, EventArgs e)
+        {
+            if (txtVendorSearch.Text != "")
+            {
+                if (_searchIndexStart >= lvVendors.Items.Count)
+                {
+                    _searchIndexStart = 0;
+                }
+                searchListView(_searchIndexStart++);           
+            }
+
+
+            
+        }
+
+        private void txtVendorNameSearch_TextChanged(object sender, EventArgs e)
+        {
+
+            if (txtVendorSearch.Text == "")
+            {
+                //  MessageBox.Show("empty");
+                //  setDefaults();
+
+                // lvVendors.Focus();
+                
+                //lvVendors.HideSelection = true;
+
+                //txtVendorSearch.Clear();
+                //lvVendors.HideSelection = false;
+
+
+
+
+                //foreach (ListViewItem item in lvVendors.Items)
+                //{
+                //    item.Selected = false;
+                //}
+
+                //txtVendorSearch.Focus();
+            }
+            else
+            {
+                searchListView(0);
+                
+            }
+            
+        }
+
+        private void searchListView(int startIndex)
+        {
+            ListViewItem foundItem = lvVendors.FindItemWithText(txtVendorSearch.Text, true, startIndex, true);
+
+            if (foundItem != null)
+            {
+                lvVendors.TopItem = foundItem;
+
+                lvVendors.Items[foundItem.Index].Selected = true;
+                _searchIndexStart = foundItem.Index + 1;
+
+                lvVendors.Focus();
+            }
+            txtVendorSearch.Focus();
+        }
+
         // does Validation on VendorID Search TextBox
         private Boolean inputIsValid()
         {
@@ -340,6 +410,10 @@ namespace com.Farouche.Presentation
             this.lvVendors.ListViewItemSorter = new ListViewItemComparer(e.Column,
                                                               lvVendors.Sorting);
         }
+
+
+
+
 
 
 

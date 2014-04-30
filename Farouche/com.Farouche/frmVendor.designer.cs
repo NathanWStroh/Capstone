@@ -39,6 +39,9 @@
             this.btnAddVendor = new System.Windows.Forms.Button();
             this.lvVendors = new System.Windows.Forms.ListView();
             this.btnVendorReport = new System.Windows.Forms.Button();
+            this.btnGetNext = new System.Windows.Forms.Button();
+            this.lblVendorSearch = new System.Windows.Forms.Label();
+            this.txtVendorSearch = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnDeactivateVendor
@@ -137,7 +140,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvVendors.FullRowSelect = true;
             this.lvVendors.GridLines = true;
+            this.lvVendors.HideSelection = false;
             this.lvVendors.Location = new System.Drawing.Point(118, 48);
+            this.lvVendors.MultiSelect = false;
             this.lvVendors.Name = "lvVendors";
             this.lvVendors.Size = new System.Drawing.Size(643, 256);
             this.lvVendors.TabIndex = 45;
@@ -158,12 +163,42 @@
             this.btnVendorReport.UseVisualStyleBackColor = true;
             this.btnVendorReport.Click += new System.EventHandler(this.btnVendorReport_Click);
             // 
+            // btnGetNext
+            // 
+            this.btnGetNext.Location = new System.Drawing.Point(508, 10);
+            this.btnGetNext.Name = "btnGetNext";
+            this.btnGetNext.Size = new System.Drawing.Size(62, 23);
+            this.btnGetNext.TabIndex = 47;
+            this.btnGetNext.Text = "Get Next";
+            this.btnGetNext.UseVisualStyleBackColor = true;
+            this.btnGetNext.Click += new System.EventHandler(this.btnGetNext_Click);
+            // 
+            // lblVendorSearch
+            // 
+            this.lblVendorSearch.AutoSize = true;
+            this.lblVendorSearch.Location = new System.Drawing.Point(352, 15);
+            this.lblVendorSearch.Name = "lblVendorSearch";
+            this.lblVendorSearch.Size = new System.Drawing.Size(44, 13);
+            this.lblVendorSearch.TabIndex = 48;
+            this.lblVendorSearch.Text = "Search:";
+            // 
+            // txtVendorSearch
+            // 
+            this.txtVendorSearch.Location = new System.Drawing.Point(402, 12);
+            this.txtVendorSearch.Name = "txtVendorSearch";
+            this.txtVendorSearch.Size = new System.Drawing.Size(100, 20);
+            this.txtVendorSearch.TabIndex = 49;
+            this.txtVendorSearch.TextChanged += new System.EventHandler(this.txtVendorNameSearch_TextChanged);
+            // 
             // FrmVendor
             // 
             this.AcceptButton = this.btnGetVendorByID;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 319);
+            this.Controls.Add(this.txtVendorSearch);
+            this.Controls.Add(this.lblVendorSearch);
+            this.Controls.Add(this.btnGetNext);
             this.Controls.Add(this.btnVendorReport);
             this.Controls.Add(this.lvVendors);
             this.Controls.Add(this.btnDeactivateVendor);
@@ -198,6 +233,9 @@
         private System.Windows.Forms.Button btnAddVendor;
         private System.Windows.Forms.ListView lvVendors;
         private System.Windows.Forms.Button btnVendorReport;
+        private System.Windows.Forms.Button btnGetNext;
+        private System.Windows.Forms.Label lblVendorSearch;
+        private System.Windows.Forms.TextBox txtVendorSearch;
 
     }
 }
