@@ -35,7 +35,6 @@
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblContact = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
-            this.txtCountry = new System.Windows.Forms.TextBox();
             this.txtZip = new System.Windows.Forms.TextBox();
             this.lblCountry = new System.Windows.Forms.Label();
             this.lblZip = new System.Windows.Forms.Label();
@@ -47,7 +46,8 @@
             this.lblAddress = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.txtState = new System.Windows.Forms.TextBox();
+            this.comboCountry = new System.Windows.Forms.ComboBox();
+            this.comboState = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnEdit
@@ -107,13 +107,6 @@
             this.lblPhone.Size = new System.Drawing.Size(41, 13);
             this.lblPhone.TabIndex = 34;
             this.lblPhone.Text = "Phone:";
-            // 
-            // txtCountry
-            // 
-            this.txtCountry.Location = new System.Drawing.Point(90, 160);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.Size = new System.Drawing.Size(100, 20);
-            this.txtCountry.TabIndex = 5;
             // 
             // txtZip
             // 
@@ -207,12 +200,23 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // txtState
+            // comboCountry
             // 
-            this.txtState.Location = new System.Drawing.Point(90, 108);
-            this.txtState.Name = "txtState";
-            this.txtState.Size = new System.Drawing.Size(100, 20);
-            this.txtState.TabIndex = 3;
+            this.comboCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCountry.FormattingEnabled = true;
+            this.comboCountry.Location = new System.Drawing.Point(90, 159);
+            this.comboCountry.Name = "comboCountry";
+            this.comboCountry.Size = new System.Drawing.Size(100, 21);
+            this.comboCountry.TabIndex = 5;
+            // 
+            // comboState
+            // 
+            this.comboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboState.FormattingEnabled = true;
+            this.comboState.Location = new System.Drawing.Point(90, 107);
+            this.comboState.Name = "comboState";
+            this.comboState.Size = new System.Drawing.Size(100, 21);
+            this.comboState.TabIndex = 3;
             // 
             // FrmUpdateShippingVendor
             // 
@@ -220,7 +224,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 261);
-            this.Controls.Add(this.txtState);
+            this.Controls.Add(this.comboCountry);
+            this.Controls.Add(this.comboState);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtContact);
@@ -228,7 +233,6 @@
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblContact);
             this.Controls.Add(this.lblPhone);
-            this.Controls.Add(this.txtCountry);
             this.Controls.Add(this.txtZip);
             this.Controls.Add(this.lblCountry);
             this.Controls.Add(this.lblZip);
@@ -257,7 +261,6 @@
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblContact;
         private System.Windows.Forms.Label lblPhone;
-        private System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.TextBox txtZip;
         private System.Windows.Forms.Label lblCountry;
         private System.Windows.Forms.Label lblZip;
@@ -269,7 +272,8 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.TextBox txtState;
+        private System.Windows.Forms.ComboBox comboCountry;
+        private System.Windows.Forms.ComboBox comboState;
 
     }
 }

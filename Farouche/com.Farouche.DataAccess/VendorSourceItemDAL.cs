@@ -50,8 +50,14 @@ namespace com.Farouche.DataAccess
             }
             catch (SqlException ex)
             {
-                Console.WriteLine(ex.Message);
-                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+                if (ex.Number == 2627)
+                {
+                    throw new ApplicationException("This vendor is already attached to this product therefore it could not be added.");
+                }
+                else
+                {
+                    throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+                }
             }
             catch (Exception ex)
             {
@@ -89,7 +95,6 @@ namespace com.Farouche.DataAccess
                 {
                     return true;
                 }
-
             }
             catch (DataException ex)
             {

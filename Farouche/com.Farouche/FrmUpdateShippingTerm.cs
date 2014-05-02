@@ -17,6 +17,9 @@ using com.Farouche.BusinessLogic;
 /*
 *                               Changelog
 * Date         By          Ticket          Version          Description
+* 5/1/2014     Kaleb                                        Improved validation to use the Validation class.
+*
+* 5/1/2014     Kaleb                                        Adjusted class to populate the vendor drop down with the vendor name rather than Id.
 */
 
 namespace com.Farouche
@@ -26,35 +29,25 @@ namespace com.Farouche
         private ShippingTermManager _myShippingTermManager;
         private ShippingVendorManager _myShippingVendorManager;
         private ShippingTerm _originalTerm;
+        List<ShippingVendor> vendors;
 
         public FrmUpdateShippingTerm(ShippingTerm term)
         {
             InitializeComponent();
             _myShippingTermManager = new ShippingTermManager();
             _myShippingVendorManager = new ShippingVendorManager();
+            vendors = _myShippingVendorManager.GetVendors();
             _originalTerm = term;
-            PopulateVendorList();
+            PopulateVendorCombo();
             txtDesc.Text = term.Description;
-            comboVendor.SelectedItem = term.ShippingVendorId;
             this.Text = "Shipping Term: " + term.Id;
         }//End of FrmUpdateShippingTerm(.)
 
         private void ClearFields()
         {
             txtDesc.Text = "";
-            comboVendor.SelectedIndex = 0;
+            comboVendors.SelectedIndex = 0;
         }//End of ClearFields()
-
-        private void PopulateVendorList()
-        {
-            _myShippingVendorManager.GetVendors();
-            ShippingVendor vendor;
-            for (int i = 0; i < _myShippingVendorManager.ShippingVendors.Count; i++)
-            {
-                vendor = _myShippingVendorManager.ShippingVendors[i];
-                comboVendor.Items.Add(vendor.Id);
-            }
-        }//End of PopulateVendorList()
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -64,28 +57,66 @@ namespace com.Farouche
         private void btnEdit_Click_1(object sender, EventArgs e)
         {
             ShippingTerm term;
-            if (txtDesc.TextLength > 250 || txtDesc.Text.Equals(""))
+            bool validShippingTerm = true;
+            string errorMessage = "Please correct the following errors:\n";
+
+            if(Validation.IsNullOrEmpty(txtDesc.Text) || Validation.IsBlank(txtDesc.Text))
             {
-                MessageBox.Show("The description was not valid.\nThis value must be 250 characters or less.");
+                validShippingTerm = false;
+                errorMessage += "You must enter a description.";
                 txtDesc.Focus();
             }
-            else
+            if (txtDesc.TextLength > 250)
             {
-                term = new ShippingTerm();
-                term.Description = txtDesc.Text;
-                term.ShippingVendorId = (int)comboVendor.SelectedItem;
-                term.Id = _originalTerm.Id;
+                validShippingTerm = false;
+                errorMessage += "The description must be 250 characters or less.";
+                txtDesc.Focus();
+            }
+            if (validShippingTerm)
+            {
+                term = new ShippingTerm()
+                {
+                    Description = txtDesc.Text,
+                    ShippingVendorId = ((KeyValuePair<int, string>)comboVendors.SelectedItem).Key,
+                    Id = _originalTerm.Id
+                };
                 if (_myShippingTermManager.Update(term, _originalTerm))
                 {
                     this.DialogResult = DialogResult.OK;
-                    MessageBox.Show("Term: " + _originalTerm.Id + " was updated.");
+                    MessageBox.Show("Shipping term " + _originalTerm.Id + " was updated.");
                 }
                 else
                 {
                     MessageBox.Show("The shipping term was not updated.");
                 }
             }
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
         }//End of btnEdit_Click(..)
+        private void PopulateVendorCombo()
+        {
+            Dictionary<int, String> vendorsDictionary = new Dictionary<int, string>();
+            int counter = 0;
+            int index = 0;
+            foreach (var vendor in vendors)
+            {
+                vendorsDictionary.Add(vendor.Id, vendor.Name);
+                if (_originalTerm != null)
+                {
+                    if (vendor.Id.Equals(_originalTerm.ShippingVendorId))
+                    {
+                        index = counter;
+                    }
+                    counter++;
+                }
+            }
+            comboVendors.DataSource = new BindingSource(vendorsDictionary, null);
+            comboVendors.DisplayMember = "Value";
+            comboVendors.ValueMember = "Key";
+            comboVendors.SelectedIndex = index;
+        }//End of PopulateVendorCombo()
     }
 }
 

@@ -241,9 +241,37 @@ namespace com.Farouche.Presentation
 
         }
 
+        private void reorderProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReorder frmReorder;
+            if (frmReorder.Instance == null)
+            {
+                frmReorder = new frmReorder(_myAccessToken);
+                frmReorder.MdiParent = this;
+                frmReorder.StartPosition = FormStartPosition.CenterScreen;
+                frmReorder.Show();
+            }
+            else
+            {
+                frmReorder.Instance.WindowState = FormWindowState.Normal;
+                frmReorder.Instance.Show();
+                frmReorder.Instance.BringToFront();
+            }
+        }
+
         private void frmStartUp_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }//End of frmStartUp_FormClosed(..)
+
+        private void toolStripButtonCascade_Click(object sender, EventArgs e)
+        {
+            this.LayoutMdi(MdiLayout.Cascade);
+        }
+
+        private void toolStripButtonTileVertically_Click(object sender, EventArgs e)
+        {
+            this.LayoutMdi(MdiLayout.TileVertical);
+        }
     }
 }

@@ -39,6 +39,9 @@
             this.btnAddVendor = new System.Windows.Forms.Button();
             this.lvVendors = new System.Windows.Forms.ListView();
             this.btnVendorReport = new System.Windows.Forms.Button();
+            this.btnGetNext = new System.Windows.Forms.Button();
+            this.lblVendorSearch = new System.Windows.Forms.Label();
+            this.txtVendorSearch = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnDeactivateVendor
@@ -65,6 +68,7 @@
             // 
             // cbVendorStatusSearch
             // 
+            this.cbVendorStatusSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbVendorStatusSearch.FormattingEnabled = true;
             this.cbVendorStatusSearch.Location = new System.Drawing.Point(640, 14);
             this.cbVendorStatusSearch.Name = "cbVendorStatusSearch";
@@ -74,6 +78,7 @@
             // 
             // lblVendorActiveSearch
             // 
+            this.lblVendorActiveSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVendorActiveSearch.AutoSize = true;
             this.lblVendorActiveSearch.Location = new System.Drawing.Point(594, 18);
             this.lblVendorActiveSearch.Name = "lblVendorActiveSearch";
@@ -97,7 +102,7 @@
             this.btnUpdateVendor.Location = new System.Drawing.Point(12, 79);
             this.btnUpdateVendor.Name = "btnUpdateVendor";
             this.btnUpdateVendor.Size = new System.Drawing.Size(100, 25);
-            this.btnUpdateVendor.TabIndex = 2;
+            this.btnUpdateVendor.TabIndex = 3;
             this.btnUpdateVendor.Text = "Update Vendor";
             this.btnUpdateVendor.UseVisualStyleBackColor = true;
             this.btnUpdateVendor.Click += new System.EventHandler(this.btnUpdateVendor_Click);
@@ -123,16 +128,21 @@
             this.btnAddVendor.Location = new System.Drawing.Point(12, 48);
             this.btnAddVendor.Name = "btnAddVendor";
             this.btnAddVendor.Size = new System.Drawing.Size(100, 25);
-            this.btnAddVendor.TabIndex = 1;
+            this.btnAddVendor.TabIndex = 2;
             this.btnAddVendor.Text = "Add Vendor";
             this.btnAddVendor.UseVisualStyleBackColor = true;
             this.btnAddVendor.Click += new System.EventHandler(this.btnAddVendor_Click);
             // 
             // lvVendors
             // 
+            this.lvVendors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvVendors.FullRowSelect = true;
             this.lvVendors.GridLines = true;
+            this.lvVendors.HideSelection = false;
             this.lvVendors.Location = new System.Drawing.Point(118, 48);
+            this.lvVendors.MultiSelect = false;
             this.lvVendors.Name = "lvVendors";
             this.lvVendors.Size = new System.Drawing.Size(643, 256);
             this.lvVendors.TabIndex = 45;
@@ -141,6 +151,7 @@
             this.lvVendors.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvVendors_ColumnClick);
             this.lvVendors.SelectedIndexChanged += new System.EventHandler(this.lvVendors_SelectedIndexChanged);
             this.lvVendors.Click += new System.EventHandler(this.lvVendors_Click);
+            this.lvVendors.DoubleClick += new System.EventHandler(this.lvVendors_DoubleClick);
             // 
             // btnVendorReport
             // 
@@ -152,12 +163,42 @@
             this.btnVendorReport.UseVisualStyleBackColor = true;
             this.btnVendorReport.Click += new System.EventHandler(this.btnVendorReport_Click);
             // 
+            // btnGetNext
+            // 
+            this.btnGetNext.Location = new System.Drawing.Point(508, 10);
+            this.btnGetNext.Name = "btnGetNext";
+            this.btnGetNext.Size = new System.Drawing.Size(62, 23);
+            this.btnGetNext.TabIndex = 47;
+            this.btnGetNext.Text = "Get Next";
+            this.btnGetNext.UseVisualStyleBackColor = true;
+            this.btnGetNext.Click += new System.EventHandler(this.btnGetNext_Click);
+            // 
+            // lblVendorSearch
+            // 
+            this.lblVendorSearch.AutoSize = true;
+            this.lblVendorSearch.Location = new System.Drawing.Point(352, 15);
+            this.lblVendorSearch.Name = "lblVendorSearch";
+            this.lblVendorSearch.Size = new System.Drawing.Size(44, 13);
+            this.lblVendorSearch.TabIndex = 48;
+            this.lblVendorSearch.Text = "Search:";
+            // 
+            // txtVendorSearch
+            // 
+            this.txtVendorSearch.Location = new System.Drawing.Point(402, 12);
+            this.txtVendorSearch.Name = "txtVendorSearch";
+            this.txtVendorSearch.Size = new System.Drawing.Size(100, 20);
+            this.txtVendorSearch.TabIndex = 1;
+            this.txtVendorSearch.TextChanged += new System.EventHandler(this.txtVendorNameSearch_TextChanged);
+            // 
             // FrmVendor
             // 
             this.AcceptButton = this.btnGetVendorByID;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 319);
+            this.Controls.Add(this.txtVendorSearch);
+            this.Controls.Add(this.lblVendorSearch);
+            this.Controls.Add(this.btnGetNext);
             this.Controls.Add(this.btnVendorReport);
             this.Controls.Add(this.lvVendors);
             this.Controls.Add(this.btnDeactivateVendor);
@@ -192,6 +233,9 @@
         private System.Windows.Forms.Button btnAddVendor;
         private System.Windows.Forms.ListView lvVendors;
         private System.Windows.Forms.Button btnVendorReport;
+        private System.Windows.Forms.Button btnGetNext;
+        private System.Windows.Forms.Label lblVendorSearch;
+        private System.Windows.Forms.TextBox txtVendorSearch;
 
     }
 }

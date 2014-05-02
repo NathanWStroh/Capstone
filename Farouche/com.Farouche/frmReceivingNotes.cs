@@ -54,6 +54,7 @@ namespace com.Farouche
         }
 
 
+
         private void frmReceivingNotes_Load(object sender, EventArgs e)
         {
             
@@ -63,5 +64,6 @@ namespace com.Farouche
         {
             this.Close();
         }
+
     }
 }

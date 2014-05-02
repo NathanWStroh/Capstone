@@ -23,6 +23,7 @@ namespace com.Farouche
             InitializeComponent();
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
+            PopulateActiveCombo();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
             Instance = this;
         }
@@ -65,6 +66,7 @@ namespace com.Farouche
                 item.SubItems.Add(vendor.Phone);
                 item.SubItems.Add(vendor.Contact);
                 item.SubItems.Add(vendor.ContactEmail);
+                item.SubItems.Add(vendor.Active.ToString());
                 lv.Items.Add(item);
             }
             lv.Columns.Add("Vendor ID");
@@ -77,6 +79,7 @@ namespace com.Farouche
             lv.Columns.Add("Phone");
             lv.Columns.Add("Contact");
             lv.Columns.Add("Email");
+            lv.Columns.Add("Active");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }//End of PopulateVendorListView(..)
 
@@ -109,8 +112,7 @@ namespace com.Farouche
         {
             FrmAddShippingVendor form = new FrmAddShippingVendor();
             form.ShowDialog();
-            SetDefaults();
-            PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
+            FindActiveSelection();
         }//End of btnAddVendor_Click(..)
 
         private void btnUpdateVendor_Click(object sender, EventArgs e)
@@ -118,13 +120,75 @@ namespace com.Farouche
             var currentIndex = this.lvShippingVendors.SelectedIndices[0];
             FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex]);
             form.ShowDialog();
-            SetDefaults();
-            PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
+            FindActiveSelection();
         }//End of btnUpdateVendor_Click(..)
 
         private void FrmShippingVendor_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
         }//End of FrmShippingVendor_FormClosed(..)
+
+        private void FindActiveSelection()
+        {
+            Boolean active;
+            switch (this.cbVendorStatusSearch.SelectedIndex)
+            {
+                case 0:
+                    active = true; //True
+                    PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetShippingVendorsByActive(active));
+                    break;
+                case 1:
+                    active = false; //False
+                    PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetShippingVendorsByActive(active));
+                    break;
+                case 2:
+                    PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
+                    break;
+            }
+            SetDefaults();
+        }
+
+        private void cbVendorStatusSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FindActiveSelection();
+        }
+
+        private void cbVendorStatusSearch_Click(object sender, EventArgs e)
+        {
+            SetDefaults();
+        }
+
+        private void btnActivateVendor_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvShippingVendors.SelectedIndices[0];
+            Boolean success = _myVendorManager.ReactivateVendor(_myVendorManager.ShippingVendors[currentIndex]);
+            if (success == true)
+            {
+                MessageBox.Show("The vendor was activated.");
+            }
+            FindActiveSelection();
+        }
+
+        private void btnDeactivateVendor_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvShippingVendors.SelectedIndices[0];
+            Boolean success = _myVendorManager.DeactivateVendor(_myVendorManager.ShippingVendors[currentIndex]);
+            if (success == true)
+            {
+                MessageBox.Show("The vendor was made inactive.");
+            }
+            FindActiveSelection();
+        }
+
+        private void btnDeleteVendor_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvShippingVendors.SelectedIndices[0];
+            Boolean success = _myVendorManager.DeleteVendor(_myVendorManager.ShippingVendors[currentIndex]);
+            if (success == true)
+            {
+                MessageBox.Show("The vendor was removed.");
+            }
+            FindActiveSelection();
+        }
     }
 }

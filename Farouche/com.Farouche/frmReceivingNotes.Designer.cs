@@ -39,7 +39,7 @@
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(107, 77);
+            this.txtNotes.Location = new System.Drawing.Point(12, 62);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(399, 188);
@@ -48,7 +48,7 @@
             // lblVendorOrderID
             // 
             this.lblVendorOrderID.AutoSize = true;
-            this.lblVendorOrderID.Location = new System.Drawing.Point(107, 13);
+            this.lblVendorOrderID.Location = new System.Drawing.Point(12, 9);
             this.lblVendorOrderID.Name = "lblVendorOrderID";
             this.lblVendorOrderID.Size = new System.Drawing.Size(87, 13);
             this.lblVendorOrderID.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             // txtVendorOrderID
             // 
-            this.txtVendorOrderID.Location = new System.Drawing.Point(200, 10);
+            this.txtVendorOrderID.Location = new System.Drawing.Point(105, 6);
             this.txtVendorOrderID.Name = "txtVendorOrderID";
             this.txtVendorOrderID.ReadOnly = true;
             this.txtVendorOrderID.Size = new System.Drawing.Size(134, 20);
@@ -64,7 +64,7 @@
             // 
             // btnUpdatedNote
             // 
-            this.btnUpdatedNote.Location = new System.Drawing.Point(399, 295);
+            this.btnUpdatedNote.Location = new System.Drawing.Point(304, 256);
             this.btnUpdatedNote.Name = "btnUpdatedNote";
             this.btnUpdatedNote.Size = new System.Drawing.Size(107, 23);
             this.btnUpdatedNote.TabIndex = 3;
@@ -75,7 +75,7 @@
             // lblProductID
             // 
             this.lblProductID.AutoSize = true;
-            this.lblProductID.Location = new System.Drawing.Point(104, 46);
+            this.lblProductID.Location = new System.Drawing.Point(41, 43);
             this.lblProductID.Name = "lblProductID";
             this.lblProductID.Size = new System.Drawing.Size(58, 13);
             this.lblProductID.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             // txtProductID
             // 
-            this.txtProductID.Location = new System.Drawing.Point(200, 43);
+            this.txtProductID.Location = new System.Drawing.Point(107, 36);
             this.txtProductID.Name = "txtProductID";
             this.txtProductID.ReadOnly = true;
             this.txtProductID.Size = new System.Drawing.Size(134, 20);
@@ -103,8 +103,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
             this.ClientSize = new System.Drawing.Size(644, 350);
             this.Controls.Add(this.btnCancel);
+
             this.Controls.Add(this.txtProductID);
             this.Controls.Add(this.lblProductID);
             this.Controls.Add(this.btnUpdatedNote);
@@ -112,8 +114,10 @@
             this.Controls.Add(this.lblVendorOrderID);
             this.Controls.Add(this.txtNotes);
             this.Name = "frmReceivingNotes";
+
             this.Text = "frmReceivingNotes";
             this.Load += new System.EventHandler(this.frmReceivingNotes_Load);
+
             this.ResumeLayout(false);
             this.PerformLayout();
 

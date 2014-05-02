@@ -41,13 +41,16 @@
             // 
             // reportViewer1
             // 
+            this.reportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             reportDataSource1.Name = "DataSet1";
             reportDataSource1.Value = this.CLSPackDetailsBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "com.Farouche.Reports.PackListReport.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(12, 21);
+            this.reportViewer1.Location = new System.Drawing.Point(12, 12);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(943, 293);
+            this.reportViewer1.Size = new System.Drawing.Size(943, 302);
             this.reportViewer1.TabIndex = 0;
             // 
             // frmPrintPackReport
@@ -58,7 +61,7 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintPackReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmPrintPackReport";
+            this.Text = "Print Preview Pack List";
             this.Load += new System.EventHandler(this.frmPrintPackReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CLSPackDetailsBindingSource)).EndInit();
             this.ResumeLayout(false);

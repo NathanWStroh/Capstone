@@ -21,7 +21,7 @@ namespace com.Farouche.Commons
         private int _minQtyToOrder;
         private int _itemsPerCase;
 
-        public VendorSourceItem(int productId,int vendorId)
+        public VendorSourceItem(int vendorId,int productId)
         {
             this.ProductID = productId;
             VendorID = vendorId;

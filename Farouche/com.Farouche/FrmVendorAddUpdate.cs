@@ -48,7 +48,7 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctkn;
             _myVendor = vendor;
 
-            this.Text = "Update Product";
+            this.Text = "Update Vendor: " + vendor.Name;
             btMorph.Text = "Update Vendor";
 
             PopulateStateCombo();
@@ -68,6 +68,67 @@ namespace com.Farouche.Presentation
             Instance = this;
         }//update window end
 
+        // viewOnly mode
+        public FrmVendorAddUpdate(AccessToken acctkn, Vendor vendor, Boolean viewOnly)
+        {
+            InitializeComponent();
+
+            _myAccessToken = acctkn;
+            _myVendor = vendor;
+
+            this.Text = "Vendor: " + vendor.Name;
+            btMorph.Text = "Done";
+
+            PopulateStateCombo();
+            PopulateCountryCombo();
+
+            txtVendorID.Text = vendor.Id.ToString();
+            txtVendorName.Text = vendor.Name;
+            txtVendorAddress.Text = vendor.Address;
+            txtVendorCity.Text = vendor.City;
+            cbVendorState.Text = vendor.State;
+            cbVendorCountry.Text = vendor.Country;
+            txtVendorZipCode.Text = vendor.Zip;
+
+            txtVendorContact.Text = vendor.Contact;
+            txtVendorContactEmail.Text = vendor.ContactEmail;
+            txtVendorContactPhone.Text = vendor.Phone;
+
+            txtVendorID.Enabled = false;
+            txtVendorName.Enabled = false;
+            txtVendorAddress.Enabled = false;
+            txtVendorCity.Enabled = false;
+            cbVendorState.Enabled = false;
+            cbVendorCountry.Enabled = false;
+            txtVendorZipCode.Enabled = false;
+
+            txtVendorContact.Enabled = false;
+            txtVendorContactEmail.Enabled = false;
+            txtVendorContactPhone.Enabled = false;
+
+            btnEditVendor.Visible = true;
+
+            Instance = this;
+        }//update window end
+
+        private void btnEditVendor_Click(object sender, EventArgs e)
+        {
+            txtVendorID.Enabled = false;
+            txtVendorName.Enabled = true;
+            txtVendorAddress.Enabled = true;
+            txtVendorCity.Enabled = true;
+            cbVendorState.Enabled = true;
+            cbVendorCountry.Enabled = true;
+            txtVendorZipCode.Enabled = true;
+
+            txtVendorContact.Enabled = true;
+            txtVendorContactEmail.Enabled = true;
+            txtVendorContactPhone.Enabled = true;
+
+            this.Text = "Update Vendor: " + _myVendor.Name;
+            btMorph.Text = "Update Vendor";
+        }
+
         private void btClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -79,9 +140,13 @@ namespace com.Farouche.Presentation
             {
                 addVendor();
             }
-            else
+            else if (btMorph.Text == "Update Vendor")
             {
                 updateVendor();
+            }
+            else 
+            {
+                this.Close();
             }
         }//morph button event
 
@@ -293,12 +358,14 @@ namespace com.Farouche.Presentation
             cbVendorCountry.Items.Add("China");
             cbVendorCountry.Items.Add("Japan");
 
-        }
+        }//End of PopulateCountryCombo()
 
         private void FrmVendorAddUpdate_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
-        }//End of PopulateCountryCombo()
+        }
+
+       
 
 
     } // end FrmVendorAddUpdate
