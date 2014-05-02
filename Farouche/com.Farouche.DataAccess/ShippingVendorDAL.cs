@@ -15,7 +15,9 @@ using com.Farouche.Commons;
  * Date         By          Ticket          Version         Description
  * 3/6/14       Andrew                                      Fixed methods
  * 
+ * 4/1/2014     Kaleb                                       Adjusted to account for Active when reading in from the DB.
  * 
+ * 4/1/2014     Kaleb                                       Adjusted class to account for activating/deactivating a shipping vendor.
 */
 
 namespace com.Farouche.DataAccess
@@ -162,14 +164,11 @@ namespace com.Farouche.DataAccess
                             Zip = mySqlReader.GetString(6),
                             Phone = mySqlReader.GetString(7),
                             Contact = mySqlReader.GetString(8),
-                            ContactEmail = mySqlReader.GetString(9)
-
-
+                            ContactEmail = mySqlReader.GetString(9),
+                            Active = mySqlReader.GetBoolean(10)
                         };
                     }
-
                 }
-
                 mySqlReader.Close();
 
             }
@@ -226,7 +225,8 @@ namespace com.Farouche.DataAccess
                             Zip = mySqlReader.GetString(6),
                             Phone = mySqlReader.GetString(7),
                             Contact = mySqlReader.GetString(8),
-                            ContactEmail = mySqlReader.GetString(9) 
+                            ContactEmail = mySqlReader.GetString(9),
+                            Active = mySqlReader.GetBoolean(10)
                         };
 
                         //Add item to list
@@ -257,6 +257,192 @@ namespace com.Farouche.DataAccess
 
             return shippingVendorList;
         }// end GetAllShippingVendors
-            
+
+        public static List<ShippingVendor> GetVendorsByActive(Boolean activeState, SqlConnection myConnection)
+        {
+            var shippingVendorList = new List<ShippingVendor>();
+            myConnection = myConnection ?? GetInventoryDbConnection();
+            try
+            {
+                var mySqlCommand = new SqlCommand("proc_GetShippingVendorsByActive", myConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                mySqlCommand.Parameters.AddWithValue("@Active", activeState ? 1 : 0);
+                myConnection.Open();
+                var mySqlReader = mySqlCommand.ExecuteReader();
+                if (mySqlReader.HasRows)
+                {
+                    while (mySqlReader.Read())
+                    {
+                        var shippingVendor = new ShippingVendor(mySqlReader.GetInt32(0))
+                        {
+                            Name = mySqlReader.GetString(1),
+                            Address = mySqlReader.GetString(2),
+                            City = mySqlReader.GetString(3),
+                            State = mySqlReader.GetString(4),
+                            Country = mySqlReader.GetString(5),
+                            Zip = mySqlReader.GetString(6),
+                            Phone = mySqlReader.GetString(7),
+                            Contact = mySqlReader.GetString(8),
+                            ContactEmail = mySqlReader.GetString(9),
+                            Active = mySqlReader.GetBoolean(10)
+                        };
+
+                        //Add item to list
+                        shippingVendorList.Add(shippingVendor);
+                    }
+                }
+                mySqlReader.Close();
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return shippingVendorList;
+        }//End of FetchTermsByActive(..)
+
+        public static Boolean ReactivateVendor(ShippingVendor vendor, SqlConnection connection)
+        {
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_ActivateShippingVendor", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ShippingVendorId", vendor.Id);
+
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }
+
+        public static Boolean DeactivateVendor(ShippingVendor vendor, SqlConnection connection)
+        {
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_DeactivateShippingVendor", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ShippingVendorId", vendor.Id);
+
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }
+
+        public static Boolean DeleteVendor(ShippingVendor vendor, SqlConnection connection)
+        {
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_DeleteShippingVendor", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ShippingVendorId", vendor.Id);
+                sqlCmd.Parameters.AddWithValue("@Name", vendor.Name);
+                sqlCmd.Parameters.AddWithValue("@Address", vendor.Address);
+                sqlCmd.Parameters.AddWithValue("@City", vendor.City);
+                sqlCmd.Parameters.AddWithValue("@State", vendor.State);
+                sqlCmd.Parameters.AddWithValue("@Zip", vendor.Zip);
+                sqlCmd.Parameters.AddWithValue("@Phone", vendor.Phone);
+                sqlCmd.Parameters.AddWithValue("@Contact", vendor.Contact);
+                sqlCmd.Parameters.AddWithValue("@ContactEmail", vendor.ContactEmail);
+                sqlCmd.Parameters.AddWithValue("@Active", vendor.Active);
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }
     }
 }

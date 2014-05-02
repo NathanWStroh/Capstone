@@ -10,6 +10,7 @@ CREATE TABLE [dbo].[ShippingVendors](
 	[Phone]				[Varchar](12)		NOT NULL,
 	[Contact]			[varchar](50)		NOT NULL,
 	[ContactEmail]		[varchar](50)		NULL,
+	[Active]            [BIT]              DEFAULT ((1)) NOT NULL,
 CONSTRAINT [PK_ShippingVendors] PRIMARY KEY CLUSTERED (ShippingVendorID ASC)
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 )ON [PRIMARY]

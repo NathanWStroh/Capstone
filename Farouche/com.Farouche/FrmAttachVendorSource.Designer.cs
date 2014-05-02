@@ -33,16 +33,12 @@
             this.lblVendor = new System.Windows.Forms.Label();
             this.lblUnitPrice = new System.Windows.Forms.Label();
             this.lblCaseQty = new System.Windows.Forms.Label();
-            this.lblActive = new System.Windows.Forms.Label();
             this.nudUnitPrice = new System.Windows.Forms.NumericUpDown();
-            this.cbActive = new System.Windows.Forms.ComboBox();
-            this.cbVendor = new System.Windows.Forms.ComboBox();
             this.lblMinimum = new System.Windows.Forms.Label();
             this.nudCase = new System.Windows.Forms.NumericUpDown();
             this.nudMinnimum = new System.Windows.Forms.NumericUpDown();
             this.lblDisplayUnitPrice = new System.Windows.Forms.Label();
-            this.lblVendorName = new System.Windows.Forms.Label();
-            this.txtVendorName = new System.Windows.Forms.TextBox();
+            this.comboVendors = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudUnitPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinnimum)).BeginInit();
@@ -51,7 +47,7 @@
             // btCancel
             // 
             this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btCancel.Location = new System.Drawing.Point(56, 189);
+            this.btCancel.Location = new System.Drawing.Point(75, 158);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(75, 23);
             this.btCancel.TabIndex = 16;
@@ -62,7 +58,7 @@
             // btnAdd
             // 
             this.btnAdd.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAdd.Location = new System.Drawing.Point(137, 189);
+            this.btnAdd.Location = new System.Drawing.Point(156, 158);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 17;
@@ -73,16 +69,16 @@
             // lblVendor
             // 
             this.lblVendor.AutoSize = true;
-            this.lblVendor.Location = new System.Drawing.Point(35, 22);
+            this.lblVendor.Location = new System.Drawing.Point(60, 38);
             this.lblVendor.Name = "lblVendor";
-            this.lblVendor.Size = new System.Drawing.Size(58, 13);
+            this.lblVendor.Size = new System.Drawing.Size(44, 13);
             this.lblVendor.TabIndex = 18;
-            this.lblVendor.Text = "Vendor ID:";
+            this.lblVendor.Text = "Vendor:";
             // 
             // lblUnitPrice
             // 
             this.lblUnitPrice.AutoSize = true;
-            this.lblUnitPrice.Location = new System.Drawing.Point(37, 75);
+            this.lblUnitPrice.Location = new System.Drawing.Point(48, 65);
             this.lblUnitPrice.Name = "lblUnitPrice";
             this.lblUnitPrice.Size = new System.Drawing.Size(56, 13);
             this.lblUnitPrice.TabIndex = 20;
@@ -91,25 +87,16 @@
             // lblCaseQty
             // 
             this.lblCaseQty.AutoSize = true;
-            this.lblCaseQty.Location = new System.Drawing.Point(17, 126);
+            this.lblCaseQty.Location = new System.Drawing.Point(28, 116);
             this.lblCaseQty.Name = "lblCaseQty";
             this.lblCaseQty.Size = new System.Drawing.Size(76, 13);
             this.lblCaseQty.TabIndex = 21;
             this.lblCaseQty.Text = "Case Quantity:";
             // 
-            // lblActive
-            // 
-            this.lblActive.AutoSize = true;
-            this.lblActive.Location = new System.Drawing.Point(53, 153);
-            this.lblActive.Name = "lblActive";
-            this.lblActive.Size = new System.Drawing.Size(40, 13);
-            this.lblActive.TabIndex = 22;
-            this.lblActive.Text = "Active:";
-            // 
             // nudUnitPrice
             // 
             this.nudUnitPrice.DecimalPlaces = 2;
-            this.nudUnitPrice.Location = new System.Drawing.Point(99, 72);
+            this.nudUnitPrice.Location = new System.Drawing.Point(110, 62);
             this.nudUnitPrice.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -118,31 +105,13 @@
             this.nudUnitPrice.Name = "nudUnitPrice";
             this.nudUnitPrice.Size = new System.Drawing.Size(121, 20);
             this.nudUnitPrice.TabIndex = 45;
+            this.nudUnitPrice.ThousandsSeparator = true;
             this.nudUnitPrice.ValueChanged += new System.EventHandler(this.nudUnitPrice_ValueChanged);
-            // 
-            // cbActive
-            // 
-            this.cbActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbActive.FormattingEnabled = true;
-            this.cbActive.Location = new System.Drawing.Point(99, 150);
-            this.cbActive.Name = "cbActive";
-            this.cbActive.Size = new System.Drawing.Size(121, 21);
-            this.cbActive.TabIndex = 46;
-            // 
-            // cbVendor
-            // 
-            this.cbVendor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbVendor.FormattingEnabled = true;
-            this.cbVendor.Location = new System.Drawing.Point(99, 19);
-            this.cbVendor.Name = "cbVendor";
-            this.cbVendor.Size = new System.Drawing.Size(121, 21);
-            this.cbVendor.TabIndex = 47;
-            this.cbVendor.SelectedIndexChanged += new System.EventHandler(this.cbVendor_SelectedIndexChanged);
             // 
             // lblMinimum
             // 
             this.lblMinimum.AutoSize = true;
-            this.lblMinimum.Location = new System.Drawing.Point(13, 100);
+            this.lblMinimum.Location = new System.Drawing.Point(24, 90);
             this.lblMinimum.Name = "lblMinimum";
             this.lblMinimum.Size = new System.Drawing.Size(80, 13);
             this.lblMinimum.TabIndex = 48;
@@ -150,7 +119,7 @@
             // 
             // nudCase
             // 
-            this.nudCase.Location = new System.Drawing.Point(99, 124);
+            this.nudCase.Location = new System.Drawing.Point(110, 114);
             this.nudCase.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -162,7 +131,7 @@
             // 
             // nudMinnimum
             // 
-            this.nudMinnimum.Location = new System.Drawing.Point(99, 98);
+            this.nudMinnimum.Location = new System.Drawing.Point(110, 88);
             this.nudMinnimum.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -175,43 +144,31 @@
             // lblDisplayUnitPrice
             // 
             this.lblDisplayUnitPrice.AutoSize = true;
-            this.lblDisplayUnitPrice.Location = new System.Drawing.Point(218, 75);
+            this.lblDisplayUnitPrice.Location = new System.Drawing.Point(229, 65);
             this.lblDisplayUnitPrice.Name = "lblDisplayUnitPrice";
             this.lblDisplayUnitPrice.Size = new System.Drawing.Size(0, 13);
             this.lblDisplayUnitPrice.TabIndex = 51;
             // 
-            // lblVendorName
+            // comboVendors
             // 
-            this.lblVendorName.AutoSize = true;
-            this.lblVendorName.Location = new System.Drawing.Point(18, 49);
-            this.lblVendorName.Name = "lblVendorName";
-            this.lblVendorName.Size = new System.Drawing.Size(75, 13);
-            this.lblVendorName.TabIndex = 52;
-            this.lblVendorName.Text = "Vendor Name:";
-            // 
-            // txtVendorName
-            // 
-            this.txtVendorName.Enabled = false;
-            this.txtVendorName.Location = new System.Drawing.Point(99, 46);
-            this.txtVendorName.Name = "txtVendorName";
-            this.txtVendorName.Size = new System.Drawing.Size(121, 20);
-            this.txtVendorName.TabIndex = 53;
+            this.comboVendors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVendors.FormattingEnabled = true;
+            this.comboVendors.Location = new System.Drawing.Point(110, 35);
+            this.comboVendors.Name = "comboVendors";
+            this.comboVendors.Size = new System.Drawing.Size(121, 21);
+            this.comboVendors.TabIndex = 52;
             // 
             // FrmAttachVendorSource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 253);
-            this.Controls.Add(this.txtVendorName);
-            this.Controls.Add(this.lblVendorName);
+            this.ClientSize = new System.Drawing.Size(275, 216);
+            this.Controls.Add(this.comboVendors);
             this.Controls.Add(this.lblDisplayUnitPrice);
             this.Controls.Add(this.nudCase);
             this.Controls.Add(this.nudMinnimum);
             this.Controls.Add(this.lblMinimum);
-            this.Controls.Add(this.cbVendor);
-            this.Controls.Add(this.cbActive);
             this.Controls.Add(this.nudUnitPrice);
-            this.Controls.Add(this.lblActive);
             this.Controls.Add(this.lblCaseQty);
             this.Controls.Add(this.lblUnitPrice);
             this.Controls.Add(this.lblVendor);
@@ -236,15 +193,11 @@
         private System.Windows.Forms.Label lblVendor;
         private System.Windows.Forms.Label lblUnitPrice;
         private System.Windows.Forms.Label lblCaseQty;
-        private System.Windows.Forms.Label lblActive;
         private System.Windows.Forms.NumericUpDown nudUnitPrice;
-        private System.Windows.Forms.ComboBox cbActive;
-        private System.Windows.Forms.ComboBox cbVendor;
         private System.Windows.Forms.Label lblMinimum;
         private System.Windows.Forms.NumericUpDown nudCase;
         private System.Windows.Forms.NumericUpDown nudMinnimum;
         private System.Windows.Forms.Label lblDisplayUnitPrice;
-        private System.Windows.Forms.Label lblVendorName;
-        private System.Windows.Forms.TextBox txtVendorName;
+        private System.Windows.Forms.ComboBox comboVendors;
     }
 }

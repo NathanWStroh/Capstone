@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.txtDesc = new System.Windows.Forms.TextBox();
-            this.comboVendor = new System.Windows.Forms.ComboBox();
+            this.comboVendors = new System.Windows.Forms.ComboBox();
             this.lblDesc = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.labelVendor = new System.Windows.Forms.Label();
@@ -44,13 +44,15 @@
             this.txtDesc.Size = new System.Drawing.Size(282, 117);
             this.txtDesc.TabIndex = 1;
             // 
-            // comboVendor
+            // comboVendors
             // 
-            this.comboVendor.FormattingEnabled = true;
-            this.comboVendor.Location = new System.Drawing.Point(111, 30);
-            this.comboVendor.Name = "comboVendor";
-            this.comboVendor.Size = new System.Drawing.Size(121, 21);
-            this.comboVendor.TabIndex = 0;
+            this.comboVendors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVendors.Enabled = false;
+            this.comboVendors.FormattingEnabled = true;
+            this.comboVendors.Location = new System.Drawing.Point(111, 30);
+            this.comboVendors.Name = "comboVendors";
+            this.comboVendors.Size = new System.Drawing.Size(121, 21);
+            this.comboVendors.TabIndex = 0;
             // 
             // lblDesc
             // 
@@ -97,7 +99,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 261);
             this.Controls.Add(this.txtDesc);
-            this.Controls.Add(this.comboVendor);
+            this.Controls.Add(this.comboVendors);
             this.Controls.Add(this.lblDesc);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.labelVendor);
@@ -112,7 +114,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtDesc;
-        private System.Windows.Forms.ComboBox comboVendor;
+        private System.Windows.Forms.ComboBox comboVendors;
         private System.Windows.Forms.Label lblDesc;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label labelVendor;

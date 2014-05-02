@@ -64,6 +64,8 @@
             this.lblPriceDisplay = new System.Windows.Forms.Label();
             this.lblWeightDisplay = new System.Windows.Forms.Label();
             this.lvVendors = new System.Windows.Forms.ListView();
+            this.btnRemoveVendor = new System.Windows.Forms.Button();
+            this.btnUpdateVendor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudAvailableQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOnHandQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudReorderThreshold)).BeginInit();
@@ -191,7 +193,7 @@
             // 
             // btAddVendor
             // 
-            this.btAddVendor.Location = new System.Drawing.Point(500, 323);
+            this.btAddVendor.Location = new System.Drawing.Point(389, 323);
             this.btAddVendor.Name = "btAddVendor";
             this.btAddVendor.Size = new System.Drawing.Size(129, 23);
             this.btAddVendor.TabIndex = 18;
@@ -428,6 +430,29 @@
             this.lvVendors.TabIndex = 46;
             this.lvVendors.UseCompatibleStateImageBehavior = false;
             this.lvVendors.View = System.Windows.Forms.View.Details;
+            this.lvVendors.SelectedIndexChanged += new System.EventHandler(this.lvVendors_SelectedIndexChanged);
+            // 
+            // btnRemoveVendor
+            // 
+            this.btnRemoveVendor.Enabled = false;
+            this.btnRemoveVendor.Location = new System.Drawing.Point(657, 323);
+            this.btnRemoveVendor.Name = "btnRemoveVendor";
+            this.btnRemoveVendor.Size = new System.Drawing.Size(90, 23);
+            this.btnRemoveVendor.TabIndex = 47;
+            this.btnRemoveVendor.Text = "Remove";
+            this.btnRemoveVendor.UseVisualStyleBackColor = true;
+            this.btnRemoveVendor.Click += new System.EventHandler(this.btnRemoveVendor_Click);
+            // 
+            // btnUpdateVendor
+            // 
+            this.btnUpdateVendor.Enabled = false;
+            this.btnUpdateVendor.Location = new System.Drawing.Point(545, 323);
+            this.btnUpdateVendor.Name = "btnUpdateVendor";
+            this.btnUpdateVendor.Size = new System.Drawing.Size(90, 23);
+            this.btnUpdateVendor.TabIndex = 48;
+            this.btnUpdateVendor.Text = "Update";
+            this.btnUpdateVendor.UseVisualStyleBackColor = true;
+            this.btnUpdateVendor.Click += new System.EventHandler(this.btnUpdateVendor_Click);
             // 
             // ProductView
             // 
@@ -436,6 +461,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btClose;
             this.ClientSize = new System.Drawing.Size(769, 366);
+            this.Controls.Add(this.btnUpdateVendor);
+            this.Controls.Add(this.btnRemoveVendor);
             this.Controls.Add(this.lvVendors);
             this.Controls.Add(this.lblWeightDisplay);
             this.Controls.Add(this.nudUnitPrice);
@@ -526,5 +553,7 @@
         private System.Windows.Forms.Label lblPriceDisplay;
         private System.Windows.Forms.Label lblWeightDisplay;
         private System.Windows.Forms.ListView lvVendors;
+        private System.Windows.Forms.Button btnRemoveVendor;
+        private System.Windows.Forms.Button btnUpdateVendor;
     }
 }

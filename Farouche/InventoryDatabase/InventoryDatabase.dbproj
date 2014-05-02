@@ -688,9 +688,33 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetCLSVendorProducts.proc.sql">
-	  <SubType>Code</SubType>
-	</Build>
+      <SubType>Code</SubType>
+    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateVendorOrderLineItemNote.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="proc_FetchTermsByActive.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="proc_ReactivateTerm.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="proc_DeactivateTerm.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="proc_DeleteTerm.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_ActivateShippingVendor.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeactivateShippingVendor.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_DeleteShippingVendor.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetShippingVendorsByActive.proc.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>
