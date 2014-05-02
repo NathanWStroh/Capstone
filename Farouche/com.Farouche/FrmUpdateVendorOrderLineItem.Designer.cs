@@ -55,9 +55,9 @@
             this.lblVendorOrderID.AutoSize = true;
             this.lblVendorOrderID.Location = new System.Drawing.Point(188, 33);
             this.lblVendorOrderID.Name = "lblVendorOrderID";
-            this.lblVendorOrderID.Size = new System.Drawing.Size(72, 13);
+            this.lblVendorOrderID.Size = new System.Drawing.Size(78, 13);
             this.lblVendorOrderID.TabIndex = 0;
-            this.lblVendorOrderID.Text = "VedorOrderID";
+            this.lblVendorOrderID.Text = "VendorOrderID";
             // 
             // txtLineItemVendorOrderID
             // 
@@ -186,6 +186,7 @@
             this.btnCancel.TabIndex = 28;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnUpdateLineItem
             // 

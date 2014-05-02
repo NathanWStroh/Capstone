@@ -34,19 +34,19 @@
             this.txtVendorName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDateOrdered = new System.Windows.Forms.TextBox();
-            this.btnAddLineItemtoCurrentListView = new System.Windows.Forms.Button();
-            this.btnAddNote = new System.Windows.Forms.Button();
-            this.btnUpdateLineItem = new System.Windows.Forms.Button();
             this.lblDateReceived = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNumberofShipments = new System.Windows.Forms.TextBox();
             this.lblShipmentsReceived = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.btnUpdateOrder = new System.Windows.Forms.Button();
+            this.dgvReceiving = new System.Windows.Forms.DataGridView();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lvVendorOrderLineItems = new System.Windows.Forms.ListView();
+            this.btnUpdateLineItem = new System.Windows.Forms.Button();
+            this.btnAddLineItemtoCurrentListView = new System.Windows.Forms.Button();
+            this.btnAddNote = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReceiving)).BeginInit();
             this.SuspendLayout();
             // 
             // lblVendorOrderID
@@ -100,36 +100,6 @@
             this.txtDateOrdered.Size = new System.Drawing.Size(100, 20);
             this.txtDateOrdered.TabIndex = 6;
             // 
-            // btnAddLineItemtoCurrentListView
-            // 
-            this.btnAddLineItemtoCurrentListView.Location = new System.Drawing.Point(704, 102);
-            this.btnAddLineItemtoCurrentListView.Name = "btnAddLineItemtoCurrentListView";
-            this.btnAddLineItemtoCurrentListView.Size = new System.Drawing.Size(162, 23);
-            this.btnAddLineItemtoCurrentListView.TabIndex = 7;
-            this.btnAddLineItemtoCurrentListView.Text = "Add Line Item";
-            this.btnAddLineItemtoCurrentListView.UseVisualStyleBackColor = true;
-            this.btnAddLineItemtoCurrentListView.Click += new System.EventHandler(this.btnAddLineItemtoCurrentListView_Click);
-            // 
-            // btnAddNote
-            // 
-            this.btnAddNote.Location = new System.Drawing.Point(704, 151);
-            this.btnAddNote.Name = "btnAddNote";
-            this.btnAddNote.Size = new System.Drawing.Size(162, 23);
-            this.btnAddNote.TabIndex = 8;
-            this.btnAddNote.Text = "Add Note";
-            this.btnAddNote.UseVisualStyleBackColor = true;
-            this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
-            // 
-            // btnUpdateLineItem
-            // 
-            this.btnUpdateLineItem.Location = new System.Drawing.Point(704, 194);
-            this.btnUpdateLineItem.Name = "btnUpdateLineItem";
-            this.btnUpdateLineItem.Size = new System.Drawing.Size(162, 23);
-            this.btnUpdateLineItem.TabIndex = 9;
-            this.btnUpdateLineItem.Text = "Update Line Item";
-            this.btnUpdateLineItem.UseVisualStyleBackColor = true;
-            this.btnUpdateLineItem.Click += new System.EventHandler(this.btnUpdateLineItem_Click);
-            // 
             // lblDateReceived
             // 
             this.lblDateReceived.AutoSize = true;
@@ -179,54 +149,80 @@
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 15;
             // 
-            // btnUpdateOrder
+            // dgvReceiving
             // 
-            this.btnUpdateOrder.Location = new System.Drawing.Point(705, 244);
-            this.btnUpdateOrder.Name = "btnUpdateOrder";
-            this.btnUpdateOrder.Size = new System.Drawing.Size(161, 23);
-            this.btnUpdateOrder.TabIndex = 16;
-            this.btnUpdateOrder.Text = "Update Vendor Order";
-            this.btnUpdateOrder.UseVisualStyleBackColor = true;
-            this.btnUpdateOrder.Click += new System.EventHandler(this.btnUpdateOrder_Click);
+            this.dgvReceiving.AllowUserToAddRows = false;
+            this.dgvReceiving.AllowUserToDeleteRows = false;
+            this.dgvReceiving.AllowUserToResizeColumns = false;
+            this.dgvReceiving.AllowUserToResizeRows = false;
+            this.dgvReceiving.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvReceiving.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvReceiving.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvReceiving.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReceiving.Location = new System.Drawing.Point(43, 127);
+            this.dgvReceiving.MultiSelect = false;
+            this.dgvReceiving.Name = "dgvReceiving";
+            this.dgvReceiving.Size = new System.Drawing.Size(860, 247);
+            this.dgvReceiving.TabIndex = 19;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(705, 293);
+            this.btnCancel.Location = new System.Drawing.Point(599, 404);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(161, 23);
-            this.btnCancel.TabIndex = 17;
+            this.btnCancel.TabIndex = 24;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lvVendorOrderLineItems
+            // btnUpdateLineItem
             // 
-            this.lvVendorOrderLineItems.GridLines = true;
-            this.lvVendorOrderLineItems.Location = new System.Drawing.Point(43, 85);
-            this.lvVendorOrderLineItems.Name = "lvVendorOrderLineItems";
-            this.lvVendorOrderLineItems.Size = new System.Drawing.Size(632, 260);
-            this.lvVendorOrderLineItems.TabIndex = 18;
-            this.lvVendorOrderLineItems.UseCompatibleStateImageBehavior = false;
-            this.lvVendorOrderLineItems.View = System.Windows.Forms.View.Details;
-            this.lvVendorOrderLineItems.SelectedIndexChanged += new System.EventHandler(this.lvVendorOrderLineItems_SelectedIndexChanged);
+            this.btnUpdateLineItem.Location = new System.Drawing.Point(224, 404);
+            this.btnUpdateLineItem.Name = "btnUpdateLineItem";
+            this.btnUpdateLineItem.Size = new System.Drawing.Size(162, 23);
+            this.btnUpdateLineItem.TabIndex = 22;
+            this.btnUpdateLineItem.Text = "Update Line Item";
+            this.btnUpdateLineItem.UseVisualStyleBackColor = true;
+            this.btnUpdateLineItem.Click += new System.EventHandler(this.btnUpdateLineItem_Click_1);
+            // 
+            // btnAddLineItemtoCurrentListView
+            // 
+            this.btnAddLineItemtoCurrentListView.Location = new System.Drawing.Point(40, 404);
+            this.btnAddLineItemtoCurrentListView.Name = "btnAddLineItemtoCurrentListView";
+            this.btnAddLineItemtoCurrentListView.Size = new System.Drawing.Size(162, 23);
+            this.btnAddLineItemtoCurrentListView.TabIndex = 20;
+            this.btnAddLineItemtoCurrentListView.Text = "Add Line Item";
+            this.btnAddLineItemtoCurrentListView.UseVisualStyleBackColor = true;
+            this.btnAddLineItemtoCurrentListView.Click += new System.EventHandler(this.btnAddLineItemtoCurrentListView_Click);
+            // 
+            // btnAddNote
+            // 
+            this.btnAddNote.Location = new System.Drawing.Point(419, 404);
+            this.btnAddNote.Name = "btnAddNote";
+            this.btnAddNote.Size = new System.Drawing.Size(136, 23);
+            this.btnAddNote.TabIndex = 25;
+            this.btnAddNote.Text = "Add Note";
+            this.btnAddNote.UseVisualStyleBackColor = true;
+            this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
             // 
             // frmReceiving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 692);
-            this.Controls.Add(this.lvVendorOrderLineItems);
+            this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnUpdateOrder);
+            this.Controls.Add(this.btnUpdateLineItem);
+            this.Controls.Add(this.btnAddLineItemtoCurrentListView);
+            this.Controls.Add(this.dgvReceiving);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.lblShipmentsReceived);
             this.Controls.Add(this.txtNumberofShipments);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.lblDateReceived);
-            this.Controls.Add(this.btnUpdateLineItem);
-            this.Controls.Add(this.btnAddNote);
-            this.Controls.Add(this.btnAddLineItemtoCurrentListView);
             this.Controls.Add(this.txtDateOrdered);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtVendorName);
@@ -237,6 +233,7 @@
             this.Text = "Receiving";
             this.Load += new System.EventHandler(this.frmReceiving_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReceiving)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,17 +247,16 @@
         private System.Windows.Forms.TextBox txtVendorName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDateOrdered;
-        private System.Windows.Forms.Button btnAddLineItemtoCurrentListView;
-        private System.Windows.Forms.Button btnAddNote;
-        private System.Windows.Forms.Button btnUpdateLineItem;
         private System.Windows.Forms.Label lblDateReceived;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNumberofShipments;
         private System.Windows.Forms.Label lblShipmentsReceived;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button btnUpdateOrder;
+        private System.Windows.Forms.DataGridView dgvReceiving;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ListView lvVendorOrderLineItems;
+        private System.Windows.Forms.Button btnUpdateLineItem;
+        private System.Windows.Forms.Button btnAddLineItemtoCurrentListView;
+        private System.Windows.Forms.Button btnAddNote;
     }
 }
