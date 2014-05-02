@@ -97,7 +97,6 @@
             this.dgvReorder.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvReorder.Size = new System.Drawing.Size(647, 263);
             this.dgvReorder.TabIndex = 2;
-<<<<<<< HEAD
             // 
             // Column1
             // 
@@ -145,9 +144,8 @@
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             this.Column6.Width = 80;
-=======
             this.ttpReorder.SetToolTip(this.dgvReorder, "Vendor Report");
->>>>>>> origin/master
+
             // 
             // btnReorder
             // 
@@ -273,11 +271,8 @@
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.cbVendors);
             this.Name = "frmReorder";
-<<<<<<< HEAD
             this.Text = "Reorder";
-=======
             this.Text = "Auto Generated Vendor Reorders";
->>>>>>> origin/master
             this.Load += new System.EventHandler(this.frmReorder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReorder)).EndInit();
             this.ResumeLayout(false);
