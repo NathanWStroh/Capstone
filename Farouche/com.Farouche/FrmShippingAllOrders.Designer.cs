@@ -108,7 +108,7 @@
             this.Controls.Add(this.btnClearUser);
             this.Controls.Add(this.lvAllOrders);
             this.Name = "FrmShippingAllOrders";
-            this.Text = "frmShippingAllOrders";
+            this.Text = "All Orders";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingAllOrders_FormClosed);
             this.Load += new System.EventHandler(this.FrmShippingAllOrders_Load);
             this.ResumeLayout(false);

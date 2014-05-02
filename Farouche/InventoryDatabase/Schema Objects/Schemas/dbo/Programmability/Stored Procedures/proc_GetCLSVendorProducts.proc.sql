@@ -1,5 +1,5 @@
 ﻿/*Object: StoredProcedure [dbo].[proc_GetCLSVendorProducts] */
-CREATE PROCEDURE [dbo].[proc_GetVendorProducts]
+CREATE PROCEDURE [dbo].[proc_GetCLSVendorProducts]
 AS
 	SELECT v.[VendorID], v.[Name], vs.[ProductID], p.[ShortDesc], p.[Description], vs.[UnitCost]
 	FROM [dbo].[Vendors] v

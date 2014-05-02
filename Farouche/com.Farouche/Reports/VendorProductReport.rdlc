@@ -6,7 +6,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>603e873e-3e1d-4b1c-8592-a271348bdc07</rd:DataSourceID>
+      <rd:DataSourceID>77b763b3-9eea-4ea0-ae1c-75a9d9fe7854</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -38,11 +38,11 @@
         </Field>
         <Field Name="unitCost">
           <DataField>unitCost</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="vendorID">
           <DataField>vendorID</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="vendorName">
           <DataField>vendorName</DataField>
@@ -66,16 +66,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.92192in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.63542in</Width>
+              <Width>1.85942in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2in</Width>
+              <Width>2.21358in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.08858in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -247,7 +247,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>productID</rd:DefaultName>
@@ -339,14 +341,16 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!unitCost.Value</Value>
+                              <Value>= "$" &amp; Round(Fields!unitCost.Value, 2)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>unitCost</rd:DefaultName>
@@ -379,16 +383,16 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>0.58333in</Size>
+                <Size>2.1165in</Size>
                 <CellContents>
-                  <Textbox Name="Textbox11">
+                  <Textbox Name="Textbox9">
                     <CanGrow>true</CanGrow>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>ID</Value>
+                            <Value>Vendor</Value>
                             <Style>
                               <FontFamily>Tahoma</FontFamily>
                               <FontSize>11pt</FontSize>
@@ -400,7 +404,7 @@
                         <Style />
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>Textbox11</rd:DefaultName>
+                    <rd:DefaultName>Textbox9</rd:DefaultName>
                     <Style>
                       <Border>
                         <Color>#4e648a</Color>
@@ -416,112 +420,27 @@
                 </CellContents>
               </TablixHeader>
               <TablixMembers>
-                <TablixMember>
-                  <TablixHeader>
-                    <Size>1.71875in</Size>
-                    <CellContents>
-                      <Textbox Name="Textbox9">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value>Vendor</Value>
-                                <Style>
-                                  <FontFamily>Tahoma</FontFamily>
-                                  <FontSize>11pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
-                                  <Color>White</Color>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Textbox9</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Color>#4e648a</Color>
-                            <Style>Solid</Style>
-                          </Border>
-                          <BackgroundColor>#384c70</BackgroundColor>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
-                  <TablixMembers>
-                    <TablixMember />
-                  </TablixMembers>
-                </TablixMember>
+                <TablixMember />
               </TablixMembers>
-              <KeepWithGroup>After</KeepWithGroup>
             </TablixMember>
             <TablixMember>
-              <Group Name="vendorID">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!vendorID.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-              <SortExpressions>
-                <SortExpression>
-                  <Value>=Fields!vendorID.Value</Value>
-                </SortExpression>
-              </SortExpressions>
-              <TablixHeader>
-                <Size>0.58333in</Size>
-                <CellContents>
-                  <Textbox Name="vendorID">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Fields!vendorID.Value</Value>
-                            <Style>
-                              <FontFamily>Tahoma</FontFamily>
-                              <FontWeight>Bold</FontWeight>
-                              <Color>White</Color>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>vendorID</rd:DefaultName>
-                    <Style>
-                      <Border>
-                        <Color>#aab292</Color>
-                        <Style>Solid</Style>
-                      </Border>
-                      <BackgroundColor>#949a7e</BackgroundColor>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </CellContents>
-              </TablixHeader>
               <TablixMembers>
                 <TablixMember>
                   <Group Name="vendorName">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!vendorName.Value</GroupExpression>
+                      <GroupExpression>=Fields!vendorID.Value</GroupExpression>
                     </GroupExpressions>
+                    <PageBreak>
+                      <BreakLocation>Between</BreakLocation>
+                    </PageBreak>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!vendorName.Value</Value>
+                      <Value>=Fields!vendorID.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1.71875in</Size>
+                    <Size>2.1165in</Size>
                     <CellContents>
                       <Textbox Name="vendorName">
                         <CanGrow>true</CanGrow>
@@ -530,7 +449,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!vendorName.Value</Value>
+                                <Value>=Fields!vendorID.Value &amp; ") " &amp; Fields!vendorName.Value</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -554,40 +473,97 @@
                           <PaddingBottom>2pt</PaddingBottom>
                         </Style>
                       </Textbox>
+                      <rd:Selected>true</rd:Selected>
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>
                     <TablixMember>
                       <Group Name="Details" />
-                      <Visibility>
-                        <Hidden>true</Hidden>
-                        <ToggleItem>vendorName</ToggleItem>
-                      </Visibility>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!productID.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
                     </TablixMember>
                   </TablixMembers>
-                  <Visibility>
-                    <Hidden>true</Hidden>
-                    <ToggleItem>vendorID</ToggleItem>
-                  </Visibility>
                 </TablixMember>
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
+        <Top>0.39583in</Top>
         <Height>0.5in</Height>
-        <Width>7.9375in</Width>
+        <Width>8.2in</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Textbox Name="Textbox13">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Run At:</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox13</rd:DefaultName>
+        <Left>6.09375in</Left>
+        <Height>0.25in</Height>
+        <Width>0.54528in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox14">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Now()</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox14</rd:DefaultName>
+        <Left>6.66681in</Left>
+        <Height>0.25in</Height>
+        <Width>1.50694in</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>7.9375in</Width>
+  <Width>8.2in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -595,6 +571,6 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>e4456d0e-7543-4f48-b094-e5c145406f66</rd:ReportID>
+  <rd:ReportID>01bb925c-76a0-429e-b9b2-7a0202f93d6b</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
 </Report>

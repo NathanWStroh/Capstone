@@ -13,10 +13,13 @@ namespace com.Farouche
 {
     public partial class frmVendorProductReport : Form
     {
+        public static frmVendorProductReport Instance;
+
         public frmVendorProductReport()
         {
             InitializeComponent();
-        }
+            Instance = this;
+        }//frmVendorProductReport()
 
         private void frmVendorProductReport_Load(object sender, EventArgs e)
         {
@@ -24,6 +27,11 @@ namespace com.Farouche
             ReportList reportList = new ReportList();
             this.CLSVendorProductBindingSource.DataSource = reportList.GetVendorProducts();
             this.reportViewer1.RefreshReport();
-        }
+        }//frmVendorProductReport_Load(..)
+
+        private void frmVendorProductReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }//frmVendorProductReport_FormClosed(..)
     }
 }

@@ -72,7 +72,7 @@ namespace com.Farouche.DataAccess
                 conn.Close();
             }
             return reportLines;
-        }
+        }// End FetchCLSPackDetails(.)
 
         public static List<CLSEmployee> FetchCLSEmployees(SqlConnection myConnection)
         {
@@ -120,7 +120,7 @@ namespace com.Farouche.DataAccess
                 conn.Close();
             }
             return employees;
-        }
+        }//End FetchEmployees(.)
 
         public static List<CLSVendorProduct> FetchVendorProducts(SqlConnection myConnection)
         {
@@ -129,9 +129,9 @@ namespace com.Farouche.DataAccess
             try
             {
                 conn.Open();
-                SqlCommand sqlCmd = new SqlCommand("proc_GetCLSVendorProducts", conn);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                SqlDataReader reader = sqlCmd.ExecuteReader();
+                SqlCommand cmd = new SqlCommand("proc_GetCLSVendorProducts", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -142,7 +142,7 @@ namespace com.Farouche.DataAccess
                             productID = reader.GetInt32(2),
                             shortDesc = reader.GetString(3),
                             description = reader.GetString(4),
-                            unitCost = reader.GetDouble(5)
+                            unitCost = (Decimal)reader.GetSqlMoney(5)
                         };
                         vendorProducts.Add(line);
                     }
@@ -166,6 +166,6 @@ namespace com.Farouche.DataAccess
                 conn.Close();
             }
             return vendorProducts;
-        }
+        }//End FetchVendorProducts(.)
     }
 }

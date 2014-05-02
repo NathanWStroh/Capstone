@@ -12,9 +12,9 @@ namespace com.Farouche.Commons
         private int _productID;
         private string _shortDesc;
         private string _description;
-        private double _unitCost;
+        private Decimal _unitCost;
 
-        public CLSVendorProduct(int vendorID, string vendorName, int productID, string shortDesc, string description, double unitCost)
+        public CLSVendorProduct(int vendorID, string vendorName, int productID, string shortDesc, string description, Decimal unitCost)
         {
             _vendorID = vendorID;
             _vendorName = vendorName;
@@ -31,7 +31,7 @@ namespace com.Farouche.Commons
             _productID = 0;
             _shortDesc = "";
             _description = "";
-            _unitCost = 0.00;
+            _unitCost = 0;
         }
 
         public CLSVendorProduct(int vendorID)
@@ -99,7 +99,7 @@ namespace com.Farouche.Commons
             }
         }
 
-        public double unitCost
+        public Decimal unitCost
         {
             get
             {
@@ -107,7 +107,7 @@ namespace com.Farouche.Commons
             }
             set
             {
-                _unitCost = unitCost;
+                _unitCost = value;
             }
         }
 

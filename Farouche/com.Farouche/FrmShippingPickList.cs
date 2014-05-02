@@ -8,7 +8,8 @@ using com.Farouche.Commons;
 *                               Changelog
 * Date         By               Ticket          Version          Description
 * 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
-*/
+* 05/25/2014   Ben Grimes                                        Added column sorting to listview headers
+ */
 
 namespace com.Farouche
 {
