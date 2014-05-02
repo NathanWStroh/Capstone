@@ -688,9 +688,12 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetCLSVendorProducts.proc.sql">
-	  <SubType>Code</SubType>
-	</Build>
+      <SubType>Code</SubType>
+    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_UpdateVendorOrderLineItemNote.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\proc_GetProductToReorder.proc.sql">
       <SubType>Code</SubType>
     </Build>
   </ItemGroup>

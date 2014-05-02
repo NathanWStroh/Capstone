@@ -14,38 +14,33 @@ namespace com.Farouche
  
     public partial class frmReorderChangeLevels : Form
     {
-        //private Product _myProduct;
-        //public frmReorderChangeLevels(Product prod)
-        //{
-        //    InitializeComponent();
-        //    _myProduct = prod;
-        //}
+        private Reorder _curProduct;
+
+        public frmReorderChangeLevels(Reorder _product)
+        {
+            InitializeComponent();
+            _curProduct = _product;
+        }
 
         private void frmReorderChangeLevels_Load(object sender, EventArgs e)
         {
-            //txtProduct.Text = _myProduct.Name;
-
-            //txtROThreshold.Text = _myProduct._reorderThreshold.ToString();
-            //numericROThreshold.Value = _myProduct._reorderThreshold;
-
-            //txtROAmount.Text = _myProduct._reorderAmount.ToString();
-            //numericROAmount.Increment = _myProduct._reorderAmount;
-            //numericROAmount.Value = _myProduct._reorderAmount;
-
+            txtProduct.Text = _curProduct.Product.Name;
+            txtROThreshold.Text = _curProduct.Product._reorderThreshold.ToString();
+            txtROAmount.Text = _curProduct.CasesToOrder.ToString();
+            numericROThreshold.Value = (int)_curProduct.Product._reorderThreshold;
+            numericROAmount.Value = (int)_curProduct.CasesToOrder;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //var newROAmount = numericROAmount.Value % _myProduct._reorderAmount;
-            //if (newROAmount != 0)
-            //{
-            //    newROAmount = newROAmount * _myProduct._reorderAmount;
-            //    MessageBox.Show("Unable to break cases\n Please pick a number that is evenly divisible by the case", "Invalid Amount", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            //}
-            //else
-            //{
-            //    this.Close();
-            //}
+            //updates to the product at database level
+            var _pManager = new ProductManager();
+            _pManager.UpdateThreshold((int)numericROThreshold.Value, _curProduct.VendorSourceItem.ProductID);
+            _pManager.UpdateReorderAmount((int)numericROAmount.Value, _curProduct.VendorSourceItem.ProductID);
+            _curProduct.Product._reorderThreshold = (int)numericROThreshold.Value;
+            _curProduct.Product._reorderAmount = (int)numericROAmount.Value;
+            _curProduct.ReorderTotal = (double)_curProduct.VendorSourceItem.UnitCost * (double)_curProduct.Product._reorderAmount;
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
