@@ -9,6 +9,13 @@ using System.Windows.Forms;
 using com.Farouche.Commons;
 using com.Farouche.BusinessLogic;
 
+/*
+*                               Changelog
+* Date         By          Ticket          Version          Description
+* 4/30/2014    Kaleb                                        Bound the vendor combo box to a dictionary.  This is used to set the display member to the vendor name and the value member to the vendor Id.
+*
+* 4/30/2014    Kaleb                                        Added functionality to update the vendor source item.
+*/
 namespace com.Farouche
 {
     public partial class FrmAttachVendorSource : Form
@@ -16,7 +23,8 @@ namespace com.Farouche
         private Product _currentProduct;
         private VendorSourceItemManager _vendorSource;
         private VendorManager _vendorManager;
-        List<Vendor> vendors;
+        private VendorSourceItem _currentVendorSourceItem;
+        List<Vendor> _vendors;
 
         public FrmAttachVendorSource(Product product)
         {
@@ -24,15 +32,28 @@ namespace com.Farouche
             _currentProduct = product;
             _vendorSource = new VendorSourceItemManager();
             _vendorManager = new VendorManager();
-            vendors = _vendorManager.GetVendors();
+            _vendors = _vendorManager.GetVendors();
         }//End of FrmAttachVendorSource(.)
+
+        public FrmAttachVendorSource(Product product, VendorSourceItem currentVendorSourceItem)
+        {
+            InitializeComponent();
+            _vendorSource = new VendorSourceItemManager();
+            _vendorManager = new VendorManager();
+            _currentVendorSourceItem = currentVendorSourceItem;
+            _vendors = _vendorManager.GetVendors();
+            _currentProduct = product;
+            nudCase.Value = _currentVendorSourceItem.ItemsPerCase;
+            nudMinnimum.Value = _currentVendorSourceItem.MinQtyToOrder;
+            nudUnitPrice.Value = _currentVendorSourceItem.UnitCost;
+            btnAdd.Text = "Update Vendor";
+            comboVendors.Enabled = false;
+        }//End of FrmAttachVendorSource(..)
 
         private void FrmAttachVendorSource_Load(object sender, EventArgs e)
         {
             lblDisplayUnitPrice.Text = String.Format("{0:C}", 0);
-            PopulateActiveCombo();
             PopulateVendorCombo();
-            txtVendorName.Text = vendors[0].Name;
         }//End of FrmAttachVendorSource_Load(..)
 
         private void btCancel_Click(object sender, EventArgs e)
@@ -42,62 +63,96 @@ namespace com.Farouche
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            VendorSourceItem vendorSource = new VendorSourceItem()
+            if(btnAdd.Text.Equals("Add Vendor"))
             {
-                ProductID = _currentProduct.Id,
-                VendorID = (int)cbVendor.SelectedItem,
-                UnitCost = (decimal)nudUnitPrice.Value,
-                ItemsPerCase = (int)nudCase.Value,
-                MinQtyToOrder = (int)nudMinnimum.Value,
-                Active = Convert.ToBoolean(cbActive.SelectedItem)
-            };
-            try
-            {
-                if (_vendorSource.AddVendorSourceItem(vendorSource))
+                VendorSourceItem vendorSource = new VendorSourceItem()
                 {
-                    this.DialogResult = DialogResult.OK;
-                    MessageBox.Show("The vendor was attached to this product.");
+                    ProductID = _currentProduct.Id,
+                    VendorID = ((KeyValuePair<int,string>)comboVendors.SelectedItem).Key,
+                    UnitCost = nudUnitPrice.Value,
+                    ItemsPerCase = (int)nudCase.Value,
+                    MinQtyToOrder = (int)nudMinnimum.Value,
+                    Active = true,
+                };
+                try
+                {
+                    if (_vendorSource.AddVendorSourceItem(vendorSource))
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        MessageBox.Show("The vendor details were added to this product.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The vendor was not attached to the product.\nThat Product/Vendor combination may already exist.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("The vendor was not attached to the product.\nThat Product/Vendor combination may already exist.");
+                    MessageBox.Show(ex.Message);
                 }
             }
-            catch (Exception ex)
+            else if(btnAdd.Text.Equals("Update Vendor"))
             {
-                MessageBox.Show("Error has Occured. Error Message: " + ex.Message);
+                VendorSourceItem vendorSource = new VendorSourceItem()
+                {
+                    ProductID = _currentProduct.Id,
+                    VendorID = ((KeyValuePair<int, string>)comboVendors.SelectedItem).Key,
+                    UnitCost = nudUnitPrice.Value,
+                    ItemsPerCase = (int)nudCase.Value,
+                    MinQtyToOrder = (int)nudMinnimum.Value,
+                    Active = true,
+                };
+                try
+                {
+                    if (_vendorSource.UpdateVendorSourceItem(vendorSource, _currentVendorSourceItem))
+                    {
+                        this.DialogResult = DialogResult.OK;
+                        MessageBox.Show("The vendor details for this product were updated.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The vendor details were not updated. This information may have already been updated by another employee. Please try again.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error has Occured. Error Message: " + ex.Message);
+                }
             }
         }//End of btnAdd_Click(..)
 
-        private void PopulateActiveCombo()
-        {
-            Active active;
-            for (int i = 1; i >= 0; i--)
-            {
-                active = (Active)i;
-                this.cbActive.Items.Add(active);
-            }
-            this.cbActive.SelectedIndex = 0;
-        }//End of populateActiveCombo()
-
         private void PopulateVendorCombo()
         {
-            foreach(var vendor in vendors)
+            Dictionary<int,String> vendorsDictionary = new Dictionary<int,string>();
+            int counter = 0;
+            int index = 0;
+            foreach(var vendor in _vendors)
             {
-                cbVendor.Items.Add(vendor.Id);
+                vendorsDictionary.Add(vendor.Id, vendor.Name);
+                if(_currentVendorSourceItem != null)
+                {
+                    if (vendor.Name.Equals(_currentVendorSourceItem.Name))
+                    {
+                        index = counter;
+                    }
+                    counter++;
+                }
             }
-            this.cbVendor.SelectedIndex = 0;
-
+            comboVendors.DataSource = new BindingSource(vendorsDictionary, null);
+            comboVendors.DisplayMember = "Value";
+            comboVendors.ValueMember = "Key";
+            comboVendors.SelectedIndex = index;
         }//End of PopulateVendorCombo()
 
         private void nudUnitPrice_ValueChanged(object sender, EventArgs e)
         {
-            lblDisplayUnitPrice.Text = String.Format("{0:C}", nudUnitPrice.Value);
+            //lblDisplayUnitPrice.Text = String.Format("{0:C}", nudUnitPrice.Value);
         }
 
-        private void cbVendor_SelectedIndexChanged(object sender, EventArgs e)
+        private void nudUnitPrice_Enter(object sender, EventArgs e)
         {
-            txtVendorName.Text = vendors[cbVendor.SelectedIndex].Name;
+            NumericUpDown that = (NumericUpDown)sender;
+            that.Select(0, that.Text.Length);
         }//End of nudUnitPrice_ValueChanged(..)
     }
 }

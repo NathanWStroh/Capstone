@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStartUp));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reorderProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +50,11 @@
             this.tsmiShippingTerms = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShippingVendors = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reorderProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMain = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonCascade = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonTileVertically = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
+            this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -104,6 +109,13 @@
             this.productsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.productsToolStripMenuItem.Text = "Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
+            // 
+            // reorderProductsToolStripMenuItem
+            // 
+            this.reorderProductsToolStripMenuItem.Name = "reorderProductsToolStripMenuItem";
+            this.reorderProductsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.reorderProductsToolStripMenuItem.Text = "Reorder Products";
+            this.reorderProductsToolStripMenuItem.Click += new System.EventHandler(this.reorderProductsToolStripMenuItem_Click);
             // 
             // vendorToolStripMenuItem
             // 
@@ -215,18 +227,43 @@
             this.reportsToolStripMenuItem.Visible = false;
             this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
-            // reorderProductsToolStripMenuItem
+            // toolStripMain
             // 
-            this.reorderProductsToolStripMenuItem.Name = "reorderProductsToolStripMenuItem";
-            this.reorderProductsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.reorderProductsToolStripMenuItem.Text = "Reorder Products";
-            this.reorderProductsToolStripMenuItem.Click += new System.EventHandler(this.reorderProductsToolStripMenuItem_Click);
+            this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonCascade,
+            this.toolStripButtonTileVertically});
+            this.toolStripMain.Location = new System.Drawing.Point(0, 24);
+            this.toolStripMain.Name = "toolStripMain";
+            this.toolStripMain.Size = new System.Drawing.Size(1284, 25);
+            this.toolStripMain.TabIndex = 2;
+            this.toolStripMain.Text = "toolStrip1";
+            // 
+            // toolStripButtonCascade
+            // 
+            this.toolStripButtonCascade.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonCascade.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonCascade.Image")));
+            this.toolStripButtonCascade.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonCascade.Name = "toolStripButtonCascade";
+            this.toolStripButtonCascade.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonCascade.Text = "Cascade Windows";
+            this.toolStripButtonCascade.Click += new System.EventHandler(this.toolStripButtonCascade_Click);
+            // 
+            // toolStripButtonTileVertically
+            // 
+            this.toolStripButtonTileVertically.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonTileVertically.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTileVertically.Image")));
+            this.toolStripButtonTileVertically.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonTileVertically.Name = "toolStripButtonTileVertically";
+            this.toolStripButtonTileVertically.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonTileVertically.Text = "Tile Windows Vertically";
+            this.toolStripButtonTileVertically.Click += new System.EventHandler(this.toolStripButtonTileVertically_Click);
             // 
             // frmStartUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 575);
+            this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
@@ -235,6 +272,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStartUp_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStripMain.ResumeLayout(false);
+            this.toolStripMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,6 +302,9 @@
         private System.Windows.Forms.ToolStripMenuItem newOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reorderProductsToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStripMain;
+        private System.Windows.Forms.ToolStripButton toolStripButtonCascade;
+        private System.Windows.Forms.ToolStripButton toolStripButtonTileVertically;
 
     }
 }

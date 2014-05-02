@@ -6,5 +6,6 @@ AS
 	SELECT *
 	FROM [dbo].[ShippingVendors]
 	WHERE [ShippingVendorID] = @shippingVendorID
+	ORDER BY [ShippingVendorId]
 
 

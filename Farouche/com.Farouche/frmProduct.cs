@@ -226,7 +226,7 @@ namespace com.Farouche.Presentation
                     break;
             }
             setDefaults();
-        }//End of findActiveSelection()
+        }//End of FindActiveSelection()
 
         private void cbProductStatusSearch_Click(object sender, EventArgs e)
         {
