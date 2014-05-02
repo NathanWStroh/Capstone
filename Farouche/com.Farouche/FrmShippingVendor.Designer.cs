@@ -35,6 +35,7 @@
             this.btnUpdateVendor = new System.Windows.Forms.Button();
             this.lvShippingVendors = new System.Windows.Forms.ListView();
             this.btnAddVendor = new System.Windows.Forms.Button();
+            this.btnDeleteVendor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDeactivateVendor
@@ -46,7 +47,7 @@
             this.btnDeactivateVendor.TabIndex = 25;
             this.btnDeactivateVendor.Text = "Deactivate";
             this.btnDeactivateVendor.UseVisualStyleBackColor = true;
-            this.btnDeactivateVendor.Visible = false;
+            this.btnDeactivateVendor.Click += new System.EventHandler(this.btnDeactivateVendor_Click);
             // 
             // btnActivateVendor
             // 
@@ -57,17 +58,17 @@
             this.btnActivateVendor.TabIndex = 24;
             this.btnActivateVendor.Text = "Activate";
             this.btnActivateVendor.UseVisualStyleBackColor = true;
-            this.btnActivateVendor.Visible = false;
+            this.btnActivateVendor.Click += new System.EventHandler(this.btnActivateVendor_Click);
             // 
             // cbVendorStatusSearch
             // 
-            this.cbVendorStatusSearch.Enabled = false;
             this.cbVendorStatusSearch.FormattingEnabled = true;
             this.cbVendorStatusSearch.Location = new System.Drawing.Point(650, 32);
             this.cbVendorStatusSearch.Name = "cbVendorStatusSearch";
             this.cbVendorStatusSearch.Size = new System.Drawing.Size(121, 21);
             this.cbVendorStatusSearch.TabIndex = 23;
-            this.cbVendorStatusSearch.Visible = false;
+            this.cbVendorStatusSearch.SelectedIndexChanged += new System.EventHandler(this.cbVendorStatusSearch_SelectedIndexChanged);
+            this.cbVendorStatusSearch.Click += new System.EventHandler(this.cbVendorStatusSearch_Click);
             // 
             // lblProductActiveSearch
             // 
@@ -77,7 +78,6 @@
             this.lblProductActiveSearch.Size = new System.Drawing.Size(40, 13);
             this.lblProductActiveSearch.TabIndex = 22;
             this.lblProductActiveSearch.Text = "Active:";
-            this.lblProductActiveSearch.Visible = false;
             // 
             // btnUpdateVendor
             // 
@@ -113,11 +113,24 @@
             this.btnAddVendor.UseVisualStyleBackColor = true;
             this.btnAddVendor.Click += new System.EventHandler(this.btnAddVendor_Click);
             // 
+            // btnDeleteVendor
+            // 
+            this.btnDeleteVendor.Enabled = false;
+            this.btnDeleteVendor.Location = new System.Drawing.Point(22, 193);
+            this.btnDeleteVendor.Name = "btnDeleteVendor";
+            this.btnDeleteVendor.Size = new System.Drawing.Size(100, 25);
+            this.btnDeleteVendor.TabIndex = 34;
+            this.btnDeleteVendor.Text = "Remove Vendor";
+            this.btnDeleteVendor.UseVisualStyleBackColor = true;
+            this.btnDeleteVendor.Visible = false;
+            this.btnDeleteVendor.Click += new System.EventHandler(this.btnDeleteVendor_Click);
+            // 
             // FrmShippingVendor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 350);
+            this.Controls.Add(this.btnDeleteVendor);
             this.Controls.Add(this.btnDeactivateVendor);
             this.Controls.Add(this.btnActivateVendor);
             this.Controls.Add(this.cbVendorStatusSearch);
@@ -126,7 +139,7 @@
             this.Controls.Add(this.lvShippingVendors);
             this.Controls.Add(this.btnAddVendor);
             this.Name = "FrmShippingVendor";
-            this.Text = "FrmShippingVendor";
+            this.Text = "Shipping Vendors";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingVendor_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -142,5 +155,6 @@
         private System.Windows.Forms.Button btnUpdateVendor;
         private System.Windows.Forms.ListView lvShippingVendors;
         private System.Windows.Forms.Button btnAddVendor;
+        private System.Windows.Forms.Button btnDeleteVendor;
     }
 }

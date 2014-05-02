@@ -35,20 +35,20 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtCity = new System.Windows.Forms.TextBox();
-            this.txtCountry = new System.Windows.Forms.TextBox();
             this.txtZip = new System.Windows.Forms.TextBox();
             this.lblCountry = new System.Windows.Forms.Label();
             this.lblZip = new System.Windows.Forms.Label();
             this.lblState = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtContact = new System.Windows.Forms.TextBox();
-            this.txtPhone = new System.Windows.Forms.TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblContact = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.txtState = new System.Windows.Forms.TextBox();
+            this.comboState = new System.Windows.Forms.ComboBox();
+            this.comboCountry = new System.Windows.Forms.ComboBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -109,13 +109,6 @@
             this.txtCity.Size = new System.Drawing.Size(100, 20);
             this.txtCity.TabIndex = 2;
             // 
-            // txtCountry
-            // 
-            this.txtCountry.Location = new System.Drawing.Point(85, 163);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.Size = new System.Drawing.Size(100, 20);
-            this.txtCountry.TabIndex = 5;
-            // 
             // txtZip
             // 
             this.txtZip.Location = new System.Drawing.Point(85, 137);
@@ -164,13 +157,6 @@
             this.txtContact.Size = new System.Drawing.Size(100, 20);
             this.txtContact.TabIndex = 7;
             // 
-            // txtPhone
-            // 
-            this.txtPhone.Location = new System.Drawing.Point(291, 33);
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(100, 20);
-            this.txtPhone.TabIndex = 6;
-            // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
@@ -218,12 +204,30 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // txtState
+            // comboState
             // 
-            this.txtState.Location = new System.Drawing.Point(85, 111);
-            this.txtState.Name = "txtState";
-            this.txtState.Size = new System.Drawing.Size(100, 20);
-            this.txtState.TabIndex = 3;
+            this.comboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboState.FormattingEnabled = true;
+            this.comboState.Location = new System.Drawing.Point(85, 111);
+            this.comboState.Name = "comboState";
+            this.comboState.Size = new System.Drawing.Size(100, 21);
+            this.comboState.TabIndex = 3;
+            // 
+            // comboCountry
+            // 
+            this.comboCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCountry.FormattingEnabled = true;
+            this.comboCountry.Location = new System.Drawing.Point(85, 163);
+            this.comboCountry.Name = "comboCountry";
+            this.comboCountry.Size = new System.Drawing.Size(100, 21);
+            this.comboCountry.TabIndex = 5;
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(291, 33);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(100, 20);
+            this.txtPhone.TabIndex = 6;
             // 
             // FrmAddShippingVendor
             // 
@@ -231,16 +235,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 261);
-            this.Controls.Add(this.txtState);
+            this.Controls.Add(this.txtPhone);
+            this.Controls.Add(this.comboCountry);
+            this.Controls.Add(this.comboState);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtContact);
-            this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblContact);
             this.Controls.Add(this.lblPhone);
-            this.Controls.Add(this.txtCountry);
             this.Controls.Add(this.txtZip);
             this.Controls.Add(this.lblCountry);
             this.Controls.Add(this.lblZip);
@@ -254,7 +258,7 @@
             this.Controls.Add(this.btnCancel);
             this.Name = "FrmAddShippingVendor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Enter Shipping Vendor";
+            this.Text = "Create Shipping Vendor";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,19 +273,19 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtCity;
-        private System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.TextBox txtZip;
         private System.Windows.Forms.Label lblCountry;
         private System.Windows.Forms.Label lblZip;
         private System.Windows.Forms.Label lblState;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtContact;
-        private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblContact;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox txtState;
+        private System.Windows.Forms.ComboBox comboState;
+        private System.Windows.Forms.ComboBox comboCountry;
+        private System.Windows.Forms.TextBox txtPhone;
     }
 }

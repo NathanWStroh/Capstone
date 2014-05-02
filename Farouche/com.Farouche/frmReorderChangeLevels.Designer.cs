@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtProduct = new System.Windows.Forms.Label();
+            this.ttpReorderLevels = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericROAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericROThreshold)).BeginInit();
             this.SuspendLayout();
@@ -87,6 +89,8 @@
             this.txtROThreshold.Size = new System.Drawing.Size(50, 20);
             this.txtROThreshold.TabIndex = 0;
             this.txtROThreshold.TabStop = false;
+            this.ttpReorderLevels.SetToolTip(this.txtROThreshold, "Current Threshold before a Product is considered to be needing Reordered by the S" +
+                    "ystem.");
             // 
             // txtROAmount
             // 
@@ -96,6 +100,7 @@
             this.txtROAmount.Size = new System.Drawing.Size(50, 20);
             this.txtROAmount.TabIndex = 0;
             this.txtROAmount.TabStop = false;
+            this.ttpReorderLevels.SetToolTip(this.txtROAmount, "Current amount to be reordered at one time.");
             // 
             // numericROAmount
             // 
@@ -109,6 +114,7 @@
             this.numericROAmount.Size = new System.Drawing.Size(50, 20);
             this.numericROAmount.TabIndex = 1;
             this.numericROAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ttpReorderLevels.SetToolTip(this.numericROAmount, "Replaces the above amount with a new Reorder Amount.");
             this.numericROAmount.Value = new decimal(new int[] {
             9999,
             0,
@@ -127,6 +133,7 @@
             this.numericROThreshold.Size = new System.Drawing.Size(50, 20);
             this.numericROThreshold.TabIndex = 1;
             this.numericROThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ttpReorderLevels.SetToolTip(this.numericROThreshold, "Replaces the above amount with a new Reorder Threshold.");
             this.numericROThreshold.Value = new decimal(new int[] {
             9999,
             0,
@@ -140,6 +147,7 @@
             this.btnSave.Size = new System.Drawing.Size(50, 23);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
+            this.ttpReorderLevels.SetToolTip(this.btnSave, "Saves Changes.");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -150,6 +158,7 @@
             this.btnCancel.Size = new System.Drawing.Size(50, 23);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
+            this.ttpReorderLevels.SetToolTip(this.btnCancel, "Reverts Changes.");
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -162,6 +171,7 @@
             this.txtProduct.Size = new System.Drawing.Size(203, 24);
             this.txtProduct.TabIndex = 12;
             this.txtProduct.Text = "No Product Selected";
+            this.ttpReorderLevels.SetToolTip(this.txtProduct, "Current Product Selected to be Changed.");
             // 
             // frmReorderChangeLevels
             // 
@@ -202,5 +212,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label txtProduct;
+        private System.Windows.Forms.ToolTip ttpReorderLevels;
     }
 }

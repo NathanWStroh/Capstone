@@ -8,7 +8,7 @@
 /*
 *                               Changelog
 * Date         By          Ticket          Version         Description
-* 
+* 5/1/2014     Kaleb                                       Adjusted class to include _shippingVendorName.
 * 
 */
 
@@ -19,6 +19,7 @@ namespace com.Farouche.Commons
 
         private int _shippingVendorID;
         private string _description;
+        private string _shippingVendorName;
 
         public ShippingTerm()
         {
@@ -59,6 +60,17 @@ namespace com.Farouche.Commons
             set 
             {
                 _description = value;
+            }
+        }
+        public string ShippingVendorName
+        {
+            get
+            {
+                return _shippingVendorName;
+            }
+            set
+            {
+                _shippingVendorName = value;
             }
         }
         public override string ToString()

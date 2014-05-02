@@ -41,6 +41,9 @@
             // 
             // reportViewer1
             // 
+            this.reportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             reportDataSource2.Name = "DataSet1";
             reportDataSource2.Value = this.CLSLineItemBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
@@ -58,8 +61,12 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintOrderDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+<<<<<<< HEAD
             this.Text = "Print Order Details";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrintOrderDetails_FormClosed);
+=======
+            this.Text = "Print Preview Order Details";
+>>>>>>> origin/master
             this.Load += new System.EventHandler(this.frmPrintOrderDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CLSLineItemBindingSource)).EndInit();
             this.ResumeLayout(false);

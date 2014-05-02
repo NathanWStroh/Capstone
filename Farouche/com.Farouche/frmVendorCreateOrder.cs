@@ -132,7 +132,7 @@ namespace com.Farouche.Presentation
 
                 //VendorOrder myVendorOrder = new VendorOrder(int.Parse(id));
                 VendorOrder myVendorOrder = new VendorOrder(int.Parse(id));
-                myVendorOrder.NumberOfShipments = int.Parse(comboShipments.SelectedItem.ToString());
+                myVendorOrder.NumberOfShipments = Int32.Parse(comboShipments.SelectedItem.ToString());
                 myVendorOrder.DateOrdered = DateTime.Parse(tbOrderDate.Text);
                 myVendorOrder.Name = vendorName;
 

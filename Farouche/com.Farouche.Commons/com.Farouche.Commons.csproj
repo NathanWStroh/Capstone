@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessToken.cs" />
@@ -40,13 +41,22 @@
     <Compile Include="CLSLineItem.cs" />
     <Compile Include="CLSPackDetails.cs" />
     <Compile Include="CLSVendorProduct.cs" />
+    <Compile Include="CurrencyUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Enity.cs" />
     <Compile Include="ApplicationStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="InchesUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Messeges.cs" />
+    <Compile Include="PoundsUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reorder.cs" />
