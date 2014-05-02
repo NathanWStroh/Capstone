@@ -48,13 +48,16 @@
             // 
             // lvAllOrders
             // 
+            this.lvAllOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvAllOrders.FullRowSelect = true;
             this.lvAllOrders.GridLines = true;
             this.lvAllOrders.HideSelection = false;
             this.lvAllOrders.Location = new System.Drawing.Point(2, 0);
             this.lvAllOrders.MultiSelect = false;
             this.lvAllOrders.Name = "lvAllOrders";
-            this.lvAllOrders.Size = new System.Drawing.Size(760, 252);
+            this.lvAllOrders.Size = new System.Drawing.Size(536, 252);
             this.lvAllOrders.TabIndex = 0;
             this.lvAllOrders.UseCompatibleStateImageBehavior = false;
             this.lvAllOrders.View = System.Windows.Forms.View.Details;
@@ -107,7 +110,7 @@
             this.Controls.Add(this.btnClearUser);
             this.Controls.Add(this.lvAllOrders);
             this.Name = "FrmShippingAllOrders";
-            this.Text = "frmShippingAllOrders";
+            this.Text = "Shipping All Orders";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingAllOrders_FormClosed);
             this.Load += new System.EventHandler(this.FrmShippingAllOrders_Load);
             this.ResumeLayout(false);

@@ -34,7 +34,7 @@
             // 
             // btnPackComplete
             // 
-            this.btnPackComplete.Location = new System.Drawing.Point(621, 259);
+            this.btnPackComplete.Location = new System.Drawing.Point(615, 270);
             this.btnPackComplete.Name = "btnPackComplete";
             this.btnPackComplete.Size = new System.Drawing.Size(144, 23);
             this.btnPackComplete.TabIndex = 3;
@@ -44,13 +44,16 @@
             // 
             // lvPackList
             // 
+            this.lvPackList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvPackList.FullRowSelect = true;
             this.lvPackList.GridLines = true;
             this.lvPackList.HideSelection = false;
-            this.lvPackList.Location = new System.Drawing.Point(1, 1);
+            this.lvPackList.Location = new System.Drawing.Point(12, 12);
             this.lvPackList.MultiSelect = false;
             this.lvPackList.Name = "lvPackList";
-            this.lvPackList.Size = new System.Drawing.Size(760, 252);
+            this.lvPackList.Size = new System.Drawing.Size(747, 252);
             this.lvPackList.TabIndex = 2;
             this.lvPackList.UseCompatibleStateImageBehavior = false;
             this.lvPackList.View = System.Windows.Forms.View.Details;
@@ -59,11 +62,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 294);
+            this.ClientSize = new System.Drawing.Size(771, 301);
             this.Controls.Add(this.btnPackComplete);
             this.Controls.Add(this.lvPackList);
             this.Name = "FrmShippingPackList";
-            this.Text = "FrmShippingPackList";
+            this.Text = "Shipping Pack List";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingPackList_FormClosed);
             this.ResumeLayout(false);
 

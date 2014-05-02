@@ -52,7 +52,7 @@
             // lblVendorOrderID
             // 
             this.lblVendorOrderID.AutoSize = true;
-            this.lblVendorOrderID.Location = new System.Drawing.Point(37, 13);
+            this.lblVendorOrderID.Location = new System.Drawing.Point(12, 9);
             this.lblVendorOrderID.Name = "lblVendorOrderID";
             this.lblVendorOrderID.Size = new System.Drawing.Size(81, 13);
             this.lblVendorOrderID.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // txtVendorOrderID
             // 
-            this.txtVendorOrderID.Location = new System.Drawing.Point(125, 13);
+            this.txtVendorOrderID.Location = new System.Drawing.Point(100, 9);
             this.txtVendorOrderID.Name = "txtVendorOrderID";
             this.txtVendorOrderID.ReadOnly = true;
             this.txtVendorOrderID.Size = new System.Drawing.Size(100, 20);
@@ -69,7 +69,7 @@
             // lblVendorName
             // 
             this.lblVendorName.AutoSize = true;
-            this.lblVendorName.Location = new System.Drawing.Point(40, 46);
+            this.lblVendorName.Location = new System.Drawing.Point(15, 42);
             this.lblVendorName.Name = "lblVendorName";
             this.lblVendorName.Size = new System.Drawing.Size(72, 13);
             this.lblVendorName.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             // txtVendorName
             // 
-            this.txtVendorName.Location = new System.Drawing.Point(125, 39);
+            this.txtVendorName.Location = new System.Drawing.Point(100, 35);
             this.txtVendorName.Name = "txtVendorName";
             this.txtVendorName.ReadOnly = true;
             this.txtVendorName.Size = new System.Drawing.Size(100, 20);
@@ -86,7 +86,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(527, 10);
+            this.label1.Location = new System.Drawing.Point(502, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 5;
@@ -94,7 +94,7 @@
             // 
             // txtDateOrdered
             // 
-            this.txtDateOrdered.Location = new System.Drawing.Point(612, 6);
+            this.txtDateOrdered.Location = new System.Drawing.Point(587, 6);
             this.txtDateOrdered.Name = "txtDateOrdered";
             this.txtDateOrdered.ReadOnly = true;
             this.txtDateOrdered.Size = new System.Drawing.Size(100, 20);
@@ -102,7 +102,7 @@
             // 
             // btnAddLineItemtoCurrentListView
             // 
-            this.btnAddLineItemtoCurrentListView.Location = new System.Drawing.Point(704, 102);
+            this.btnAddLineItemtoCurrentListView.Location = new System.Drawing.Point(650, 83);
             this.btnAddLineItemtoCurrentListView.Name = "btnAddLineItemtoCurrentListView";
             this.btnAddLineItemtoCurrentListView.Size = new System.Drawing.Size(162, 23);
             this.btnAddLineItemtoCurrentListView.TabIndex = 7;
@@ -112,7 +112,7 @@
             // 
             // btnAddNote
             // 
-            this.btnAddNote.Location = new System.Drawing.Point(704, 151);
+            this.btnAddNote.Location = new System.Drawing.Point(650, 132);
             this.btnAddNote.Name = "btnAddNote";
             this.btnAddNote.Size = new System.Drawing.Size(162, 23);
             this.btnAddNote.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             // btnUpdateLineItem
             // 
-            this.btnUpdateLineItem.Location = new System.Drawing.Point(704, 194);
+            this.btnUpdateLineItem.Location = new System.Drawing.Point(650, 175);
             this.btnUpdateLineItem.Name = "btnUpdateLineItem";
             this.btnUpdateLineItem.Size = new System.Drawing.Size(162, 23);
             this.btnUpdateLineItem.TabIndex = 9;
@@ -133,7 +133,7 @@
             // lblDateReceived
             // 
             this.lblDateReceived.AutoSize = true;
-            this.lblDateReceived.Location = new System.Drawing.Point(527, 46);
+            this.lblDateReceived.Location = new System.Drawing.Point(502, 42);
             this.lblDateReceived.Name = "lblDateReceived";
             this.lblDateReceived.Size = new System.Drawing.Size(79, 13);
             this.lblDateReceived.TabIndex = 10;
@@ -141,7 +141,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(612, 40);
+            this.dateTimePicker1.Location = new System.Drawing.Point(587, 36);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 11;
@@ -149,7 +149,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(254, 13);
+            this.label2.Location = new System.Drawing.Point(229, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 12;
@@ -157,7 +157,7 @@
             // 
             // txtNumberofShipments
             // 
-            this.txtNumberofShipments.Location = new System.Drawing.Point(368, 10);
+            this.txtNumberofShipments.Location = new System.Drawing.Point(343, 6);
             this.txtNumberofShipments.Name = "txtNumberofShipments";
             this.txtNumberofShipments.ReadOnly = true;
             this.txtNumberofShipments.Size = new System.Drawing.Size(63, 20);
@@ -166,7 +166,7 @@
             // lblShipmentsReceived
             // 
             this.lblShipmentsReceived.AutoSize = true;
-            this.lblShipmentsReceived.Location = new System.Drawing.Point(257, 45);
+            this.lblShipmentsReceived.Location = new System.Drawing.Point(232, 41);
             this.lblShipmentsReceived.Name = "lblShipmentsReceived";
             this.lblShipmentsReceived.Size = new System.Drawing.Size(105, 13);
             this.lblShipmentsReceived.TabIndex = 14;
@@ -174,14 +174,14 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(368, 40);
+            this.numericUpDown1.Location = new System.Drawing.Point(343, 36);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 15;
             // 
             // btnUpdateOrder
             // 
-            this.btnUpdateOrder.Location = new System.Drawing.Point(705, 244);
+            this.btnUpdateOrder.Location = new System.Drawing.Point(651, 225);
             this.btnUpdateOrder.Name = "btnUpdateOrder";
             this.btnUpdateOrder.Size = new System.Drawing.Size(161, 23);
             this.btnUpdateOrder.TabIndex = 16;
@@ -191,7 +191,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(705, 293);
+            this.btnCancel.Location = new System.Drawing.Point(651, 274);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(161, 23);
             this.btnCancel.TabIndex = 17;
@@ -201,8 +201,11 @@
             // 
             // lvVendorOrderLineItems
             // 
+            this.lvVendorOrderLineItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvVendorOrderLineItems.GridLines = true;
-            this.lvVendorOrderLineItems.Location = new System.Drawing.Point(43, 85);
+            this.lvVendorOrderLineItems.Location = new System.Drawing.Point(12, 66);
             this.lvVendorOrderLineItems.Name = "lvVendorOrderLineItems";
             this.lvVendorOrderLineItems.Size = new System.Drawing.Size(632, 260);
             this.lvVendorOrderLineItems.TabIndex = 18;
@@ -214,7 +217,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 692);
+            this.ClientSize = new System.Drawing.Size(829, 338);
             this.Controls.Add(this.lvVendorOrderLineItems);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdateOrder);

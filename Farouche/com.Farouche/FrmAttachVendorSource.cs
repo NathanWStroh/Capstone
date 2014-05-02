@@ -84,7 +84,7 @@ namespace com.Farouche
         {
             foreach(var vendor in vendors)
             {
-                cbVendor.Items.Add(vendor.Id);
+                cbVendor.Items.Add(vendor.Id + " " + vendor.Name);
             }
             this.cbVendor.SelectedIndex = 0;
 
@@ -92,12 +92,17 @@ namespace com.Farouche
 
         private void nudUnitPrice_ValueChanged(object sender, EventArgs e)
         {
-            lblDisplayUnitPrice.Text = String.Format("{0:C}", nudUnitPrice.Value);
+            //lblDisplayUnitPrice.Text = String.Format("{0:C}", nudUnitPrice.Value);
         }
-
         private void cbVendor_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtVendorName.Text = vendors[cbVendor.SelectedIndex].Name;
+        }
+
+        private void nudUnitPrice_Enter(object sender, EventArgs e)
+        {
+            NumericUpDown that = (NumericUpDown)sender;
+            that.Select(0, that.Text.Length);
         }//End of nudUnitPrice_ValueChanged(..)
     }
 }

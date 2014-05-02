@@ -34,20 +34,23 @@
             // 
             // lvPickList
             // 
+            this.lvPickList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvPickList.FullRowSelect = true;
             this.lvPickList.GridLines = true;
             this.lvPickList.HideSelection = false;
             this.lvPickList.Location = new System.Drawing.Point(12, 12);
             this.lvPickList.MultiSelect = false;
             this.lvPickList.Name = "lvPickList";
-            this.lvPickList.Size = new System.Drawing.Size(760, 252);
+            this.lvPickList.Size = new System.Drawing.Size(760, 248);
             this.lvPickList.TabIndex = 4;
             this.lvPickList.UseCompatibleStateImageBehavior = false;
             this.lvPickList.View = System.Windows.Forms.View.Details;
             // 
             // btnStartPick
             // 
-            this.btnStartPick.Location = new System.Drawing.Point(634, 274);
+            this.btnStartPick.Location = new System.Drawing.Point(628, 270);
             this.btnStartPick.Name = "btnStartPick";
             this.btnStartPick.Size = new System.Drawing.Size(144, 23);
             this.btnStartPick.TabIndex = 3;
@@ -59,11 +62,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 305);
+            this.ClientSize = new System.Drawing.Size(784, 301);
             this.Controls.Add(this.lvPickList);
             this.Controls.Add(this.btnStartPick);
             this.Name = "FrmShippingPickList";
-            this.Text = "FrmShippingPickList";
+            this.Text = "Shipping Pick List";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingPickList_FormClosed);
             this.ResumeLayout(false);
 
