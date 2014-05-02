@@ -33,7 +33,10 @@
             this.lblVendor = new System.Windows.Forms.Label();
             this.lblUnitPrice = new System.Windows.Forms.Label();
             this.lblCaseQty = new System.Windows.Forms.Label();
-            this.nudUnitPrice = new System.Windows.Forms.NumericUpDown();
+            this.lblActive = new System.Windows.Forms.Label();
+            this.nudUnitPrice = new com.Farouche.Commons.CurrencyUpDown();
+            this.cbActive = new System.Windows.Forms.ComboBox();
+            this.cbVendor = new System.Windows.Forms.ComboBox();
             this.lblMinimum = new System.Windows.Forms.Label();
             this.nudCase = new System.Windows.Forms.NumericUpDown();
             this.nudMinnimum = new System.Windows.Forms.NumericUpDown();
@@ -50,7 +53,7 @@
             this.btCancel.Location = new System.Drawing.Point(75, 158);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(75, 23);
-            this.btCancel.TabIndex = 16;
+            this.btCancel.TabIndex = 45;
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
             this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
@@ -61,7 +64,7 @@
             this.btnAdd.Location = new System.Drawing.Point(156, 158);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 17;
+            this.btnAdd.TabIndex = 46;
             this.btnAdd.Text = "Add Vendor";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -81,7 +84,7 @@
             this.lblUnitPrice.Location = new System.Drawing.Point(48, 65);
             this.lblUnitPrice.Name = "lblUnitPrice";
             this.lblUnitPrice.Size = new System.Drawing.Size(56, 13);
-            this.lblUnitPrice.TabIndex = 20;
+            this.lblUnitPrice.TabIndex = 0;
             this.lblUnitPrice.Text = "Unit Price:";
             // 
             // lblCaseQty
@@ -90,8 +93,17 @@
             this.lblCaseQty.Location = new System.Drawing.Point(28, 116);
             this.lblCaseQty.Name = "lblCaseQty";
             this.lblCaseQty.Size = new System.Drawing.Size(76, 13);
-            this.lblCaseQty.TabIndex = 21;
+            this.lblCaseQty.TabIndex = 0;
             this.lblCaseQty.Text = "Case Quantity:";
+            // 
+            // lblActive
+            // 
+            this.lblActive.AutoSize = true;
+            this.lblActive.Location = new System.Drawing.Point(53, 153);
+            this.lblActive.Name = "lblActive";
+            this.lblActive.Size = new System.Drawing.Size(40, 13);
+            this.lblActive.TabIndex = 0;
+            this.lblActive.Text = "Active:";
             // 
             // nudUnitPrice
             // 
@@ -106,7 +118,27 @@
             this.nudUnitPrice.Size = new System.Drawing.Size(121, 20);
             this.nudUnitPrice.TabIndex = 45;
             this.nudUnitPrice.ThousandsSeparator = true;
+            this.nudUnitPrice.TabIndex = 41;
             this.nudUnitPrice.ValueChanged += new System.EventHandler(this.nudUnitPrice_ValueChanged);
+            this.nudUnitPrice.Enter += new System.EventHandler(this.nudUnitPrice_Enter);
+            // 
+            // cbActive
+            // 
+            this.cbActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbActive.FormattingEnabled = true;
+            this.cbActive.Location = new System.Drawing.Point(99, 150);
+            this.cbActive.Name = "cbActive";
+            this.cbActive.Size = new System.Drawing.Size(121, 21);
+            this.cbActive.TabIndex = 44;
+            // 
+            // cbVendor
+            // 
+            this.cbVendor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVendor.FormattingEnabled = true;
+            this.cbVendor.Location = new System.Drawing.Point(99, 19);
+            this.cbVendor.Name = "cbVendor";
+            this.cbVendor.Size = new System.Drawing.Size(121, 21);
+            this.cbVendor.TabIndex = 40;
             // 
             // lblMinimum
             // 
@@ -114,7 +146,7 @@
             this.lblMinimum.Location = new System.Drawing.Point(24, 90);
             this.lblMinimum.Name = "lblMinimum";
             this.lblMinimum.Size = new System.Drawing.Size(80, 13);
-            this.lblMinimum.TabIndex = 48;
+            this.lblMinimum.TabIndex = 0;
             this.lblMinimum.Text = "Minimum Order:";
             // 
             // nudCase
@@ -127,7 +159,8 @@
             0});
             this.nudCase.Name = "nudCase";
             this.nudCase.Size = new System.Drawing.Size(121, 20);
-            this.nudCase.TabIndex = 50;
+            this.nudCase.TabIndex = 43;
+            this.nudCase.Enter += new System.EventHandler(this.nudUnitPrice_Enter);
             // 
             // nudMinnimum
             // 
@@ -139,7 +172,8 @@
             0});
             this.nudMinnimum.Name = "nudMinnimum";
             this.nudMinnimum.Size = new System.Drawing.Size(121, 20);
-            this.nudMinnimum.TabIndex = 49;
+            this.nudMinnimum.TabIndex = 42;
+            this.nudMinnimum.Enter += new System.EventHandler(this.nudUnitPrice_Enter);
             // 
             // lblDisplayUnitPrice
             // 
@@ -193,7 +227,10 @@
         private System.Windows.Forms.Label lblVendor;
         private System.Windows.Forms.Label lblUnitPrice;
         private System.Windows.Forms.Label lblCaseQty;
-        private System.Windows.Forms.NumericUpDown nudUnitPrice;
+        private System.Windows.Forms.Label lblActive;
+        private com.Farouche.Commons.CurrencyUpDown nudUnitPrice;
+        private System.Windows.Forms.ComboBox cbActive;
+        private System.Windows.Forms.ComboBox cbVendor;
         private System.Windows.Forms.Label lblMinimum;
         private System.Windows.Forms.NumericUpDown nudCase;
         private System.Windows.Forms.NumericUpDown nudMinnimum;

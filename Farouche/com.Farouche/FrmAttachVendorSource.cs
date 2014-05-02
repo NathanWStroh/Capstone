@@ -146,7 +146,13 @@ namespace com.Farouche
 
         private void nudUnitPrice_ValueChanged(object sender, EventArgs e)
         {
-            lblDisplayUnitPrice.Text = String.Format("{0:C}", nudUnitPrice.Value);
+            //lblDisplayUnitPrice.Text = String.Format("{0:C}", nudUnitPrice.Value);
         }
+
+        private void nudUnitPrice_Enter(object sender, EventArgs e)
+        {
+            NumericUpDown that = (NumericUpDown)sender;
+            that.Select(0, that.Text.Length);
+        }//End of nudUnitPrice_ValueChanged(..)
     }
 }

@@ -36,12 +36,14 @@
             // 
             // lvOpenVendorOrders
             // 
-
+            this.lvOpenVendorOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvOpenVendorOrders.FullRowSelect = true;
             this.lvOpenVendorOrders.GridLines = true;
-            this.lvOpenVendorOrders.Location = new System.Drawing.Point(55, 54);
+            this.lvOpenVendorOrders.Location = new System.Drawing.Point(12, 54);
             this.lvOpenVendorOrders.Name = "lvOpenVendorOrders";
-            this.lvOpenVendorOrders.Size = new System.Drawing.Size(645, 288);
+            this.lvOpenVendorOrders.Size = new System.Drawing.Size(775, 306);
             this.lvOpenVendorOrders.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvOpenVendorOrders.TabIndex = 0;
             this.lvOpenVendorOrders.UseCompatibleStateImageBehavior = false;
@@ -80,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 645);
+            this.ClientSize = new System.Drawing.Size(799, 372);
             this.Controls.Add(this.btngetAllOpenOrdersByVendor);
             this.Controls.Add(this.cbGetVendorsById);
             this.Controls.Add(this.lblGetAllOpenOrdersByVendor);
