@@ -5,7 +5,7 @@ using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 //Author: Andrew
 //Date Created: 1/31/2014
-//Last Modified: 02/22/2014 
+//Last Modified: 5/2/2014 
 //Last Modified By: Andrew Willhoit
 
 /*
@@ -18,6 +18,8 @@ using com.Farouche.Commons;
 *04/22/2014   Andrew Willhoit                              Fixed active/deactive/update/add buttons to show/hide appropriatly
  *                                                         Added search by Vendor capabilites, added display vendors by list by active/deactive
  *                                                         Added Validation. - Adjusted layout of form to match project.
+ *                                                         
+ * 5/2/14     Andrew Willhoit                              Added search function.
 */
 
 
@@ -179,9 +181,6 @@ namespace com.Farouche.Presentation
         }
 
 
-
-
-
         private void cbVendortStatusSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             findActiveSelection();
@@ -283,40 +282,26 @@ namespace com.Farouche.Presentation
                 }
                 searchListView(_searchIndexStart++);           
             }
-
-
-            
+          
         }
 
         private void txtVendorNameSearch_TextChanged(object sender, EventArgs e)
         {
-
             if (txtVendorSearch.Text == "")
             {
-                //  MessageBox.Show("empty");
-                //  setDefaults();
+                setDefaults();
 
-                // lvVendors.Focus();
-                
-                //lvVendors.HideSelection = true;
+                if (this.lvVendors.SelectedIndices.Count > 0)
+                    for (int i = 0; i < this.lvVendors.SelectedIndices.Count; i++)
+                    {
+                        this.lvVendors.Items[this.lvVendors.SelectedIndices[i]].Selected = false;
+                    }
 
-                //txtVendorSearch.Clear();
-                //lvVendors.HideSelection = false;
-
-
-
-
-                //foreach (ListViewItem item in lvVendors.Items)
-                //{
-                //    item.Selected = false;
-                //}
-
-                //txtVendorSearch.Focus();
+                txtVendorSearch.Focus();
             }
             else
             {
-                searchListView(0);
-                
+                searchListView(0);                
             }
             
         }
