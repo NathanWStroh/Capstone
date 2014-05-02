@@ -22,7 +22,7 @@ namespace com.Farouche
         private Boolean dgvBool = false;    //Boolean used to determine if the dgv has been populated or not.
         private Boolean cbCanClick = false; //Hack: makes sure cellValuechanged Event wont run calcAmount function at odd times.
         private Boolean _vendorOrdered = true; //used to check if current Vendor Order has been ordered before moving to new Vendor Order
-        private Reorder curProduct;
+        private Boolean devState = false;
         private List<Reorder> lreport;
         //Constructor with AccessToken as the only parameter.
         public frmReorder(AccessToken acctoken)
@@ -35,40 +35,8 @@ namespace com.Farouche
         private void frmReorder_Load(object sender, EventArgs e)
         {
             var venManager = new VendorManager();
-            fillVendorsComboBox();
-            //dgvReorder.AllowUserToAddRows = false;            
-        }
-
-        //makes a call to populate the dgv
-        private void btnGo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //_vendorOrdered is used to determine if the current Order has been sent out.
-                if (_vendorOrdered)
-                {
-                     populateDataGridView((int)cbVendors.SelectedValue);
-                }
-                else
-                {
-                    DialogResult result = MessageBox.Show("You are about to start a new Vendor Order without Saving your current Order, would you like to Proceed?",
-                        "Reorder", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    switch (result)
-                    {
-                        case DialogResult.Yes:
-                            populateDataGridView((int)cbVendors.SelectedValue);
-                            break;
-                        case DialogResult.No:
-                            break;
-                    }                
-                }
-            }
-            catch (ArgumentNullException ex)
-            { MessageBox.Show(ex.Message); }
-            dgvBool = true;
-            _vendorOrdered = false;
-        }
+            fillVendorsComboBox();        
+        }      
 
         //populates Vendor Combobox with list of Vendors 
         private void fillVendorsComboBox()
@@ -158,50 +126,51 @@ namespace com.Farouche
         private void dgvComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cb = (ComboBox)sender;
-
-            if (dgvReorder.CurrentRow.IsNewRow)
+            try
             {
-                if (cb.SelectedIndex >= 0 & dgvReorder.CurrentRow.Cells[1].ReadOnly == false)
+                if (dgvReorder.CurrentRow.IsNewRow)
                 {
-                    
-                    try
-                    {                   
-                        var valid = true;
-                        foreach(var _curProduct in _report.Reorders)
+                    if (cb.SelectedIndex >= 0 & dgvReorder.CurrentRow.Cells[1].ReadOnly == false)
+                    {
+
+                        try
                         {
-                            if(_curProduct.Product.Name == cb.SelectedItem.ToString())
+                            var valid = true;
+                            foreach (var _curProduct in _report.Reorders)
                             {
-                                MessageBox.Show("That Product has already been added.", "Error", 
-                                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                valid = false;
-                                break;
+                                if (_curProduct.Product.Name == cb.SelectedItem.ToString())
+                                {
+                                    MessageBox.Show("That Product has already been added.", "Error",
+                                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    valid = false;
+                                    break;
+                                }
+                            }
+                            if (valid)
+                            {
+                                var _product = _report.GetProductToReorder(cb.SelectedItem.ToString());
+                                _report.AddNewLineItem(_product.Product, _product.VendorSourceItem, (int)_product.Product._reorderAmount);
+                                _product.CasesToOrder = (int)_product.Product._reorderAmount;
+                                _report.AddToOrder(_product);
+                                _product.ReorderTotal = _report.UpdateReorderAmount(_product, _product.CasesToOrder);
+                                dgvReorder.CurrentRow.Cells[0].Value = _product.ShouldReorder;
+                                dgvReorder.CurrentRow.Cells[1] = new DataGridViewTextBoxCell();
+                                dgvReorder.CurrentRow.Cells[1].Value = _product.Product.Name;
+                                dgvReorder.CurrentRow.Cells[2].Value = _product.VendorSourceItem.UnitCost;
+                                dgvReorder.CurrentRow.Cells[3].Value = _product.Product._reorderThreshold;
+                                populate_dgvROComboBox((int)_product.Product._reorderAmount, (DataGridViewComboBoxCell)dgvReorder.CurrentRow.Cells[4]);
+                                dgvReorder.CurrentRow.Cells[5].Value = _product.ReorderTotal;
+                                dgvReorder.CurrentRow.Cells[0].ReadOnly = false;
+                                dgvReorder.CurrentRow.Cells[1].ReadOnly = true;
+                                txtTotalAmount.Text = _report.GetReportTotal().ToString("C2");                                
                             }
                         }
-                        if (valid)
-                        {
-                            var _product = _report.GetProductToReorder(cb.SelectedItem.ToString());
-                            _report.AddNewLineItem(_product.Product, _product.VendorSourceItem, (int)_product.Product._reorderAmount);
-                            _product.CasesToOrder = (int)_product.Product._reorderAmount;
-                            _report.AddToOrder(_product);
-                            _product.ReorderTotal = _report.UpdateReorderAmount(_product, _product.CasesToOrder);
-                            dgvReorder.CurrentRow.Cells[0].Value = _product.ShouldReorder;
-                            dgvReorder.CurrentRow.Cells[1] = new DataGridViewTextBoxCell();
-                            dgvReorder.CurrentRow.Cells[1].Value = _product.Product.Name;
-                            dgvReorder.CurrentRow.Cells[2].Value = _product.VendorSourceItem.UnitCost;
-                            dgvReorder.CurrentRow.Cells[3].Value = _product.Product._reorderThreshold;
-                            populate_dgvROComboBox((int)_product.Product._reorderAmount, (DataGridViewComboBoxCell)dgvReorder.CurrentRow.Cells[4]);
-                            dgvReorder.CurrentRow.Cells[5].Value = _product.ReorderTotal;
-                            dgvReorder.CurrentRow.Cells[0].ReadOnly = false;
-                            dgvReorder.CurrentRow.Cells[1].ReadOnly = true;
-                            txtTotalAmount.Text = _report.GetReportTotal().ToString("C2");
-                        }                        
+                        catch (ApplicationException ex) { MessageBox.Show(ex.Message); }
+
                     }
-                    catch (ApplicationException ex) { MessageBox.Show(ex.Message); }
-                    
                 }
-            }
-            else if (null != cb | cb.SelectedIndex != -1 & (bool)dgvReorder.CurrentRow.Cells[0].Value == true)
-            {
+                else if (null != cb | cb.SelectedIndex != -1 & (bool)dgvReorder.CurrentRow.Cells[0].Value == true)
+                {
                     foreach (var product in _report.Reorders)
                     {
                         if (product.Product.Name == dgvReorder.CurrentRow.Cells[1].Value.ToString())
@@ -214,7 +183,12 @@ namespace com.Farouche
                             txtTotalAmount.Text = _report.GetReportTotal().ToString("C2");
                         }
                     }
-            } //end outer if else               
+                } //end outer if else  
+            }
+            catch (NullReferenceException ex)
+            {
+                // MessageBox.Show("Stop clicking things so quickly!"); 
+            }
             cb.SelectedIndexChanged -= dgvComboBox_SelectedIndexChanged;
         }
 
@@ -259,30 +233,9 @@ namespace com.Farouche
             {
                 dgvReorder.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
-        }
+        }       
 
-        //Changing Reorder Level Form Button
-        private void btnReorderChangeLevel_Click(object sender, EventArgs e)
-        {
-            if (dgvBool == true && dgvReorder.CurrentRow.Selected == true)
-            {
-                foreach (var product in _report.Reorders)
-                {
-                    if (product.Product.Name == dgvReorder.CurrentRow.Cells[1].Value.ToString())
-                    {
-                        frmReorderChangeLevels _myForm = new frmReorderChangeLevels(product);
-                        _myForm.ShowDialog();
-                        populateDGV();
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("To select a Product, click on the Row Header OR\n Go! to start the report.", 
-                    "No Product Selected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+        //populates each row of the Datagridview
         private void populateDGV()
         {
             cbCanClick = false; //HACK
@@ -326,25 +279,95 @@ namespace com.Farouche
             dgvReorder.CellValueChanged += new DataGridViewCellEventHandler(dgvReorder_CellValueChanged);
         }
 
-        private void frmReorder_FormClosed(object sender, FormClosedEventArgs e)
+
+        //Button methods
+        //makes a call to populate the dgv
+        private void btnGo_Click(object sender, EventArgs e)
         {
-            Instance = null;
+            try
+            {
+                //_vendorOrdered is used to determine if the current Order has been sent out.
+                if (_vendorOrdered)
+                {
+                    populateDataGridView((int)cbVendors.SelectedValue);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("You are about to start a new Vendor Order without Saving your current Order, would you like to Proceed?",
+                        "Vendor Reorder", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    switch (result)
+                    {
+                        case DialogResult.Yes:
+                            populateDataGridView((int)cbVendors.SelectedValue);
+                            break;
+                        case DialogResult.No:
+                            break;
+                    }
+                }
+            }
+            catch (ArgumentNullException ex)
+            { MessageBox.Show(ex.Message); }
+            dgvBool = true;
+            _vendorOrdered = false;
+        }
+
+        //Changing Reorder Level Form Button
+        private void btnReorderChangeLevel_Click(object sender, EventArgs e)
+        {
+            if (dgvBool == true && dgvReorder.CurrentRow.Selected == true)
+            {
+                foreach (var product in _report.Reorders)
+                {
+                    if (product.Product.Name == dgvReorder.CurrentRow.Cells[1].Value.ToString())
+                    {
+                        frmReorderChangeLevels _myForm = new frmReorderChangeLevels(product);
+                        _myForm.ShowDialog();
+                        populateDGV();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("To select a Product, click on the Row Header OR\n Go! to start the report.",
+                    "No Product Selected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnReorder_Click(object sender, EventArgs e)
         {
-            _vendorOrdered = _report.OrderReorders();
-            _productManager = new ProductManager();
-            foreach (var _product in _report.Reorders) 
+            try
             {
-                _productManager.UpdateOnOrder((int)_product.CasesToOrder, _product.VendorSourceItem.ProductID);
+                _vendorOrdered = _report.OrderReorders();
+                _productManager = new ProductManager();
+                foreach (var _product in _report.Reorders)
+                {
+                    _productManager.UpdateOnOrder((int)_product.CasesToOrder, _product.VendorSourceItem.ProductID);
+                }
+                MessageBox.Show("Your order has been sent.","Vendor Reorder");
+            }
+            catch (ApplicationException ex)
+            {
+                if (devState)
+                { MessageBox.Show(ex.Message); }
+            }
+            catch (NullReferenceException ex) 
+            { 
+                MessageBox.Show("No Order to send.","Vendor Reorder");
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            _vendorOrdered = false;            
+            _vendorOrdered = true;
             dgvReorder.Rows.Clear();
+            _report = null;
         }
+
+        private void frmReorder_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }
+
     }//end frmReorder
 }//end Namespace
