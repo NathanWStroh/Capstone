@@ -263,5 +263,15 @@ namespace com.Farouche.Presentation
         {
             Application.Exit();
         }//End of frmStartUp_FormClosed(..)
+
+        private void toolStripButtonCascade_Click(object sender, EventArgs e)
+        {
+            this.LayoutMdi(MdiLayout.Cascade);
+        }
+
+        private void toolStripButtonTileVertically_Click(object sender, EventArgs e)
+        {
+            this.LayoutMdi(MdiLayout.TileVertical);
+        }
     }
 }
