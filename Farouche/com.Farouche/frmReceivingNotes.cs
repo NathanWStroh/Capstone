@@ -18,24 +18,51 @@ namespace com.Farouche
         private ReceivingManager _receivingManager;
        
 
-        public frmReceivingNotes(int vendorOrder, int productID)
+        public frmReceivingNotes(int vendorOrderID, int productID)
         {
             InitializeComponent();
-            txtVendorOrderID.Text = vendorOrder.ToString();
+            txtVendorOrderID.Text = vendorOrderID.ToString();
             txtProductID.Text = productID.ToString();
+            
         }
+
+
 
         private void btnUpdatedNote_Click(object sender, EventArgs e)
         {
             var note = txtNotes.Text;
             
             _receivingManager = new ReceivingManager();
-            vendorOrder.VendorID = Int32.Parse(txtVendorOrderID.Text);
-            vendorOrderLineItem.ProductID = Int32.Parse(txtProductID.Text);
+            VendorOrderManager _vendorOrderManager = new VendorOrderManager();
+            
 
-            //_receivingManager.AddNotes(note, vendorOrder, vendorOrderLineItem);
+            vendorOrder = _vendorOrderManager.getVendorOrder(Int32.Parse(txtVendorOrderID.Text.ToString()));
+            
+
+            VendorOrderLineItem vendorOrderLineItem = new VendorOrderLineItem(Int32.Parse(txtVendorOrderID.Text), Int32.Parse(txtProductID.Text));
+
+            vendorOrderLineItem.Note = note;
+            _receivingManager.UpdateLineItemNote(vendorOrderLineItem, note);
+            MessageBox.Show("Note added to line item");
+            
+            frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
+            _frmReceiving.Show();
+            _frmReceiving.BringToFront();
+            this.Close();
             
             
+        }
+
+
+
+        private void frmReceivingNotes_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }

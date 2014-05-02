@@ -34,6 +34,7 @@
             this.btnUpdatedNote = new System.Windows.Forms.Button();
             this.lblProductID = new System.Windows.Forms.Label();
             this.txtProductID = new System.Windows.Forms.TextBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtNotes
@@ -88,11 +89,24 @@
             this.txtProductID.Size = new System.Drawing.Size(134, 20);
             this.txtProductID.TabIndex = 5;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(110, 294);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // frmReceivingNotes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 292);
+
+            this.ClientSize = new System.Drawing.Size(644, 350);
+            this.Controls.Add(this.btnCancel);
+
             this.Controls.Add(this.txtProductID);
             this.Controls.Add(this.lblProductID);
             this.Controls.Add(this.btnUpdatedNote);
@@ -100,7 +114,10 @@
             this.Controls.Add(this.lblVendorOrderID);
             this.Controls.Add(this.txtNotes);
             this.Name = "frmReceivingNotes";
-            this.Text = "Receiving Notes";
+
+            this.Text = "frmReceivingNotes";
+            this.Load += new System.EventHandler(this.frmReceivingNotes_Load);
+
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,5 +131,6 @@
         private System.Windows.Forms.Button btnUpdatedNote;
         private System.Windows.Forms.Label lblProductID;
         private System.Windows.Forms.TextBox txtProductID;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
