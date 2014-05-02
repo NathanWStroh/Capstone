@@ -61,12 +61,8 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintOrderDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-<<<<<<< HEAD
             this.Text = "Print Order Details";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrintOrderDetails_FormClosed);
-=======
-            this.Text = "Print Preview Order Details";
->>>>>>> origin/master
             this.Load += new System.EventHandler(this.frmPrintOrderDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CLSLineItemBindingSource)).EndInit();
             this.ResumeLayout(false);

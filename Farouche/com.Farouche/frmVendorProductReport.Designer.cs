@@ -30,16 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.CLSVendorProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.CLSVendorProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CLSEmployeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.CLSVendorProductBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CLSEmployeeBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // CLSVendorProductBindingSource
-            // 
-            this.CLSVendorProductBindingSource.DataSource = typeof(com.Farouche.Commons.CLSVendorProduct);
             // 
             // reportViewer1
             // 
@@ -49,8 +45,12 @@
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "com.Farouche.Reports.VendorProductReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(17, 12);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(788, 582);
+            this.reportViewer1.Size = new System.Drawing.Size(816, 582);
             this.reportViewer1.TabIndex = 0;
+            // 
+            // CLSVendorProductBindingSource
+            // 
+            this.CLSVendorProductBindingSource.DataSource = typeof(com.Farouche.Commons.CLSVendorProduct);
             // 
             // CLSEmployeeBindingSource
             // 
@@ -60,7 +60,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 606);
+            this.ClientSize = new System.Drawing.Size(845, 606);
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmVendorProductReport";
             this.Text = "Vendor Product Report";
