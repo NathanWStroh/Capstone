@@ -16,6 +16,7 @@ namespace com.Farouche
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
         public static FrmShippingMyOrders Instance;
+        private int _sortColumn = -1;
 
         public FrmShippingMyOrders(AccessToken accToken)
         {
@@ -44,23 +45,26 @@ namespace com.Farouche
             lv.Columns.Clear();
             foreach (var order in _myOrderManager.Orders)
             {
-                var item = new ListViewItem();
-                item.Text = order.ID.ToString();
-                item.SubItems.Add(order.ShippingVendorName);
-                if (order.UserId.HasValue)
+                if (order.Picked == false)
                 {
-                    item.SubItems.Add(order.UserId.ToString());
-                    item.SubItems.Add(order.UserFirstName.ToString());
-                    item.SubItems.Add(order.UserLastName.ToString());
+                    var item = new ListViewItem();
+                    item.Text = order.ID.ToString();
+                    item.SubItems.Add(order.ShippingVendorName);
+                    if (order.UserId.HasValue)
+                    {
+                        item.SubItems.Add(order.UserId.ToString());
+                        item.SubItems.Add(order.UserFirstName.ToString());
+                        item.SubItems.Add(order.UserLastName.ToString());
+                    }
+                    else
+                    {
+                        item.SubItems.Add(" ");
+                        item.SubItems.Add(" ");
+                        item.SubItems.Add(" ");
+                    }
+                    item.SubItems.Add(order.Picked.ToString());
+                    lv.Items.Add(item);
                 }
-                else
-                {
-                    item.SubItems.Add(" ");
-                    item.SubItems.Add(" ");
-                    item.SubItems.Add(" ");
-                }
-                item.SubItems.Add(order.Picked.ToString());
-                lv.Items.Add(item);
             }
             lv.Columns.Add("OrderID");
             lv.Columns.Add("Vendor");
@@ -73,10 +77,11 @@ namespace com.Farouche
 
         private void btnDetails_Click(object sender, EventArgs e)
         {
+            ListView.SelectedListViewItemCollection selectedOrder = this.lvMyOrders.SelectedItems;
             try
             {
-                int selectedOrder = (int)this.lvMyOrders.SelectedIndices[0] + 1;
-                InitPick(selectedOrder);
+                int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
+                InitPick(selectedOrderId);
                 RefreshMyOrdersView();
             }
             catch(ArgumentOutOfRangeException)
@@ -85,9 +90,9 @@ namespace com.Farouche
             }
         }//End btnDetails_Click(..)
 
-        private void InitPick(int selectedOrder)
+        private void InitPick(int selectedOrderId)
         {
-            FrmViewOrderDetails details = new FrmViewOrderDetails(_myOrderManager.GetOrderByID(selectedOrder).ID, _myAccessToken);
+            FrmViewOrderDetails details = new FrmViewOrderDetails(_myOrderManager.GetOrderByID(selectedOrderId).ID, _myAccessToken);
             details.ShowDialog();
         }//End InitPick(.)
 
@@ -95,5 +100,29 @@ namespace com.Farouche
         {
             Instance = null;
         }//End of FrmShippingMyOrders_FormClosed(..)
+
+        private void lvMyOrders_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != _sortColumn)
+            {
+                // Set the sort column to the new column.
+                _sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                lvMyOrders.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvMyOrders.Sorting == SortOrder.Ascending)
+                    lvMyOrders.Sorting = SortOrder.Descending;
+                else
+                    lvMyOrders.Sorting = SortOrder.Ascending;
+            }
+            // Call the sort method to manually sort.
+            lvMyOrders.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer object.
+            this.lvMyOrders.ListViewItemSorter = new ListViewItemComparer(e.Column, lvMyOrders.Sorting);
+        }//End lvMyOrders_ColumnClick(..)
     }
 }

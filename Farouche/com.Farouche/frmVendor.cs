@@ -5,7 +5,7 @@ using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 //Author: Andrew
 //Date Created: 1/31/2014
-//Last Modified: 02/22/2014 
+//Last Modified: 5/2/2014 
 //Last Modified By: Andrew Willhoit
 
 /*
@@ -18,6 +18,8 @@ using com.Farouche.Commons;
 *04/22/2014   Andrew Willhoit                              Fixed active/deactive/update/add buttons to show/hide appropriatly
  *                                                         Added search by Vendor capabilites, added display vendors by list by active/deactive
  *                                                         Added Validation. - Adjusted layout of form to match project.
+ *                                                         
+ * 5/2/14     Andrew Willhoit                              Added search function.
 */
 
 
@@ -31,6 +33,8 @@ namespace com.Farouche.Presentation
         private readonly AccessToken _myAccessToken;
         private VendorManager _myVendorManager = new VendorManager();
         public static FrmVendor Instance;
+        private int _sortColumn = -1;
+        private int _searchIndexStart = 0;
 
         public FrmVendor(AccessToken acctoken)
         {
@@ -154,6 +158,11 @@ namespace com.Farouche.Presentation
             btnUpdateVendor.Enabled = false;
             btnDeactivateVendor.Enabled = false;
             btnActivateVendor.Enabled = false;
+          //  txtVendorSearch.Text = "";
+            txtVendorSearch.Clear();
+            txtVendorIDSearch.Text = "";
+            _searchIndexStart = 0;
+            txtVendorIDSearch.Focus();
         }
 
 
@@ -170,9 +179,6 @@ namespace com.Farouche.Presentation
             this.cbVendorStatusSearch.Items.Add("Both");
             this.cbVendorStatusSearch.SelectedIndex = 0;
         }
-
-
-
 
 
         private void cbVendortStatusSearch_SelectedIndexChanged(object sender, EventArgs e)
@@ -246,6 +252,10 @@ namespace com.Farouche.Presentation
             }
         }
 
+        private void lvVendors_DoubleClick(object sender, EventArgs e)
+        {
+            searchForVendorByID();
+        }
 
         private void searchForVendorByID()
         {
@@ -254,11 +264,62 @@ namespace com.Farouche.Presentation
                 String vendorIDString = this.txtVendorIDSearch.Text;
                 int vendorID = Convert.ToInt32(vendorIDString);
                 Vendor thisVendor = _myVendorManager.GetVendor(vendorID);
-                FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor);
+                FrmVendorAddUpdate frm = new FrmVendorAddUpdate(_myAccessToken, thisVendor, true);
                 frm.ShowDialog();
-                setDefaults();
+               // setDefaults();
+                findActiveSelection();
             }
             
+        }
+
+        private void btnGetNext_Click(object sender, EventArgs e)
+        {
+            if (txtVendorSearch.Text != "")
+            {
+                if (_searchIndexStart >= lvVendors.Items.Count)
+                {
+                    _searchIndexStart = 0;
+                }
+                searchListView(_searchIndexStart++);           
+            }
+          
+        }
+
+        private void txtVendorNameSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtVendorSearch.Text == "")
+            {
+                setDefaults();
+
+                if (this.lvVendors.SelectedIndices.Count > 0)
+                    for (int i = 0; i < this.lvVendors.SelectedIndices.Count; i++)
+                    {
+                        this.lvVendors.Items[this.lvVendors.SelectedIndices[i]].Selected = false;
+                    }
+
+                txtVendorSearch.Focus();
+            }
+            else
+            {
+                searchListView(0);                
+            }
+            
+        }
+
+        private void searchListView(int startIndex)
+        {
+            ListViewItem foundItem = lvVendors.FindItemWithText(txtVendorSearch.Text, true, startIndex, true);
+
+            if (foundItem != null)
+            {
+                lvVendors.TopItem = foundItem;
+
+                lvVendors.Items[foundItem.Index].Selected = true;
+                _searchIndexStart = foundItem.Index + 1;
+
+                lvVendors.Focus();
+            }
+            txtVendorSearch.Focus();
         }
 
         // does Validation on VendorID Search TextBox
@@ -301,6 +362,44 @@ namespace com.Farouche.Presentation
         {
             Instance = null;
         }
+
+        private void btnVendorReport_Click(object sender, EventArgs e)
+        {
+            frmVendorProductReport myForm = new frmVendorProductReport();
+            myForm.ShowDialog();
+        }
+
+        private void lvVendors_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != _sortColumn)
+            {
+                // Set the sort column to the new column.
+                _sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                lvVendors.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvVendors.Sorting == SortOrder.Ascending)
+                    lvVendors.Sorting = SortOrder.Descending;
+                else
+                    lvVendors.Sorting = SortOrder.Ascending;
+            }
+
+            // Call the sort method to manually sort.
+            lvVendors.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer
+            // object.
+            this.lvVendors.ListViewItemSorter = new ListViewItemComparer(e.Column,
+                                                              lvVendors.Sorting);
+        }
+
+
+
+
+
 
 
     }

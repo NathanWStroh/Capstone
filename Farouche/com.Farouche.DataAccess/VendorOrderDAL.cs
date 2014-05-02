@@ -264,6 +264,7 @@ namespace com.Farouche.DataAccess
                 };
                 mySqlCommand.Parameters.AddWithValue("@VendorID", order.VendorID);
                 mySqlCommand.Parameters.AddWithValue("@DateOrdered", order.DateOrdered);
+                mySqlCommand.Parameters.AddWithValue("@NumberOfShipments", order.NumberOfShipments);
                 connection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {

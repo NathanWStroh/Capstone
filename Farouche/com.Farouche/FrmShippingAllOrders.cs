@@ -6,14 +6,15 @@ using com.Farouche.Commons;
 
 //Author: Ben
 //Date Created: 4/4/2014
-//Last Modified: 4/4/2014
+//Last Modified: 4/25/2014
 //Last Modified By: Ben Grimes
 
 /*
 *                               Changelog
 * Date         By               Ticket          Version          Description
 * 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
-*/
+* 04/25/2014   Ben Grimes                                        Implemented Column Sorting and Modified existing code to work with it.
+ */
 
 namespace com.Farouche
 {
@@ -22,6 +23,7 @@ namespace com.Farouche
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
         public static FrmShippingAllOrders Instance;
+        private int _sortColumn = -1;
 
         public FrmShippingAllOrders(AccessToken acctoken)
         {
@@ -77,9 +79,10 @@ namespace com.Farouche
 
         private void btnClearUser_Click(object sender, EventArgs e)
         {
+            ListView.SelectedListViewItemCollection selectedOrder = this.lvAllOrders.SelectedItems;
             try
             {
-                int selectedOrderId = (int)this.lvAllOrders.SelectedIndices[0] + 1;
+                int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
                 ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrderId);
                 if (currentOrder.Picked == true && currentOrder.UserId.HasValue)
                 {
@@ -106,9 +109,10 @@ namespace com.Farouche
 
         private void btnAssignUser_Click(object sender, EventArgs e)
         {
+            ListView.SelectedListViewItemCollection selectedOrder = this.lvAllOrders.SelectedItems;
             try
             {
-                int selectedOrderId = (int)this.lvAllOrders.SelectedIndices[0] + 1;
+                int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
                 ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrderId);
                 if (currentOrder.Picked == true || currentOrder.UserId.HasValue)
                 {
@@ -150,5 +154,29 @@ namespace com.Farouche
             employeeReport.ShowDialog();
             employeeReport = null;
         }//End btnUserDirectory_Click(..)
+
+        private void lvAllOrders_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != _sortColumn)
+            {
+                // Set the sort column to the new column.
+                _sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                lvAllOrders.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvAllOrders.Sorting == SortOrder.Ascending)
+                    lvAllOrders.Sorting = SortOrder.Descending;
+                else
+                    lvAllOrders.Sorting = SortOrder.Ascending;
+            }
+            // Call the sort method to manually sort.
+            lvAllOrders.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer object.
+            this.lvAllOrders.ListViewItemSorter = new ListViewItemComparer(e.Column, lvAllOrders.Sorting);
+        }//lvAllOrders_ColumnClick(..)
     }
 }

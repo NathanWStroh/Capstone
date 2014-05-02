@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbVendors = new System.Windows.Forms.ComboBox();
             this.btnGo = new System.Windows.Forms.Button();
             this.dgvReorder = new System.Windows.Forms.DataGridView();
+            this.btnReorder = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTotalAmount = new System.Windows.Forms.TextBox();
+            this.btnReorderChangeLevel = new System.Windows.Forms.Button();
+            this.ttpReorder = new System.Windows.Forms.ToolTip(this.components);
             this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnReorder = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtTotalAmount = new System.Windows.Forms.TextBox();
-            this.btnReorderChangeLevel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReorder)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,6 +66,8 @@
             this.btnGo.Size = new System.Drawing.Size(75, 23);
             this.btnGo.TabIndex = 1;
             this.btnGo.Text = "Go!";
+            this.ttpReorder.SetToolTip(this.btnGo, "Creates the Automated Report, if there is already a report in view, save or cance" +
+                    "l it before continueing.");
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
@@ -93,6 +97,7 @@
             this.dgvReorder.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvReorder.Size = new System.Drawing.Size(647, 263);
             this.dgvReorder.TabIndex = 2;
+<<<<<<< HEAD
             // 
             // Column1
             // 
@@ -140,6 +145,9 @@
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             this.Column6.Width = 80;
+=======
+            this.ttpReorder.SetToolTip(this.dgvReorder, "Vendor Report");
+>>>>>>> origin/master
             // 
             // btnReorder
             // 
@@ -148,7 +156,9 @@
             this.btnReorder.Size = new System.Drawing.Size(75, 23);
             this.btnReorder.TabIndex = 3;
             this.btnReorder.Text = "Reorder";
+            this.ttpReorder.SetToolTip(this.btnReorder, "Saves the Reorder Report and sends it to be filled.");
             this.btnReorder.UseVisualStyleBackColor = true;
+            this.btnReorder.Click += new System.EventHandler(this.btnReorder_Click);
             // 
             // btnCancel
             // 
@@ -157,7 +167,9 @@
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
+            this.ttpReorder.SetToolTip(this.btnCancel, "Resets current Reorder,removing it from view.");
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label1
             // 
@@ -182,13 +194,70 @@
             // 
             // btnReorderChangeLevel
             // 
-            this.btnReorderChangeLevel.Location = new System.Drawing.Point(170, 335);
+            this.btnReorderChangeLevel.Location = new System.Drawing.Point(12, 344);
             this.btnReorderChangeLevel.Name = "btnReorderChangeLevel";
             this.btnReorderChangeLevel.Size = new System.Drawing.Size(131, 23);
             this.btnReorderChangeLevel.TabIndex = 7;
             this.btnReorderChangeLevel.Text = "Change Reorder Level";
+            this.ttpReorder.SetToolTip(this.btnReorderChangeLevel, "Opens a new Window to update the \"Auto Reorder Amount\" and the \"Reorder Amount\" o" +
+                    "f a Product in the Report.");
             this.btnReorderChangeLevel.UseVisualStyleBackColor = true;
             this.btnReorderChangeLevel.Click += new System.EventHandler(this.btnReorderChangeLevel_Click);
+            // 
+            // ttpReorder
+            // 
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "On Reorder";
+            this.Column1.Name = "Column1";
+            this.Column1.ToolTipText = "Easily remove a Product from an Order with this Checkbox.";
+            this.Column1.Width = 50;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Product";
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column2.ToolTipText = "Short Description Name";
+            // 
+            // Column3
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column3.HeaderText = "Price Per Item";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.ToolTipText = "Unit Cost of one Product.";
+            this.Column3.Width = 75;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Auto Reorder Amount";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.ToolTipText = "Current Reorder Threshold for Product.";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Reorder Amount";
+            this.Column5.Name = "Column5";
+            this.Column5.ToolTipText = "Number of Items to be Reordered.";
+            this.Column5.Width = 60;
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column6.HeaderText = "Total";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.ToolTipText = "Total Cost of Product to reorder.";
+            this.Column6.Width = 80;
             // 
             // frmReorder
             // 
@@ -204,7 +273,11 @@
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.cbVendors);
             this.Name = "frmReorder";
+<<<<<<< HEAD
             this.Text = "Reorder";
+=======
+            this.Text = "Auto Generated Vendor Reorders";
+>>>>>>> origin/master
             this.Load += new System.EventHandler(this.frmReorder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReorder)).EndInit();
             this.ResumeLayout(false);
@@ -221,12 +294,13 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTotalAmount;
+        private System.Windows.Forms.Button btnReorderChangeLevel;
+        private System.Windows.Forms.ToolTip ttpReorder;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.Button btnReorderChangeLevel;
     }
 }

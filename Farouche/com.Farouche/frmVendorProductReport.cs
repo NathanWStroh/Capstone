@@ -11,18 +11,18 @@ using com.Farouche.Commons;
 
 namespace com.Farouche
 {
-    public partial class frmEmployeeDirectory : Form
+    public partial class frmVendorProductReport : Form
     {
-        public frmEmployeeDirectory()
+        public frmVendorProductReport()
         {
             InitializeComponent();
         }
 
-        private void frmEmployeeDirectory_Load(object sender, EventArgs e)
+        private void frmVendorProductReport_Load(object sender, EventArgs e)
         {
             this.reportViewer1.RefreshReport();
             ReportList reportList = new ReportList();
-            this.CLSEmployeeBindingSource.DataSource = reportList.GetEmployeeDirectory();
+            this.CLSVendorProductBindingSource.DataSource = reportList.GetVendorProducts();
             this.reportViewer1.RefreshReport();
         }
     }

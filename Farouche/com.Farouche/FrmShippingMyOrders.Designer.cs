@@ -57,6 +57,7 @@
             this.lvMyOrders.TabIndex = 2;
             this.lvMyOrders.UseCompatibleStateImageBehavior = false;
             this.lvMyOrders.View = System.Windows.Forms.View.Details;
+            this.lvMyOrders.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvMyOrders_ColumnClick);
             // 
             // FrmShippingMyOrders
             // 

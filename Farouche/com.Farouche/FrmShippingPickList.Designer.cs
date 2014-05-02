@@ -47,6 +47,7 @@
             this.lvPickList.TabIndex = 4;
             this.lvPickList.UseCompatibleStateImageBehavior = false;
             this.lvPickList.View = System.Windows.Forms.View.Details;
+            this.lvPickList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPickList_ColumnClick);
             // 
             // btnStartPick
             // 

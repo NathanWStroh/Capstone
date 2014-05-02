@@ -19,8 +19,9 @@ namespace com.Farouche
         private ReceivingManager _receivingManager;
         private List<VendorOrderLineItem> vendorOrderLineItemList;
         private frmReceivingNotes _frmReceivingNotes;
-        private VendorOrderManager _vendorOrderManager;
+        private VendorOrderManager _vendorOrderManager = new VendorOrderManager();
         private FrmUpdateVendorOrderLineItem _frmUpdateVendorOrderLineItem;
+        private ProductManager _productManager;
         
 
 
@@ -39,12 +40,14 @@ namespace com.Farouche
 
 
 
+            VendorManager _vendorManager = new VendorManager();
+            
             
 
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
-            //txtVendorName.Text = vendorOrder.Name;
-            txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
-            txtDateOrdered.Text = vendorOrder.DateOrdered.ToString();
+            txtVendorName.Text = _vendorManager.GetVendor(vendorOrder.VendorID).Name.ToString();
+            txtNumberofShipments.Text = _vendorOrderManager.getVendorOrder(vendorOrder.Id).NumberOfShipments.ToString();
+            txtDateOrdered.Text = _vendorOrderManager.getVendorOrder(vendorOrder.Id).DateOrdered.ToString();
             //txtNumberofShipments.Text = vendorOrder.NumberOfShipments.ToString();
 
 
@@ -73,13 +76,13 @@ namespace com.Farouche
             _receivingManager = new ReceivingManager();
             List<VendorOrderLineItem> vendorOrderLineItemList = new List<VendorOrderLineItem>();
             vendorOrderLineItemList = _receivingManager.GetAllLineItemsByVendorOrder(vendorOrder);
-            
+            _productManager = new ProductManager();
             foreach(var vendorOrderLineItem in vendorOrderLineItemList)
             {
                 
                 var item = new ListViewItem();
                 item.Text = vendorOrderLineItem.ProductID.ToString();
-                //item.SubItems.Add(vendorOrderLineItem.Name.ToString());
+                item.SubItems.Add(_productManager.GetProduct(vendorOrderLineItem.ProductID).Name.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyOrdered.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyReceived.ToString());
                 item.SubItems.Add(vendorOrderLineItem.QtyDamaged.ToString());
@@ -91,7 +94,7 @@ namespace com.Farouche
             }
 
             lv.Columns.Add("ProductID");
-            //lv.Columns.Add("Name");
+            lv.Columns.Add("Name");
             lv.Columns.Add("Qty Ordered");
             lv.Columns.Add("Qty Received");
             lv.Columns.Add("Qty Damaged");
@@ -136,12 +139,12 @@ namespace com.Farouche
 
 
             VendorOrderLineItem item = new VendorOrderLineItem(id, productID);
-            item.ProductID = Int32.Parse(selectedRow[0].SubItems[1].Text);
-            item.Name = selectedRow[0].SubItems[2].Text;
-            item.QtyOrdered = Int32.Parse(selectedRow[0].SubItems[3].Text);
-            item.QtyReceived = Int32.Parse(selectedRow[0].SubItems[4].Text);
-            item.QtyDamaged = Int32.Parse(selectedRow[0].SubItems[5].Text);
-            item.LineItemTotal = Double.Parse(selectedRow[0].SubItems[6].Text);
+            item.ProductID = Int32.Parse(selectedRow[0].SubItems[0].Text);
+            //item.Name = selectedRow[0].SubItems[2].Text;
+            item.QtyOrdered = Int32.Parse(selectedRow[0].SubItems[2].Text);
+            item.QtyReceived = Int32.Parse(selectedRow[0].SubItems[3].Text);
+            item.QtyDamaged = Int32.Parse(selectedRow[0].SubItems[4].Text);
+            item.LineItemTotal = Double.Parse(selectedRow[0].SubItems[5].Text);
 
             int newQuantityOrdered = item.QtyOrdered;
 
