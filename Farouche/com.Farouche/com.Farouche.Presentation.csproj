@@ -392,10 +392,6 @@
     <EmbeddedResource Include="FrmVendorAddUpdate.resx">
       <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\VendorProductReport.rdlc" />
-    <EmbeddedResource Include="Reports\EmployeeDirectory.rdlc" />
-    <EmbeddedResource Include="Reports\PackListReport.rdlc" />
-    <EmbeddedResource Include="Reports\PickReport.rdlc" />
     <None Include="app.config" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSEmployee.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSLineItem.datasource" />

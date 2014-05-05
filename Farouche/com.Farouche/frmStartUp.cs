@@ -5,15 +5,12 @@
 
 /*
 *                               Changelog
-<<<<<<< HEAD
 * Date         By          Ticket          Version         Description
 * 4/16/14   Ben Grimes                                      Added Shipping Vendors and Terms into Startup
-=======
-* Date         By           Ticket          Version         Description
-* 4-4-14       NathanStroh                  ???             Removed title from frame.
->>>>>>> origin
-*
+* 
 * 04/19/2014   Kaleb Wendel                                 Adjusted the class to check to see if the form in question was instantiated before.  If the form has an instance already it will bring the form to the front. If there is no instance it will instantiate the form.
+*
+*5-2-14         NWS         n/a             n/a             Fixed issue on line 206. Code was checking for FrmVendor == null when it should have stated frmVendorCreateOrder == null. Caused errors when loading frmVendorCreateOrder when FrmVendor was open.
 */
 
 using System;
@@ -203,7 +200,7 @@ namespace com.Farouche.Presentation
         private void newOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmVendorCreateOrder frmVendorCreateOrder;
-            if (FrmVendor.Instance == null)
+            if (frmVendorCreateOrder.Instance == null)
             {
                 frmVendorCreateOrder = new frmVendorCreateOrder(_myAccessToken);
                 frmVendorCreateOrder.MdiParent = this;
