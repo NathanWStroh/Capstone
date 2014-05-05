@@ -26,24 +26,38 @@ namespace com.Farouche.Presentation
         private VendorOrder vendorOrder;
         private List<VendorOrder> orderList;
         private VendorOrderLineItem vendorOrderLineItem;
+        private ReorderManager _reorderManager;
+        private List<Reorder> reorderList;
         public static frmOpenVendorOrders Instance;
+
 
         public frmOpenVendorOrders()
         {
             InitializeComponent();
             Instance = this;
+
+            // Add a CellClick handler to handle clicks in the button column.
+            dgvOpenVendorOrders.CellClick += new DataGridViewCellEventHandler(dgv_CellClick);
+
+
         }
 
         private void frmOpenVendorOrders_Load(object sender, EventArgs e)
         {
             _receivingManager = new ReceivingManager();
 
-            
             fillVendorDropDown();
 
             orderList = _receivingManager.GetAllOpenOrders();
 
-            fillListView(dgvOpenVendorOrders, orderList);
+
+            
+
+
+
+
+           
+            fillGridView(dgvOpenVendorOrders, orderList);
             
             
             
@@ -65,10 +79,15 @@ namespace com.Farouche.Presentation
             }
         }
 
-        private void fillListView(DataGridView dgv, List<VendorOrder> orderList)
+        private void fillGridView(DataGridView dgv, List<VendorOrder> orderList)
 
-        {      
- 
+        {
+
+            DataGridViewButtonColumn viewOrderDetailsColumn = new DataGridViewButtonColumn();
+            viewOrderDetailsColumn.Text = "View Order Details";
+            viewOrderDetailsColumn.Name = "View Order Details";
+            viewOrderDetailsColumn.HeaderText = "View Order Details";
+            viewOrderDetailsColumn.UseColumnTextForButtonValue = true;
             dgv.Columns.Clear();
             dgv.Rows.Clear();
 
@@ -78,6 +97,8 @@ namespace com.Farouche.Presentation
             dgv.Columns[2].Name = "Vendor Name";
             dgv.Columns[3].Name = "Date Ordered";
             dgv.Columns[4].Name = "Number of Shipments";
+            
+
 
             foreach (var vendorOrder in orderList)
             {
@@ -90,32 +111,40 @@ namespace com.Farouche.Presentation
             }
 
 
-
-            // Add a CellClick handler to handle clicks in the button column.
-            dgv.CellClick += new DataGridViewCellEventHandler(dgv_CellClick);
+            dgvOpenVendorOrders.Columns.Insert(5, viewOrderDetailsColumn);
             
             
         }
-
+        
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            try
+            if (e.RowIndex < 0 || e.ColumnIndex != dgvOpenVendorOrders.Columns["View Order Details"].Index)
             {
-                vendorOrder = new VendorOrder((Int32)dgvOpenVendorOrders["Vendor OrderID", e.RowIndex].Value, (Int32)dgvOpenVendorOrders["Vendor ID", e.RowIndex].Value);
-                vendorOrder.DateOrdered = (DateTime)dgvOpenVendorOrders["Date Ordered", e.RowIndex].Value;
-                vendorOrder.NumberOfShipments = (Int32)dgvOpenVendorOrders["Number of Shipments", e.RowIndex].Value;
-                frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-                _frmReceiving.Show();
-                _frmReceiving.BringToFront();
-                this.Close();
+                return;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("oops");
+                try
+                {
 
-                ex.StackTrace.ToString();
+                    vendorOrder = new VendorOrder((Int32)dgvOpenVendorOrders["Vendor OrderID", e.RowIndex].Value, (Int32)dgvOpenVendorOrders["Vendor ID", e.RowIndex].Value);
+                    vendorOrder.DateOrdered = (DateTime)dgvOpenVendorOrders["Date Ordered", e.RowIndex].Value;
+                    vendorOrder.NumberOfShipments = (Int32)dgvOpenVendorOrders["Number of Shipments", e.RowIndex].Value;
+                    frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
+                    _frmReceiving.Show();
+                    _frmReceiving.BringToFront();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("oops!" + ex.StackTrace.ToString());
+
+                    ex.StackTrace.ToString();
+                }
             }
+              
+
         }
 
 
@@ -127,7 +156,11 @@ namespace com.Farouche.Presentation
                 string id = cbGetVendorsById.SelectedItem.ToString().Substring(0, index);
                 vendor = new Vendor(Int32.Parse(id));
                 orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
-                fillListView(dgvOpenVendorOrders, orderList);
+                DataGridViewButtonColumn viewOrderDetailsColumn = new DataGridViewButtonColumn();
+                viewOrderDetailsColumn.UseColumnTextForButtonValue = true;
+                viewOrderDetailsColumn.Text = "View Order Details";
+                viewOrderDetailsColumn.HeaderText = "View Order Details";
+                fillGridView(dgvOpenVendorOrders, orderList);
                 dgvOpenVendorOrders.ClearSelection();
                 
             }
@@ -150,7 +183,11 @@ namespace com.Farouche.Presentation
         private void btnGellAllOpenOrders_Click(object sender, EventArgs e)
         {
             orderList = _receivingManager.GetAllOpenOrders();
-            fillListView(dgvOpenVendorOrders, orderList);
+           
+
+            
+            
+            fillGridView(dgvOpenVendorOrders, orderList);
         }
         
 

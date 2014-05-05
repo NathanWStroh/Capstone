@@ -13,10 +13,11 @@ namespace com.Farouche
 {
     public partial class FrmAddLineItemToVendorOrder : Form
     {
+        VendorOrder vendorOrder;
         public FrmAddLineItemToVendorOrder(VendorOrder vendorOrder)
         {
             InitializeComponent();
-
+            this.vendorOrder = vendorOrder;
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
             VendorManager _vendorManager = new VendorManager();
 
