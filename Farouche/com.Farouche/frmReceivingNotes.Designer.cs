@@ -133,6 +133,7 @@
             this.Controls.Add(this.lblVendorOrderID);
             this.Controls.Add(this.txtNotes);
             this.Name = "frmReceivingNotes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmReceivingNotes";
             this.Load += new System.EventHandler(this.frmReceivingNotes_Load);
             this.ResumeLayout(false);

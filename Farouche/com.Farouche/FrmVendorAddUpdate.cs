@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
-//Author: ?
-//Date Created: ?
+//Author: Justin
+//Date Created: 02/10/2014
 //Last Modified: 02/22/2014 
 //Last Modified By: Andrew Willhoit
 

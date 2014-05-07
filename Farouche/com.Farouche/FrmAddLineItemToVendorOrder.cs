@@ -9,6 +9,11 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
+//Author: Justin
+//Date Created: 4/10/14
+//Last Modified: 5/7/14
+//Last Modified By: Justin Pitts
+
 namespace com.Farouche
 {
     public partial class FrmAddLineItemToVendorOrder : Form

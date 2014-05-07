@@ -243,6 +243,7 @@
             this.Controls.Add(this.txtVendorOrderID);
             this.Controls.Add(this.lblVendorOrderID);
             this.Name = "frmReceiving";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Receiving";
             this.Load += new System.EventHandler(this.frmReceiving_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
