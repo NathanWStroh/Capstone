@@ -167,21 +167,24 @@ namespace com.Farouche.Presentation
             {
                 List<VendorOrderLineItem> lineItemList = new List<VendorOrderLineItem>();
                 int index = comboVendor.SelectedItem.ToString().IndexOf(" ");
-                string id = comboVendor.SelectedItem.ToString().Substring(0, index);
-                string vendorName = comboVendor.SelectedItem.ToString().Substring(1, index);
+                int id = Convert.ToInt32(comboVendor.SelectedItem.ToString().Substring(0, index));
+                _myVendorManager = new VendorManager();
+
+                var vendorName = _myVendorManager.GetVendor(id).Name;
 
                 //VendorOrder myVendorOrder = new VendorOrder(int.Parse(id));
-                VendorOrder myVendorOrder = new VendorOrder(int.Parse(id));
-                myVendorOrder.NumberOfShipments = Int32.Parse(comboShipments.SelectedItem.ToString());
-                myVendorOrder.DateOrdered = DateTime.Parse(tbOrderDate.Text);
+                VendorOrder myVendorOrder = new VendorOrder(id);
+                myVendorOrder.NumberOfShipments = Convert.ToInt32(comboShipments.SelectedItem.ToString());
+                myVendorOrder.DateOrdered = Convert.ToDateTime(tbOrderDate.Text);
                 myVendorOrder.Name = vendorName;
 
                 for (int i = 0; i < lvOrderItems.Items.Count;i++)
                 {
-                    int productId = int.Parse(lvOrderItems.Items[i].SubItems[0].Text);
-                    VendorOrderLineItem item = new VendorOrderLineItem(int.Parse(id), productId);
+                    
+                    Int32 productId = Int32.Parse(lvOrderItems.Items[i].SubItems[0].Text);
+                    VendorOrderLineItem item = new VendorOrderLineItem(id, productId);
                     item.Name = lvOrderItems.Items[i].SubItems[1].Text; 
-                    item.QtyOrdered = int.Parse(lvOrderItems.Items[i].SubItems[3].Text);
+                    item.QtyOrdered = Int32.Parse(lvOrderItems.Items[i].SubItems[3].Text);
                     lineItemList.Add(item);
                     
                 }

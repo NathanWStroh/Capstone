@@ -18,7 +18,8 @@ using com.Farouche.Commons;
 namespace com.Farouche.Presentation
 {
     public partial class frmOpenVendorOrders : Form
-    {     
+    {
+        private readonly AccessToken _myAccessToken;
         private VendorOrderManager _vendorOrdersManager;
         private ReceivingManager _receivingManager;
         private VendorManager _vendorManager;
@@ -31,9 +32,10 @@ namespace com.Farouche.Presentation
         public static frmOpenVendorOrders Instance;
 
 
-        public frmOpenVendorOrders()
+        public frmOpenVendorOrders(AccessToken acctkn)
         {
             InitializeComponent();
+            _myAccessToken = acctkn;
             Instance = this;
 
             // Add a CellClick handler to handle clicks in the button column.
@@ -131,7 +133,7 @@ namespace com.Farouche.Presentation
                     vendorOrder = new VendorOrder((Int32)dgvOpenVendorOrders["Vendor OrderID", e.RowIndex].Value, (Int32)dgvOpenVendorOrders["Vendor ID", e.RowIndex].Value);
                     vendorOrder.DateOrdered = (DateTime)dgvOpenVendorOrders["Date Ordered", e.RowIndex].Value;
                     vendorOrder.NumberOfShipments = (Int32)dgvOpenVendorOrders["Number of Shipments", e.RowIndex].Value;
-                    frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
+                    frmReceiving _frmReceiving = new frmReceiving(vendorOrder, _myAccessToken);
                     _frmReceiving.Show();
                     _frmReceiving.BringToFront();
                     this.Close();

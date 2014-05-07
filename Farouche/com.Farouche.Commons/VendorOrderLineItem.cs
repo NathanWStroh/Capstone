@@ -22,21 +22,6 @@ namespace com.Farouche.Commons
             VendorOrderId = vendorOrderId;
         }
 
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string ToXml()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Type GetType()
-        {
-            throw new NotImplementedException();
-        }
-
         public int ProductID
         {
             get { return _productId; }
@@ -76,5 +61,20 @@ namespace com.Farouche.Commons
             get { return _note; }
             set { _note = value; }
         }
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ToXml()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Type GetType()
+        {
+            throw new NotImplementedException();
+        }
     }
+    
 }

@@ -31,6 +31,7 @@ namespace com.Farouche.Presentation
         public FrmShippingPackList ShippingPackList;
         public FrmShippingTerm ShippingTerm;
         public FrmShippingVendor ShippingVendor;
+        public frmReceiving frmReceiving;
 
         public frmStartUp(AccessToken acctoken)
         {
@@ -220,7 +221,7 @@ namespace com.Farouche.Presentation
             frmOpenVendorOrders frmOpenVendorOrders;
             if (frmOpenVendorOrders.Instance == null)
             {
-                frmOpenVendorOrders = new frmOpenVendorOrders();
+                frmOpenVendorOrders = new frmOpenVendorOrders(_myAccessToken);
                 frmOpenVendorOrders.MdiParent = this;
                 frmOpenVendorOrders.StartPosition = FormStartPosition.CenterScreen;
                 frmOpenVendorOrders.Show();
@@ -230,6 +231,24 @@ namespace com.Farouche.Presentation
                 frmOpenVendorOrders.Instance.WindowState = FormWindowState.Normal;
                 frmOpenVendorOrders.Instance.Show();
                 frmOpenVendorOrders.Instance.BringToFront();
+            }
+        }
+
+        private void receivingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReceiving frmReceiving;
+            if (frmReceiving.Instance == null)
+            {
+                frmReceiving = new frmReceiving(_myAccessToken);
+                frmReceiving.MdiParent = this;
+                frmReceiving.StartPosition = FormStartPosition.CenterScreen;
+                frmReceiving.Show();
+            }
+            else
+            {
+                frmReceiving.Instance.WindowState = FormWindowState.Normal;
+                frmReceiving.Instance.Show();
+                frmReceiving.Instance.BringToFront();
             }
         }
 

@@ -13,16 +13,20 @@ namespace com.Farouche
 {
     public partial class frmReceivingNotes : Form
     {
+        private readonly AccessToken _myAccessToken;
         private VendorOrder vendorOrder;
         private VendorOrderLineItem vendorOrderLineItem;
         private ReceivingManager _receivingManager;
-       
 
-        public frmReceivingNotes(int vendorOrderID, int productID)
+
+        public frmReceivingNotes(int vendorOrderID, int productID, int vendorID, string note, AccessToken acctkn)
         {
             InitializeComponent();
+            _myAccessToken = acctkn;
             txtVendorOrderID.Text = vendorOrderID.ToString();
             txtProductID.Text = productID.ToString();
+            txtVendorID.Text = vendorID.ToString();
+            txtNotes.Text = note;
             
         }
 
@@ -36,18 +40,15 @@ namespace com.Farouche
             VendorOrderManager _vendorOrderManager = new VendorOrderManager();
             
 
-            vendorOrder = _vendorOrderManager.getVendorOrder(Int32.Parse(txtVendorOrderID.Text.ToString()));
+            vendorOrder = new VendorOrder(Int32.Parse(txtVendorOrderID.Text.ToString()),Int32.Parse(txtVendorID.Text.ToString()));
             
 
             VendorOrderLineItem vendorOrderLineItem = new VendorOrderLineItem(Int32.Parse(txtVendorOrderID.Text), Int32.Parse(txtProductID.Text));
 
             vendorOrderLineItem.Note = note;
             _receivingManager.UpdateLineItemNote(vendorOrderLineItem, note);
-            MessageBox.Show("Note added to line item");
-            
-            frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-            _frmReceiving.Show();
-            _frmReceiving.BringToFront();
+            MessageBox.Show("Note added to Order");
+           
             this.Close();
             
             

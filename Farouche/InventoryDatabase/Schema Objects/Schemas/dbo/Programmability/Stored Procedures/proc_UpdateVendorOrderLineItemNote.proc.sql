@@ -8,4 +8,5 @@ AS
 		[Note] = @note
 	WHERE
 		[VendorOrderID] = @vendorOrderId
+		And [ProductID] = @productId
 	RETURN @@ROWCOUNT

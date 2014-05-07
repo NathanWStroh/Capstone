@@ -14,9 +14,11 @@ namespace com.Farouche
     public partial class FrmAddLineItemToVendorOrder : Form
     {
         VendorOrder vendorOrder;
-        public FrmAddLineItemToVendorOrder(VendorOrder vendorOrder)
+        private readonly AccessToken _myAccessToken;
+        public FrmAddLineItemToVendorOrder(VendorOrder vendorOrder, AccessToken acctkn)
         {
             InitializeComponent();
+            _myAccessToken = acctkn;
             this.vendorOrder = vendorOrder;
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
             VendorManager _vendorManager = new VendorManager();
@@ -84,20 +86,23 @@ namespace com.Farouche
         private void btnAddLineItem_Click(object sender, EventArgs e)
         {
             ReceivingManager _receivingManager = new ReceivingManager();
+            VendorOrderManager _vendorOrderManager = new VendorOrderManager();
             VendorOrder vendorOrder;
             Product product;
             Int32 qtyReceived;
+            Int32 qtyDamaged;
 
             Int32 vendorID = Int32.Parse(txtVendorID.Text);
             vendorOrder = new VendorOrder(Int32.Parse(txtVendorOrderID.Text), vendorID);
-            
-            product = new Product(vendorID);
+            int index = cbProductName.SelectedItem.ToString().IndexOf(" ");
+            var productID = Int32.Parse(cbProductName.SelectedItem.ToString().Substring(0, index));
+            product = new Product(productID);
             qtyReceived = Int32.Parse(upQuantityReceived.Value.ToString());
-            _receivingManager.AddNewLineItemToVendorOrder(vendorOrder, product, qtyReceived);
-            MessageBox.Show("Product added to Order");
-            frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-            _frmReceiving.Show();
-            _frmReceiving.BringToFront();
+            qtyDamaged = Int32.Parse(upQtyDamaged.Value.ToString());
+            string note = txtNotes.Text;
+            _receivingManager.AddNewLineItemToVendorOrder(vendorOrder, product, qtyReceived, note, qtyDamaged);
+            MessageBox.Show("Line Item Added");
+            
             this.Close();
 
         }
