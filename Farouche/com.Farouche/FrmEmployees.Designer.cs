@@ -77,18 +77,19 @@
             // updateEmployeeBtn
             // 
             this.updateEmployeeBtn.Enabled = false;
-            this.updateEmployeeBtn.Location = new System.Drawing.Point(13, 70);
+            this.updateEmployeeBtn.Location = new System.Drawing.Point(12, 201);
             this.updateEmployeeBtn.Name = "updateEmployeeBtn";
             this.updateEmployeeBtn.Size = new System.Drawing.Size(100, 25);
             this.updateEmployeeBtn.TabIndex = 3;
             this.updateEmployeeBtn.Text = "Update Employee";
             this.updateEmployeeBtn.UseVisualStyleBackColor = true;
+            this.updateEmployeeBtn.Visible = false;
             this.updateEmployeeBtn.Click += new System.EventHandler(this.updateEmployeeBtn_Click);
             // 
             // deactivateBtn
             // 
             this.deactivateBtn.Enabled = false;
-            this.deactivateBtn.Location = new System.Drawing.Point(12, 132);
+            this.deactivateBtn.Location = new System.Drawing.Point(13, 100);
             this.deactivateBtn.Name = "deactivateBtn";
             this.deactivateBtn.Size = new System.Drawing.Size(100, 25);
             this.deactivateBtn.TabIndex = 5;
@@ -99,7 +100,7 @@
             // activateBtn
             // 
             this.activateBtn.Enabled = false;
-            this.activateBtn.Location = new System.Drawing.Point(12, 101);
+            this.activateBtn.Location = new System.Drawing.Point(13, 69);
             this.activateBtn.Name = "activateBtn";
             this.activateBtn.Size = new System.Drawing.Size(100, 25);
             this.activateBtn.TabIndex = 6;

@@ -135,8 +135,7 @@
             // 
             // lvVendors
             // 
-            this.lvVendors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lvVendors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvVendors.FullRowSelect = true;
             this.lvVendors.GridLines = true;
@@ -161,6 +160,7 @@
             this.btnVendorReport.TabIndex = 46;
             this.btnVendorReport.Text = "Vendor Report";
             this.btnVendorReport.UseVisualStyleBackColor = true;
+            this.btnVendorReport.Visible = false;
             this.btnVendorReport.Click += new System.EventHandler(this.btnVendorReport_Click);
             // 
             // btnGetNext
@@ -195,7 +195,7 @@
             this.AcceptButton = this.btnGetVendorByID;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 319);
+            this.ClientSize = new System.Drawing.Size(790, 392);
             this.Controls.Add(this.txtVendorSearch);
             this.Controls.Add(this.lblVendorSearch);
             this.Controls.Add(this.btnGetNext);

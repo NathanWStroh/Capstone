@@ -48,9 +48,9 @@
             // 
             // lvAllOrders
             // 
-            this.lvAllOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvAllOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvAllOrders.FullRowSelect = true;
             this.lvAllOrders.GridLines = true;
             this.lvAllOrders.HideSelection = false;
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 281);
+            this.ClientSize = new System.Drawing.Size(539, 322);
             this.Controls.Add(this.txtUserId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnUserDirectory);

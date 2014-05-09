@@ -286,7 +286,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btClose;
-            this.ClientSize = new System.Drawing.Size(689, 366);
+            this.ClientSize = new System.Drawing.Size(689, 419);
             this.Controls.Add(this.btnEditVendor);
             this.Controls.Add(this.btClose);
             this.Controls.Add(this.lblShippingInfo);

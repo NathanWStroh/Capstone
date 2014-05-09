@@ -44,9 +44,9 @@
             // 
             // lvPackList
             // 
-            this.lvPackList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvPackList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvPackList.FullRowSelect = true;
             this.lvPackList.GridLines = true;
             this.lvPackList.HideSelection = false;
@@ -64,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 301);
+            this.ClientSize = new System.Drawing.Size(771, 347);
             this.Controls.Add(this.btnPackComplete);
             this.Controls.Add(this.lvPackList);
             this.Name = "FrmShippingPackList";

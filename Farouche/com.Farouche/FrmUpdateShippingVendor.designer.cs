@@ -223,7 +223,7 @@
             this.AcceptButton = this.btnEdit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 261);
+            this.ClientSize = new System.Drawing.Size(434, 285);
             this.Controls.Add(this.comboCountry);
             this.Controls.Add(this.comboState);
             this.Controls.Add(this.btnEdit);

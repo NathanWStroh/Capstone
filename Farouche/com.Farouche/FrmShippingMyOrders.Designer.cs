@@ -44,9 +44,9 @@
             // 
             // lvMyOrders
             // 
-            this.lvMyOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvMyOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvMyOrders.FullRowSelect = true;
             this.lvMyOrders.GridLines = true;
             this.lvMyOrders.HideSelection = false;
@@ -64,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 305);
+            this.ClientSize = new System.Drawing.Size(784, 343);
             this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.lvMyOrders);
             this.Name = "FrmShippingMyOrders";
