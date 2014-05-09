@@ -47,6 +47,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtVendorID = new System.Windows.Forms.TextBox();
             this.lvReceiving = new System.Windows.Forms.ListView();
+            this.btnFinalizeOrder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -218,11 +219,22 @@
             this.lvReceiving.UseCompatibleStateImageBehavior = false;
             this.lvReceiving.View = System.Windows.Forms.View.Details;
             // 
+            // btnFinalizeOrder
+            // 
+            this.btnFinalizeOrder.Location = new System.Drawing.Point(784, 403);
+            this.btnFinalizeOrder.Name = "btnFinalizeOrder";
+            this.btnFinalizeOrder.Size = new System.Drawing.Size(100, 23);
+            this.btnFinalizeOrder.TabIndex = 29;
+            this.btnFinalizeOrder.Text = "Finalize Order";
+            this.btnFinalizeOrder.UseVisualStyleBackColor = true;
+            this.btnFinalizeOrder.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmReceiving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 692);
+            this.Controls.Add(this.btnFinalizeOrder);
             this.Controls.Add(this.lvReceiving);
             this.Controls.Add(this.txtVendorID);
             this.Controls.Add(this.label3);
@@ -273,5 +285,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtVendorID;
         private System.Windows.Forms.ListView lvReceiving;
+        private System.Windows.Forms.Button btnFinalizeOrder;
     }
 }

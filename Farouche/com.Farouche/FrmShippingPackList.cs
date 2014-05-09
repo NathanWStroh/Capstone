@@ -16,6 +16,7 @@ namespace com.Farouche
     {
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
+        private ShippingOrderLineItemManager _shippingLineItemMan = new ShippingOrderLineItemManager();
         public static FrmShippingPackList Instance;
         private int _sortColumn = -1;
 
@@ -82,6 +83,7 @@ namespace com.Farouche
             {
                 int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
                 ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrderId);
+                currentOrder.ShippingOrderLineItemList = _shippingLineItemMan.GetLineItemsByID(selectedOrderId);
                 Boolean success = _myOrderManager.UpdateShippedDate(currentOrder);
                 _myOrderManager.UpdateUserId(currentOrder, _myAccessToken.UserID);
                 if (success == true)
