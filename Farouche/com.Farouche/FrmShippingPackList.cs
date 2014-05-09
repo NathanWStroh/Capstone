@@ -22,8 +22,9 @@ namespace com.Farouche
 
         public FrmShippingPackList(AccessToken accToken)
         {
-            var RoleAccess = new RoleAccess(accToken, this);
             InitializeComponent();
+            var RoleAccess = new RoleAccess(accToken, this);
+         
             _myAccessToken = accToken;
             _myOrderManager = new ShippingOrderManager();
             RefreshPackView();

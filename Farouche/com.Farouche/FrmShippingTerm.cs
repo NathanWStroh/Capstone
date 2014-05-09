@@ -22,8 +22,9 @@ namespace com.Farouche
 
         public FrmShippingTerm(AccessToken acctoken)
         {
-            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctoken, this);
+       
             _myAccessToken = acctoken;
             _myTermManager = new ShippingTermManager();
             Instance = this;

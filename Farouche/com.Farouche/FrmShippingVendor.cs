@@ -20,8 +20,9 @@ namespace com.Farouche
 
         public FrmShippingVendor(AccessToken acctoken)
         {
-            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctoken, this);
+       
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
             PopulateActiveCombo();

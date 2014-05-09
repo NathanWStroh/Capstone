@@ -35,8 +35,9 @@ namespace com.Farouche.Presentation
 
         public frmStartUp(AccessToken acctoken)
         {
-            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
+
+            var RoleAccess = new RoleAccess(acctoken, this);
             _myAccessToken = acctoken;
             this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
             this.WindowState = FormWindowState.Maximized;

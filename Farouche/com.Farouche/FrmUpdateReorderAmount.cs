@@ -19,8 +19,9 @@ namespace com.Farouche
 
         public FrmUpdateReorderAmount(int? currentReorderAmount, int currentProductID, AccessToken _myAccessToken)
         {
-            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
+
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             _currentAmount = currentReorderAmount;
             _currentProduct = currentProductID;
         }
