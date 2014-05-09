@@ -376,7 +376,7 @@ namespace com.Farouche
         {
             VendorOrder thisOrder = new VendorOrder(vendorOrder.Id);
             thisOrder.LineItems = vendorOrderLineItemList;
-            _vendorOrderManager.FinalizeVendorOrder(thisOrder);
+            _vendorOrderManager.FinalizeVendorOrder(vendorOrder);
         }
 
 
