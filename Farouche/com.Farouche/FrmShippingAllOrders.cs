@@ -32,7 +32,7 @@ namespace com.Farouche
             _myOrderManager = new ShippingOrderManager();
             PopulateMasterListView(lvAllOrders, _myOrderManager.GetAllShippingOrders());
             Instance = this;
-        }
+        }//End FrmShippingAllOrders(.)
 
         private void FrmShippingAllOrders_Load(object sender, EventArgs e)
         {
@@ -41,6 +41,8 @@ namespace com.Farouche
 
         private void PopulateMasterListView(ListView lv, List<ShippingOrder> orderlist)
         {
+            btnClearUser.Enabled = false;
+            btnAssignUser.Enabled = false;
             _myOrderManager.Orders = orderlist;
             lv.Items.Clear();
             lv.Columns.Clear();
@@ -150,6 +152,8 @@ namespace com.Farouche
 
         private void btnUserDirectory_Click(object sender, EventArgs e)
         {
+            btnClearUser.Enabled = false;
+            btnAssignUser.Enabled = false;
             frmEmployeeDirectory employeeReport = new frmEmployeeDirectory();
             employeeReport.ShowDialog();
             employeeReport = null;
@@ -177,6 +181,12 @@ namespace com.Farouche
             lvAllOrders.Sort();
             // Set the ListViewItemSorter property to a new ListViewItemComparer object.
             this.lvAllOrders.ListViewItemSorter = new ListViewItemComparer(e.Column, lvAllOrders.Sorting);
+        }
+
+        private void lvAllOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnAssignUser.Enabled = true;
+            btnClearUser.Enabled = true;
         }//lvAllOrders_ColumnClick(..)
     }
 }

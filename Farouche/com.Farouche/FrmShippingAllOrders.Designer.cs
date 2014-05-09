@@ -48,9 +48,9 @@
             // 
             // lvAllOrders
             // 
-            this.lvAllOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvAllOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lvAllOrders.FullRowSelect = true;
             this.lvAllOrders.GridLines = true;
             this.lvAllOrders.HideSelection = false;
@@ -62,6 +62,7 @@
             this.lvAllOrders.UseCompatibleStateImageBehavior = false;
             this.lvAllOrders.View = System.Windows.Forms.View.Details;
             this.lvAllOrders.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvAllOrders_ColumnClick);
+            this.lvAllOrders.SelectedIndexChanged += new System.EventHandler(this.lvAllOrders_SelectedIndexChanged);
             // 
             // btnAssignUser
             // 

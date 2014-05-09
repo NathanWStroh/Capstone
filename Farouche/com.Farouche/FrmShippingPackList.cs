@@ -31,6 +31,7 @@ namespace com.Farouche
         private void FrmShippingPackList_Load(object sender, EventArgs e)
         {
             RefreshPackView();
+            btnPackComplete.Enabled = false;
         }// End FrmShippingPackList_Load(..)
 
         private void RefreshPackView()
@@ -40,6 +41,7 @@ namespace com.Farouche
 
         private void PopulatePackListView(ListView lv, List<ShippingOrder> orderList)
         {
+            btnPackComplete.Enabled = false;
             _myOrderManager.Orders = orderList;
             lv.Items.Clear();
             lv.Columns.Clear();
@@ -102,12 +104,12 @@ namespace com.Farouche
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
-        }
-
+        }//End btnPackComplete_Click(..)
+  
         private void FrmShippingPackList_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
-        }
+        }//End FrmShippingPackList_FormClosed(..)
 
         private void lvPackList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -131,8 +133,11 @@ namespace com.Farouche
             lvPackList.Sort();
             // Set the ListViewItemSorter property to a new ListViewItemComparer object.
             this.lvPackList.ListViewItemSorter = new ListViewItemComparer(e.Column, lvPackList.Sorting);
-        }
+        }//End lvPackList_ColumnClick(..)
 
-        
+        private void lvPackList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnPackComplete.Enabled = true;
+        }//End lvPackList_SelectedIndexChanged(..)   
     }
 }

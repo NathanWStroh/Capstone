@@ -33,6 +33,8 @@ namespace com.Farouche
 
         private void PopulateLineItemLists()
         {
+            btnPick.Enabled = false;
+            btnUnpick.Enabled = false;
             PopulateListViews(lvItemsForPick, _myOrderDetails.GetLineItemsByID(_myOrderId), false);
             PopulateListViews(lvPickedItems, _myOrderDetails.GetLineItemsByID(_myOrderId), true);
         }//PopulateLineItemLists()
@@ -69,6 +71,8 @@ namespace com.Farouche
 
         private void BtnPrintDetails_Click(object sender, EventArgs e)
         {
+            btnPick.Enabled = false;
+            btnUnpick.Enabled = false;
             frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId);
             print.ShowDialog();
         }//End of BtnPrintDetails_Click(..)

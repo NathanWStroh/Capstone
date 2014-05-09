@@ -338,13 +338,18 @@ namespace com.Farouche
         {
             try
             {
-                _vendorOrdered = _report.OrderReorders();
-                _productManager = new ProductManager();
-                foreach (var _product in _report.Reorders)
+                if (_vendorOrdered == false)
                 {
-                    _productManager.UpdateOnOrder((int)_product.CasesToOrder, _product.VendorSourceItem.ProductID);
+                    _vendorOrdered = _report.OrderReorders();
+                    _productManager = new ProductManager();
+                    foreach (var _product in _report.Reorders)
+                    {
+                        _productManager.UpdateOnOrder((int)_product.CasesToOrder, _product.VendorSourceItem.ProductID);
+                    }
+                    MessageBox.Show("Your order has been sent.", "Vendor Reorder");
+                    _vendorOrdered = true;
                 }
-                MessageBox.Show("Your order has been sent.","Vendor Reorder");
+                
             }
             catch (ApplicationException ex)
             {
