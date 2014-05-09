@@ -98,7 +98,9 @@ namespace com.Farouche.BusinessLogic
         {
             if (order == null) throw new ApplicationException("VendorOrder cannot be null");
             if (order.LineItems == null) throw new ApplicationException("VendorOrder cannot have zero line items");
-            var oldOrder = order;
+            var oldOrder = new VendorOrder(order.Id, order.VendorID);
+            oldOrder.Finalized = order.Finalized;
+            oldOrder.NumberOfShipments = order.NumberOfShipments;
             order.Finalized = true;
             foreach (VendorOrderLineItem item in order.LineItems)
             {

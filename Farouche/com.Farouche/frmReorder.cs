@@ -48,7 +48,7 @@ namespace com.Farouche
             cbVendors.DataSource = lVendors;
             cbVendors.DisplayMember = "Name";
             cbVendors.ValueMember = "ID";
-            cbVendors.SelectedIndex = 0;
+           // cbVendors.SelectedIndex = 0;
         }
 
         //populates the "Reorder Amount" ComboBox's Cell per row/Column 4
