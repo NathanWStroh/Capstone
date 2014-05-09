@@ -39,6 +39,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DisplayMember = "Description";
             this.comboBox1.Location = new System.Drawing.Point(509, 12);
             this.comboBox1.Name = "comboBox1";
@@ -49,6 +50,8 @@
             // 
             // employeeLv
             // 
+            this.employeeLv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.employeeLv.FullRowSelect = true;
             this.employeeLv.GridLines = true;
             this.employeeLv.Location = new System.Drawing.Point(119, 39);
@@ -106,6 +109,7 @@
             // 
             // lblActive
             // 
+            this.lblActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblActive.AutoSize = true;
             this.lblActive.Location = new System.Drawing.Point(466, 15);
             this.lblActive.Name = "lblActive";

@@ -13,8 +13,9 @@ namespace com.Farouche
 {
     public partial class frmEmployeeDirectory : Form
     {
-        public frmEmployeeDirectory()
+        public frmEmployeeDirectory(AccessToken _myAccessToken)
         {
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
         }
 

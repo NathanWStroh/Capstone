@@ -31,9 +31,10 @@ namespace com.Farouche
         private ShippingTerm _originalTerm;
         List<ShippingVendor> vendors;
 
-        public FrmUpdateShippingTerm(ShippingTerm term)
+        public FrmUpdateShippingTerm(ShippingTerm term, AccessToken _myAccessToken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             _myShippingTermManager = new ShippingTermManager();
             _myShippingVendorManager = new ShippingVendorManager();
             vendors = _myShippingVendorManager.GetVendors();

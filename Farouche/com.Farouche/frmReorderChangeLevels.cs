@@ -16,10 +16,11 @@ namespace com.Farouche
     {
         private Reorder _curProduct;
 
-        public frmReorderChangeLevels(Reorder _product)
+        public frmReorderChangeLevels(Reorder _product, AccessToken _myAccessToken)
         {
             InitializeComponent();
             _curProduct = _product;
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
         }
 
         private void frmReorderChangeLevels_Load(object sender, EventArgs e)

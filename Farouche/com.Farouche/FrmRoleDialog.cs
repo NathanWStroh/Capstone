@@ -15,8 +15,9 @@ namespace com.Farouche
     {
         public Role SelectedRole;
         private List<Role>_activeRoles;
-        public FrmRoleDialog()
+        public FrmRoleDialog(AccessToken _myAccessToken)
         {
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
             FillRolesComboBox();
         }

@@ -15,10 +15,11 @@ namespace com.Farouche
     {
         public static frmVendorProductReport Instance;
 
-        public frmVendorProductReport()
+        public frmVendorProductReport(AccessToken _myAccessToken)
         {
             InitializeComponent();
             Instance = this;
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
         }//frmVendorProductReport()
 
         private void frmVendorProductReport_Load(object sender, EventArgs e)

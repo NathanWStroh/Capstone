@@ -22,6 +22,7 @@ namespace com.Farouche.Presentation
         {
             InitializeComponent();
             _myAccessToken = acctoken;
+            var RoleAccess = new RoleAccess(acctoken, this);
         }
 
         private void button1_Click(object sender, EventArgs e)
