@@ -85,7 +85,7 @@ namespace com.Farouche
         private void BtnComplete_Click(object sender, EventArgs e)
         {
             _myOrder = _myOrderManager.GetOrderByID(_myOrderId);
-            _myOrder.ShippingOrderLineItemList = _myOrderDetails.GetLineItemsByID(_myOrder.Id);
+            _myOrder.ShippingOrderLineItemList = _myOrderDetails.GetLineItemsByID(_myOrderId);
             Boolean success = _myOrderManager.UpdatePickedTrue(_myOrder);
             Boolean success2 = _myOrderManager.ClearUserId(_myOrderManager.GetOrderByID(_myOrderId));
             if (success == true && success2 == true)

@@ -81,29 +81,48 @@ namespace com.Farouche
                         controlName = c.Name;
                     }
 
-                    var foundControl = _editingRoleControls.Where(c => c.FormName == _formName && c.Name == controlName);
-                    if (foundControl.Count() > 0)
-                    {
-                        foreach (var controlAccess in foundControl)
-                        {
-                            Console.WriteLine(controlName);
-                            roleMenu.Items.Add(controlName);
-                            roleMenu.Items.Add("-");
-                            roleMenu.Items.Add(!controlAccess.Disabled ? "Disable" : "Enable", null, new System.EventHandler(enable_click));
-                            roleMenu.Items.Add(controlAccess.Visible ? "Hide" : "Show", null, new System.EventHandler(visible_click));
-                            _currentControl = controlAccess;
-                            _currentControl.RoleID = _currentRoleID;
-                            _currentControl.status = "UPDATE";
-                        }
-                    }
-                    else
+                    var isUpdate = _editingRoleControls.SingleOrDefault(c => c.FormName == _formName && c.Name == controlName && c.status != "NEW");
+                    if (isUpdate != null)
                     {
                         Console.WriteLine(controlName);
                         roleMenu.Items.Add(controlName);
                         roleMenu.Items.Add("-");
-                        roleMenu.Items.Add("Disable", null, new System.EventHandler(enable_click));
-                        roleMenu.Items.Add("Hide", null, new System.EventHandler(visible_click));
-                        _currentControl = new RoleControl() {Name = controlName, FormName = _formName, Disabled = false, Active = true, Visible = true,  RoleID = _currentRoleID,status = "NEW"};
+                        roleMenu.Items.Add(!isUpdate.Disabled ? "Disable" : "Enable", null, new System.EventHandler(enable_click));
+                        roleMenu.Items.Add(isUpdate.Visible ? "Hide" : "Show", null, new System.EventHandler(visible_click));
+                        _currentControl = isUpdate;
+                        _currentControl.RoleID = _currentRoleID;
+                        _currentControl.status = "UPDATE";
+                    }
+                    else
+                    {
+                        if (_editingRoleControls.Count > 0)
+                        {
+                            var control = _editingRoleControls.SingleOrDefault(c => c.FormName == _formName && c.Name == controlName && c.status == "NEW");
+
+                            Console.WriteLine(controlName);
+                            roleMenu.Items.Add(controlName);
+                            roleMenu.Items.Add("-");
+                            roleMenu.Items.Add("Disable", null, new System.EventHandler(enable_click));
+                            roleMenu.Items.Add("Hide", null, new System.EventHandler(visible_click));
+                            if (control == null)
+                            {
+                                _currentControl = new RoleControl() { Name = controlName, FormName = _formName, Disabled = false, Active = true, Visible = true, RoleID = _currentRoleID, status = "NEW" };
+                            }
+                            else
+                            {
+                                _currentControl = control;
+                            }
+                        }
+                        else 
+                        {
+                            Console.WriteLine(controlName);
+                            roleMenu.Items.Add(controlName);
+                            roleMenu.Items.Add("-");
+                            roleMenu.Items.Add("Disable", null, new System.EventHandler(enable_click));
+                            roleMenu.Items.Add("Hide", null, new System.EventHandler(visible_click));
+                            _currentControl = new RoleControl() { Name = controlName, FormName = _formName, Disabled = false, Active = true, Visible = true, RoleID = _currentRoleID, status = "NEW" };
+                        
+                        }
                     }
                     if (sender is ToolStripMenuItem)
                     {
@@ -113,7 +132,6 @@ namespace com.Farouche
                     {
                         roleMenu.Show((Control)sender, e.Location);
                     }
-                   
                 }
             }
         }
