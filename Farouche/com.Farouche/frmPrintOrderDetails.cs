@@ -16,8 +16,9 @@ namespace com.Farouche
         private int _myOrderId;
         public static frmPrintOrderDetails Instance;
 
-        public frmPrintOrderDetails(int myOrderId)
+        public frmPrintOrderDetails(int myOrderId, AccessToken _myAccessToken)
         {
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
             _myOrderId = myOrderId;
             Instance = this;

@@ -76,7 +76,7 @@ namespace com.Farouche
 
         private void btnAddTerm_Click(object sender, EventArgs e)
         {
-            FrmAddShippingTerm form = new FrmAddShippingTerm();
+            FrmAddShippingTerm form = new FrmAddShippingTerm(_myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());

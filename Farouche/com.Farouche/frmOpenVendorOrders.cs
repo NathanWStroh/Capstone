@@ -39,6 +39,7 @@ namespace com.Farouche.Presentation
 
         public frmOpenVendorOrders(AccessToken acctkn)
         {
+            var RoleAccess = new RoleAccess(acctkn, this);
             InitializeComponent();
             _myAccessToken = acctkn;
             Instance = this;

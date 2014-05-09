@@ -27,8 +27,9 @@ namespace com.Farouche
     public partial class FrmAddShippingVendor : Form
     {
         private ShippingVendorManager _myShippingVendorManager;
-        public FrmAddShippingVendor()
+        public FrmAddShippingVendor(AccessToken _myAccessToken)
         {
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
             _myShippingVendorManager = new ShippingVendorManager();
             PopulateCountryCombo();

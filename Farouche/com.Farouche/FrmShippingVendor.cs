@@ -110,7 +110,7 @@ namespace com.Farouche
 
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
-            FrmAddShippingVendor form = new FrmAddShippingVendor();
+            FrmAddShippingVendor form = new FrmAddShippingVendor(_myAccessToken);
             form.ShowDialog();
             FindActiveSelection();
         }//End of btnAddVendor_Click(..)

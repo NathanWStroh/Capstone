@@ -263,7 +263,7 @@ namespace com.Farouche.Presentation
 
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
-            FrmAddShippingVendor form = new FrmAddShippingVendor();
+            FrmAddShippingVendor form = new FrmAddShippingVendor(_myAccessToken );
             form.ShowDialog();
             SetDefaults();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
@@ -280,7 +280,7 @@ namespace com.Farouche.Presentation
 
         private void btnAddTerm_Click(object sender, EventArgs e)
         {
-            FrmAddShippingTerm form = new FrmAddShippingTerm();
+            FrmAddShippingTerm form = new FrmAddShippingTerm(_myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
@@ -312,7 +312,7 @@ namespace com.Farouche.Presentation
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            FrmLogin frm = new FrmLogin();
+            FrmLogin frm = new FrmLogin(_myAccessToken);
             frm.Show();
             Close();
         }//End of btnLogout_Click(..)

@@ -11,8 +11,9 @@ namespace com.Farouche.Presentation
 {
     public partial class FrmLogin : Form
     {
-        public FrmLogin()
+        public FrmLogin(AccessToken _myAccessToken)
         {
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
             //added for faster access
             txtUserID.Text = "1";

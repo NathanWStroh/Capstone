@@ -69,7 +69,7 @@ namespace com.Farouche
 
         private void BtnPrintDetails_Click(object sender, EventArgs e)
         {
-            frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId);
+            frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId, _myAccessToken);
             print.ShowDialog();
         }//End of BtnPrintDetails_Click(..)
 

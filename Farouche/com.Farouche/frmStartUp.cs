@@ -45,7 +45,7 @@ namespace com.Farouche.Presentation
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmLogin frm = new FrmLogin();
+            FrmLogin frm = new FrmLogin(_myAccessToken);
             frm.Visible = true;
             this.Hide();
         }

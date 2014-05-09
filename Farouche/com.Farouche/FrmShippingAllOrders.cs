@@ -150,7 +150,7 @@ namespace com.Farouche
 
         private void btnUserDirectory_Click(object sender, EventArgs e)
         {
-            frmEmployeeDirectory employeeReport = new frmEmployeeDirectory();
+            frmEmployeeDirectory employeeReport = new frmEmployeeDirectory(_myAccessToken);
             employeeReport.ShowDialog();
             employeeReport = null;
         }//End btnUserDirectory_Click(..)
