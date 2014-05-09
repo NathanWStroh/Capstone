@@ -76,7 +76,7 @@ namespace com.Farouche
             {
                 int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
                 ShippingOrder myOrder = _myOrderManager.GetOrderByID(selectedOrderId);
-                if(myOrder.UserId.Equals(_myAccessToken.UserID))
+                if(myOrder.UserId.Equals(_myAccessToken.Id))
                 {
                     MessageBox.Show("Order is already in your 'My Orders' queue", "Action Unnecessary");
                 }
@@ -86,7 +86,7 @@ namespace com.Farouche
                 }
                 else
                 {
-                    Boolean success = _myOrderManager.UpdateUserId(myOrder, _myAccessToken.UserID);
+                    Boolean success = _myOrderManager.UpdateUserId(myOrder, _myAccessToken.Id);
                     if (success == true)
                     {
                         RefreshPickView();

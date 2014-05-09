@@ -40,13 +40,14 @@
             this.txtNumberofShipments = new System.Windows.Forms.TextBox();
             this.lblShipmentsReceived = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.dgvReceiving = new System.Windows.Forms.DataGridView();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUpdateLineItem = new System.Windows.Forms.Button();
             this.btnAddLineItemtoCurrentListView = new System.Windows.Forms.Button();
             this.btnAddNote = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtVendorID = new System.Windows.Forms.TextBox();
+            this.lvReceiving = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReceiving)).BeginInit();
             this.SuspendLayout();
             // 
             // lblVendorOrderID
@@ -69,7 +70,7 @@
             // lblVendorName
             // 
             this.lblVendorName.AutoSize = true;
-            this.lblVendorName.Location = new System.Drawing.Point(15, 42);
+            this.lblVendorName.Location = new System.Drawing.Point(12, 69);
             this.lblVendorName.Name = "lblVendorName";
             this.lblVendorName.Size = new System.Drawing.Size(72, 13);
             this.lblVendorName.TabIndex = 3;
@@ -77,7 +78,7 @@
             // 
             // txtVendorName
             // 
-            this.txtVendorName.Location = new System.Drawing.Point(100, 35);
+            this.txtVendorName.Location = new System.Drawing.Point(100, 66);
             this.txtVendorName.Name = "txtVendorName";
             this.txtVendorName.ReadOnly = true;
             this.txtVendorName.Size = new System.Drawing.Size(100, 20);
@@ -100,7 +101,6 @@
             this.txtDateOrdered.Size = new System.Drawing.Size(100, 20);
             this.txtDateOrdered.TabIndex = 6;
             // 
-
             // lblDateReceived
             // 
             this.lblDateReceived.AutoSize = true;
@@ -150,46 +150,25 @@
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 15;
             // 
-
-            // dgvReceiving
-            // 
-            this.dgvReceiving.AllowUserToAddRows = false;
-            this.dgvReceiving.AllowUserToDeleteRows = false;
-            this.dgvReceiving.AllowUserToResizeColumns = false;
-            this.dgvReceiving.AllowUserToResizeRows = false;
-            this.dgvReceiving.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvReceiving.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvReceiving.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvReceiving.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReceiving.Location = new System.Drawing.Point(43, 127);
-            this.dgvReceiving.MultiSelect = false;
-            this.dgvReceiving.Name = "dgvReceiving";
-            this.dgvReceiving.Size = new System.Drawing.Size(860, 247);
-            this.dgvReceiving.TabIndex = 19;
-            // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(599, 404);
-
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(161, 23);
             this.btnCancel.TabIndex = 24;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click_1);
             // 
             // btnUpdateLineItem
             // 
-
             this.btnUpdateLineItem.Location = new System.Drawing.Point(224, 404);
             this.btnUpdateLineItem.Name = "btnUpdateLineItem";
             this.btnUpdateLineItem.Size = new System.Drawing.Size(162, 23);
             this.btnUpdateLineItem.TabIndex = 22;
             this.btnUpdateLineItem.Text = "Update Line Item";
             this.btnUpdateLineItem.UseVisualStyleBackColor = true;
-            this.btnUpdateLineItem.Click += new System.EventHandler(this.btnUpdateLineItem_Click_1);
+            this.btnUpdateLineItem.Click += new System.EventHandler(this.btnUpdateLineItem_Click_2);
             // 
             // btnAddLineItemtoCurrentListView
             // 
@@ -210,20 +189,47 @@
             this.btnAddNote.Text = "Add Note";
             this.btnAddNote.UseVisualStyleBackColor = true;
             this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
-
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "VendorID";
+            // 
+            // txtVendorID
+            // 
+            this.txtVendorID.Location = new System.Drawing.Point(100, 41);
+            this.txtVendorID.Name = "txtVendorID";
+            this.txtVendorID.ReadOnly = true;
+            this.txtVendorID.Size = new System.Drawing.Size(100, 20);
+            this.txtVendorID.TabIndex = 27;
+            // 
+            // lvReceiving
+            // 
+            this.lvReceiving.FullRowSelect = true;
+            this.lvReceiving.GridLines = true;
+            this.lvReceiving.Location = new System.Drawing.Point(40, 122);
+            this.lvReceiving.Name = "lvReceiving";
+            this.lvReceiving.Size = new System.Drawing.Size(707, 220);
+            this.lvReceiving.TabIndex = 28;
+            this.lvReceiving.UseCompatibleStateImageBehavior = false;
+            this.lvReceiving.View = System.Windows.Forms.View.Details;
             // 
             // frmReceiving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
             this.ClientSize = new System.Drawing.Size(915, 692);
+            this.Controls.Add(this.lvReceiving);
+            this.Controls.Add(this.txtVendorID);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddNote);
-
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdateLineItem);
             this.Controls.Add(this.btnAddLineItemtoCurrentListView);
-            this.Controls.Add(this.dgvReceiving);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.lblShipmentsReceived);
             this.Controls.Add(this.txtNumberofShipments);
@@ -237,10 +243,10 @@
             this.Controls.Add(this.txtVendorOrderID);
             this.Controls.Add(this.lblVendorOrderID);
             this.Name = "frmReceiving";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Receiving";
             this.Load += new System.EventHandler(this.frmReceiving_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReceiving)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,10 +266,12 @@
         private System.Windows.Forms.TextBox txtNumberofShipments;
         private System.Windows.Forms.Label lblShipmentsReceived;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.DataGridView dgvReceiving;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnUpdateLineItem;
         private System.Windows.Forms.Button btnAddLineItemtoCurrentListView;
         private System.Windows.Forms.Button btnAddNote;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtVendorID;
+        private System.Windows.Forms.ListView lvReceiving;
     }
 }

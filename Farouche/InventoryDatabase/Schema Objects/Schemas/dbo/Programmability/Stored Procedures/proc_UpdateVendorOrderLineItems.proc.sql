@@ -1,14 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[proc_UpdateVendorOrderLineItems]
-	(@VendorOrderID int,
-     @ProductID int,
+	(
+     
      @QtyOrdered int,
      @QtyReceived int,
      @QtyDamaged int,
 	 @orig_VendorOrderID int,
      @orig_ProductID int,
-     @orig_QtyOrdered int,
-     @orig_QtyReceived int,
-     @orig_QtyDamaged int)
+	 @orig_QtyOrdered int,
+	 @orig_QtyReceived int,
+	 @orig_QtyDamaged int
+	 )
 AS
 	UPDATE [dbo].[VendorOrderLineItems]
    SET 
@@ -16,9 +17,10 @@ AS
       [QtyReceived] = @QtyReceived, 
       [QtyDamaged] = @QtyDamaged
  WHERE 
-		[VendorOrderID] = @VendorOrderID
-		and [ProductID] = @ProductID
-		and [QtyOrdered] = @QtyOrdered
-		and [QtyDamaged] = @QtyDamaged
-		and [QtyReceived] = @QtyReceived
+		[VendorOrderID] = @orig_VendorOrderID
+		and [ProductID] = @orig_ProductID
+		and [QtyOrdered] = @orig_QtyOrdered
+		and [QtyDamaged] = @orig_QtyDamaged
+		and [QtyReceived] = @orig_QtyReceived
+		
 RETURN @@ROWCOUNT

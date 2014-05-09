@@ -342,7 +342,7 @@ namespace com.Farouche.DataAccess
                 connection.Close();
             }
 
-            throw new ApplicationException("Vendor Order from vendor: " 
+            throw new ApplicationException("Vendor Order from vendor: "
                     + vendorId + ", on date: " + date + ", not found");
         }
     }

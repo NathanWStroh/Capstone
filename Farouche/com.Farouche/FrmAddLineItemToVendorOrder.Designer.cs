@@ -205,6 +205,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Name = "FrmAddLineItemToVendorOrder";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmAddLineItemToVendorOrder";
             ((System.ComponentModel.ISupportInitialize)(this.upQuantityReceived)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.upQtyDamaged)).EndInit();

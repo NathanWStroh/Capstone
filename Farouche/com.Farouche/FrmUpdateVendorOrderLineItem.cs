@@ -16,8 +16,9 @@ namespace com.Farouche
         private VendorOrderLineItem item;
         private VendorOrderLineItem updateItem;
         private ReceivingManager _receivingManager;
-        
-        public FrmUpdateVendorOrderLineItem(VendorOrderLineItem item, string vendorName, int vendorID)
+        private readonly AccessToken _myAccessToken;
+
+        public FrmUpdateVendorOrderLineItem(VendorOrderLineItem item, string vendorName, int vendorID, AccessToken acctkn)
         {
             InitializeComponent();
 
@@ -26,8 +27,8 @@ namespace com.Farouche
             txtLineItemProductID.Text = item.ProductID.ToString();
             txtLineItemProductName.Text = item.Name;
             txtLineItemQuantityOrdered.Text = item.QtyOrdered.ToString();
-            upDownQuantityDamaged.Value = Decimal.Parse(item.QtyDamaged.ToString());
-            upDownQuantityReceived.Value = Decimal.Parse(item.QtyReceived.ToString());
+            upDownQuantityDamaged.Value = 0;
+            upDownQuantityReceived.Value = 0;
             txtLineItemVendorID.Text = vendorID.ToString();
             txtLineItemVendorOrderID.Text = item.VendorOrderId.ToString();
             txtLineItemVendorName.Text = vendorName;
@@ -36,6 +37,9 @@ namespace com.Farouche
             txtLineItemProductName.ReadOnly = true;
             txtLineItemVendorID.ReadOnly = true;
             txtLineItemVendorOrderID.ReadOnly = true;
+            txtLineItemQuantityOrdered.ReadOnly = true;
+
+           
 
         }
 
@@ -47,12 +51,16 @@ namespace com.Farouche
         private void btnUpdateLineItem_Click(object sender, EventArgs e)
         {
             
-            
+            ReceivingManager _receivingManger = new ReceivingManager();
             int productId = Int32.Parse(txtLineItemProductID.Text);
             int vendorOrderId = Int32.Parse(txtLineItemVendorOrderID.Text);
+
+            //int quantityDamaged = 
             
-
-
+            VendorOrderLineItem oldLineItem = new VendorOrderLineItem(vendorOrderId, productId);
+            oldLineItem.QtyReceived = item.QtyReceived;
+            oldLineItem.QtyOrdered = item.QtyOrdered;
+            oldLineItem.QtyDamaged = item.QtyDamaged;
             updateItem = new VendorOrderLineItem(vendorOrderId, productId);
             updateItem.Name = txtLineItemProductName.Text;
             updateItem.QtyDamaged = Int32.Parse(upDownQuantityDamaged.Value.ToString());
@@ -60,17 +68,16 @@ namespace com.Farouche
             updateItem.QtyReceived = Int32.Parse(upDownQuantityReceived.Value.ToString());
             
 
-            int quantityReceived = updateItem.QtyReceived;
-            int quantityDamaged = updateItem.QtyDamaged;
-            _receivingManager = new ReceivingManager();
-            _receivingManager.UpdateQtyDamaged(updateItem, quantityReceived);
-            _receivingManager.UpdateQtyReceived(updateItem, quantityDamaged);
-            MessageBox.Show("Quantity fields have been updated.");
-            VendorOrder vendorOrder = new VendorOrder(vendorOrderId,Int32.Parse(txtLineItemVendorID.Text));
 
-            frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-            _frmReceiving.Show();
-            _frmReceiving.BringToFront();
+            _receivingManager = new ReceivingManager();
+            //_receivingManager.UpdateQtyDamaged(oldLineItem, updateItem);
+            _receivingManager.UpdateQtyReceived(updateItem, oldLineItem);
+            //_receivingManager.UpdateQtyDamaged(updateItem, oldLineItem);
+            
+            
+
+            MessageBox.Show("Quantity Fields Updated");
+           
             this.Close();
 
 

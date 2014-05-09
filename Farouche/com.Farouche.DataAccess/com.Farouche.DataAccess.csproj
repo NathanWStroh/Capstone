@@ -40,12 +40,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationVariablesDAL.cs" />
+    <Compile Include="AuthenticatorDAL.cs" />
     <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="EmployeeDAL.cs" />
     <Compile Include="FlexListDAL.cs" />
     <Compile Include="ProductDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportingDAL.cs" />
     <Compile Include="ReportDAL.cs" />
+    <Compile Include="RoleDAL.cs" />
     <Compile Include="ShippingOrderDAL.cs" />
     <Compile Include="ShippingOrderLineItemDAL.cs" />
     <Compile Include="ShippingTermDAL.cs" />

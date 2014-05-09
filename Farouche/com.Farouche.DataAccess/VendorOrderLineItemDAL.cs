@@ -81,6 +81,7 @@ namespace com.Farouche.DataAccess
                 mySqlCommand.Parameters.AddWithValue("@QtyOrdered", vendorOrderLineItem.QtyOrdered);
                 mySqlCommand.Parameters.AddWithValue("@QtyReceived", vendorOrderLineItem.QtyReceived);
                 mySqlCommand.Parameters.AddWithValue("@QtyDamaged", vendorOrderLineItem.QtyDamaged);
+                mySqlCommand.Parameters.AddWithValue("@Note", vendorOrderLineItem.Note);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -133,7 +134,8 @@ namespace com.Farouche.DataAccess
                         {
                             QtyOrdered = mySqlReader.GetInt32(2),
                             QtyReceived = mySqlReader.GetInt32(3),
-                            QtyDamaged = mySqlReader.GetInt32(4)
+                            QtyDamaged = mySqlReader.GetInt32(4),
+                            Note =  mySqlReader.GetString(5)
                         };
                         vendorOrderLineItemList.Add(vendorOrderLineItem);
                     }
@@ -399,8 +401,7 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@ProductID", currentLineItem.ProductID);
-                mySqlCommand.Parameters.AddWithValue("@VendorOrderID", currentLineItem.VendorOrderId);
+
                 mySqlCommand.Parameters.AddWithValue("@QtyOrdered", currentLineItem.QtyOrdered);
                 mySqlCommand.Parameters.AddWithValue("@QtyReceived", currentLineItem.QtyReceived);
                 mySqlCommand.Parameters.AddWithValue("@QtyDamaged", currentLineItem.QtyDamaged);
@@ -436,7 +437,7 @@ namespace com.Farouche.DataAccess
             {
                 myConnection.Close();
             }
-            return false;
+            return true;
         }
 
         public static bool UpdateNote(VendorOrderLineItem lineItem, SqlConnection myConnection)

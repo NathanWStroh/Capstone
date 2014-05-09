@@ -1,19 +1,16 @@
 ﻿//Author: Nathan Stroh
 //Date Created: 3/30/2014
-//Last Modified:  4/16/14
-//Last Modified By: Ben Grimes
+//Last Modified:  5/7/2014
+//Last Modified By: Justin Pitts
 
 /*
 *                               Changelog
-<<<<<<< HEAD
 * Date         By          Ticket          Version         Description
 * 4/16/14   Ben Grimes                                      Added Shipping Vendors and Terms into Startup
-=======
-* Date         By           Ticket          Version         Description
-* 4-4-14       NathanStroh                  ???             Removed title from frame.
->>>>>>> origin
-*
+* 
 * 04/19/2014   Kaleb Wendel                                 Adjusted the class to check to see if the form in question was instantiated before.  If the form has an instance already it will bring the form to the front. If there is no instance it will instantiate the form.
+*
+*5-2-14         NWS         n/a             n/a             Fixed issue on line 206. Code was checking for FrmVendor == null when it should have stated frmVendorCreateOrder == null. Caused errors when loading frmVendorCreateOrder when FrmVendor was open.
 */
 
 using System;
@@ -34,13 +31,16 @@ namespace com.Farouche.Presentation
         public FrmShippingPackList ShippingPackList;
         public FrmShippingTerm ShippingTerm;
         public FrmShippingVendor ShippingVendor;
+        public RoleAccess RoleAccess;
+        public frmReceiving frmReceiving;
 
         public frmStartUp(AccessToken acctoken)
         {
             InitializeComponent();
             _myAccessToken = acctoken;
-            this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
             this.WindowState = FormWindowState.Maximized;
+            RoleAccess = new RoleAccess(_myAccessToken, this);
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,7 +203,7 @@ namespace com.Farouche.Presentation
         private void newOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmVendorCreateOrder frmVendorCreateOrder;
-            if (FrmVendor.Instance == null)
+            if (frmVendorCreateOrder.Instance == null)
             {
                 frmVendorCreateOrder = new frmVendorCreateOrder(_myAccessToken);
                 frmVendorCreateOrder.MdiParent = this;
@@ -223,7 +223,7 @@ namespace com.Farouche.Presentation
             frmOpenVendorOrders frmOpenVendorOrders;
             if (frmOpenVendorOrders.Instance == null)
             {
-                frmOpenVendorOrders = new frmOpenVendorOrders();
+                frmOpenVendorOrders = new frmOpenVendorOrders(_myAccessToken);
                 frmOpenVendorOrders.MdiParent = this;
                 frmOpenVendorOrders.StartPosition = FormStartPosition.CenterScreen;
                 frmOpenVendorOrders.Show();
@@ -233,6 +233,24 @@ namespace com.Farouche.Presentation
                 frmOpenVendorOrders.Instance.WindowState = FormWindowState.Normal;
                 frmOpenVendorOrders.Instance.Show();
                 frmOpenVendorOrders.Instance.BringToFront();
+            }
+        }
+
+        private void receivingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReceiving frmReceiving;
+            if (frmReceiving.Instance == null)
+            {
+                frmReceiving = new frmReceiving(_myAccessToken);
+                frmReceiving.MdiParent = this;
+                frmReceiving.StartPosition = FormStartPosition.CenterScreen;
+                frmReceiving.Show();
+            }
+            else
+            {
+                frmReceiving.Instance.WindowState = FormWindowState.Normal;
+                frmReceiving.Instance.Show();
+                frmReceiving.Instance.BringToFront();
             }
         }
 
@@ -262,7 +280,44 @@ namespace com.Farouche.Presentation
         private void frmStartUp_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }//End of frmStartUp_FormClosed(..)
+        } //End of frmStartUp_FormClosed(..) 
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRoles frmRoles;
+            if (FrmRoles.Instance == null)
+            {
+                frmRoles = new FrmRoles(_myAccessToken);
+                frmRoles.MdiParent = this;
+                frmRoles.StartPosition = FormStartPosition.CenterScreen;
+                frmRoles.Show();
+            }
+            else
+            {
+                FrmRoles.Instance.WindowState = FormWindowState.Normal;
+                FrmRoles.Instance.Show();
+                FrmRoles.Instance.BringToFront();
+            }
+
+        }
+
+        private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEmployees frmEmployees;
+            if (FrmEmployees.Instance == null)
+            {
+                frmEmployees = new FrmEmployees(_myAccessToken);
+                frmEmployees.MdiParent = this;
+                frmEmployees.StartPosition = FormStartPosition.CenterScreen;
+                frmEmployees.Show();
+            }
+            else
+            {
+                FrmEmployees.Instance.WindowState = FormWindowState.Normal;
+                FrmEmployees.Instance.Show();
+                FrmEmployees.Instance.BringToFront();
+            }
+        }
 
         private void toolStripButtonCascade_Click(object sender, EventArgs e)
         {

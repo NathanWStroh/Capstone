@@ -35,7 +35,7 @@ namespace com.Farouche.Presentation
 
         private void FrmShipping_Load(object sender, EventArgs e)
         {
-            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
 
             //Populates the active combo box. 
             this.PopulateActiveCombo();

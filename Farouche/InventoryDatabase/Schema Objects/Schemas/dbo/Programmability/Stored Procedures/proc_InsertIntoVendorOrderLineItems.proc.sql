@@ -3,16 +3,18 @@
      @ProductID int,
      @QtyOrdered int,
      @QtyReceived int,
-     @QtyDamaged int)
+     @QtyDamaged int,
+	 @Note varchar(250))
 AS
 	INSERT INTO [dbo].[VendorOrderLineItems]
            ([VendorOrderID]
            ,[ProductID]
            ,[QtyOrdered]
            ,[QtyReceived]
-           ,[QtyDamaged])
+           ,[QtyDamaged],
+		   [Note])
      VALUES
-           (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged)
+           (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged, @Note)
 RETURN @@IDENTITY
 
 

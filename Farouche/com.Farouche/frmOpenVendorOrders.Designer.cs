@@ -36,7 +36,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenVendorOrders)).BeginInit();
             this.SuspendLayout();
             // 
-
             // lblGetAllOpenOrdersByVendor
             // 
             this.lblGetAllOpenOrdersByVendor.AutoSize = true;
@@ -96,15 +95,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
             this.ClientSize = new System.Drawing.Size(821, 589);
             this.Controls.Add(this.btnGellAllOpenOrders);
             this.Controls.Add(this.dgvOpenVendorOrders);
-
             this.Controls.Add(this.btngetAllOpenOrdersByVendor);
             this.Controls.Add(this.cbGetVendorsById);
             this.Controls.Add(this.lblGetAllOpenOrdersByVendor);
             this.Name = "frmOpenVendorOrders";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Open Vendor Orders";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmOpenVendorOrders_FormClosed);
             this.Load += new System.EventHandler(this.frmOpenVendorOrders_Load);
