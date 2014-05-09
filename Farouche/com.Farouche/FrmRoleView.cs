@@ -46,10 +46,39 @@ namespace com.Farouche
                     descTxb.Text = _role.Description;
                     activeCmb.Text = _role.Active.ToString();
                     actionBtn.Text = "Save";
+                    populateRoleLv(RoleManager.GetControlsByRole(_role.Id));
                     break;
                 default:
                     break;
             }
+        }
+
+        private void populateRoleLv(List<RoleControl> list)
+        {
+            roleLv.Clear();
+
+            foreach (var control in list)
+            {
+                var item = new ListViewItem();
+                item.Text = control.FormName;
+                item.SubItems.Add(control.Name);
+                item.SubItems.Add(control.Visible.ToString());
+                item.SubItems.Add(control.Disabled.ToString());
+                item.Tag = control;
+                roleLv.Items.Add(item);
+            }
+            if (list.Count == 0)
+            {
+                roleLv.Columns.Add("No Controls Found");
+            }
+            else
+            {
+                roleLv.Columns.Add("Form");
+                roleLv.Columns.Add("Control");
+                roleLv.Columns.Add("Visible");
+                roleLv.Columns.Add("Disabled");
+            }
+            roleLv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void Save_Button_Click(object sender, EventArgs e)
@@ -134,6 +163,11 @@ namespace com.Farouche
         }
 
         private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

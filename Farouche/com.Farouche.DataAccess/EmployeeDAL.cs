@@ -111,6 +111,7 @@ namespace com.Farouche.DataAccess
             return false;
     
         }
+       
         public static Boolean Update(Employee old, Employee edited)
         {
             var connection = GetInventoryDbConnection();
