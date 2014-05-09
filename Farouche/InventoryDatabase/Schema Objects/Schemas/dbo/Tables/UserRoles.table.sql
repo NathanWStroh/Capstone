@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[UserRoles](
+	[UserID] [int] NOT NULL,
+	[RoleID] [int] NOT NULL,
+ CONSTRAINT [PK_UsersToRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC,
+	[RoleID] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]

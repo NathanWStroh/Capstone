@@ -35,7 +35,7 @@ namespace com.Farouche
 
         private void RefreshMyOrdersView()
         {
-            PopulateOrderListView(lvMyOrders, _myOrderManager.GetOrdersByUserId(_myAccessToken.UserID));
+            PopulateOrderListView(lvMyOrders, _myOrderManager.GetOrdersByUserId(_myAccessToken.Id));
         }//End of RefreshMyOrdersView()
 
         private void PopulateOrderListView(ListView lv, List<ShippingOrder> orderList)

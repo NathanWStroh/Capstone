@@ -21,13 +21,14 @@ GO
 /* **************************************Insert Statements******************************************** */           
 /* Inserts for Roles */
 SET IDENTITY_INSERT [dbo].[Roles] ON
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1000,'Manager', 'Oversees all activity.')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1100,'Employee', 'More work!?')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1200,'Guest', 'Restricted Access')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1300,'Level 4', '-------To Be filled--------')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1400,'Level 5', '-------To Be filled--------')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1000, N'Administrator', N'Has access to everything.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1100, N'Shipping Manager', N'Has access to all shipping related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1200, N'Receiving Manager', N'Has access to all receiving related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1300, N'Inventory Manager', N'Has access to all inventory related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1400, N'Shipping Employee', N'Does work.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1700, N'Receiving Employee', N'Does work.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1800, N'Inventory Employee', N'Does work.')
 SET IDENTITY_INSERT [dbo].[Roles] OFF
-GO
 
 /* Inserts for Users */
 SET IDENTITY_INSERT [dbo].[Users] ON
