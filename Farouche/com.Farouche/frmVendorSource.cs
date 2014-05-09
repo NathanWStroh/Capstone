@@ -22,6 +22,7 @@ namespace com.Farouche.Presentation
         {
             InitializeComponent();
             _myAccessToken = acctoken;
+            var RoleAccess = new RoleAccess(acctoken, this);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -107,7 +108,7 @@ namespace com.Farouche.Presentation
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            var frm = new FrmLogin(_myAccessToken);
+            var frm = new FrmLogin();
             frm.Show();
             Close();
         }

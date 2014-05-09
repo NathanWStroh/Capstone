@@ -43,7 +43,7 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctoken;
             _vendorList = _myVendorManager.GetVendors();
             _productList = _myProductManager.GetProducts();
-            
+            var RoleAccess = new RoleAccess(acctoken, this);
 
             tbOrderDate.Text = DateTime.Now.ToString();
             populateListView();

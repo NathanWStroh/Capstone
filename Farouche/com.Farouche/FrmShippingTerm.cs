@@ -22,6 +22,7 @@ namespace com.Farouche
 
         public FrmShippingTerm(AccessToken acctoken)
         {
+            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
             _myAccessToken = acctoken;
             _myTermManager = new ShippingTermManager();
@@ -86,7 +87,7 @@ namespace com.Farouche
         private void btnUpdateTerm_Click(object sender, EventArgs e)
         {
             var currentIndex = this.lvShippingTerms.SelectedIndices[0];
-            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex]);
+            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex], _myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());

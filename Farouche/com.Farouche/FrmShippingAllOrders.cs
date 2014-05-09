@@ -27,6 +27,7 @@ namespace com.Farouche
 
         public FrmShippingAllOrders(AccessToken acctoken)
         {
+            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
             _myAccessToken = acctoken;
             _myOrderManager = new ShippingOrderManager();

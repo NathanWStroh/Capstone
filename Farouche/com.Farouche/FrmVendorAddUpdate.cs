@@ -32,7 +32,7 @@ namespace com.Farouche.Presentation
             InitializeComponent();
             _myAccessToken = acctkn;
             btMorph.Text = "Add Vendor";
-
+            var RoleAccess = new RoleAccess(acctkn, this);
 
 
             PopulateStateCombo();

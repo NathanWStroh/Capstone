@@ -13,7 +13,7 @@ namespace com.Farouche.Presentation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmLogin(_myAccessToken));
+            Application.Run(new FrmLogin());
         }
     }
 }

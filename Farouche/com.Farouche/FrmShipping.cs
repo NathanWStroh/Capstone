@@ -26,6 +26,7 @@ namespace com.Farouche.Presentation
 
         public FrmShipping(AccessToken acctoken)
         {
+            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
@@ -272,7 +273,7 @@ namespace com.Farouche.Presentation
         private void btnUpdateVendor_Click(object sender, EventArgs e)
         {
             var currentIndex = this.lvShippingVendors.SelectedIndices[0];
-            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex]);
+            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex], _myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
@@ -289,7 +290,7 @@ namespace com.Farouche.Presentation
         private void btnUpdateTerm_Click(object sender, EventArgs e)
         {
             var currentIndex = this.lvShippingTerms.SelectedIndices[0];
-            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex]);
+            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex], _myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
@@ -312,7 +313,7 @@ namespace com.Farouche.Presentation
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            FrmLogin frm = new FrmLogin(_myAccessToken);
+            FrmLogin frm = new FrmLogin();
             frm.Show();
             Close();
         }//End of btnLogout_Click(..)

@@ -29,6 +29,7 @@ namespace com.Farouche
             _myOrderDetails = new ShippingOrderLineItemManager();
             _myOrderManager = new ShippingOrderManager();
             PopulateLineItemLists();
+            var RoleAccess = new RoleAccess(accToken, this);
         }// End FrmViewOrderDetails(..)
 
         private void PopulateLineItemLists()

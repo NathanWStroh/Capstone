@@ -46,6 +46,7 @@ namespace com.Farouche.Presentation
         public ProductView(AccessToken accToken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(accToken, this);
             _myAccessToken = accToken;
             _productManager = new ProductManager();
             _vendorManager = new VendorManager();

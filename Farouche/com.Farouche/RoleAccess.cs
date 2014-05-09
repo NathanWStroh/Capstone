@@ -21,9 +21,11 @@ namespace com.Farouche
         private RoleControl _currentControl;
         private Boolean _madeChanges = false;
         private int _currentRoleID;
+        private readonly AccessToken _myAccessToken;
 
         public RoleAccess(AccessToken accessToken, Control form)
         {
+            _myAccessToken = accessToken;
             try
             {
                 _controls = GetControls(form);
@@ -213,7 +215,7 @@ namespace com.Farouche
         }
         private void editRoles_Click(object sender, EventArgs e)
         {
-            using (var frmRoleDialog = new FrmRoleDialog())
+            using (var frmRoleDialog = new FrmRoleDialog(_myAccessToken))
             {
                 var result = frmRoleDialog.ShowDialog();
                 if (result == DialogResult.OK)

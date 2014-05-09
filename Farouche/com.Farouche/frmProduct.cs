@@ -245,7 +245,7 @@ namespace com.Farouche.Presentation
         {
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
-            FrmUpdateReorderAmount frm = new FrmUpdateReorderAmount(thisProduct._reorderAmount, thisProduct.Id);
+            FrmUpdateReorderAmount frm = new FrmUpdateReorderAmount(thisProduct._reorderAmount, thisProduct.Id, _myAccessToken);
             frm.ShowDialog();
             findActiveSelection();
         }
@@ -254,7 +254,7 @@ namespace com.Farouche.Presentation
         {
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
-            FrmUpdateReorderThreshold frm = new FrmUpdateReorderThreshold(thisProduct._reorderThreshold, thisProduct.Id);
+            FrmUpdateReorderThreshold frm = new FrmUpdateReorderThreshold(thisProduct._reorderThreshold, thisProduct.Id, _myAccessToken);
             frm.ShowDialog();
             findActiveSelection();
         }
@@ -263,7 +263,7 @@ namespace com.Farouche.Presentation
         {
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
-            FrmUpdateReorderOnOrder frm = new FrmUpdateReorderOnOrder(thisProduct._onOrder, thisProduct.Id);
+            FrmUpdateReorderOnOrder frm = new FrmUpdateReorderOnOrder(thisProduct._onOrder, thisProduct.Id, _myAccessToken);
             frm.ShowDialog();
             findActiveSelection();
         }

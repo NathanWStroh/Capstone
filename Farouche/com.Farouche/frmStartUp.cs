@@ -36,6 +36,7 @@ namespace com.Farouche.Presentation
 
         public frmStartUp(AccessToken acctoken)
         {
+            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
             _myAccessToken = acctoken;
             this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
@@ -45,7 +46,7 @@ namespace com.Farouche.Presentation
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmLogin frm = new FrmLogin(_myAccessToken);
+            FrmLogin frm = new FrmLogin();
             frm.Visible = true;
             this.Hide();
         }
