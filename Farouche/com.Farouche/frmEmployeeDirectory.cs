@@ -15,8 +15,9 @@ namespace com.Farouche
     {
         public frmEmployeeDirectory(AccessToken _myAccessToken)
         {
-            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
+            
         }
 
         private void frmEmployeeDirectory_Load(object sender, EventArgs e)

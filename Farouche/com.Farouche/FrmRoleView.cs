@@ -19,8 +19,9 @@ namespace com.Farouche
 
         public FrmRoleView(AccessToken accessToken, Role role = null)
         {
-            var RoleAccess = new RoleAccess(accessToken, this);
             InitializeComponent();
+            var RoleAccess = new RoleAccess(accessToken, this);
+           
             _accessToken = accessToken;
             _role = role;
         }

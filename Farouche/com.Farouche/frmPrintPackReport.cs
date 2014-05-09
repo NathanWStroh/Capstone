@@ -18,8 +18,9 @@ namespace com.Farouche
 
         public frmPrintPackReport(ShippingOrder order, AccessToken _myAccessToken)
         {
-            var RoleAccess = new RoleAccess(_myAccessToken, this);
             InitializeComponent();
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
+            
             _currentOrder = order;
             Instance = this;
         }//frmPrintPackReport(.)

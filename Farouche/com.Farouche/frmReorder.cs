@@ -27,8 +27,9 @@ namespace com.Farouche
         //Constructor with AccessToken as the only parameter.
         public frmReorder(AccessToken acctoken)
         {
-            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctoken, this);
+           
             _myAccessToken = acctoken;
             Instance = this;
         }
