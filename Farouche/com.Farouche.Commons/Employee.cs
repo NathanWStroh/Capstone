@@ -12,6 +12,11 @@ namespace com.Farouche.Commons
         private string _lastName;
         private string _phoneNumber;
 
+        public Employee()
+        {
+
+        }
+
         public Employee(int id)
         {
             this.Id = id;

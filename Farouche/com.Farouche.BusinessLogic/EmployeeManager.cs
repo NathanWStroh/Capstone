@@ -33,5 +33,10 @@ namespace com.Farouche.BusinessLogic
         {
             return EmployeeDAL.Update(old, edited);
         }
+
+        public static Boolean Add(Employee newEmployee, String password)
+        {
+            return EmployeeDAL.Add(newEmployee, password);
+        }
     }
 }

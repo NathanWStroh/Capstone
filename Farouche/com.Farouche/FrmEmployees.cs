@@ -61,6 +61,8 @@ namespace com.Farouche
            // FrmEmployeeView frm = new FrmEmployeeView(_myAccessToken);
            // frm.Mode = "NEW";
            // frm.ShowDialog();
+            FrmAddEmployee frm = new FrmAddEmployee();
+            frm.ShowDialog();
             updateEmployeeListViewByActive(this.comboBox1.SelectedItem.ToString());
         }
         private void fillEmployeeListView(List<Employee> Employees)

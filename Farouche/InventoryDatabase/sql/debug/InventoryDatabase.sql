@@ -825,6 +825,15 @@ ALTER TABLE [dbo].[VendorOrderLineItems]
 
 
 GO
+PRINT N'Creating On column: DateOrdered...';
+
+
+GO
+ALTER TABLE [dbo].[VendorOrders]
+    ADD DEFAULT SYSDATETIME() FOR [DateOrdered];
+
+
+GO
 PRINT N'Creating On column: AmountOfShipments...';
 
 
@@ -1895,6 +1904,18 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_GetProductAvailable]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetProductAvailable]
+	@productID int 
+AS
+	SELECT Available
+	FROM Products
+	WHERE ProductID = @productID
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetProductCategories]...';
 
 
@@ -1961,6 +1982,30 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_GetProductOnHand]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetProductOnHand]
+	@productID int 
+AS
+	SELECT OnHand
+	FROM Products
+	WHERE ProductID = @productID
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetProductOnOrder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetProductOnOrder]
+	@productID int 
+AS
+	SELECT OnOrder
+	FROM Products
+	WHERE ProductID = @productID
+RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetProducts]...';
 
@@ -2204,13 +2249,12 @@ PRINT N'Creating [dbo].[proc_GetVendorOrderByVendorAndDate]...';
 
 GO
 CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
-	@VendorID int, 
-	@DateOrdered datetime
+	@VendorID int
 AS
-	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	SELECT top(1) [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	FROM VendorOrders
 	WHERE [VendorID] = @VendorID
-	and [DateOrdered] = @DateOrdered
+	order by DateOrdered desc
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetVendorOrderLineItem]...';
@@ -2734,11 +2778,10 @@ PRINT N'Creating [dbo].[proc_InsertVendorOrder]...';
 GO
 CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]
 	@VendorID int, 
-	@DateOrdered date,
 	@NumberOfShipments int
 AS
-	Insert into [VendorOrders] (VendorID, DateOrdered, AmountOfShipments)
-	Values (@VendorID, @DateOrdered, @NumberOfShipments)
+	Insert into [VendorOrders] (VendorID, AmountOfShipments)
+	Values (@VendorID, @NumberOfShipments)
 RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_ReactivateCategory]...';
@@ -2978,6 +3021,19 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_UpdateProductAvailable]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductAvailable]
+	(@productID		int,
+	@amount			int)
+AS
+	UPDATE [dbo].[Products]
+	SET [Available] = @amount
+	WHERE [ProductID] = @productID
+	RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_UpdateProductCategory]...';
 
 
@@ -3004,6 +3060,19 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_UpdateProductOnHand]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateProductOnHand]
+	(@productID		int,
+	 @amount		int)
+AS
+	UPDATE [dbo].[Products]
+	SET [OnHand] = @amount
+	WHERE [ProductID] = @productID
+	RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateProductOnOrder]...';
 
@@ -3509,7 +3578,6 @@ GO
 CREATE PROCEDURE [dbo].[proc_UpdateVendorOrder]
 	(@VendorOrderID int,
 	 @VendorID int,
-	 @DateOrdered datetime,
 	 @AmountOfShipments int,
 	 @Finalized bit,
 	 @orig_AmountOfShipments int,
@@ -3520,7 +3588,6 @@ AS
 	    [Finalized] = @Finalized
 	WHERE [VendorOrderID] = @VendorOrderID
 	  and [VendorID] = @VendorID
-	  and [DateOrdered] = @DateOrdered
 	  and [AmountOfShipments] = @orig_AmountOfShipments
 	  and [Finalized] = @orig_Finalized
 	
