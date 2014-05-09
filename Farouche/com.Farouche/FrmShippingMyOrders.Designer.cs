@@ -44,9 +44,9 @@
             // 
             // lvMyOrders
             // 
-            this.lvMyOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvMyOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lvMyOrders.FullRowSelect = true;
             this.lvMyOrders.GridLines = true;
             this.lvMyOrders.HideSelection = false;
@@ -58,6 +58,7 @@
             this.lvMyOrders.UseCompatibleStateImageBehavior = false;
             this.lvMyOrders.View = System.Windows.Forms.View.Details;
             this.lvMyOrders.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvMyOrders_ColumnClick);
+            this.lvMyOrders.SelectedIndexChanged += new System.EventHandler(this.lvMyOrders_SelectedIndexChanged);
             // 
             // FrmShippingMyOrders
             // 

@@ -21,6 +21,12 @@ namespace com.Farouche.Commons
             ProductID = productId;
             VendorOrderId = vendorOrderId;
         }
+        public VendorOrderLineItem(int productId, int qtyOrdered, int qtyReceived, int qtyDamaged) {
+            ProductID = productId;
+            QtyOrdered = qtyOrdered;
+            QtyReceived = qtyReceived;
+            QtyDamaged = qtyDamaged;
+        }
 
         public int ProductID
         {

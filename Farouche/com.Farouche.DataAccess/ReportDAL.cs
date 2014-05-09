@@ -59,8 +59,8 @@ namespace com.Farouche.DataAccess
                             ItemsPerCase = reader.GetInt32(reader.GetOrdinal("ItemsPerCase")),
                             Active = true
                         };
-                        order.ReorderTotal = (double)product._reorderAmount * (double)vendorSrcItem.UnitCost;
-                        order.CasesToOrder = (int)product._reorderAmount;
+                        order.CasesToOrder = (int)product._reorderAmount / vendorSrcItem.ItemsPerCase + (product._reorderAmount % vendorSrcItem.ItemsPerCase == 0 ? 0 : 1);
+                        order.ReorderTotal = (double)order.CasesToOrder * (double)vendorSrcItem.ItemsPerCase * (double)vendorSrcItem.UnitCost;
                         order.ShouldReorder = true;
                         order.VendorSourceItem = vendorSrcItem;
                         reorders.Add(order);
@@ -124,12 +124,10 @@ namespace com.Farouche.DataAccess
                             ItemsPerCase = reader.GetInt32(reader.GetOrdinal("ItemsPerCase")),
                             Active = true
                         };
-                        order.ReorderTotal = (double)product._reorderAmount * (double)vendorSrcItem.UnitCost;
-                        order.CasesToOrder = (int)product._reorderAmount;
+                        order.CasesToOrder = (int)product._reorderAmount / vendorSrcItem.ItemsPerCase + (product._reorderAmount % vendorSrcItem.ItemsPerCase == 0 ? 0 : 1);
+                        order.ReorderTotal = (double)order.CasesToOrder * (double)vendorSrcItem.ItemsPerCase * (double)vendorSrcItem.UnitCost;
                         order.ShouldReorder = true;
                         order.VendorSourceItem = vendorSrcItem;
-
-                       
                     }
                 }
                 reader.Close();

@@ -34,9 +34,9 @@
             // 
             // lvPickList
             // 
-            this.lvPickList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvPickList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lvPickList.FullRowSelect = true;
             this.lvPickList.GridLines = true;
             this.lvPickList.HideSelection = false;
@@ -48,6 +48,7 @@
             this.lvPickList.UseCompatibleStateImageBehavior = false;
             this.lvPickList.View = System.Windows.Forms.View.Details;
             this.lvPickList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPickList_ColumnClick);
+            this.lvPickList.SelectedIndexChanged += new System.EventHandler(this.lvPickList_SelectedIndexChanged);
             // 
             // btnStartPick
             // 

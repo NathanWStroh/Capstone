@@ -1,9 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[proc_GetVendorOrderByVendorAndDate]
-	@VendorID int, 
-	@DateOrdered datetime
+	@VendorID int
 AS
-	SELECT [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
+	SELECT top(1) [VendorOrderID], [VendorID], [DateOrdered], [AmountOfShipments], [Finalized], [Active]
 	FROM VendorOrders
 	WHERE [VendorID] = @VendorID
-	and [DateOrdered] = @DateOrdered
+	order by DateOrdered desc
 RETURN

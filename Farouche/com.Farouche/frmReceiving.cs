@@ -371,6 +371,13 @@ namespace com.Farouche
             this.Close();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            VendorOrder thisOrder = new VendorOrder(vendorOrder.Id);
+            thisOrder.LineItems = vendorOrderLineItemList;
+            _vendorOrderManager.FinalizeVendorOrder(thisOrder);
+        }
+
 
         
     }

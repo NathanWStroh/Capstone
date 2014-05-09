@@ -10,6 +10,7 @@ namespace com.Farouche.BusinessLogic
     public class ReorderManager
     {
         private List<Reorder> _reorders = new List<Reorder>();
+        private VendorOrderManager _voMangaer = new VendorOrderManager();
         public List<Reorder> Reorders
         {
             get { return _reorders; }
@@ -94,14 +95,15 @@ namespace com.Farouche.BusinessLogic
 
         public Boolean OrderReorders()
         {
+            VendorOrder order = new VendorOrder(_reorders[0].VendorSourceItem.VendorID);
             foreach (var reorder in _reorders)
             {
                 if (reorder.ShouldReorder == true && reorder.CasesToOrder > 0)
-                { 
-                    //Use VendorOrderManager to add the odds
+                {
+                    order.AddLineItem(new VendorOrderLineItem(reorder.Product.Id, (reorder.CasesToOrder * reorder.VendorSourceItem.ItemsPerCase), 0, 0));
                 }
             }
-            return true;
+            return _voMangaer.AddVendorOrder(order);
         } // end OrderReorders()
 
         private Boolean UpdateOrderInCollection(Reorder reorder)
@@ -137,7 +139,7 @@ namespace com.Farouche.BusinessLogic
         {
             try
             {
-                return (Double)(reorder.CasesToOrder * reorder.VendorSourceItem.UnitCost);
+                return (Double)(reorder.CasesToOrder * reorder.VendorSourceItem.UnitCost * reorder.VendorSourceItem.ItemsPerCase);
             }
             catch(Exception ex)
             {

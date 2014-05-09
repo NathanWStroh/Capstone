@@ -28,15 +28,16 @@ namespace com.Farouche
             _myOrderManager = new ShippingOrderManager();
             RefreshPickView();
             Instance = this;
-        }
+        }//End FrmShippingPickList(.)
 
         private void FrmShippingPickList_Load(object sender, EventArgs e)
         {
             RefreshPickView();
-        }
+        }//End FrmShippingPickList_Load(..)
 
         private void PopulatePickListView(ListView lv, List<ShippingOrder> orderList)
         {
+            btnStartPick.Enabled = false;
             _myOrderManager.Orders = orderList;
             lv.Items.Clear();
             lv.Columns.Clear();
@@ -67,7 +68,7 @@ namespace com.Farouche
             lv.Columns.Add("LastName");
             lv.Columns.Add("Picked");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }//End of PopulateOrderListView(..)
+        }//End of PopulatePickListView(..)
 
         private void btnStartPick_Click(object sender, EventArgs e)
         {
@@ -103,7 +104,7 @@ namespace com.Farouche
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
-        }//End btnStartPick(..)
+        }//End btnStartPick_Click(..)
 
         private void InitPick(int selectedOrder)
         {
@@ -115,17 +116,17 @@ namespace com.Farouche
         private void Details_FormClosed(object sender, EventArgs e)
         {
             RefreshPickView();
-        }
+        }//End Details_FormClosed(..)
 
         private void RefreshPickView()
         {
             PopulatePickListView(lvPickList, _myOrderManager.GetNonPickedOrders());
-        }
+        }//End RefreshPickView()
 
         private void FrmShippingPickList_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
-        }
+        }//End FrmShippingPickList_FormClosed(..)
 
         private void lvPickList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -149,6 +150,11 @@ namespace com.Farouche
             lvPickList.Sort();
             // Set the ListViewItemSorter property to a new ListViewItemComparer object.
             this.lvPickList.ListViewItemSorter = new ListViewItemComparer(e.Column, lvPickList.Sorting);
-        }
+        }//End lvPickList_ColumnClick(..)
+
+        private void lvPickList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnStartPick.Enabled = true;
+        }//End lvPickList_SelectedIndexChanged(..)
     }
 }

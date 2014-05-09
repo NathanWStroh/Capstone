@@ -2,7 +2,7 @@
 CREATE TABLE [dbo].[VendorOrders] (
 VendorOrderID 		[int] IDENTITY(1,1)	NOT NULL,
 VendorID 			[int]				NOT NULL,
-DateOrdered			[datetime]		NOT NULL,	
+DateOrdered			[datetime]			NOT NULL DEFAULT SYSDATETIME(),	
 AmountOfShipments	[int]				NOT NULL DEFAULT(1),
 Finalized			[Bit]				NOT NULL DEFAULT(0),
 Active 				[Bit]				NOT NULL DEFAULT(1)
