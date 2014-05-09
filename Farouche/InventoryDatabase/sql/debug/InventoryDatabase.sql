@@ -408,6 +408,7 @@ CREATE TABLE [dbo].[ShippingTermsLookup] (
     [ShippingTermID]   INT           IDENTITY (1, 1) NOT NULL,
     [ShippingVendorID] INT           NOT NULL,
     [Description]      VARCHAR (250) NOT NULL,
+    [Active]           BIT           NOT NULL,
     CONSTRAINT [PK_ShippingTermsLookup] PRIMARY KEY CLUSTERED ([ShippingTermID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
 ) ON [PRIMARY];
 
@@ -428,6 +429,7 @@ CREATE TABLE [dbo].[ShippingVendors] (
     [Phone]            VARCHAR (12) NOT NULL,
     [Contact]          VARCHAR (50) NOT NULL,
     [ContactEmail]     VARCHAR (50) NULL,
+    [Active]           BIT          NOT NULL,
     CONSTRAINT [PK_ShippingVendors] PRIMARY KEY CLUSTERED ([ShippingVendorID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
 ) ON [PRIMARY];
 
@@ -502,11 +504,12 @@ PRINT N'Creating [dbo].[VendorOrderLineItems]...';
 
 GO
 CREATE TABLE [dbo].[VendorOrderLineItems] (
-    [VendorOrderID] INT NOT NULL,
-    [ProductID]     INT NOT NULL,
-    [QtyOrdered]    INT NOT NULL,
-    [QtyReceived]   INT NOT NULL,
-    [QtyDamaged]    INT NOT NULL,
+    [VendorOrderID] INT           NOT NULL,
+    [ProductID]     INT           NOT NULL,
+    [QtyOrdered]    INT           NOT NULL,
+    [QtyReceived]   INT           NOT NULL,
+    [QtyDamaged]    INT           NOT NULL,
+    [Note]          VARCHAR (250) NULL,
     CONSTRAINT [PK_VendorOrderLineItems] PRIMARY KEY CLUSTERED ([VendorOrderID] ASC, [ProductID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
 ) ON [PRIMARY];
 
@@ -764,6 +767,24 @@ PRINT N'Creating On column: Active...';
 
 
 GO
+ALTER TABLE [dbo].[ShippingTermsLookup]
+    ADD DEFAULT ((1)) FOR [Active];
+
+
+GO
+PRINT N'Creating On column: Active...';
+
+
+GO
+ALTER TABLE [dbo].[ShippingVendors]
+    ADD DEFAULT ((1)) FOR [Active];
+
+
+GO
+PRINT N'Creating On column: Active...';
+
+
+GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
 
 
@@ -1009,6 +1030,18 @@ ALTER TABLE [dbo].[VendorSourceItems] WITH NOCHECK
 
 
 GO
+PRINT N'Creating [dbo].[proc_ActivateShippingVendor]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_ActivateShippingVendor]
+	(@ShippingVendorId	Int)
+AS
+	UPDATE [dbo].[ShippingVendors]
+	SET [Active] = 1
+	WHERE [ShippingVendorID] = @ShippingVendorId
+	RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_Authenticate]...';
 
 
@@ -1122,6 +1155,30 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_DeactivateShippingVendor]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_DeactivateShippingVendor]
+	(@ShippingVendorId	Int)
+AS
+	UPDATE [dbo].[ShippingVendors]
+	SET [Active] = 0
+	WHERE [ShippingVendorID] = @ShippingVendorId
+	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_DeactivateTerm]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_DeactivateTerm]
+	(@ShippingTermId	Int)
+AS
+	UPDATE [dbo].[ShippingTermsLookup]
+	SET [Active] = 0
+	WHERE [ShippingTermId] = @ShippingTermId
+	RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_DeactivateVendor]...';
 
@@ -1277,6 +1334,52 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_DeleteShippingVendor]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_DeleteShippingVendor]
+	(@ShippingVendorID		[int],
+	@Name					[varchar],
+	@Address				[varchar],
+	@City					[varchar],
+	@State					[varchar],
+	@Country				[varchar],
+	@Zip					[varchar],
+	@Phone					[Varchar],
+	@Contact				[varchar],
+	@ContactEmail			[varchar],
+	@Active					[BIT])
+AS
+	DELETE FROM [dbo].[ShippingVendors]
+	WHERE [ShippingVendorID] = @ShippingVendorID
+	AND [Name] = @Name
+	AND [Address] = @Address
+	AND [City] = @City
+	AND [State] = @State
+	AND [Country] = @Country
+	AND [Zip] = @Zip
+	AND [Phone] = @Phone
+	AND [Contact] = @Contact
+	AND [ContactEmail] = @ContactEmail
+	AND [Active] = @Active
+RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_DeleteTerm]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_DeleteTerm]
+	(@Id					int,
+	@ShippingVendorId		int,
+	@Active					bit)
+AS
+	DELETE FROM [dbo].[ShippingTermsLookup]
+	WHERE [ShippingTermID] = @Id
+	AND [ShippingVendorID] = @ShippingVendorId
+	AND [Active] = @Active
+RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_DeleteVendor]...';
 
 
@@ -1321,14 +1424,31 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_FetchTermsByActive]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_FetchTermsByActive]
+	(@Active	Int)
+AS
+	SELECT [ShippingTermId], [ShippingTermsLookup].[ShippingVendorId], [Description], [Name], [ShippingTermsLookup].[Active]
+	FROM [dbo].[ShippingTermsLookup]
+	INNER JOIN [ShippingVendors]
+	ON [ShippingTermsLookup].[ShippingVendorID] = [ShippingVendors].[ShippingVendorID]
+	WHERE [ShippingTermsLookup].[Active] = @Active
+	ORDER BY [ShippingTermsLookup].[Active] DESC, [ShippingTermsLookup].[ShippingVendorId]
+GO
 PRINT N'Creating [dbo].[proc_GenerateReorderReports]...';
 
 
 GO
 CREATE PROCEDURE [dbo].[proc_GenerateReorderReports]
-	@VendorID int
+	@VendorID int,
+	@ReorderActive int
 AS
-	select p.ProductID, ReorderAmount, ReorderThreshold, vsi.VendorID, ItemsPerCase, UnitCost, UnitPrice, MinQtyToOrder
+IF @ReorderActive = 0
+BEGIN
+	select p.ProductID, ShortDesc, ReorderAmount, ReorderThreshold, vsi.VendorID, ItemsPerCase, UnitCost, UnitPrice, MinQtyToOrder
     from Products p
             Join VendorSourceItems vsi on 
                 vsi.ProductID = p.ProductID
@@ -1336,6 +1456,18 @@ AS
                 vsi.Active = 'true' and
                 vsi.VendorID = @VendorID  and
                 OnHand + OnOrder < ReorderThreshold
+END
+ELSE
+BEGIN
+select p.ProductID, ShortDesc, ReorderAmount, ReorderThreshold, vsi.VendorID, ItemsPerCase, UnitCost, UnitPrice, MinQtyToOrder
+    from Products p
+            Join VendorSourceItems vsi on 
+                vsi.ProductID = p.ProductID
+            where p.active = 'true' and
+                vsi.Active = 'true' and
+                vsi.VendorID = @VendorID  and
+                OnHand + OnOrder > ReorderThreshold
+END
 GO
 PRINT N'Creating [dbo].[proc_GetAllApplicationVariables]...';
 
@@ -1505,8 +1637,11 @@ PRINT N'Creating [dbo].[proc_GetAllShippingTerms]...';
 GO
 CREATE PROCEDURE [proc_GetAllShippingTerms]
 AS
-	SELECT *
+	SELECT [ShippingTermId], [ShippingTermsLookup].[ShippingVendorId], [Description], [Name], [ShippingTermsLookup].[Active]
 	FROM [dbo].[ShippingTermsLookup]
+	INNER JOIN [ShippingVendors]
+	ON [ShippingTermsLookup].[ShippingVendorID] = [ShippingVendors].[ShippingVendorID]
+	ORDER BY [ShippingTermsLookup].[Active] DESC, [ShippingTermsLookup].[ShippingVendorId]
 GO
 PRINT N'Creating [dbo].[proc_GetAllShippingVendors]...';
 
@@ -1516,6 +1651,7 @@ CREATE PROCEDURE [proc_GetAllShippingVendors]
 AS
 	SELECT *
 	FROM [dbo].[ShippingVendors]
+	ORDER BY [Active] DESC, [ShippingVendorId]
 GO
 PRINT N'Creating [dbo].[proc_GetAllStates]...';
 
@@ -1542,9 +1678,9 @@ GO
 CREATE PROCEDURE [dbo].[proc_GetAllVendorOrderLineItemsByVendor]
 	(@VendorID int)
 AS
-	SELECT [VendorOrderLineItems].[VendorOrderID],[ProductID],[QtyOrdered],[QtyReceived],[QtyDamaged]
+SELECT [VendorOrders].VendorID,[ProductID],[QtyOrdered],[QtyReceived],[QtyDamaged]
 	from [VendorOrderLineItems], [VendorOrders]
-	where [VendorID] = @VendorID
+	where [VendorOrders].VendorID = @VendorID
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetAllVendorOrderLineItemsByVendorOrder]...';
@@ -1554,9 +1690,9 @@ GO
 CREATE PROCEDURE [dbo].[proc_GetAllVendorOrderLineItemsByVendorOrder]
 	@VendorOrderID int
 AS
-	SELECT [VendorOrderID],[ProductID],[QtyOrdered],[QtyReceived],[QtyDamaged]
-	from [VendorOrderLineItems]
-	where [VendorOrderID] = @VendorOrderID
+Select VendorOrderLineItems.VendorOrderID, VendorOrderLineItems.ProductID, VendorOrderLineItems.QtyOrdered, VendorOrderLineItems.QtyReceived, VendorOrderLineItems.QtyDamaged, VendorOrderLineItems.Note
+From VendorOrderLineItems
+Where VendorOrderLineItems.VendorOrderID = @VendorOrderID
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetAllVendorOrders]...';
@@ -1634,6 +1770,22 @@ AS
 	SELECT so.ShippingOrderID, so.ShippingTermID, sv.ShippingVendorID, st.Description, sv.Name, st.Description, si.ProductID, pr.ShortDesc, si.Quantity, so.ShipDate, so.ShipToName, so.ShipToAddress, so.ShipToCity, so.ShipToState, so.ShipToZip
 	FROM [dbo].[ShippingTermsLookup] st, [dbo].[Products] pr, [dbo].[ShippingVendors] sv, [dbo].[ShippingOrders] so, [dbo].[ShippingOrderLineItems] si
 	WHERE so.ShippingOrderID = @ShippingOrderId AND so.ShippingTermID = st.ShippingTermID AND st.ShippingVendorID = sv.ShippingVendorID AND so.ShippingOrderID = si.ShippingOrderID AND si.ProductID = pr.ProductID
+RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetCLSVendorProducts]...';
+
+
+GO
+/*Object: StoredProcedure [dbo].[proc_GetCLSVendorProducts] */
+CREATE PROCEDURE [dbo].[proc_GetCLSVendorProducts]
+AS
+	SELECT v.[VendorID], v.[Name], vs.[ProductID], p.[ShortDesc], p.[Description], vs.[UnitCost]
+	FROM [dbo].[Vendors] v
+	JOIN [dbo].[VendorSourceItems] vs
+	ON vs.[VendorID] = v.[VendorID]
+	JOIN [dbo].[Products] p
+	ON vs.[ProductID] = p.[productID]
+	ORDER BY v.[VendorID]
 RETURN
 GO
 PRINT N'Creating [dbo].[proc_GetControlsForRole]...';
@@ -1850,6 +2002,21 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_GetProductToReorder]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetProductToReorder]
+	@shortDesc  varchar(50)
+AS
+	select p.ProductID, ShortDesc, ReorderAmount, ReorderThreshold, vsi.VendorID, ItemsPerCase, UnitCost, UnitPrice, MinQtyToOrder
+    from Products p
+            Join VendorSourceItems vsi on 
+                vsi.ProductID = p.ProductID
+            where p.active = 'true' and
+                vsi.Active = 'true' and
+                ShortDesc = @shortDesc
+GO
 PRINT N'Creating [dbo].[proc_GetRoles]...';
 
 
@@ -1952,9 +2119,12 @@ CREATE PROCEDURE [proc_GetShippingTermsByID]
 	@shippingTermID int
 )
 AS
-	SELECT *
+	SELECT [ShippingTermId], [ShippingTermsLookup].[ShippingVendorId], [Description], [Name], [ShippingTermsLookup].[Active]
 	FROM [dbo].[ShippingTermsLookup]
+	INNER JOIN [ShippingVendors]
+	ON [ShippingTermsLookup].[ShippingVendorID] = [ShippingVendors].[ShippingVendorID]
 	WHERE [ShippingTermID] = @shippingTermID
+	ORDER BY [ShippingTermsLookup].[ShippingVendorId]
 GO
 PRINT N'Creating [dbo].[proc_GetShippingVendorByID]...';
 
@@ -1968,6 +2138,20 @@ AS
 	SELECT *
 	FROM [dbo].[ShippingVendors]
 	WHERE [ShippingVendorID] = @shippingVendorID
+	ORDER BY [ShippingVendorId]
+GO
+PRINT N'Creating [dbo].[proc_GetShippingVendorsByActive]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetShippingVendorsByActive]
+	(@Active	Int)
+AS
+	SELECT *
+	FROM [dbo].[ShippingVendors]
+	WHERE [Active] = @Active
+	ORDER BY [Active] DESC, [ShippingVendorId]
+RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_GetVendor]...';
 
@@ -2502,16 +2686,18 @@ CREATE PROCEDURE [dbo].[proc_InsertIntoVendorOrderLineItems]
      @ProductID int,
      @QtyOrdered int,
      @QtyReceived int,
-     @QtyDamaged int)
+     @QtyDamaged int,
+	 @Note varchar(250))
 AS
 	INSERT INTO [dbo].[VendorOrderLineItems]
            ([VendorOrderID]
            ,[ProductID]
            ,[QtyOrdered]
            ,[QtyReceived]
-           ,[QtyDamaged])
+           ,[QtyDamaged],
+		   [Note])
      VALUES
-           (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged)
+           (@VendorOrderID, @ProductID, @QtyOrdered, @QtyReceived, @QtyDamaged, @Note)
 RETURN @@IDENTITY
 GO
 PRINT N'Creating [dbo].[proc_InsertIntoVendorSourceItems]...';
@@ -2548,10 +2734,11 @@ PRINT N'Creating [dbo].[proc_InsertVendorOrder]...';
 GO
 CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]
 	@VendorID int, 
-	@DateOrdered date
+	@DateOrdered date,
+	@NumberOfShipments int
 AS
-	Insert into [VendorOrders] (VendorID, DateOrdered)
-	Values (@VendorID, @DateOrdered)
+	Insert into [VendorOrders] (VendorID, DateOrdered, AmountOfShipments)
+	Values (@VendorID, @DateOrdered, @NumberOfShipments)
 RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_ReactivateCategory]...';
@@ -2642,6 +2829,18 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_ReactivateTerm]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_ReactivateTerm]
+	(@ShippingTermId	Int)
+AS
+	UPDATE [dbo].[ShippingTermsLookup]
+	SET [Active] = 1
+	WHERE [ShippingTermId] = @ShippingTermId
+	RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_ReactivateVendor]...';
 
@@ -3327,21 +3526,39 @@ AS
 	
 RETURN @@ROWCOUNT
 GO
+PRINT N'Creating [dbo].[proc_UpdateVendorOrderLineItemNote]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateVendorOrderLineItemNote]
+	@vendorOrderId int,
+	@productId int, 
+	@note varchar(250)
+AS
+	UPDATE[dbo].[VendorOrderLineItems]
+	SET
+		[Note] = @note
+	WHERE
+		[VendorOrderID] = @vendorOrderId
+		And [ProductID] = @productId
+	RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_UpdateVendorOrderLineItems]...';
 
 
 GO
 CREATE PROCEDURE [dbo].[proc_UpdateVendorOrderLineItems]
-	(@VendorOrderID int,
-     @ProductID int,
+	(
+     
      @QtyOrdered int,
      @QtyReceived int,
      @QtyDamaged int,
 	 @orig_VendorOrderID int,
      @orig_ProductID int,
-     @orig_QtyOrdered int,
-     @orig_QtyReceived int,
-     @orig_QtyDamaged int)
+	 @orig_QtyOrdered int,
+	 @orig_QtyReceived int,
+	 @orig_QtyDamaged int
+	 )
 AS
 	UPDATE [dbo].[VendorOrderLineItems]
    SET 
@@ -3349,11 +3566,12 @@ AS
       [QtyReceived] = @QtyReceived, 
       [QtyDamaged] = @QtyDamaged
  WHERE 
-		[VendorOrderID] = @VendorOrderID
-		and [ProductID] = @ProductID
-		and [QtyOrdered] = @QtyOrdered
-		and [QtyDamaged] = @QtyDamaged
-		and [QtyReceived] = @QtyReceived
+		[VendorOrderID] = @orig_VendorOrderID
+		and [ProductID] = @orig_ProductID
+		and [QtyOrdered] = @orig_QtyOrdered
+		and [QtyDamaged] = @orig_QtyDamaged
+		and [QtyReceived] = @orig_QtyReceived
+		
 RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateVendorSourceItem]...';
@@ -3458,6 +3676,21 @@ INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 2A')
 INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 2B')
 INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 3A')
 INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 3B')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 4A')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 4B')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 4C')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 5A')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 5B')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 5C')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 6A')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 6B')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 6C')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 7A')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 7B')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 7C')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 8A')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 8B')
+INSERT [dbo].[Locations] ([Location]) VALUES ('Bin 8C')
 GO
 /* Inserts for Categories */
 
@@ -3493,6 +3726,37 @@ INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Loc
 VALUES (11, 10, 1, 'Better Than Yours Accessory Pack', 'Bin 3B', 98.77, 'Better Pack', 5, 10, '24x36x10', 36.42)
 INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight], [Active])
 VALUES (12, 10, 2, 'Ivan the Chess Wiz Computer Drive', 'Bin 2A', 700.66, 'Ivan Drive', 8, 16, '10x8x2', 5.36, 0)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (13, 100, 50, 'Zeta Computer Drive', 'Bin 4B', 511.52, 'Zeta Drive', 200, 100, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (14, 98, 42, ' Star Wars Admril Ackbar Speakers', 'Bin 4C', 29.99, 'Ackbar Speakers', 50, 16, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (15, 54, 16, 'The Great and Powerful Gizmo', 'Bin 5A', 1.00, 'Gizmo Thing', 61, 16, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (16, 34, 61, 'Box of Power Computer Case', 'Bin 5C', 99.99, 'Box Computer Case', 50, 25, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (17, 15, 10, 'Gremlin Keyboard v15', 'Bin 4B', 800.00, 'Gremlin Keyboard', 56, 16, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (18, 0, 0, 'Khan Motherboard', 'Bin 6A', 111.11, 'Khan Motherboard', 15, 30, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (19, 15, 14, 'Blesbok Laptop of Divinity', 'Bin 6C', 89.05, 'Not So Divine Laptop', 125, 25, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (20, 71, 42, ' Superman Bizarro Mouse', 'Bin 7A', 51.61, 'Weird Mouse', 61, 30, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (21, 76, 46, 'Inferno Cables', 'Bin 7B', 6.66, 'Keeps the Heat away Cables', 42, 20, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (22, 24, 61, 'Growl Microphone', 'Bin 7C', 89.51, 'Loudass Microphone', 42, 16, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (23, 23, 20, 'Salmagundi Computer Case', 'Bin 8A', 157.16, 'Salmagundi Computer Case', 42, 30, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (24, 14, 13, 'Laplace Laptop', 'Bin 8B', 999.60, 'No Lap Laptop', 42, 16, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (25, 42, 29, 'Cybertron Monitor', 'Bin 8C', 300.76, 'Always Watching Monitor', 42, 16, '10x8x2', 5.37)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (26, 10, 4, 'Eco Friendly Luminous Keyboard', 'Bin 4A', 90.66, 'Luminous Keyboard', 6, 6, '10x8x2', 5.36)
+INSERT [dbo].[Products] ([ProductID], [Available], [OnHand], [Description], [Location], [UnitPrice], [ShortDesc], [ReorderThreshold], [ReorderAmount], [ShippingDimensions], [ShippingWeight])
+VALUES (27, 80, 7, 'Eniac Wireless Headset, wearable anywhere', 'Bin 6B', 249.99, 'Eniac Wireless Headset', 20, 16, '10x8x2', 5.36)
+
 SET IDENTITY_INSERT [dbo].[Products] OFF
 GO
 /* Inserts for ProductCategories */
@@ -3523,16 +3787,34 @@ INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOr
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (5, 1, 15.00, 10,25, 1)
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (7, 1, 30.00, 10,25, 1)
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (10, 1, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (12, 1, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (13, 1, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (14, 1, 5.00, 10,25, 1)
 
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (2, 2, 5.00, 10,  25,1)
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (5, 2, 15.00, 10, 25,1)
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (8, 2, 30.00, 10, 25,1)
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (11, 2, 50.00, 10,25, 0)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (15, 2, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (17, 2, 5.00, 10,25, 1)
 
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (3, 3, 500.00, 10,25, 1)
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (6, 3, 20.00, 10, 25,1)
 INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (9, 3, 200.00, 10,25, 1)
-INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (12, 3, 500.00, 10,25, 0)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (26, 3, 500.00, 10,25, 0)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (16, 3, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (18, 3, 5.00, 10,25, 1)
+
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (19, 4, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (21, 4, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (22, 4, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (23, 4, 5.00, 10,25, 1)
+
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (20, 5, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (24, 5, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (25, 5, 5.00, 10,25, 1)
+INSERT [dbo].[VendorSourceItems] ([ProductID],[VendorID], [UnitCost],[MinQtyToOrder],[ItemsPerCase],[Active]) VALUES (27, 5, 5.00, 10,25, 1)
+
 GO
 
 /* Insert for ShippingVendors */

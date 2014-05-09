@@ -50,15 +50,12 @@
             this.tsmiShippingTerms = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShippingVendors = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-<<<<<<< HEAD
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-=======
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonCascade = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonTileVertically = new System.Windows.Forms.ToolStripButton();
->>>>>>> origin/master
             this.menuStrip1.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
@@ -234,7 +231,6 @@
             this.reportsToolStripMenuItem.Visible = false;
             this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
-<<<<<<< HEAD
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -257,7 +253,6 @@
             this.employeesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.employeesToolStripMenuItem.Text = "Employees";
             this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
-=======
             // toolStripMain
             // 
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -288,7 +283,6 @@
             this.toolStripButtonTileVertically.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonTileVertically.Text = "Tile Windows Vertically";
             this.toolStripButtonTileVertically.Click += new System.EventHandler(this.toolStripButtonTileVertically_Click);
->>>>>>> origin/master
             // 
             // frmStartUp
             // 

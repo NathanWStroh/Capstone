@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="FrmEmployees.Designer.cs">
       <DependentUpon>FrmEmployees.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddLineItemToVendorOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +299,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEmployees.resx">
       <DependentUpon>FrmEmployees.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAddLineItemToVendorOrder.resx">
       <DependentUpon>FrmAddLineItemToVendorOrder.cs</DependentUpon>
     </EmbeddedResource>
