@@ -60,6 +60,11 @@
     </Compile>
     <Compile Include="FrmEmployees.Designer.cs">
       <DependentUpon>FrmEmployees.cs</DependentUpon>
+    <Compile Include="FrmAddLineItemToVendorOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddLineItemToVendorOrder.Designer.cs">
+      <DependentUpon>FrmAddLineItemToVendorOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmAddShippingTerm.cs">
       <SubType>Form</SubType>
@@ -223,6 +228,12 @@
     <Compile Include="FrmUpdateShippingVendor.designer.cs">
       <DependentUpon>FrmUpdateShippingVendor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmUpdateVendorOrderLineItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateVendorOrderLineItem.Designer.cs">
+      <DependentUpon>FrmUpdateVendorOrderLineItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVendor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +251,12 @@
     </Compile>
     <Compile Include="frmVendorCreateOrder.Designer.cs">
       <DependentUpon>frmVendorCreateOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVendorProductReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVendorProductReport.Designer.cs">
+      <DependentUpon>frmVendorProductReport.cs</DependentUpon>
     </Compile>
     <Compile Include="frmVendorSource.cs">
       <SubType>Form</SubType>
@@ -259,6 +276,7 @@
     <Compile Include="FrmViewOrderDetails.designer.cs">
       <DependentUpon>FrmViewOrderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListViewItemComparer.cs" />
     <Compile Include="ProductView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,6 +298,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEmployees.resx">
       <DependentUpon>FrmEmployees.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAddLineItemToVendorOrder.resx">
+      <DependentUpon>FrmAddLineItemToVendorOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddShippingTerm.resx">
       <DependentUpon>FrmAddShippingTerm.cs</DependentUpon>
@@ -363,6 +383,9 @@
       <DependentUpon>FrmUpdateShippingVendor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateVendorOrderLineItem.resx">
+      <DependentUpon>FrmUpdateVendorOrderLineItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmVendor.resx">
       <DependentUpon>frmVendor.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -373,6 +396,9 @@
     <EmbeddedResource Include="frmVendorCreateOrder.resx">
       <DependentUpon>frmVendorCreateOrder.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVendorProductReport.resx">
+      <DependentUpon>frmVendorProductReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVendorSource.resx">
       <DependentUpon>frmVendorSource.cs</DependentUpon>
@@ -401,13 +427,11 @@
     <EmbeddedResource Include="FrmVendorAddUpdate.resx">
       <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\EmployeeDirectory.rdlc" />
-    <EmbeddedResource Include="Reports\PackListReport.rdlc" />
-    <EmbeddedResource Include="Reports\PickReport.rdlc" />
     <None Include="app.config" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSEmployee.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSLineItem.datasource" />
     <None Include="Properties\DataSources\com.Farouche.Commons.CLSPackDetails.datasource" />
+    <None Include="Properties\DataSources\com.Farouche.Commons.CLSVendorProduct.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

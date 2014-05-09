@@ -15,9 +15,11 @@ using com.Farouche.Commons;
 //Last Modified By: Kaleb Wendel
 
 /*
- *                               Changelog
- * Date         By          Ticket          Version         Description
- * 
+*                               Changelog
+* Date         By          Ticket          Version         Description
+* 5/1/2014     Kaleb                                        Improved validation to use the Validation class.
+*
+* 5/1/2014     Kaleb                                        Adjusted class to populate the vendor drop down with the vendor name rather than Id.
 */
 
 namespace com.Farouche
@@ -26,13 +28,16 @@ namespace com.Farouche
     {
         private ShippingTermManager _myShippingTermManager;
         private ShippingVendorManager _myShippingVendorManager;
+        private ShippingTerm _originalTerm;
+        List<ShippingVendor> vendors;
 
         public FrmAddShippingTerm()
         {
             InitializeComponent();
             _myShippingTermManager = new ShippingTermManager();
             _myShippingVendorManager = new ShippingVendorManager();
-            PopulateVendorList();
+            vendors = _myShippingVendorManager.GetVendors();
+            PopulateVendorCombo();
         }//End of FrmAddShippingTerm()
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -44,21 +49,31 @@ namespace com.Farouche
         {
             ClearFields();
         }//End of btnClear_Click(..)
-
         
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ShippingTerm term;
-            if (txtDesc.TextLength > 250 || txtDesc.Text.Equals(""))
+            bool validShippingTerm = true;
+            string errorMessage = "Please correct the following errors:\n";
+            if(Validation.IsNullOrEmpty(txtDesc.Text) || Validation.IsBlank(txtDesc.Text))
             {
-                MessageBox.Show("The description was not valid.\nThis value must be 250 characters or less.");
+                validShippingTerm = false;
+                errorMessage += "You must enter a description.";
                 txtDesc.Focus();
             }
-            else
+            if (txtDesc.TextLength > 250)
             {
-                term = new ShippingTerm();
-                term.Description = txtDesc.Text;
-                term.ShippingVendorId = (int)comboVendor.SelectedItem;
+                validShippingTerm = false;
+                errorMessage += "The description must be 250 characters or less.";
+                txtDesc.Focus();
+            }
+            if(validShippingTerm)
+            {
+                term = new ShippingTerm()
+                {
+                    Description = txtDesc.Text,
+                    ShippingVendorId = ((KeyValuePair<int,string>)comboVendors.SelectedItem).Key
+                };
                 if(_myShippingTermManager.Insert(term))
                 {
                     this.DialogResult = DialogResult.OK;
@@ -69,24 +84,39 @@ namespace com.Farouche
                     MessageBox.Show("The shipping term was not created.");
                 }
             }
+            else
+            {
+                MessageBox.Show(errorMessage);
+            }
         }//End of btnAdd_Click(..)
 
         private void ClearFields()
         {
             txtDesc.Text = "";
-            comboVendor.SelectedIndex = 0;
+            comboVendors.SelectedIndex = 0;
         }//End of ClearFields()
 
-        private void PopulateVendorList()
+        private void PopulateVendorCombo()
         {
-            _myShippingVendorManager.GetVendors();
-            ShippingVendor vendor;
-            for (int i = 0; i < _myShippingVendorManager.ShippingVendors.Count; i++)
+            Dictionary<int, String> vendorsDictionary = new Dictionary<int, string>();
+            int counter = 0;
+            int index = 0;
+            foreach (var vendor in vendors)
             {
-                vendor = _myShippingVendorManager.ShippingVendors[i];
-                comboVendor.Items.Add(vendor.Id);
+                vendorsDictionary.Add(vendor.Id, vendor.Name);
+                if (_originalTerm != null)
+                {
+                    if (vendor.Id.Equals(_originalTerm.Id))
+                    {
+                        index = counter;
+                    }
+                    counter++;
+                }
             }
-            comboVendor.SelectedIndex = 0;
-        }//End of PopulateVendorList()
+            comboVendors.DataSource = new BindingSource(vendorsDictionary, null);
+            comboVendors.DisplayMember = "Value";
+            comboVendors.ValueMember = "Key";
+            comboVendors.SelectedIndex = index;
+        }//End of PopulateVendorCombo()
     }
 }

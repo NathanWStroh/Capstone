@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.CLSPackDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)(this.CLSPackDetailsBindingSource)).BeginInit();
@@ -41,13 +41,19 @@
             // 
             // reportViewer1
             // 
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.CLSPackDetailsBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            //reportDataSource2.Name = "DataSet1";
+            //reportDataSource2.Value = this.CLSPackDetailsBindingSource;
+            //this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
+            this.reportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            reportDataSource2.Name = "DataSet1";
+            reportDataSource2.Value = this.CLSPackDetailsBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "com.Farouche.Reports.PackListReport.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(12, 21);
+            this.reportViewer1.Location = new System.Drawing.Point(12, 12);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(943, 293);
+            this.reportViewer1.Size = new System.Drawing.Size(943, 302);
             this.reportViewer1.TabIndex = 0;
             // 
             // frmPrintPackReport
@@ -58,7 +64,8 @@
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmPrintPackReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmPrintPackReport";
+            this.Text = "Print Pack Report";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrintPackReport_FormClosed);
             this.Load += new System.EventHandler(this.frmPrintPackReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CLSPackDetailsBindingSource)).EndInit();
             this.ResumeLayout(false);

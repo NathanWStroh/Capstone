@@ -15,13 +15,13 @@ namespace com.Farouche.BusinessLogic
             get { return _reorders; }
         } 
 
-        public List<Reorder> GetReordersForVendor(int vendorId)
+        public List<Reorder> GetReordersForVendor(int vendorId, int reorderActive)
         {
             if (vendorId == null)
             {
                 throw new ArgumentNullException("VendorID cannot be empty");
             }
-            return ReportDAL.GetReorderReportData(vendorId);
+            return ReportDAL.GetReorderReportData(vendorId, reorderActive);
         }
 
         public ReorderManager(List<Reorder> reorders)
@@ -44,11 +44,12 @@ namespace com.Farouche.BusinessLogic
             addOrder.ShouldReorder = true;
             addOrder.CasesToOrder = caseAmt;
             addOrder.ReorderTotal = GetReorderRowTotal(addOrder);
-
-            throw new NotImplementedException();
+            return true;
+            //throw new NotImplementedException();
         }
         public Boolean AddToOrder(Reorder reorder)
         {
+            _reorders.Add(reorder);
             return UpdateOrderList(reorder, false);
         }
         private Boolean UpdateOrderList(Reorder reorder, Boolean remove)
@@ -56,7 +57,15 @@ namespace com.Farouche.BusinessLogic
             reorder.ShouldReorder = !remove;
             return UpdateOrderInCollection(reorder);
         } //end UpdateOrderList(..)
-        
+
+        public Reorder GetProductToReorder(string productName)
+        {
+            if (productName == null)
+            {
+                throw new ArgumentNullException("Must Select a Product");
+            }
+            return ReportDAL.GetProductToReorder(productName);
+        }
         public Double UpdateReorderAmount(Reorder reorder, int amt)
         {
             reorder.CasesToOrder = amt;
@@ -75,7 +84,10 @@ namespace com.Farouche.BusinessLogic
             double totalReorderCost = 0;
             foreach (var reorderI in _reorders)
             {
-                totalReorderCost = totalReorderCost + GetReorderRowTotal(reorderI);
+                if (reorderI.ShouldReorder)
+                {
+                    totalReorderCost = totalReorderCost + GetReorderRowTotal(reorderI);
+                }
             }
             return totalReorderCost;
         } // end GetReportTotal()
@@ -102,10 +114,10 @@ namespace com.Farouche.BusinessLogic
             { 
                 throw new ApplicationException("There are no reorder objects in the collection"); 
             }
-            if (!_reorders.Contains(reorder))
-            {
-                throw new ApplicationException("No reorder found in reorders collection");
-            }
+            //if (!_reorders.Contains(reorder))
+            //{
+            //    throw new ApplicationException("No reorder found in reorders collection");
+            //}
             foreach (var reorderI in _reorders)
 	            {
 		            if (reorderI == reorder)
@@ -114,6 +126,7 @@ namespace com.Farouche.BusinessLogic
                         reorderI.ShouldReorder = reorder.ShouldReorder;
                         //reorderI.Product = reorder.Product;
                         reorderI.VendorSourceItem = reorder.VendorSourceItem;
+                      
                         return true;
                     }   
                 }

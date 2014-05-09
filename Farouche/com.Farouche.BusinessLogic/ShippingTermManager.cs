@@ -14,7 +14,7 @@ using System.Data.SqlClient;
 /*
  *                               Changelog
  * Date         By          Ticket          Version         Description
- * 
+ * Kaleb                                                    Adjusted class to handle activating/deactivating/deleting shipping terms.
 */
 
 namespace com.Farouche.BusinessLogic
@@ -80,5 +80,28 @@ namespace com.Farouche.BusinessLogic
             return ShippingTerms;
         }//End of GetTerms()
 
+        public List<ShippingTerm> GetShippingTermsByActive(Boolean activeState)
+        {
+            ShippingTerms = ShippingTermDAL.FetchTermsByActive(activeState, _connection);
+            return ShippingTerms;
+        }
+
+        public Boolean ReactivateTerm(ShippingTerm shippingTerm)
+        {
+            if (shippingTerm == null) throw new ArgumentException("The shipping term was null, therefore it cannot be set to active.");
+            return ShippingTermDAL.ReactivateTerm(shippingTerm, _connection);
+        }
+
+        public Boolean DeactivateTerm(ShippingTerm shippingTerm)
+        {
+            if (shippingTerm == null) throw new ArgumentException("The shipping term was null, therefore it cannot be set to inactive.");
+            return ShippingTermDAL.DeactivateTerm(shippingTerm, _connection);
+        }
+
+        public Boolean DeleteTerm(ShippingTerm shippingTerm)
+        {
+            if (shippingTerm == null) throw new ArgumentException("The shipping term was null, therefore it cannot be deleted.");
+            return ShippingTermDAL.DeleteTerm(shippingTerm, _connection);
+        }
     }//End of class.
 }//End of namespace.

@@ -81,6 +81,7 @@ namespace com.Farouche.DataAccess
                 mySqlCommand.Parameters.AddWithValue("@QtyOrdered", vendorOrderLineItem.QtyOrdered);
                 mySqlCommand.Parameters.AddWithValue("@QtyReceived", vendorOrderLineItem.QtyReceived);
                 mySqlCommand.Parameters.AddWithValue("@QtyDamaged", vendorOrderLineItem.QtyDamaged);
+                mySqlCommand.Parameters.AddWithValue("@Note", vendorOrderLineItem.Note);
                 myConnection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
                 {
@@ -133,7 +134,8 @@ namespace com.Farouche.DataAccess
                         {
                             QtyOrdered = mySqlReader.GetInt32(2),
                             QtyReceived = mySqlReader.GetInt32(3),
-                            QtyDamaged = mySqlReader.GetInt32(4)
+                            QtyDamaged = mySqlReader.GetInt32(4),
+                            Note =  mySqlReader.GetString(5)
                         };
                         vendorOrderLineItemList.Add(vendorOrderLineItem);
                     }
@@ -399,8 +401,7 @@ namespace com.Farouche.DataAccess
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                mySqlCommand.Parameters.AddWithValue("@ProductID", currentLineItem.ProductID);
-                mySqlCommand.Parameters.AddWithValue("@VendorOrderID", currentLineItem.VendorOrderId);
+
                 mySqlCommand.Parameters.AddWithValue("@QtyOrdered", currentLineItem.QtyOrdered);
                 mySqlCommand.Parameters.AddWithValue("@QtyReceived", currentLineItem.QtyReceived);
                 mySqlCommand.Parameters.AddWithValue("@QtyDamaged", currentLineItem.QtyDamaged);
@@ -436,7 +437,47 @@ namespace com.Farouche.DataAccess
             {
                 myConnection.Close();
             }
-            return false;
+            return true;
+        }
+
+        public static bool UpdateNote(VendorOrderLineItem lineItem, SqlConnection myConnection)
+        {
+            myConnection = myConnection ?? GetInventoryDbConnection();
+            try
+            {
+                var mySqlCommand = new SqlCommand("proc_UpdateVendorOrderLineItemNote", myConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                mySqlCommand.Parameters.AddWithValue("@vendorOrderId", lineItem.VendorOrderId);  
+	            mySqlCommand.Parameters.AddWithValue("@productId", lineItem.ProductID);
+	            mySqlCommand.Parameters.AddWithValue("@note", lineItem.Note);
+                myConnection.Open();
+                if (mySqlCommand.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                myConnection.Close();
+            }    
+            return true;
         }
     }
 }

@@ -9,6 +9,11 @@ using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
 
+//Author: Justin
+//Date Created: 4/10/14
+//Last Modified: 5/7/14
+//Last Modified By: Justin Pitts
+
 /*
 *                               Changelog
 * Date         By               Ticket          Version          Description
@@ -18,139 +23,189 @@ using com.Farouche.Commons;
 namespace com.Farouche.Presentation
 {
     public partial class frmOpenVendorOrders : Form
-    {     
+    {
+        private readonly AccessToken _myAccessToken;
         private VendorOrderManager _vendorOrdersManager;
         private ReceivingManager _receivingManager;
+        private VendorManager _vendorManager;
         private Vendor vendor;
         private VendorOrder vendorOrder;
         private List<VendorOrder> orderList;
         private VendorOrderLineItem vendorOrderLineItem;
+        private ReorderManager _reorderManager;
+        private List<Reorder> reorderList;
         public static frmOpenVendorOrders Instance;
 
-        public frmOpenVendorOrders()
+
+        public frmOpenVendorOrders(AccessToken acctkn)
         {
             InitializeComponent();
+            _myAccessToken = acctkn;
             Instance = this;
+
+            // Add a CellClick handler to handle clicks in the button column.
+            dgvOpenVendorOrders.CellClick += new DataGridViewCellEventHandler(dgv_CellClick);
+
+
         }
 
         private void frmOpenVendorOrders_Load(object sender, EventArgs e)
         {
             _receivingManager = new ReceivingManager();
 
-            //createVendorOrder();
-            //fillVendorDropDown();
-            //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
+            fillVendorDropDown();
 
-            //vendorOrder1.VendorOrderID = 1;
-            //vendorOrder1.VendorID = 1;
-            //vendorOrder1.ProductID = 1;
-            //vendorOrder1.Name = "Sam's";
-            //vendorOrder1.DateOrdered = "1/24/2014";
-            //vendorOrder1.NumberOfShipments = 3;
+            orderList = _receivingManager.GetAllOpenOrders();
 
-            //vendorOrder2.VendorOrderID = 2;
-            //vendorOrder2.VendorID = 2;
-            //vendorOrder2.ProductID = 2;
-            //vendorOrder2.Name = "Target";
-            //vendorOrder2.DateOrdered = "1/25/2014";
-            //vendorOrder2.NumberOfShipments = 1;
 
-            //orderList = _receivingManager.GetAllOpenOrders();
+            
 
-            //vendorList = new List<Vendor>();
-            //var vendor1 = new Vendor();
-            //var vendor2 = new Vendor();
-            ////vendor1.Name = vendorOrder1.Name;
-            ////vendor2.Name = vendorOrder2.Name;
-            //vendorList.Add(vendor1);
-            //vendorList.Add(vendor2);
-            //fillVendorDropDown(vendorList);
 
-            fillListView(lvOpenVendorOrders, orderList);
-            //fillListView(lvOpenVendorOrders, _receivingManager.GetAllOpenOrders());
+
+
+           
+            fillGridView(dgvOpenVendorOrders, orderList);
+            
+            
+            
         }
 
         private void fillVendorDropDown()
         {
-            string vendorListString = "";
-            List<VendorOrder> vendorList = new List<VendorOrder>();
-            vendorList = _receivingManager.GetAllOpenOrders();
-            foreach (VendorOrder v in vendorList)
+
+          
+            List<Vendor> vendorList = new List<Vendor>();
+            _vendorManager = new VendorManager();
+
+            vendorList = _vendorManager.GetVendors();
+
+            foreach (Vendor v in vendorList)
+
             {
-                cbGetVendorsById.Items.Add(v.VendorID.ToString());
+                cbGetVendorsById.Items.Add(v.Id.ToString() + " " + v.Name);
             }
         }
 
-        private void fillListView(ListView lv, List<VendorOrder> orderList)
-        {      
-            lv.Items.Clear();
-            lv.Columns.Clear();
+        private void fillGridView(DataGridView dgv, List<VendorOrder> orderList)
+
+        {
+
+            DataGridViewButtonColumn viewOrderDetailsColumn = new DataGridViewButtonColumn();
+            viewOrderDetailsColumn.Text = "View Order Details";
+            viewOrderDetailsColumn.Name = "View Order Details";
+            viewOrderDetailsColumn.HeaderText = "View Order Details";
+            viewOrderDetailsColumn.UseColumnTextForButtonValue = true;
+            dgv.Columns.Clear();
+            dgv.Rows.Clear();
+
+            dgv.ColumnCount = 5;
+            dgv.Columns[0].Name = "Vendor OrderID";
+            dgv.Columns[1].Name = "Vendor ID";
+            dgv.Columns[2].Name = "Vendor Name";
+            dgv.Columns[3].Name = "Date Ordered";
+            dgv.Columns[4].Name = "Number of Shipments";
+            
+
+
             foreach (var vendorOrder in orderList)
             {
-                var item = new ListViewItem();
-                item.Text = vendorOrder.Id.ToString();
-                item.SubItems.Add(vendorOrder.VendorID.ToString());
-                item.SubItems.Add(vendorOrder.Name);
-                item.SubItems.Add(vendorOrder.DateOrdered.ToString());
-                item.SubItems.Add(vendorOrder.NumberOfShipments.ToString());
-                lv.Items.Add(item);
+
+
+                dgv.Rows.Add(vendorOrder.Id, vendorOrder.VendorID, _vendorManager.GetVendor(vendorOrder.VendorID).Name, vendorOrder.DateOrdered, vendorOrder.NumberOfShipments);
+                
+                
+                
             }
 
-            lv.Columns.Add("Vendor OrderID");
-            lv.Columns.Add("VendorID");
-            lv.Columns.Add("Vendor Name");
-            lv.Columns.Add("Date Ordered");
-            lv.Columns.Add("Number of Shipments");
-            lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
 
-        private void lvOpenVendorOrders_Click(object sender, EventArgs e)
+            dgvOpenVendorOrders.Columns.Insert(5, viewOrderDetailsColumn);
+            
+            
+        }
+        
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            lvOpenVendorOrders.FullRowSelect = true;
-            var selectedRow = lvOpenVendorOrders.SelectedItems;
-            if (selectedRow.Count != 0)
+
+            if (e.RowIndex < 0 || e.ColumnIndex != dgvOpenVendorOrders.Columns["View Order Details"].Index)
             {
-                vendorOrder = new VendorOrder(Int32.Parse(selectedRow[0].Text), Int32.Parse(selectedRow[0].SubItems[1].Text));
-                vendorOrder.DateOrdered = Convert.ToDateTime(selectedRow[0].SubItems[3].Text);
-                vendorOrder.NumberOfShipments = Int32.Parse(selectedRow[0].SubItems[4].Text);
-                frmReceiving _frmReceiving = new frmReceiving(vendorOrder);
-                _frmReceiving.Show();
-                _frmReceiving.BringToFront();
+                return;
             }
+            else
+            {
+                try
+                {
+
+                    vendorOrder = new VendorOrder((Int32)dgvOpenVendorOrders["Vendor OrderID", e.RowIndex].Value, (Int32)dgvOpenVendorOrders["Vendor ID", e.RowIndex].Value);
+                    vendorOrder.DateOrdered = (DateTime)dgvOpenVendorOrders["Date Ordered", e.RowIndex].Value;
+                    vendorOrder.NumberOfShipments = (Int32)dgvOpenVendorOrders["Number of Shipments", e.RowIndex].Value;
+                    frmReceiving _frmReceiving = new frmReceiving(vendorOrder, _myAccessToken);
+                    _frmReceiving.Show();
+                    _frmReceiving.BringToFront();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("oops!" + ex.StackTrace.ToString());
+
+                    ex.StackTrace.ToString();
+                }
+            }
+              
+
         }
+
 
         private void btngetAllOpenOrdersByVendor_Click(object sender, EventArgs e)
         {
-            vendor = new Vendor(Int32.Parse(cbGetVendorsById.SelectedItem.ToString()));
-            orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
-            fillListView(lvOpenVendorOrders, orderList);
+            try
+            {
+                int index = cbGetVendorsById.SelectedItem.ToString().IndexOf(" ");
+                string id = cbGetVendorsById.SelectedItem.ToString().Substring(0, index);
+                vendor = new Vendor(Int32.Parse(id));
+                orderList = _receivingManager.GetAllOpenOrdersByVendor(vendor);
+                DataGridViewButtonColumn viewOrderDetailsColumn = new DataGridViewButtonColumn();
+                viewOrderDetailsColumn.UseColumnTextForButtonValue = true;
+                viewOrderDetailsColumn.Text = "View Order Details";
+                viewOrderDetailsColumn.HeaderText = "View Order Details";
+                fillGridView(dgvOpenVendorOrders, orderList);
+                dgvOpenVendorOrders.ClearSelection();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You must select a vendor to search");
+            }
         }
 
-        private void createVendorOrder()
-        {
-            _vendorOrdersManager = new VendorOrderManager();
-            vendorOrder = new VendorOrder(1);
-            vendorOrder.Name = "Target";
-            vendorOrder.DateOrdered = DateTime.Today;
-            vendorOrder.NumberOfShipments = 4;
-            _vendorOrdersManager.AddVendorOrder(vendorOrder);
-            vendorOrderLineItem = new VendorOrderLineItem(1, 1);
-            vendorOrderLineItem.Name = "Target";
-            vendorOrderLineItem.QtyOrdered = 10;
-            vendorOrderLineItem.ProductID = 1;
-            vendorOrderLineItem.VendorOrderId = 1;
-            vendorOrderLineItem.LineItemTotal = 20.00;
-            vendorOrder.AddLineItem(vendorOrderLineItem);
-        }
+
+        
 
         private void cbGetVendorsById_SelectedIndexChanged(object sender, EventArgs e)
         {
-            fillVendorDropDown();
+            //fillVendorDropDown();
         }
+
+       
+
+        private void btnGellAllOpenOrders_Click(object sender, EventArgs e)
+        {
+            orderList = _receivingManager.GetAllOpenOrders();
+           
+
+            
+            
+            fillGridView(dgvOpenVendorOrders, orderList);
+        }
+        
+
 
         private void frmOpenVendorOrders_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
         }
+
+       
+
+        
     }
 }

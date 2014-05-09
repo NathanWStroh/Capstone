@@ -159,12 +159,15 @@
             // 
             // lvProducts
             // 
+            this.lvProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvProducts.FullRowSelect = true;
             this.lvProducts.GridLines = true;
             this.lvProducts.Location = new System.Drawing.Point(118, 48);
             this.lvProducts.MultiSelect = false;
             this.lvProducts.Name = "lvProducts";
-            this.lvProducts.Size = new System.Drawing.Size(643, 256);
+            this.lvProducts.Size = new System.Drawing.Size(644, 256);
             this.lvProducts.TabIndex = 23;
             this.lvProducts.UseCompatibleStateImageBehavior = false;
             this.lvProducts.View = System.Windows.Forms.View.Details;
@@ -184,7 +187,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 319);
+            this.ClientSize = new System.Drawing.Size(791, 319);
             this.Controls.Add(this.btnUpdateOnOrder);
             this.Controls.Add(this.btnUpdateReorderThreshold);
             this.Controls.Add(this.btnUpdateReorderAmount);

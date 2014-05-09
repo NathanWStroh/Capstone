@@ -17,6 +17,7 @@ namespace com.Farouche
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
         public static FrmShippingPackList Instance;
+        private int _sortColumn = -1;
 
         public FrmShippingPackList(AccessToken accToken)
         {
@@ -76,10 +77,11 @@ namespace com.Farouche
 
         private void btnPackComplete_Click(object sender, EventArgs e)
         {
+            ListView.SelectedListViewItemCollection selectedOrder = this.lvPackList.SelectedItems;
             try
             {
-                int selectedOrder = (int)this.lvPackList.SelectedIndices[0] + 1;
-                ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrder);
+                int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
+                ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrderId);
                 Boolean success = _myOrderManager.UpdateShippedDate(currentOrder);
                 _myOrderManager.UpdateUserId(currentOrder, _myAccessToken.UserID);
                 if (success == true)
@@ -106,5 +108,31 @@ namespace com.Farouche
         {
             Instance = null;
         }
+
+        private void lvPackList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != _sortColumn)
+            {
+                // Set the sort column to the new column.
+                _sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                lvPackList.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvPackList.Sorting == SortOrder.Ascending)
+                    lvPackList.Sorting = SortOrder.Descending;
+                else
+                    lvPackList.Sorting = SortOrder.Ascending;
+            }
+            // Call the sort method to manually sort.
+            lvPackList.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer object.
+            this.lvPackList.ListViewItemSorter = new ListViewItemComparer(e.Column, lvPackList.Sorting);
+        }
+
+        
     }
 }

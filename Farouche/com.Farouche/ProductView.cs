@@ -27,12 +27,15 @@ using System.Collections.Generic;
 * 04/10/2014   Kaleb                                        Added data validation to the form.
 *
 * 04/19/2014   Kaleb                                        Adjusted class to implement a singleton pattern so only one form can be instantiated.
+*
+* 4/30/2014    Kaleb                                        Added functionality to update the vendor source item and remove a vendor source item.
 */
 
 namespace com.Farouche.Presentation
 {
     public partial class ProductView : Form
     {
+        List<VendorSourceItem> vendorSourceList;
         private VendorManager _vendorManager;
         private ProductManager _productManager;
         private VendorSourceItemManager _vendorSourceManager;
@@ -121,13 +124,6 @@ namespace com.Farouche.Presentation
         {
             btAddVendor.Enabled = false;
         }//ProductView
-
-        private void btAddVendor_Click(object sender, EventArgs e)
-        {
-            FrmAttachVendorSource frmVendorSource = new FrmAttachVendorSource(_currentProduct);
-            frmVendorSource.ShowDialog();
-            PopulateListView(lvVendors, _currentProduct.Id);
-        }//End of btAddVendor_Click(..)
 
         private void btMorph_Click(object sender, EventArgs e)
         {
@@ -341,7 +337,7 @@ namespace com.Farouche.Presentation
         //Populates a list view.
         private void PopulateListView(ListView lv, int productID)
         {
-            List<VendorSourceItem> vendorSourceList = _vendorSourceManager.GetVendorSourceItemsByProduct(productID);
+            vendorSourceList = _vendorSourceManager.GetVendorSourceItemsByProduct(productID);
             lv.Items.Clear();
             lv.Columns.Clear();
             foreach (var vendorSource in vendorSourceList)
@@ -351,14 +347,12 @@ namespace com.Farouche.Presentation
                 item.SubItems.Add(String.Format("{0:C}", vendorSource.UnitCost));
                 item.SubItems.Add(vendorSource.MinQtyToOrder.ToString());
                 item.SubItems.Add(vendorSource.ItemsPerCase.ToString());
-                item.SubItems.Add(vendorSource.Active.ToString());
                 lv.Items.Add(item);
             }
             lv.Columns.Add("Vendor Name");
             lv.Columns.Add("Unit Cost");
             lv.Columns.Add("Min Order Qty");
             lv.Columns.Add("Case Qty");
-            lv.Columns.Add("Active");
             lv.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }//End of populateListView(..)
 
@@ -366,5 +360,51 @@ namespace com.Farouche.Presentation
         {
             Instance = null;
         }//End of ProductView_FormClosed(..)
+
+        private void lvVendors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvVendors.SelectedItems.Count != 0)
+            {
+                btnRemoveVendor.Enabled = true;
+                btnUpdateVendor.Enabled = true;
+            }
+            else
+            {
+                btnRemoveVendor.Enabled = false;
+                btnUpdateVendor.Enabled = false;
+            }
+        }//End of lvVendors_SelectedIndexChanged(..)
+
+        private void btnUpdateVendor_Click(object sender, EventArgs e)
+        {
+            int currentIndex = this.lvVendors.SelectedIndices[0];
+            FrmAttachVendorSource frmVendorSource = new FrmAttachVendorSource(_currentProduct, vendorSourceList[currentIndex]);
+            frmVendorSource.ShowDialog();
+            PopulateListView(lvVendors, _currentProduct.Id);
+            btnRemoveVendor.Enabled = false;
+            btnUpdateVendor.Enabled = false;
+        }//End of btnUpdateVendor_Click(..)
+
+        private void btAddVendor_Click(object sender, EventArgs e)
+        {
+            FrmAttachVendorSource frmVendorSource = new FrmAttachVendorSource(_currentProduct);
+            frmVendorSource.ShowDialog();
+            PopulateListView(lvVendors, _currentProduct.Id);
+            btnRemoveVendor.Enabled = false;
+            btnUpdateVendor.Enabled = false;
+        }//End of btAddVendor_Click(..)
+
+        private void btnRemoveVendor_Click(object sender, EventArgs e)
+        {
+             int currentIndex = this.lvVendors.SelectedIndices[0];
+             Boolean success = _vendorSourceManager.DeleteVendorSourceItem(vendorSourceList[currentIndex]);
+             if (success == true)
+             {
+                 MessageBox.Show("The vendor was removed from this product.");
+             }
+             PopulateListView(lvVendors, _currentProduct.Id);
+        }//End of btnRemoveVendor_Click(..)
+
+
     }//public partial class ProductView : Form
 }

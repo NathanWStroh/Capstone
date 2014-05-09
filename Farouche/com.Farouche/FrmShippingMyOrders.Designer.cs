@@ -34,7 +34,7 @@
             // 
             // btnDetails
             // 
-            this.btnDetails.Location = new System.Drawing.Point(642, 272);
+            this.btnDetails.Location = new System.Drawing.Point(628, 270);
             this.btnDetails.Name = "btnDetails";
             this.btnDetails.Size = new System.Drawing.Size(144, 23);
             this.btnDetails.TabIndex = 3;
@@ -44,26 +44,30 @@
             // 
             // lvMyOrders
             // 
+            this.lvMyOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvMyOrders.FullRowSelect = true;
             this.lvMyOrders.GridLines = true;
             this.lvMyOrders.HideSelection = false;
-            this.lvMyOrders.Location = new System.Drawing.Point(24, 12);
+            this.lvMyOrders.Location = new System.Drawing.Point(12, 12);
             this.lvMyOrders.MultiSelect = false;
             this.lvMyOrders.Name = "lvMyOrders";
             this.lvMyOrders.Size = new System.Drawing.Size(760, 252);
             this.lvMyOrders.TabIndex = 2;
             this.lvMyOrders.UseCompatibleStateImageBehavior = false;
             this.lvMyOrders.View = System.Windows.Forms.View.Details;
+            this.lvMyOrders.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvMyOrders_ColumnClick);
             // 
             // FrmShippingMyOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 305);
+            this.ClientSize = new System.Drawing.Size(784, 305);
             this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.lvMyOrders);
             this.Name = "FrmShippingMyOrders";
-            this.Text = "FrmShippingMyOrders";
+            this.Text = "My Orders";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmShippingMyOrders_FormClosed);
             this.ResumeLayout(false);
 

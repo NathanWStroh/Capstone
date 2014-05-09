@@ -42,10 +42,10 @@
             // 
             this.lvItemsForPick.FullRowSelect = true;
             this.lvItemsForPick.GridLines = true;
-            this.lvItemsForPick.Location = new System.Drawing.Point(27, 34);
+            this.lvItemsForPick.Location = new System.Drawing.Point(12, 34);
             this.lvItemsForPick.MultiSelect = false;
             this.lvItemsForPick.Name = "lvItemsForPick";
-            this.lvItemsForPick.Size = new System.Drawing.Size(297, 321);
+            this.lvItemsForPick.Size = new System.Drawing.Size(323, 321);
             this.lvItemsForPick.TabIndex = 0;
             this.lvItemsForPick.UseCompatibleStateImageBehavior = false;
             this.lvItemsForPick.View = System.Windows.Forms.View.Details;
@@ -67,10 +67,10 @@
             // 
             this.lvPickedItems.FullRowSelect = true;
             this.lvPickedItems.GridLines = true;
-            this.lvPickedItems.Location = new System.Drawing.Point(437, 34);
+            this.lvPickedItems.Location = new System.Drawing.Point(425, 34);
             this.lvPickedItems.MultiSelect = false;
             this.lvPickedItems.Name = "lvPickedItems";
-            this.lvPickedItems.Size = new System.Drawing.Size(279, 321);
+            this.lvPickedItems.Size = new System.Drawing.Size(312, 321);
             this.lvPickedItems.TabIndex = 2;
             this.lvPickedItems.UseCompatibleStateImageBehavior = false;
             this.lvPickedItems.View = System.Windows.Forms.View.Details;
@@ -119,7 +119,7 @@
             // btnUnpick
             // 
             this.btnUnpick.Enabled = false;
-            this.btnUnpick.Location = new System.Drawing.Point(341, 192);
+            this.btnUnpick.Location = new System.Drawing.Point(341, 217);
             this.btnUnpick.Name = "btnUnpick";
             this.btnUnpick.Size = new System.Drawing.Size(78, 66);
             this.btnUnpick.TabIndex = 8;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 386);
+            this.ClientSize = new System.Drawing.Size(743, 363);
             this.Controls.Add(this.btnUnpick);
             this.Controls.Add(this.btnComplete);
             this.Controls.Add(this.label2);

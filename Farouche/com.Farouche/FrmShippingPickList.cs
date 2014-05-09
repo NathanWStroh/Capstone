@@ -8,7 +8,8 @@ using com.Farouche.Commons;
 *                               Changelog
 * Date         By               Ticket          Version          Description
 * 04/19/2014   Kaleb Wendel                                      Adjusted class to implement a singleton pattern so only one form can be instantiated.
-*/
+* 05/25/2014   Ben Grimes                                        Added column sorting to listview headers
+ */
 
 namespace com.Farouche
 {
@@ -17,6 +18,7 @@ namespace com.Farouche
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
         public static FrmShippingPickList Instance;
+        private int _sortColumn = -1;
 
         public FrmShippingPickList(AccessToken accToken)
         {
@@ -68,10 +70,11 @@ namespace com.Farouche
 
         private void btnStartPick_Click(object sender, EventArgs e)
         {
+            ListView.SelectedListViewItemCollection selectedOrder = this.lvPickList.SelectedItems;
             try
             {
-                int selectedOrder = (int)this.lvPickList.SelectedIndices[0] + 1;
-                ShippingOrder myOrder = _myOrderManager.GetOrderByID(selectedOrder);
+                int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
+                ShippingOrder myOrder = _myOrderManager.GetOrderByID(selectedOrderId);
                 if(myOrder.UserId.Equals(_myAccessToken.Id))
                 {
                     MessageBox.Show("Order is already in your 'My Orders' queue", "Action Unnecessary");
@@ -86,7 +89,7 @@ namespace com.Farouche
                     if (success == true)
                     {
                         RefreshPickView();
-                        InitPick(selectedOrder);
+                        InitPick(selectedOrderId);
                     }
                     else
                     {
@@ -121,6 +124,30 @@ namespace com.Farouche
         private void FrmShippingPickList_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
+        }
+
+        private void lvPickList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != _sortColumn)
+            {
+                // Set the sort column to the new column.
+                _sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                lvPickList.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvPickList.Sorting == SortOrder.Ascending)
+                    lvPickList.Sorting = SortOrder.Descending;
+                else
+                    lvPickList.Sorting = SortOrder.Ascending;
+            }
+            // Call the sort method to manually sort.
+            lvPickList.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer object.
+            this.lvPickList.ListViewItemSorter = new ListViewItemComparer(e.Column, lvPickList.Sorting);
         }
     }
 }

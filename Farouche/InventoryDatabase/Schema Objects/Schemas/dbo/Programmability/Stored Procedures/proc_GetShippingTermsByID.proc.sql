@@ -3,8 +3,9 @@
 	@shippingTermID int
 )
 AS
-	SELECT *
+	SELECT [ShippingTermId], [ShippingTermsLookup].[ShippingVendorId], [Description], [Name], [ShippingTermsLookup].[Active]
 	FROM [dbo].[ShippingTermsLookup]
+	INNER JOIN [ShippingVendors]
+	ON [ShippingTermsLookup].[ShippingVendorID] = [ShippingVendors].[ShippingVendorID]
 	WHERE [ShippingTermID] = @shippingTermID
-
-
+	ORDER BY [ShippingTermsLookup].[ShippingVendorId]

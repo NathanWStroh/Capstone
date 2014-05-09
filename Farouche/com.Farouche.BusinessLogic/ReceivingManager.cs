@@ -35,29 +35,35 @@ namespace com.Farouche.BusinessLogic
             return exceptionLineItems ?? new List<VendorOrderLineItem>();
         }
 
-        public bool UpdateQtyDamaged(VendorOrderLineItem currentLineItem, int qty)
+        public bool UpdateQtyDamaged(VendorOrderLineItem currentLineItem, VendorOrderLineItem oldLineItem)
         {
             if (currentLineItem == null) throw new ApplicationException("VendorOrderLineItem is null");
-            if (currentLineItem.QtyDamaged + qty < 0)
+            if (currentLineItem.QtyDamaged < 0)
             {
                 Console.Write("Qty Damaged can't be negative");
                 throw new ApplicationException("Quantity damaged cannot be negative.");
             }
-            var oldLineItem = currentLineItem;
-            currentLineItem.QtyDamaged = currentLineItem.QtyDamaged + qty;
+            currentLineItem.QtyReceived = oldLineItem.QtyReceived;
+            currentLineItem.QtyDamaged = oldLineItem.QtyDamaged + currentLineItem.QtyDamaged;
             var result = VendorOrderLineItemDAL.Update(oldLineItem, currentLineItem, _connection);
             return result;
         }
-        public bool UpdateQtyReceived(VendorOrderLineItem currentLineItem, int qty)
+        public bool UpdateQtyReceived(VendorOrderLineItem currentLineItem, VendorOrderLineItem oldLineItem)
         {
             if (currentLineItem == null) throw new ApplicationException("VendorOrderLineItem is null");
-            if (currentLineItem.QtyReceived + qty < 0)
+            if (currentLineItem.QtyReceived < 0 || currentLineItem.QtyDamaged < 0)
             {
-                Console.Write("Qty Received can't be negative");
-                throw new ApplicationException("Quantity received cannot be negative.");
+                Console.Write("Qty Entered can't be negative");
+                throw new ApplicationException("Quantity fields cannot be negative.");
             }
-            var oldLineItem = currentLineItem;
-            currentLineItem.QtyReceived = currentLineItem.QtyReceived + qty;
+
+                currentLineItem.QtyDamaged = oldLineItem.QtyDamaged + currentLineItem.QtyDamaged;
+      
+   
+          
+                currentLineItem.QtyReceived = oldLineItem.QtyReceived + currentLineItem.QtyReceived;
+            
+            
             var result = VendorOrderLineItemDAL.Update(oldLineItem, currentLineItem, _connection);
             return result;
         }
@@ -66,14 +72,14 @@ namespace com.Farouche.BusinessLogic
         {
             if (currentLineItem == null) throw new ApplicationException("VendorOrderLineItem is null");
             if (note == null) note = "";
-            if (note.Length > 50) throw new ApplicationException("Note can only be 50 characters long.");
+            if (note.Length > 250) throw new ApplicationException("Note can only be 250 characters long.");
             var oldLineItem = currentLineItem;
             currentLineItem.Note = note;
-            var result = VendorOrderLineItemDAL.Update(oldLineItem, currentLineItem, _connection);
+            var result = VendorOrderLineItemDAL.UpdateNote(currentLineItem, _connection);
             return result;
         }
 
-        public bool AddNewLineItemToVendorOrder(VendorOrder vendorOrder,Product productToAdd, int qtyReceived)
+        public bool AddNewLineItemToVendorOrder(VendorOrder vendorOrder,Product productToAdd, int qtyReceived, string note, int qtyDamaged)
         {
             if (productToAdd == null) throw new ApplicationException("Product can't be null");
             if (vendorOrder == null) throw new ApplicationException("VendorOrder can't be null");
@@ -82,7 +88,8 @@ namespace com.Farouche.BusinessLogic
             {
                 QtyOrdered = 0,
                 QtyReceived = qtyReceived,
-                QtyDamaged = 0
+                QtyDamaged = qtyDamaged,
+                Note = note
             };
             return VendorOrderLineItemDAL.Add(newVendorOrderLineItem, _connection);
         }

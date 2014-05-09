@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStartUp));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reorderProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendorOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,10 +50,17 @@
             this.tsmiShippingTerms = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiShippingVendors = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+<<<<<<< HEAD
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+=======
+            this.toolStripMain = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonCascade = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonTileVertically = new System.Windows.Forms.ToolStripButton();
+>>>>>>> origin/master
             this.menuStrip1.SuspendLayout();
+            this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -95,7 +104,8 @@
             // productToolStripMenuItem
             // 
             this.productToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productsToolStripMenuItem});
+            this.productsToolStripMenuItem,
+            this.reorderProductsToolStripMenuItem});
             this.productToolStripMenuItem.Name = "productToolStripMenuItem";
             this.productToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.productToolStripMenuItem.Text = "Inventory";
@@ -103,9 +113,16 @@
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.productsToolStripMenuItem.Text = "Products";
             this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
+            // 
+            // reorderProductsToolStripMenuItem
+            // 
+            this.reorderProductsToolStripMenuItem.Name = "reorderProductsToolStripMenuItem";
+            this.reorderProductsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.reorderProductsToolStripMenuItem.Text = "Reorder Products";
+            this.reorderProductsToolStripMenuItem.Click += new System.EventHandler(this.reorderProductsToolStripMenuItem_Click);
             // 
             // vendorToolStripMenuItem
             // 
@@ -131,7 +148,6 @@
             this.vendorOrderToolStripMenuItem.Name = "vendorOrderToolStripMenuItem";
             this.vendorOrderToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.vendorOrderToolStripMenuItem.Text = "Vendor Order";
-            this.vendorOrderToolStripMenuItem.Visible = false;
             // 
             // newOrderToolStripMenuItem
             // 
@@ -218,6 +234,7 @@
             this.reportsToolStripMenuItem.Visible = false;
             this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
+<<<<<<< HEAD
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -240,12 +257,45 @@
             this.employeesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.employeesToolStripMenuItem.Text = "Employees";
             this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
+=======
+            // toolStripMain
+            // 
+            this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonCascade,
+            this.toolStripButtonTileVertically});
+            this.toolStripMain.Location = new System.Drawing.Point(0, 24);
+            this.toolStripMain.Name = "toolStripMain";
+            this.toolStripMain.Size = new System.Drawing.Size(1284, 25);
+            this.toolStripMain.TabIndex = 2;
+            this.toolStripMain.Text = "toolStrip1";
+            // 
+            // toolStripButtonCascade
+            // 
+            this.toolStripButtonCascade.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonCascade.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonCascade.Image")));
+            this.toolStripButtonCascade.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonCascade.Name = "toolStripButtonCascade";
+            this.toolStripButtonCascade.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonCascade.Text = "Cascade Windows";
+            this.toolStripButtonCascade.Click += new System.EventHandler(this.toolStripButtonCascade_Click);
+            // 
+            // toolStripButtonTileVertically
+            // 
+            this.toolStripButtonTileVertically.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonTileVertically.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTileVertically.Image")));
+            this.toolStripButtonTileVertically.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonTileVertically.Name = "toolStripButtonTileVertically";
+            this.toolStripButtonTileVertically.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonTileVertically.Text = "Tile Windows Vertically";
+            this.toolStripButtonTileVertically.Click += new System.EventHandler(this.toolStripButtonTileVertically_Click);
+>>>>>>> origin/master
             // 
             // frmStartUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 575);
+            this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MinimumSize = new System.Drawing.Size(1000, 600);
@@ -254,6 +304,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStartUp_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStripMain.ResumeLayout(false);
+            this.toolStripMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,6 +336,9 @@
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
-
+        private System.Windows.Forms.ToolStripMenuItem reorderProductsToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStripMain;
+        private System.Windows.Forms.ToolStripButton toolStripButtonCascade;
+        private System.Windows.Forms.ToolStripButton toolStripButtonTileVertically;
     }
 }

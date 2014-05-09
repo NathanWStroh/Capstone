@@ -14,12 +14,14 @@ namespace com.Farouche
     public partial class frmPrintOrderDetails : Form
     {
         private int _myOrderId;
+        public static frmPrintOrderDetails Instance;
 
         public frmPrintOrderDetails(int myOrderId)
         {
             InitializeComponent();
             _myOrderId = myOrderId;
-        }
+            Instance = this;
+        }//frmPrintOrderDetails(.)
 
         private void frmPrintOrderDetails_Load(object sender, EventArgs e)
         {
@@ -27,6 +29,11 @@ namespace com.Farouche
             ReportList ReportList = new ReportList();
             this.CLSLineItemBindingSource.DataSource = ReportList.FetchCLSLineItems(_myOrderId);
             this.reportViewer1.RefreshReport();
-        }
+        }//frmPrintOrderDetails_Load(..)
+
+        private void frmPrintOrderDetails_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Instance = null;
+        }//frmPrintOrderDetails_FormClosed(..)
     }
 }

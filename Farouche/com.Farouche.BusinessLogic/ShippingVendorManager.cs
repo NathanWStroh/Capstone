@@ -80,5 +80,28 @@ namespace com.Farouche.BusinessLogic
             return ShippingVendors;
         }//End of GetVendors(.)
 
+        public List<ShippingVendor> GetShippingVendorsByActive(Boolean activeState)
+        {
+            ShippingVendors = ShippingVendorDAL.GetVendorsByActive(activeState, _connection);
+            return ShippingVendors;
+        }
+
+        public Boolean ReactivateVendor(ShippingVendor shippingVendor)
+        {
+            if (shippingVendor == null) throw new ArgumentException("The shipping vendor was null, therefore it cannot be set to active.");
+            return ShippingVendorDAL.ReactivateVendor(shippingVendor, _connection);
+        }
+
+        public Boolean DeactivateVendor(ShippingVendor shippingVendor)
+        {
+            if (shippingVendor == null) throw new ArgumentException("The shipping vendor was null, therefore it cannot be set to inactive.");
+            return ShippingVendorDAL.DeactivateVendor(shippingVendor, _connection);
+        }
+
+        public Boolean DeleteVendor(ShippingVendor shippingVendor)
+        {
+            if (shippingVendor == null) throw new ArgumentException("The shipping vendor was null, therefore it could not be deleted.");
+            return ShippingVendorDAL.DeleteVendor(shippingVendor, _connection);
+        }
     }//End of class.
 }//End of namespace.

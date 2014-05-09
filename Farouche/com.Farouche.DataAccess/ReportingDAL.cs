@@ -7,7 +7,7 @@ using com.Farouche.Commons;
 
 //Author: Ben
 //Date Created: 4/10/2014
-//Last Modified: 4/10/2014
+//Last Modified: 4/25/2014
 //Last Modified By: Ben Grimes
 
 namespace com.Farouche.DataAccess
@@ -72,7 +72,7 @@ namespace com.Farouche.DataAccess
                 conn.Close();
             }
             return reportLines;
-        }
+        }// End FetchCLSPackDetails(.)
 
         public static List<CLSEmployee> FetchCLSEmployees(SqlConnection myConnection)
         {
@@ -120,6 +120,52 @@ namespace com.Farouche.DataAccess
                 conn.Close();
             }
             return employees;
-        }
+        }//End FetchEmployees(.)
+
+        public static List<CLSVendorProduct> FetchVendorProducts(SqlConnection myConnection)
+        {
+            List<CLSVendorProduct> vendorProducts = new List<CLSVendorProduct>();
+            SqlConnection conn = myConnection;
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("proc_GetCLSVendorProducts", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var line = new CLSVendorProduct(reader.GetInt32(0))
+                        {
+                            vendorName = reader.GetString(1),
+                            productID = reader.GetInt32(2),
+                            shortDesc = reader.GetString(3),
+                            description = reader.GetString(4),
+                            unitCost = (Decimal)reader.GetSqlMoney(5)
+                        };
+                        vendorProducts.Add(line);
+                    }
+                }
+                reader.Close();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("SqlException. " + ex.Message);
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine("DataException. " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("GeneralException. " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return vendorProducts;
+        }//End FetchVendorProducts(.)
     }
 }

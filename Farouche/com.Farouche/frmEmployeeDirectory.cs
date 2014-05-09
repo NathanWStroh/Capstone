@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
 using com.Farouche.Commons;
+
 namespace com.Farouche
 {
     public partial class frmEmployeeDirectory : Form
