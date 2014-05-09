@@ -20,6 +20,7 @@ namespace com.Farouche
 
         public FrmShippingMyOrders(AccessToken accToken)
         {
+            var RoleAccess = new RoleAccess(accToken, this);
             InitializeComponent();
             _myAccessToken = accToken;
             _myOrderManager = new ShippingOrderManager();
@@ -40,6 +41,7 @@ namespace com.Farouche
 
         private void PopulateOrderListView(ListView lv, List<ShippingOrder> orderList)
         {
+            btnDetails.Enabled = false;
             _myOrderManager.Orders = orderList;
             lv.Items.Clear();
             lv.Columns.Clear();
@@ -124,5 +126,10 @@ namespace com.Farouche
             // Set the ListViewItemSorter property to a new ListViewItemComparer object.
             this.lvMyOrders.ListViewItemSorter = new ListViewItemComparer(e.Column, lvMyOrders.Sorting);
         }//End lvMyOrders_ColumnClick(..)
+
+        private void lvMyOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnDetails.Enabled = true;
+        }//End lvMyOrders_SelectedIndexChanged(..)
     }
 }

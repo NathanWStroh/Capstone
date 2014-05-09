@@ -599,7 +599,223 @@ namespace com.Farouche.DataAccess
             }
             return false;
         }//End of UpdateOnOrder(..)
+        public static int GetOnOrder(int productID, SqlConnection connection) 
+        {
+            int onOrder = 0;
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_GetProductOnOrder", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@productID", productID);
 
+                //Creates the reader object by ExecutingReader on the cmd object.
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        onOrder = reader.GetInt32(0);
+                    }
+                }
+                reader.Close();
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return onOrder; 
+        }//End of GetOnOrder(..)
+        public static Boolean UpdateAvailable(int amount, int productID, SqlConnection connection) 
+        {
+            //If the connection is null a new connection will be returned.
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_UpdateProductAvailable", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@productID", productID);
+                sqlCmd.Parameters.AddWithValue("@amount", amount);
+
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//End of UpdateAvailable(...)
+        public static int GetAvailable(int productID, SqlConnection connection) 
+        {
+            int available = 0;
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_GetProductAvailable", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@productID", productID);
+
+                //Creates the reader object by ExecutingReader on the cmd object.
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        available = reader.GetInt32(0);
+                    }
+                }
+                reader.Close();
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return available; 
+        } //End of GetAvailable(..)
+        public static Boolean UpdateOnHand(int amount, int productID, SqlConnection connection) 
+        {
+            //If the connection is null a new connection will be returned.
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_UpdateProductOnHand", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@productID", productID);
+                sqlCmd.Parameters.AddWithValue("@amount", amount);
+
+                //If the procedure returns 1 set to true, if 0 remain false.
+                if (sqlCmd.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        } //End of UpdateOnHand(...)
+        public static int GetOnHand(int productID, SqlConnection connection) 
+        {
+            int onHand = 0;
+            SqlConnection conn = connection ?? GetInventoryDbConnection();
+            try
+            {
+                //Establishes the connection.
+                conn.Open();
+                //Creates the command object, passing the SP and connection object.
+                SqlCommand sqlCmd = new SqlCommand("proc_GetProductOnHand", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@productID", productID);
+
+                //Creates the reader object by ExecutingReader on the cmd object.
+                SqlDataReader reader = sqlCmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        onHand = reader.GetInt32(0);
+                    }
+                }
+                reader.Close();
+            }
+            catch (DataException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("DatabaseException"), ex);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("SqlException"), ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException(Messeges.GetMessage("Exception"), ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return onHand; 
+        }//End of GetOnHand(..)
         public static List<String> FetchLocations(SqlConnection connection)
         {
             List<String> locations = new List<String>();

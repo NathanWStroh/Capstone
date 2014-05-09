@@ -26,6 +26,7 @@ namespace com.Farouche
 
         public frmReceivingNotes(int vendorOrderID, int productID, int vendorID, string note, AccessToken acctkn)
         {
+            var RoleAccess = new RoleAccess(acctkn, this);
             InitializeComponent();
             _myAccessToken = acctkn;
             txtVendorOrderID.Text = vendorOrderID.ToString();

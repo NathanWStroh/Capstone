@@ -44,9 +44,9 @@
             // 
             // lvPackList
             // 
-            this.lvPackList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvPackList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lvPackList.FullRowSelect = true;
             this.lvPackList.GridLines = true;
             this.lvPackList.HideSelection = false;
@@ -58,6 +58,7 @@
             this.lvPackList.UseCompatibleStateImageBehavior = false;
             this.lvPackList.View = System.Windows.Forms.View.Details;
             this.lvPackList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPackList_ColumnClick);
+            this.lvPackList.SelectedIndexChanged += new System.EventHandler(this.lvPackList_SelectedIndexChanged);
             // 
             // FrmShippingPackList
             // 

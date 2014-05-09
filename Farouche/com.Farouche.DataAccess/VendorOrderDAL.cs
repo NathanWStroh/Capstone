@@ -221,7 +221,6 @@ namespace com.Farouche.DataAccess
                 };
                 mySqlCommand.Parameters.AddWithValue("@VendorOrderID", newVendorOrder.Id);
                 mySqlCommand.Parameters.AddWithValue("@VendorID", newVendorOrder.VendorID);
-                mySqlCommand.Parameters.AddWithValue("@DateOrdered", newVendorOrder.DateOrdered);
                 mySqlCommand.Parameters.AddWithValue("@AmountOfShipments", newVendorOrder.NumberOfShipments);
                 mySqlCommand.Parameters.AddWithValue("@Finalized", newVendorOrder.Finalized);
                 mySqlCommand.Parameters.AddWithValue("@orig_AmountOfShipments", oldVendorOrder.NumberOfShipments);
@@ -263,7 +262,7 @@ namespace com.Farouche.DataAccess
                     CommandType = CommandType.StoredProcedure
                 };
                 mySqlCommand.Parameters.AddWithValue("@VendorID", order.VendorID);
-                mySqlCommand.Parameters.AddWithValue("@DateOrdered", order.DateOrdered);
+                //mySqlCommand.Parameters.AddWithValue("@DateOrdered", order.DateOrdered.ToString("yyyy-MM-dd HH:mm:ss"));
                 mySqlCommand.Parameters.AddWithValue("@NumberOfShipments", order.NumberOfShipments);
                 connection.Open();
                 if (mySqlCommand.ExecuteNonQuery() == 1)
@@ -292,7 +291,7 @@ namespace com.Farouche.DataAccess
             }
             return false;
         }
-        public static VendorOrder GetVendorOrderByVendorAndDate(int vendorId, DateTime date, SqlConnection connection)
+        public static VendorOrder GetVendorOrderByVendorAndDate(int vendorId, SqlConnection connection)
         {
             VendorOrder newVendorOrder;
             connection = connection ?? GetInventoryDbConnection();
@@ -303,7 +302,6 @@ namespace com.Farouche.DataAccess
                     CommandType = CommandType.StoredProcedure
                 };
                 mySqlCommand.Parameters.AddWithValue("@VendorId", vendorId);
-                mySqlCommand.Parameters.AddWithValue("@DateOrdered", date);
                 connection.Open();
                 var myReader = mySqlCommand.ExecuteReader();
                 if (myReader.HasRows)
@@ -343,7 +341,7 @@ namespace com.Farouche.DataAccess
             }
 
             throw new ApplicationException("Vendor Order from vendor: "
-                    + vendorId + ", on date: " + date + ", not found");
+                    + vendorId + "not found");
         }
     }
 }
