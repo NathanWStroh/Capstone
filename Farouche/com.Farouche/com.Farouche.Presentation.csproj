@@ -55,6 +55,12 @@
     <Compile Include="AddVendorWindow.Designer.cs">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEmployees.Designer.cs">
+      <DependentUpon>FrmEmployees.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddShippingTerm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,24 @@
     </Compile>
     <Compile Include="frmReorderChangeLevels.Designer.cs">
       <DependentUpon>frmReorderChangeLevels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRoleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRoleDialog.Designer.cs">
+      <DependentUpon>FrmRoleDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRoleView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRoleView.Designer.cs">
+      <DependentUpon>FrmRoleView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRoles.Designer.cs">
+      <DependentUpon>FrmRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmShipping.cs">
       <SubType>Form</SubType>
@@ -249,9 +273,13 @@
     <Compile Include="FrmVendorAddUpdate.Designer.cs">
       <DependentUpon>FrmVendorAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="RoleAccess.cs" />
     <EmbeddedResource Include="AddVendorWindow.resx">
       <DependentUpon>AddVendorWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEmployees.resx">
+      <DependentUpon>FrmEmployees.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddShippingTerm.resx">
       <DependentUpon>FrmAddShippingTerm.cs</DependentUpon>
@@ -285,6 +313,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReorderChangeLevels.resx">
       <DependentUpon>frmReorderChangeLevels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRoleDialog.resx">
+      <DependentUpon>FrmRoleDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRoleView.resx">
+      <DependentUpon>FrmRoleView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRoles.resx">
+      <DependentUpon>FrmRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmShipping.resx">
       <DependentUpon>FrmShipping.cs</DependentUpon>

@@ -28,7 +28,7 @@ namespace com.Farouche.Presentation
             try
             {
 
-                myAccessToken = Authenticator.authenticate(int.Parse(txtUserID.Text), txtPassword.Text);
+                myAccessToken = Authenticator.Authenticate(int.Parse(txtUserID.Text), txtPassword.Text);
 
                 myForm = new frmStartUp(myAccessToken);
                 myForm.Show();

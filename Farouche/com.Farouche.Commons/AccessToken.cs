@@ -5,47 +5,56 @@
 
 namespace com.Farouche.Commons
 {
-    public class AccessToken
+    public class AccessToken : Entity
     {
-        private int _UserID;
-        private int _RoleID;
+        private Role _Role;
         private string _FirstName;
         private string _LastName;
-        private string _Title;
 
-        public int RoleID
+        public Role Role
         {
-            get { return _RoleID; }
-        }
-
-        public int UserID
-        {
-            get { return _UserID; }
+            get { return _Role; }
+            set { _Role = value; }
         }
 
         public string FirstName
         {
             get { return _FirstName; }
+            set { _FirstName = value; }
         }
 
         public string LastName
         {
             get { return _LastName; }
+            set { _LastName = value; }
         }
 
-        public string Title
+        public int UserID
         {
-            get { return _Title; }
+            get { return _Id; }
+        }
+        public AccessToken(int UserID)
+        {
+            _Id = UserID;
         }
 
-        public AccessToken(int myUserID, int myRoleID, string myFirstName, string myLastName, string myTitle)
+        public AccessToken()
         {
-            _UserID = myUserID;
-            _RoleID = myRoleID;
-            _FirstName = myFirstName;
-            _LastName = myLastName;
-            _Title = myTitle;
-            
+        }
+
+        public override System.Type GetType()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override string ToXml()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

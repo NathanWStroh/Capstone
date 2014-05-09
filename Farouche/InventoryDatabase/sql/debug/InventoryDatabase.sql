@@ -12,9 +12,10 @@ GO
 :setvar DefaultLogPath "c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
 
 GO
-:on error exit
-GO
 USE [master]
+
+GO
+:on error exit
 GO
 IF (DB_ID(N'$(DatabaseName)') IS NOT NULL
     AND DATABASEPROPERTYEX(N'$(DatabaseName)','Status') <> N'ONLINE')
@@ -145,6 +146,7 @@ ELSE
 
 GO
 USE [$(DatabaseName)]
+
 GO
 IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
     EXECUTE sp_fulltext_database 'enable';
@@ -201,6 +203,21 @@ PRINT N'Creating PK_Categories...';
 GO
 ALTER TABLE [dbo].[Categories]
     ADD CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED ([Category] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF);
+
+
+GO
+PRINT N'Creating [dbo].[ControlsToRoles]...';
+
+
+GO
+CREATE TABLE [dbo].[ControlsToRoles] (
+    [RoleID]   INT          NOT NULL,
+    [Form]     VARCHAR (50) NOT NULL,
+    [Control]  VARCHAR (50) NOT NULL,
+    [Visible]  BIT          NOT NULL,
+    [Disabled] BIT          NOT NULL,
+    CONSTRAINT [PK_ControlsToRoles] PRIMARY KEY CLUSTERED ([RoleID] ASC, [Form] ASC, [Control] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
+) ON [PRIMARY];
 
 
 GO
@@ -320,7 +337,8 @@ GO
 CREATE TABLE [dbo].[Roles] (
     [RoleID]      INT           IDENTITY (1000, 100) NOT NULL,
     [Title]       VARCHAR (25)  NOT NULL,
-    [Description] VARCHAR (250) NOT NULL
+    [Description] VARCHAR (250) NOT NULL,
+    [Active]      BIT           NOT NULL
 );
 
 
@@ -430,6 +448,18 @@ CREATE TABLE [dbo].[States] (
 
 
 GO
+PRINT N'Creating [dbo].[UserRoles]...';
+
+
+GO
+CREATE TABLE [dbo].[UserRoles] (
+    [UserID] INT NOT NULL,
+    [RoleID] INT NOT NULL,
+    CONSTRAINT [PK_UsersToRoles] PRIMARY KEY CLUSTERED ([UserID] ASC, [RoleID] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF) ON [PRIMARY]
+) ON [PRIMARY];
+
+
+GO
 PRINT N'Creating [dbo].[Users]...';
 
 
@@ -444,11 +474,11 @@ CREATE TABLE [dbo].[Users] (
     [Password]    VARCHAR (50) NOT NULL,
     [FirstName]   VARCHAR (25) NOT NULL,
     [LastName]    VARCHAR (25) NOT NULL,
-    [PhoneNumber] VARCHAR (14) NOT NULL,
-    [Address]     VARCHAR (50) NOT NULL,
-    [City]        VARCHAR (25) NOT NULL,
-    [State]       VARCHAR (25) NOT NULL,
-    [Zip]         VARCHAR (9)  NOT NULL,
+    [PhoneNumber] VARCHAR (14) NULL,
+    [Address]     VARCHAR (50) NULL,
+    [City]        VARCHAR (25) NULL,
+    [State]       VARCHAR (25) NULL,
+    [Zip]         VARCHAR (9)  NULL,
     [Active]      BIT          NOT NULL
 );
 
@@ -695,6 +725,23 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating On column: Active...';
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER ON;
+
+
+GO
+ALTER TABLE [dbo].[Roles]
+    ADD DEFAULT (1) FOR [Active];
+
+
+GO
+SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
+
+
+GO
 PRINT N'Creating On column: Picked...';
 
 
@@ -818,6 +865,15 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating FK_ControlsToRoles_Roles...';
+
+
+GO
+ALTER TABLE [dbo].[ControlsToRoles] WITH NOCHECK
+    ADD CONSTRAINT [FK_ControlsToRoles_Roles] FOREIGN KEY ([RoleID]) REFERENCES [dbo].[Roles] ([RoleID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
 PRINT N'Creating FK_ProductCategories_Categories...';
 
 
@@ -890,12 +946,21 @@ ALTER TABLE [dbo].[ShippingTermsLookup] WITH NOCHECK
 
 
 GO
-PRINT N'Creating FK_Users_Roles...';
+PRINT N'Creating FK_UsersRoles_Roles...';
 
 
 GO
-ALTER TABLE [dbo].[Users] WITH NOCHECK
-    ADD CONSTRAINT [FK_Users_Roles] FOREIGN KEY ([RoleID]) REFERENCES [dbo].[Roles] ([RoleID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [dbo].[UserRoles] WITH NOCHECK
+    ADD CONSTRAINT [FK_UsersRoles_Roles] FOREIGN KEY ([RoleID]) REFERENCES [dbo].[Roles] ([RoleID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FK_UsersRoles_Users...';
+
+
+GO
+ALTER TABLE [dbo].[UserRoles] WITH NOCHECK
+    ADD CONSTRAINT [FK_UsersRoles_Users] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([UserID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
@@ -943,6 +1008,30 @@ ALTER TABLE [dbo].[VendorSourceItems] WITH NOCHECK
     ADD CONSTRAINT [FK_VendorSourceItems_Vendors] FOREIGN KEY ([VendorID]) REFERENCES [dbo].[Vendors] ([VendorID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
+GO
+PRINT N'Creating [dbo].[proc_Authenticate]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_Authenticate]
+	@UserID int,
+	@Password varchar(50)
+AS
+Declare @RoleId int
+	SELECT [UserID]
+		  ,[Roles].[RoleID]
+		  ,[Title]
+		  ,[FirstName]
+		  ,[LastName]
+		  ,[Roles].[Description]
+	  FROM [dbo].[Users] 
+	  inner join Roles on(Users.RoleID = Roles.RoleID and Roles.Active = 1)
+	  where Password = @Password
+	  and UserID = @UserID
+	  and users.Active = 1
+	  Select * from
+	  ControlsToRoles 
+	  where RoleID = (Select RoleID from Users where Password = @Password and UserID = @UserID)
 GO
 PRINT N'Creating [dbo].[proc_DeactivateCategory]...';
 
@@ -1523,6 +1612,18 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_GetCLSEmployees]...';
+
+
+GO
+/*Object: StoredProcedure [dbo].[proc_GetCLSEmployees] */
+CREATE PROCEDURE [proc_GetCLSEmployees]
+AS
+	SELECT u.[UserID], r.[RoleID], r.[Title], u.[FirstName], u.[LastName]
+	FROM [dbo].[Users] u, [dbo].[Roles] r
+	WHERE r.[RoleID] = u.[RoleID]
+RETURN
+GO
 PRINT N'Creating [dbo].[proc_GetCLSPackDetails]...';
 
 
@@ -1534,6 +1635,32 @@ AS
 	FROM [dbo].[ShippingTermsLookup] st, [dbo].[Products] pr, [dbo].[ShippingVendors] sv, [dbo].[ShippingOrders] so, [dbo].[ShippingOrderLineItems] si
 	WHERE so.ShippingOrderID = @ShippingOrderId AND so.ShippingTermID = st.ShippingTermID AND st.ShippingVendorID = sv.ShippingVendorID AND so.ShippingOrderID = si.ShippingOrderID AND si.ProductID = pr.ProductID
 RETURN
+GO
+PRINT N'Creating [dbo].[proc_GetControlsForRole]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetControlsForRole]
+	@RoleID int 
+AS
+	SELECT * from ControlsToRoles where RoleID = @RoleID
+GO
+PRINT N'Creating [dbo].[proc_GetEmployees]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetEmployees]
+AS
+	Select UserID,RoleID,FirstName,LastName,PhoneNumber,Active from Users
+GO
+PRINT N'Creating [dbo].[proc_GetEmployeesByActive]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetEmployeesByActive]
+	@Active bit
+AS
+	Select UserID,RoleID,FirstName,LastName,PhoneNumber,Active from Users where Active = @Active
 GO
 PRINT N'Creating [dbo].[proc_GetExceptionItems]...';
 
@@ -1722,6 +1849,23 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_GetRoles]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetRoles]
+AS
+	Select RoleID, Title as 'Name', Active, Description from Roles
+GO
+PRINT N'Creating [dbo].[proc_GetRolesByActive]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_GetRolesByActive]
+@Active bit
+AS
+	Select RoleID, Title as 'Name', Active, Description from Roles where Active = @Active
 GO
 PRINT N'Creating [dbo].[proc_GetShippingOrderByID]...';
 
@@ -2024,6 +2168,26 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_InsertControlForRole]...';
+
+
+GO
+
+CREATE PROCEDURE [dbo].[proc_InsertControlForRole]
+	@RoleID int,
+	@Form varchar(50),
+	@Control varchar(50),
+	@Visible bit ,
+	@Disabled bit
+AS
+INSERT INTO [dbo].[ControlsToRoles]
+           ([RoleID]
+           ,[Form]
+           ,[Control]
+           ,[Visible]
+           ,[Disabled])
+     VALUES (@RoleID,@Form,@Control,@Visible,@Disabled)
+GO
 PRINT N'Creating [dbo].[proc_InsertIntoCategories]...';
 
 
@@ -2046,6 +2210,23 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_InsertIntoControlToRoles]...';
+
+
+GO
+Create PROCEDURE [dbo].[proc_InsertIntoControlToRoles]
+@RoleID int,
+@FormName varchar(50),
+@Control varchar(50),
+@Visible bit,
+@Disabled bit
+AS
+BEGIN
+	
+	insert into ControlsToRoles (RoleID, Form, Control, Visible, Disabled) 
+		values (@RoleID, @FormName, @Control, @Visible, @Disabled)
+END
 GO
 PRINT N'Creating [dbo].[proc_InsertIntoLocations]...';
 
@@ -2152,6 +2333,18 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_InsertIntoRoles]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertIntoRoles]
+	@Title [varchar](25),
+	@Description [varchar](250),
+	@Active [bit]
+AS
+	insert into Roles (Title,Description,Active) values (@Title,@Description,@Active)
+	RETURN @@IDENTITY
+GO
 PRINT N'Creating [dbo].[proc_InsertIntoShippingOrderLineItems]...';
 
 
@@ -2229,6 +2422,45 @@ CREATE PROCEDURE [proc_InsertIntoShippingVendors]
 AS
 	INSERT INTO [dbo].[ShippingVendors]([Name],[Address],[City],[State],[Country],[Zip],[Phone],[Contact],[ContactEmail])
 	VALUES(@name,@address,@city,@state,@country,@zip,@phone,@contact,@contactEmail)
+GO
+PRINT N'Creating [dbo].[proc_InsertIntoUserRoles]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertIntoUserRoles]
+	@UserID int,
+	@RoleID int
+AS
+BEGIN
+	insert into UserRoles (UserID, RoleID) values (@UserID , @RoleID)
+END
+GO
+PRINT N'Creating [dbo].[proc_InsertIntoUsers]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_InsertIntoUsers]
+		@RoleID int,
+        @Password varchar(50),
+        @FirstName varchar(25),
+        @LastName varchar(25),
+        @PhoneNumber varchar(14),
+        @Active bit
+AS
+	INSERT INTO [dbo].[Users]
+           ([RoleID]
+           ,[Password]
+           ,[FirstName]
+           ,[LastName]
+           ,[PhoneNumber]
+           ,[Active])
+     VALUES
+           (@RoleID,
+           @Password, 
+           @FirstName,
+           @LastName, 
+           @PhoneNumber,
+           @Active)
 GO
 PRINT N'Creating [dbo].[proc_InsertIntoVendor]...';
 
@@ -2457,6 +2689,33 @@ SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
 GO
+PRINT N'Creating [dbo].[proc_UpdateActiveEmployee]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateActiveEmployee]
+	@UserID int,
+	@Active bit
+AS
+	Update [dbo].Users
+	Set Active = @Active
+	where UserID = @UserID
+GO
+PRINT N'Creating [dbo].[proc_UpdateActiveRole]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateActiveRole]
+	(
+	@RoleID int,
+	@Active	bit
+	)
+AS
+	UPDATE [dbo].[Roles]
+	SET [Active] = @Active
+	WHERE [RoleID] = @RoleID
+	RETURN @@ROWCOUNT
+GO
 PRINT N'Creating [dbo].[proc_UpdateCategory]...';
 
 
@@ -2479,6 +2738,23 @@ GO
 SET ANSI_NULLS, QUOTED_IDENTIFIER OFF;
 
 
+GO
+PRINT N'Creating [dbo].[proc_UpdateControlForRole]...';
+
+
+GO
+
+CREATE PROCEDURE [dbo].[proc_UpdateControlForRole]
+	@RoleID int,
+	@Form varchar(50),
+	@Control varchar(50) ,
+	@Visible bit ,
+	@Disabled bit
+AS
+UPDATE [dbo].[ControlsToRoles]
+   SET [Visible] = @Visible
+      ,[Disabled] = @Disabled
+ WHERE RoleID = @RoleID and Form = @Form and Control = @Control
 GO
 PRINT N'Creating [dbo].[proc_UpdateLocation]...';
 
@@ -2639,6 +2915,31 @@ AS
 	UPDATE [dbo].[Products]
 	SET [ReorderThreshold] = @Amount
 	WHERE [ProductID] = @ProductID
+	RETURN @@ROWCOUNT
+GO
+PRINT N'Creating [dbo].[proc_UpdateRole]...';
+
+
+GO
+CREATE PROCEDURE [dbo].[proc_UpdateRole]
+	(
+	@RoleID int,
+	@Title varchar(25),
+	@Description varchar(250),
+	@Active	bit,
+	@OriginalTitle varchar(25),
+	@OriginalDescription varchar(250),
+	@OriginalActive	bit
+	)
+AS
+	UPDATE [dbo].[Roles]
+	SET [Active] = @Active,
+		[Title] = @Title,
+		[Description] = @Description
+	WHERE [RoleID] = @RoleID
+		and [Title] = @OriginalTitle
+		and [Description] = @OriginalDescription
+		and [Active] = @OriginalActive
 	RETURN @@ROWCOUNT
 GO
 PRINT N'Creating [dbo].[proc_UpdateShippingOrder]...';
@@ -3124,13 +3425,14 @@ GO
 /* **************************************Insert Statements******************************************** */           
 /* Inserts for Roles */
 SET IDENTITY_INSERT [dbo].[Roles] ON
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1000,'Manager', 'Oversees all activity.')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1100,'Employee', 'More work!?')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1200,'Guest', 'Restricted Access')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1300,'Level 4', '-------To Be filled--------')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1400,'Level 5', '-------To Be filled--------')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1000, N'Administrator', N'Has access to everything.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1100, N'Shipping Manager', N'Has access to all shipping related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1200, N'Receiving Manager', N'Has access to all receiving related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1300, N'Inventory Manager', N'Has access to all inventory related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1400, N'Shipping Employee', N'Does work.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1700, N'Receiving Employee', N'Does work.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1800, N'Inventory Employee', N'Does work.')
 SET IDENTITY_INSERT [dbo].[Roles] OFF
-GO
 
 /* Inserts for Users */
 SET IDENTITY_INSERT [dbo].[Users] ON
@@ -3138,6 +3440,8 @@ INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[Phone
 VALUES (1,1000,'1111','Bob','Ross','1-800-262-7677','314 Happy Tree Lane','Daytona Beach', 'Florida', '32114', '1')
 INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
 VALUES (2,1100,'1111','James Tiberius','Kirk','1-555-555-1701','NCC-1701 Enterprise','Riverside', 'Iowa', '57001', '1')
+INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
+VALUES (6,1000,'1111','Radaghast','The Brown','1-555-575-1761','Mirkwood','Forest', 'Middle-Earth', '57901', '1')
 INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
 VALUES (3,1200,'1111','Rose','Tyler','1-555-555-1963','42 Wibbly Wobbly Timey Wimey Road','Gallifrey', 'South Dakota', '32114', '1')
 INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
@@ -3363,6 +3667,8 @@ USE [$(DatabaseName)];
 
 
 GO
+ALTER TABLE [dbo].[ControlsToRoles] WITH CHECK CHECK CONSTRAINT [FK_ControlsToRoles_Roles];
+
 ALTER TABLE [dbo].[ProductCategories] WITH CHECK CHECK CONSTRAINT [FK_ProductCategories_Categories];
 
 ALTER TABLE [dbo].[ProductCategories] WITH CHECK CHECK CONSTRAINT [FK_ProductCategories_Products];
@@ -3379,7 +3685,9 @@ ALTER TABLE [dbo].[ShippingOrders] WITH CHECK CHECK CONSTRAINT [FK_ShippingOrder
 
 ALTER TABLE [dbo].[ShippingTermsLookup] WITH CHECK CHECK CONSTRAINT [FK_ShippingTermsLookup_ShippingVendor];
 
-ALTER TABLE [dbo].[Users] WITH CHECK CHECK CONSTRAINT [FK_Users_Roles];
+ALTER TABLE [dbo].[UserRoles] WITH CHECK CHECK CONSTRAINT [FK_UsersRoles_Roles];
+
+ALTER TABLE [dbo].[UserRoles] WITH CHECK CHECK CONSTRAINT [FK_UsersRoles_Users];
 
 ALTER TABLE [dbo].[VendorOrderLineItems] WITH CHECK CHECK CONSTRAINT [FK_VendorOrderLineItems_Products];
 

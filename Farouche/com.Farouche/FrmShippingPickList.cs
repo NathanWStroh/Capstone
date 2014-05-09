@@ -72,7 +72,7 @@ namespace com.Farouche
             {
                 int selectedOrder = (int)this.lvPickList.SelectedIndices[0] + 1;
                 ShippingOrder myOrder = _myOrderManager.GetOrderByID(selectedOrder);
-                if(myOrder.UserId.Equals(_myAccessToken.UserID))
+                if(myOrder.UserId.Equals(_myAccessToken.Id))
                 {
                     MessageBox.Show("Order is already in your 'My Orders' queue", "Action Unnecessary");
                 }
@@ -82,7 +82,7 @@ namespace com.Farouche
                 }
                 else
                 {
-                    Boolean success = _myOrderManager.UpdateUserId(myOrder, _myAccessToken.UserID);
+                    Boolean success = _myOrderManager.UpdateUserId(myOrder, _myAccessToken.Id);
                     if (success == true)
                     {
                         RefreshPickView();

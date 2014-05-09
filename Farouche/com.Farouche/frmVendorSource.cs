@@ -50,7 +50,7 @@ namespace com.Farouche.Presentation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
 
              var vsiManager = new VendorSourceItemManager();
              fillListView(vnd,vsiManager.GetAllVendorSourceItems());
