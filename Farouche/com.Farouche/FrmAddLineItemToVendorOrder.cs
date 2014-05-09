@@ -24,6 +24,7 @@ namespace com.Farouche
         {
             InitializeComponent();
             _myAccessToken = acctkn;
+            var RoleAccess = new RoleAccess(acctkn, this);
             this.vendorOrder = vendorOrder;
             txtVendorOrderID.Text = vendorOrder.Id.ToString();
             VendorManager _vendorManager = new VendorManager();

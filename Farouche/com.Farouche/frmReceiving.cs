@@ -39,6 +39,7 @@ namespace com.Farouche
 
         public frmReceiving(AccessToken acctkn)
         {
+            var RoleAccess = new RoleAccess(acctkn, this);
             InitializeComponent();
             _myAccessToken = acctkn;
             

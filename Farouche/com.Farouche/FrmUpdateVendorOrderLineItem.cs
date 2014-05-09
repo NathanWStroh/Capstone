@@ -21,7 +21,7 @@ namespace com.Farouche
         public FrmUpdateVendorOrderLineItem(VendorOrderLineItem item, string vendorName, int vendorID, AccessToken acctkn)
         {
             InitializeComponent();
-
+            var RoleAccess = new RoleAccess(acctkn, this);
             
             this.item = item;
             txtLineItemProductID.Text = item.ProductID.ToString();

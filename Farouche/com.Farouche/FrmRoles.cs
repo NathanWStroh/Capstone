@@ -22,6 +22,7 @@ namespace com.Farouche
        // private List<Role> roles = new List<Role>();
         public FrmRoles(AccessToken acctoken)
         {
+            var RoleAccess = new RoleAccess(acctoken, this);
             _roleManager = new RoleManager();
             _myAccessToken = acctoken;
             InitializeComponent();

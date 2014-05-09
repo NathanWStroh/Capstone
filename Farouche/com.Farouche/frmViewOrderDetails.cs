@@ -29,6 +29,7 @@ namespace com.Farouche
             _myOrderDetails = new ShippingOrderLineItemManager();
             _myOrderManager = new ShippingOrderManager();
             PopulateLineItemLists();
+            var RoleAccess = new RoleAccess(accToken, this);
         }// End FrmViewOrderDetails(..)
 
         private void PopulateLineItemLists()
@@ -71,9 +72,13 @@ namespace com.Farouche
 
         private void BtnPrintDetails_Click(object sender, EventArgs e)
         {
+
+            frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId, _myAccessToken);
+
             btnPick.Enabled = false;
             btnUnpick.Enabled = false;
-            frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId);
+            
+
             print.ShowDialog();
         }//End of BtnPrintDetails_Click(..)
 

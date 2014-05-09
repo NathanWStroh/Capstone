@@ -39,6 +39,7 @@ namespace com.Farouche.Presentation
         public FrmVendor(AccessToken acctoken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctoken, this);
             _myAccessToken = acctoken;
             Instance = this;
         }
@@ -365,7 +366,7 @@ namespace com.Farouche.Presentation
 
         private void btnVendorReport_Click(object sender, EventArgs e)
         {
-            frmVendorProductReport myForm = new frmVendorProductReport();
+            frmVendorProductReport myForm = new frmVendorProductReport(_myAccessToken);
             myForm.ShowDialog();
         }
 

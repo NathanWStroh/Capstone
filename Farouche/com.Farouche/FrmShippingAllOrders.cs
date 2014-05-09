@@ -27,6 +27,7 @@ namespace com.Farouche
 
         public FrmShippingAllOrders(AccessToken acctoken)
         {
+            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
             _myAccessToken = acctoken;
             _myOrderManager = new ShippingOrderManager();
@@ -152,9 +153,13 @@ namespace com.Farouche
 
         private void btnUserDirectory_Click(object sender, EventArgs e)
         {
+
+            frmEmployeeDirectory employeeReport = new frmEmployeeDirectory(_myAccessToken);
+
             btnClearUser.Enabled = false;
             btnAssignUser.Enabled = false;
-            frmEmployeeDirectory employeeReport = new frmEmployeeDirectory();
+            
+
             employeeReport.ShowDialog();
             employeeReport = null;
         }//End btnUserDirectory_Click(..)

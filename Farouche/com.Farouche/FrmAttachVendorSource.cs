@@ -26,13 +26,14 @@ namespace com.Farouche
         private VendorSourceItem _currentVendorSourceItem;
         List<Vendor> _vendors;
 
-        public FrmAttachVendorSource(Product product)
+        public FrmAttachVendorSource(Product product, AccessToken _myAccessToken)
         {
             InitializeComponent();
             _currentProduct = product;
             _vendorSource = new VendorSourceItemManager();
             _vendorManager = new VendorManager();
             _vendors = _vendorManager.GetVendors();
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
         }//End of FrmAttachVendorSource(.)
 
         public FrmAttachVendorSource(Product product, VendorSourceItem currentVendorSourceItem)

@@ -27,6 +27,7 @@ namespace com.Farouche
         //Constructor with AccessToken as the only parameter.
         public frmReorder(AccessToken acctoken)
         {
+            var RoleAccess = new RoleAccess(acctoken, this);
             InitializeComponent();
             _myAccessToken = acctoken;
             Instance = this;
@@ -321,7 +322,7 @@ namespace com.Farouche
                 {
                     if (product.Product.Name == dgvReorder.CurrentRow.Cells[1].Value.ToString())
                     {
-                        frmReorderChangeLevels _myForm = new frmReorderChangeLevels(product);
+                        frmReorderChangeLevels _myForm = new frmReorderChangeLevels(product, _myAccessToken);
                         _myForm.ShowDialog();
                         populateDGV();
                     }

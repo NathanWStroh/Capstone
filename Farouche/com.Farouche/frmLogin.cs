@@ -13,6 +13,7 @@ namespace com.Farouche.Presentation
     {
         public FrmLogin()
         {
+           
             InitializeComponent();
             //added for faster access
             txtUserID.Text = "1";

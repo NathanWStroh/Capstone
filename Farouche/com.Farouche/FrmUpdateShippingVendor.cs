@@ -29,9 +29,10 @@ namespace com.Farouche
         private ShippingVendorManager _myShippingVendorManager;
         private ShippingVendor _originalVendor; 
 
-        public FrmUpdateShippingVendor(ShippingVendor vendor)
+        public FrmUpdateShippingVendor(ShippingVendor vendor, AccessToken _myAccessToken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             _myShippingVendorManager = new ShippingVendorManager();
             _originalVendor = vendor;
             this.Text = "Shipping Vendor ID: " + vendor.Id;

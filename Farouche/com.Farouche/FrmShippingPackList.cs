@@ -22,6 +22,7 @@ namespace com.Farouche
 
         public FrmShippingPackList(AccessToken accToken)
         {
+            var RoleAccess = new RoleAccess(accToken, this);
             InitializeComponent();
             _myAccessToken = accToken;
             _myOrderManager = new ShippingOrderManager();
@@ -92,7 +93,7 @@ namespace com.Farouche
                 {
                     MessageBox.Show("Now Printing Pack Slip", "Packing Complete");
                     RefreshPackView();
-                    frmPrintPackReport packReport = new frmPrintPackReport(currentOrder);
+                    frmPrintPackReport packReport = new frmPrintPackReport(currentOrder, _myAccessToken);
                     packReport.ShowDialog();
                     packReport = null;
                 }
