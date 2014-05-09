@@ -96,10 +96,55 @@ namespace com.Farouche.BusinessLogic
             return ProductDAL.UpdateReorderAmount(amount, productID, _connection);
         } //End of UpdateReorderAmount(.)
 
+        //only use this method to completely change amount, use AddTo/RemoveFrom methods to increment/decrement this amount
         public Boolean UpdateOnOrder(int amount, int productID)
         {
             if (amount < 0) throw new ArgumentException("The on order amount is invalid. This value must be greater than or equal to zero.");
             return ProductDAL.UpdateOnOrder(amount, productID, _connection);
         } //End of UpdateOnOrder(.)
+        //while it may seem silly to have an add and a remove method, both are available for later coder need (and easier exception handling)
+        public Boolean AddToOnOrder(int amount, int productID)
+        {
+            int currentAmt = ProductDAL.GetOnOrder(productID, _connection);
+            int newTotal = currentAmt + amount;
+            //if needed, add exception handling here (negative values maybe?)
+            return ProductDAL.UpdateOnOrder(newTotal, productID, _connection);
+        }//End of AddToOnOrder(..)
+        public Boolean RemoveFromOnOrder(int amount, int productID) 
+        {
+            int currentAmt = ProductDAL.GetOnOrder(productID, _connection);
+            int newTotal = currentAmt - amount;
+            //if needed, add exception handling here
+            return ProductDAL.UpdateOnOrder(newTotal, productID, _connection);
+        }//End of RemoveFromOnOrder(..)
+        public Boolean AddToAvailable(int amount, int productID) 
+        {
+            int currentAmt = ProductDAL.GetAvailable(productID, _connection);
+            int newTotal = currentAmt + amount;
+            //if needed, add exception handling here (negative values maybe?)
+            return ProductDAL.UpdateAvailable(newTotal, productID, _connection); 
+        }//End of AddtoAvailable(..)
+        public Boolean RemoveFromAvailable(int amount, int productID)
+        {
+            int currentAmt = ProductDAL.GetAvailable(productID, _connection);
+            int newTotal = currentAmt - amount;
+            //if needed, add exception handling here (negative values maybe?)
+            return ProductDAL.UpdateAvailable(newTotal, productID, _connection); 
+        }//End of RemoveFromAvailable(..)
+        public Boolean AddToOnHand(int amount, int productID) 
+        {
+            int currentAmt = ProductDAL.GetOnHand(productID, _connection);
+            int newTotal = currentAmt + amount;
+            //if needed, add exception handling here (negative values maybe?)
+            return ProductDAL.UpdateOnHand(newTotal, productID, _connection);
+        }//End of AddToOnHand(..)
+        public Boolean RemoveFromOnHand(int amount, int productID) 
+        {
+            int currentAmt = ProductDAL.GetOnHand(productID, _connection);
+            int newTotal = currentAmt - amount;
+            //if needed, add exception handling here (negative values maybe?)
+            return ProductDAL.UpdateOnHand(newTotal, productID, _connection); 
+        }//End of RemoveFromOnHand(..)
+
     }
 }

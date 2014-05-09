@@ -22,6 +22,7 @@ namespace com.Farouche.BusinessLogic
     public class VendorOrderManager : DatabaseConnection
     {
         private readonly SqlConnection _connection = GetInventoryDbConnection();
+        private ProductManager prodMan = new ProductManager();
 
         public bool AddLineItem(VendorOrder order, Product product, int qty)
         {
@@ -64,16 +65,24 @@ namespace com.Farouche.BusinessLogic
         public bool AddVendorOrder(VendorOrder order)
         {
             if (order == null) throw new ApplicationException("Order cannot be null");
-            if(order.DateOrdered == null) order.DateOrdered = DateTime.Now;
+            if (order.DateOrdered == null) order.DateOrdered = DateTime.Now;
             var result = VendorOrderDAL.Add(order, _connection);
             if (result)
             {
-                var newVendorOrder = VendorOrderDAL.GetVendorOrderByVendorAndDate(order.VendorID, order.DateOrdered, _connection);
+                var newVendorOrder = VendorOrderDAL.GetVendorOrderByVendorAndDate(order.VendorID,_connection);
                 if (order.LineItems != null)
                 {
                     foreach (var item in order.LineItems)
                     {
-                        VendorOrderLineItemDAL.Add(item, _connection);
+                        item.VendorOrderId = newVendorOrder.Id;
+                        if (item.Note == null || item.Note == "")
+                        {
+                            item.Note = "no note";
+                        }
+                        if (VendorOrderLineItemDAL.Add(item, _connection)) {
+                            prodMan.AddToOnOrder(item.QtyOrdered, item.ProductID);
+                        }
+
                     }
                 }
             }
@@ -88,8 +97,15 @@ namespace com.Farouche.BusinessLogic
         public Boolean FinalizeVendorOrder(VendorOrder order)
         {
             if (order == null) throw new ApplicationException("VendorOrder cannot be null");
+            if (order.LineItems == null) throw new ApplicationException("VendorOrder cannot have zero line items");
             var oldOrder = order;
             order.Finalized = true;
+            foreach (VendorOrderLineItem item in order.LineItems)
+            {
+                prodMan.AddToAvailable(item.QtyReceived, item.ProductID);
+                prodMan.AddToOnHand(item.QtyDamaged + item.QtyReceived, item.ProductID);
+                prodMan.RemoveFromOnOrder(item.QtyReceived + item.QtyDamaged, item.ProductID);
+            }
             var result = VendorOrderDAL.Update(oldOrder, order, _connection);
             return result;
         }

@@ -1,8 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[proc_InsertVendorOrder]
 	@VendorID int, 
-	@DateOrdered date,
 	@NumberOfShipments int
 AS
-	Insert into [VendorOrders] (VendorID, DateOrdered, AmountOfShipments)
-	Values (@VendorID, @DateOrdered, @NumberOfShipments)
+	Insert into [VendorOrders] (VendorID, AmountOfShipments)
+	Values (@VendorID, @NumberOfShipments)
 RETURN @@ROWCOUNT
