@@ -31,7 +31,6 @@ namespace com.Farouche.Presentation
         public FrmShippingPackList ShippingPackList;
         public FrmShippingTerm ShippingTerm;
         public FrmShippingVendor ShippingVendor;
-        public RoleAccess RoleAccess;
         public frmReceiving frmReceiving;
 
         public frmStartUp(AccessToken acctoken)
@@ -41,7 +40,7 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctoken;
             this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
             this.WindowState = FormWindowState.Maximized;
-            RoleAccess = new RoleAccess(_myAccessToken, this);
+
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)

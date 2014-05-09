@@ -47,6 +47,10 @@ namespace com.Farouche
         private void AddEditRoleMenuStrip()
         {
             _roleMenuStrip = new MenuStrip();
+          //  _roleMenuStrip.BringToFront();
+            _roleMenuStrip.Dock = DockStyle.Bottom;
+
+         //  _roleMenuStrip.Margin.Bottom.Equals(100);
             var editRoleItem = new ToolStripMenuItem("Edit Roles");
             var saveItem = new ToolStripMenuItem("Save");
             saveItem.Enabled = false;
