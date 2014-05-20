@@ -58,12 +58,13 @@
             this.lvMyOrders.UseCompatibleStateImageBehavior = false;
             this.lvMyOrders.View = System.Windows.Forms.View.Details;
             this.lvMyOrders.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvMyOrders_ColumnClick);
+            this.lvMyOrders.SelectedIndexChanged += new System.EventHandler(this.lvMyOrders_SelectedIndexChanged);
             // 
             // FrmShippingMyOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 305);
+            this.ClientSize = new System.Drawing.Size(784, 343);
             this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.lvMyOrders);
             this.Name = "FrmShippingMyOrders";

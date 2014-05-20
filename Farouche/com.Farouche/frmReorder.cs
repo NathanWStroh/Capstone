@@ -22,12 +22,14 @@ namespace com.Farouche
         private Boolean dgvBool = false;    //Boolean used to determine if the dgv has been populated or not.
         private Boolean cbCanClick = false; //Hack: makes sure cellValuechanged Event wont run calcAmount function at odd times.
         private Boolean _vendorOrdered = true; //used to check if current Vendor Order has been ordered before moving to new Vendor Order
-        private Boolean devState = false;
+        private Boolean devState = true;
         private List<Reorder> lreport;
         //Constructor with AccessToken as the only parameter.
         public frmReorder(AccessToken acctoken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctoken, this);
+           
             _myAccessToken = acctoken;
             Instance = this;
         }
@@ -47,7 +49,7 @@ namespace com.Farouche
             cbVendors.DataSource = lVendors;
             cbVendors.DisplayMember = "Name";
             cbVendors.ValueMember = "ID";
-            cbVendors.SelectedIndex = 0;
+           // cbVendors.SelectedIndex = 0;
         }
 
         //populates the "Reorder Amount" ComboBox's Cell per row/Column 4
@@ -321,7 +323,7 @@ namespace com.Farouche
                 {
                     if (product.Product.Name == dgvReorder.CurrentRow.Cells[1].Value.ToString())
                     {
-                        frmReorderChangeLevels _myForm = new frmReorderChangeLevels(product);
+                        frmReorderChangeLevels _myForm = new frmReorderChangeLevels(product, _myAccessToken);
                         _myForm.ShowDialog();
                         populateDGV();
                     }
@@ -338,13 +340,17 @@ namespace com.Farouche
         {
             try
             {
-                _vendorOrdered = _report.OrderReorders();
-                _productManager = new ProductManager();
-                foreach (var _product in _report.Reorders)
+                if (_vendorOrdered == false)
                 {
-                    _productManager.UpdateOnOrder((int)_product.CasesToOrder, _product.VendorSourceItem.ProductID);
-                }
-                MessageBox.Show("Your order has been sent.","Vendor Reorder");
+                    _vendorOrdered = _report.OrderReorders();
+                    _productManager = new ProductManager();
+                    foreach (Reorder reorder in _report.Reorders)
+					{
+						_productManager.AddToOnOrder(reorder.CasesToOrder * reorder.VendorSourceItem.ItemsPerCase, reorder.VendorSourceItem.ProductID);
+					}
+                    MessageBox.Show("Your order has been sent.", "Vendor Reorder");
+                    _vendorOrdered = true;
+				}
             }
             catch (ApplicationException ex)
             {

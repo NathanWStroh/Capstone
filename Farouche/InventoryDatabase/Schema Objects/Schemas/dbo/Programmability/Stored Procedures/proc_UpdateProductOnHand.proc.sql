@@ -1,8 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[proc_UpdateProductOnHand]
-	(@ProductID		int,
-	@Amount			int)
+
+	(@productID		int,
+	 @amount		int)
 AS
 	UPDATE [dbo].[Products]
-	SET [OnHand] = @Amount
-	WHERE [ProductID] = @ProductID
+	SET [OnHand] = @amount
+	WHERE [ProductID] = @productID
 	RETURN @@ROWCOUNT

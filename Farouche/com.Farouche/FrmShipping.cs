@@ -27,6 +27,8 @@ namespace com.Farouche.Presentation
         public FrmShipping(AccessToken acctoken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctoken, this);
+           
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
             _myTermManager = new ShippingTermManager();
@@ -35,7 +37,7 @@ namespace com.Farouche.Presentation
 
         private void FrmShipping_Load(object sender, EventArgs e)
         {
-            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            Text += "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
 
             //Populates the active combo box. 
             this.PopulateActiveCombo();
@@ -263,7 +265,7 @@ namespace com.Farouche.Presentation
 
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
-            FrmAddShippingVendor form = new FrmAddShippingVendor();
+            FrmAddShippingVendor form = new FrmAddShippingVendor(_myAccessToken );
             form.ShowDialog();
             SetDefaults();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
@@ -272,7 +274,7 @@ namespace com.Farouche.Presentation
         private void btnUpdateVendor_Click(object sender, EventArgs e)
         {
             var currentIndex = this.lvShippingVendors.SelectedIndices[0];
-            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex]);
+            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex], _myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateVendorListView(this.lvShippingVendors, _myVendorManager.GetVendors());
@@ -280,7 +282,7 @@ namespace com.Farouche.Presentation
 
         private void btnAddTerm_Click(object sender, EventArgs e)
         {
-            FrmAddShippingTerm form = new FrmAddShippingTerm();
+            FrmAddShippingTerm form = new FrmAddShippingTerm(_myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());
@@ -289,7 +291,7 @@ namespace com.Farouche.Presentation
         private void btnUpdateTerm_Click(object sender, EventArgs e)
         {
             var currentIndex = this.lvShippingTerms.SelectedIndices[0];
-            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex]);
+            FrmUpdateShippingTerm form = new FrmUpdateShippingTerm(_myTermManager.ShippingTerms[currentIndex], _myAccessToken);
             form.ShowDialog();
             SetDefaults();
             PopulateTermListView(this.lvShippingTerms, _myTermManager.GetTerms());

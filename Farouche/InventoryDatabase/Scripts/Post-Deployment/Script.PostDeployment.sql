@@ -21,13 +21,14 @@ GO
 /* **************************************Insert Statements******************************************** */           
 /* Inserts for Roles */
 SET IDENTITY_INSERT [dbo].[Roles] ON
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1000,'Manager', 'Oversees all activity.')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1100,'Employee', 'More work!?')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1200,'Guest', 'Restricted Access')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1300,'Level 4', '-------To Be filled--------')
-INSERT [dbo].[Roles] ([RoleID],[Title], [Description]) VALUES (1400,'Level 5', '-------To Be filled--------')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1000, N'Administrator', N'Has access to everything.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1100, N'Shipping Manager', N'Has access to all shipping related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1200, N'Receiving Manager', N'Has access to all receiving related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1300, N'Inventory Manager', N'Has access to all inventory related task.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1400, N'Shipping Employee', N'Does work.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1700, N'Receiving Employee', N'Does work.')
+INSERT [dbo].[Roles] ([RoleID], [Title], [Description]) VALUES (1800, N'Inventory Employee', N'Does work.')
 SET IDENTITY_INSERT [dbo].[Roles] OFF
-GO
 
 /* Inserts for Users */
 SET IDENTITY_INSERT [dbo].[Users] ON
@@ -43,6 +44,8 @@ INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[Phone
 VALUES (4,1300,'1111','Jayne','Cobb','1-555-555-2002','Corner of Firefly and Serenity','Canton', 'Missouri', '63435', '1')
 INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
 VALUES (5,1400,'1111','Jaedis','Tristran','1-555-555-1337','221B Baker Street','Martha''s Vineyard', 'Massachusetts', '02552', '0')
+INSERT [dbo].[Users] ([UserID],[RoleID],[Password],[FirstName],[LastName],[PhoneNumber],[Address],[City],[State],[Zip],[Active]) 
+VALUES (7,1800,'1111','Employee','Inventory','1-555-555-1337','221B Baker Street','Martha''s Vineyard', 'Massachusetts', '02552', '0')
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
 

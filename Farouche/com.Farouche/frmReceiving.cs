@@ -40,6 +40,8 @@ namespace com.Farouche
         public frmReceiving(AccessToken acctkn)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctkn, this);
+           
             _myAccessToken = acctkn;
             
         }
@@ -368,6 +370,13 @@ namespace com.Farouche
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            VendorOrder thisOrder = new VendorOrder(vendorOrder.Id);
+            thisOrder.LineItems = vendorOrderLineItemList;
+            _vendorOrderManager.FinalizeVendorOrder(vendorOrder);
         }
 
 

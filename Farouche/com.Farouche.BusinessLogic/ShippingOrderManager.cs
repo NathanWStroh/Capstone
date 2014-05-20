@@ -27,7 +27,7 @@ namespace com.Farouche.BusinessLogic
         private List<ShippingOrder> _orders = null;
         //Private member used to store a single order.
         private ShippingOrder _order = null;
-
+        private ProductManager prodMan = new ProductManager();
         //Used to retrieve the list of orders.
         public List<ShippingOrder> Orders
         {
@@ -69,6 +69,11 @@ namespace com.Farouche.BusinessLogic
         public bool UpdatePickedTrue(ShippingOrder order)
         {
             //Need to do error checking... Try/Catch.
+
+            foreach(ShippingOrderLineItem item in order.ShippingOrderLineItemList)
+            {
+                prodMan.RemoveFromAvailable(item.Quantity, item.ProductId);
+            }
             return ShippingOrderDAL.PickShippingOrder(order, _connection);
             //Should also clear the current UserId.
 
@@ -79,6 +84,10 @@ namespace com.Farouche.BusinessLogic
         //When would this be done?
         public bool UpdatePickedFalse(ShippingOrder order)
         {
+            foreach (ShippingOrderLineItem item in order.ShippingOrderLineItemList)
+            {
+                prodMan.AddToAvailable(item.Quantity, item.ProductId);
+            }
             //Need to do error checking... Try/Catch.
             return ShippingOrderDAL.UnpickShippingOrder(order, _connection);
         }//End of UpdatePickedFalse(.)
@@ -86,6 +95,11 @@ namespace com.Farouche.BusinessLogic
         public bool UpdateShippedDate(ShippingOrder order)
         {
             //Need to do error checking... Try/Catch.
+
+            foreach (ShippingOrderLineItem item in order.ShippingOrderLineItemList)
+            {
+                prodMan.RemoveFromOnHand(item.Quantity, item.ProductId);
+            }
             return ShippingOrderDAL.ShipShippingOrder(order, _connection);
             //Need to update on-hand inventory for all line items once the shipped date is set.
         }//End of UpdateShippedDate(.)
@@ -94,6 +108,11 @@ namespace com.Farouche.BusinessLogic
         public bool ClearShippedDate(ShippingOrder order)
         {
             //Need to do error checking... Try/Catch.
+
+            foreach (ShippingOrderLineItem item in order.ShippingOrderLineItemList)
+            {
+                prodMan.AddToOnHand(item.Quantity, item.ProductId);
+            }
             return ShippingOrderDAL.UnshipShippingOrder(order, _connection);
         }//End of ClearShippedDate(.)
 

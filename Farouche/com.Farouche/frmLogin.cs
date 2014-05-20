@@ -13,10 +13,11 @@ namespace com.Farouche.Presentation
     {
         public FrmLogin()
         {
+           
             InitializeComponent();
             //added for faster access
-            txtUserID.Text = "1";
-            txtPassword.Text = "1111";
+          //  txtUserID.Text = "1";
+        //    txtPassword.Text = "1111";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -28,7 +29,7 @@ namespace com.Farouche.Presentation
             try
             {
 
-                myAccessToken = Authenticator.authenticate(int.Parse(txtUserID.Text), txtPassword.Text);
+                myAccessToken = Authenticator.Authenticate(int.Parse(txtUserID.Text), txtPassword.Text);
 
                 myForm = new frmStartUp(myAccessToken);
                 myForm.Show();

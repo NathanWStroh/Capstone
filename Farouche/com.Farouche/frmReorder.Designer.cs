@@ -67,7 +67,7 @@
             this.btnGo.TabIndex = 1;
             this.btnGo.Text = "Go!";
             this.ttpReorder.SetToolTip(this.btnGo, "Creates the Automated Report, if there is already a report in view, save or cance" +
-                    "l it before continueing.");
+        "l it before continueing.");
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
@@ -97,55 +97,7 @@
             this.dgvReorder.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvReorder.Size = new System.Drawing.Size(647, 263);
             this.dgvReorder.TabIndex = 2;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "On Reorder";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 50;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Product";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Column3
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column3.HeaderText = "Price Per Item";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 75;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Auto Reorder Amount";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Reorder Amount";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 60;
-            // 
-            // Column6
-            // 
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column6.HeaderText = "Total";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 80;
             this.ttpReorder.SetToolTip(this.dgvReorder, "Vendor Report");
-
             // 
             // Column1
             // 
@@ -159,6 +111,7 @@
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column2.HeaderText = "Product";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Column2.ToolTipText = "Short Description Name";
@@ -250,7 +203,7 @@
             this.btnReorderChangeLevel.TabIndex = 7;
             this.btnReorderChangeLevel.Text = "Change Reorder Level";
             this.ttpReorder.SetToolTip(this.btnReorderChangeLevel, "Opens a new Window to update the \"Auto Reorder Amount\" and the \"Reorder Amount\" o" +
-                    "f a Product in the Report.");
+        "f a Product in the Report.");
             this.btnReorderChangeLevel.UseVisualStyleBackColor = true;
             this.btnReorderChangeLevel.Click += new System.EventHandler(this.btnReorderChangeLevel_Click);
             // 
@@ -258,7 +211,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 379);
+            this.ClientSize = new System.Drawing.Size(673, 406);
             this.Controls.Add(this.btnReorderChangeLevel);
             this.Controls.Add(this.txtTotalAmount);
             this.Controls.Add(this.label1);
@@ -268,7 +221,6 @@
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.cbVendors);
             this.Name = "frmReorder";
-            this.Text = "Reorder";
             this.Text = "Auto Generated Vendor Reorders";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmReorder_FormClosed);
             this.Load += new System.EventHandler(this.frmReorder_Load);

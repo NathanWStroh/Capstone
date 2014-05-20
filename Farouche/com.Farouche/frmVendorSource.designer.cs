@@ -109,7 +109,6 @@
             this.vnd.TabIndex = 9;
             this.vnd.UseCompatibleStateImageBehavior = false;
             this.vnd.View = System.Windows.Forms.View.Details;
-            //this.vnd.SelectedIndexChanged += new System.EventHandler(this.vnd_SelectedIndexChanged);
             // 
             // columnHeader2
             // 
@@ -276,7 +275,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 437);
+            this.ClientSize = new System.Drawing.Size(834, 479);
             this.Controls.Add(this.btnShipping);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnPressed);

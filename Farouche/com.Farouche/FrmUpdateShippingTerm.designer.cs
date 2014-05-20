@@ -97,7 +97,7 @@
             this.AcceptButton = this.btnEdit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 261);
+            this.ClientSize = new System.Drawing.Size(434, 297);
             this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.comboVendors);
             this.Controls.Add(this.lblDesc);

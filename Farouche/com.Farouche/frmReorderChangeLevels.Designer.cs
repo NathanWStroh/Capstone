@@ -90,7 +90,7 @@
             this.txtROThreshold.TabIndex = 0;
             this.txtROThreshold.TabStop = false;
             this.ttpReorderLevels.SetToolTip(this.txtROThreshold, "Current Threshold before a Product is considered to be needing Reordered by the S" +
-                    "ystem.");
+        "ystem.");
             // 
             // txtROAmount
             // 
@@ -177,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 200);
+            this.ClientSize = new System.Drawing.Size(279, 222);
             this.Controls.Add(this.txtProduct);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);

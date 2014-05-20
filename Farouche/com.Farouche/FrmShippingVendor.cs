@@ -21,6 +21,8 @@ namespace com.Farouche
         public FrmShippingVendor(AccessToken acctoken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(acctoken, this);
+       
             _myAccessToken = acctoken;
             _myVendorManager = new ShippingVendorManager();
             PopulateActiveCombo();
@@ -110,7 +112,7 @@ namespace com.Farouche
 
         private void btnAddVendor_Click(object sender, EventArgs e)
         {
-            FrmAddShippingVendor form = new FrmAddShippingVendor();
+            FrmAddShippingVendor form = new FrmAddShippingVendor(_myAccessToken);
             form.ShowDialog();
             FindActiveSelection();
         }//End of btnAddVendor_Click(..)
@@ -118,7 +120,7 @@ namespace com.Farouche
         private void btnUpdateVendor_Click(object sender, EventArgs e)
         {
             var currentIndex = this.lvShippingVendors.SelectedIndices[0];
-            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex]);
+            FrmUpdateShippingVendor form = new FrmUpdateShippingVendor(_myVendorManager.ShippingVendors[currentIndex], _myAccessToken);
             form.ShowDialog();
             FindActiveSelection();
         }//End of btnUpdateVendor_Click(..)

@@ -162,7 +162,6 @@
             this.lvShippingVendors.TabIndex = 10;
             this.lvShippingVendors.UseCompatibleStateImageBehavior = false;
             this.lvShippingVendors.View = System.Windows.Forms.View.Details;
-            //this.lvShippingVendors.SelectedIndexChanged += new System.EventHandler(this.lvShippingVendors_SelectedIndexChanged);
             this.lvShippingVendors.Click += new System.EventHandler(this.lvShippingVendors_Click);
             // 
             // btnAddVendor
@@ -484,7 +483,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 437);
+            this.ClientSize = new System.Drawing.Size(834, 471);
             this.Controls.Add(this.btnVendor);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnVendorSource);

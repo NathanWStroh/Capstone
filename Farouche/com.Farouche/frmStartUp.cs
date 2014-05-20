@@ -36,9 +36,12 @@ namespace com.Farouche.Presentation
         public frmStartUp(AccessToken acctoken)
         {
             InitializeComponent();
+
+            var RoleAccess = new RoleAccess(acctoken, this);
             _myAccessToken = acctoken;
-            this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Title;
+            this.Text = "                         " + _myAccessToken.FirstName + " " + _myAccessToken.LastName + " logged in as a " + _myAccessToken.Role.Name;
             this.WindowState = FormWindowState.Maximized;
+
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,7 +281,44 @@ namespace com.Farouche.Presentation
         private void frmStartUp_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }//End of frmStartUp_FormClosed(..)
+        } //End of frmStartUp_FormClosed(..) 
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRoles frmRoles;
+            if (FrmRoles.Instance == null)
+            {
+                frmRoles = new FrmRoles(_myAccessToken);
+                frmRoles.MdiParent = this;
+                frmRoles.StartPosition = FormStartPosition.CenterScreen;
+                frmRoles.Show();
+            }
+            else
+            {
+                FrmRoles.Instance.WindowState = FormWindowState.Normal;
+                FrmRoles.Instance.Show();
+                FrmRoles.Instance.BringToFront();
+            }
+
+        }
+
+        private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEmployees frmEmployees;
+            if (FrmEmployees.Instance == null)
+            {
+                frmEmployees = new FrmEmployees(_myAccessToken);
+                frmEmployees.MdiParent = this;
+                frmEmployees.StartPosition = FormStartPosition.CenterScreen;
+                frmEmployees.Show();
+            }
+            else
+            {
+                FrmEmployees.Instance.WindowState = FormWindowState.Normal;
+                FrmEmployees.Instance.Show();
+                FrmEmployees.Instance.BringToFront();
+            }
+        }
 
         private void toolStripButtonCascade_Click(object sender, EventArgs e)
         {

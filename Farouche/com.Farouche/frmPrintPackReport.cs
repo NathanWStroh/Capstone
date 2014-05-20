@@ -16,9 +16,11 @@ namespace com.Farouche
         private ShippingOrder _currentOrder;
         public static frmPrintPackReport Instance;
 
-        public frmPrintPackReport(ShippingOrder order)
+        public frmPrintPackReport(ShippingOrder order, AccessToken _myAccessToken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
+            
             _currentOrder = order;
             Instance = this;
         }//frmPrintPackReport(.)

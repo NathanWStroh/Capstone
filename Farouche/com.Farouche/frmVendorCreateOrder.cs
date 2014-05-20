@@ -43,7 +43,7 @@ namespace com.Farouche.Presentation
             _myAccessToken = acctoken;
             _vendorList = _myVendorManager.GetVendors();
             _productList = _myProductManager.GetProducts();
-            
+            var RoleAccess = new RoleAccess(acctoken, this);
 
             tbOrderDate.Text = DateTime.Now.ToString();
             populateListView();
@@ -134,7 +134,7 @@ namespace com.Farouche.Presentation
             {
 
                 MessageBox.Show("No item selected from List View.");
-                if (_myAccessToken.RoleID == 1400)
+                if (_myAccessToken.Role.Id == 1400)
                 {
                     MessageBox.Show(ex.ToString());
                 }

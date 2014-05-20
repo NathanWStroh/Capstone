@@ -29,10 +29,13 @@ namespace com.Farouche
             _myOrderDetails = new ShippingOrderLineItemManager();
             _myOrderManager = new ShippingOrderManager();
             PopulateLineItemLists();
+            var RoleAccess = new RoleAccess(accToken, this);
         }// End FrmViewOrderDetails(..)
 
         private void PopulateLineItemLists()
         {
+            btnPick.Enabled = false;
+            btnUnpick.Enabled = false;
             PopulateListViews(lvItemsForPick, _myOrderDetails.GetLineItemsByID(_myOrderId), false);
             PopulateListViews(lvPickedItems, _myOrderDetails.GetLineItemsByID(_myOrderId), true);
         }//PopulateLineItemLists()
@@ -69,13 +72,20 @@ namespace com.Farouche
 
         private void BtnPrintDetails_Click(object sender, EventArgs e)
         {
-            frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId);
+
+            frmPrintOrderDetails print = new frmPrintOrderDetails(_myOrderId, _myAccessToken);
+
+            btnPick.Enabled = false;
+            btnUnpick.Enabled = false;
+            
+
             print.ShowDialog();
         }//End of BtnPrintDetails_Click(..)
 
         private void BtnComplete_Click(object sender, EventArgs e)
         {
             _myOrder = _myOrderManager.GetOrderByID(_myOrderId);
+            _myOrder.ShippingOrderLineItemList = _myOrderDetails.GetLineItemsByID(_myOrderId);
             Boolean success = _myOrderManager.UpdatePickedTrue(_myOrder);
             Boolean success2 = _myOrderManager.ClearUserId(_myOrderManager.GetOrderByID(_myOrderId));
             if (success == true && success2 == true)

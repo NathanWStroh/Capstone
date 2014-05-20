@@ -65,7 +65,7 @@
             this.AcceptButton = this.btnUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 111);
+            this.ClientSize = new System.Drawing.Size(249, 124);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdate);

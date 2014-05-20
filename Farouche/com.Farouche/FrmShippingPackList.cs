@@ -16,12 +16,15 @@ namespace com.Farouche
     {
         private readonly AccessToken _myAccessToken;
         private ShippingOrderManager _myOrderManager;
+        private ShippingOrderLineItemManager _shippingLineItemMan = new ShippingOrderLineItemManager();
         public static FrmShippingPackList Instance;
         private int _sortColumn = -1;
 
         public FrmShippingPackList(AccessToken accToken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(accToken, this);
+         
             _myAccessToken = accToken;
             _myOrderManager = new ShippingOrderManager();
             RefreshPackView();
@@ -31,6 +34,7 @@ namespace com.Farouche
         private void FrmShippingPackList_Load(object sender, EventArgs e)
         {
             RefreshPackView();
+            btnPackComplete.Enabled = false;
         }// End FrmShippingPackList_Load(..)
 
         private void RefreshPackView()
@@ -40,6 +44,7 @@ namespace com.Farouche
 
         private void PopulatePackListView(ListView lv, List<ShippingOrder> orderList)
         {
+            btnPackComplete.Enabled = false;
             _myOrderManager.Orders = orderList;
             lv.Items.Clear();
             lv.Columns.Clear();
@@ -82,13 +87,14 @@ namespace com.Farouche
             {
                 int selectedOrderId = Convert.ToInt32(selectedOrder[0].SubItems[0].Text);
                 ShippingOrder currentOrder = _myOrderManager.GetOrderByID(selectedOrderId);
+                currentOrder.ShippingOrderLineItemList = _shippingLineItemMan.GetLineItemsByID(selectedOrderId);
                 Boolean success = _myOrderManager.UpdateShippedDate(currentOrder);
                 _myOrderManager.UpdateUserId(currentOrder, _myAccessToken.UserID);
                 if (success == true)
                 {
                     MessageBox.Show("Now Printing Pack Slip", "Packing Complete");
                     RefreshPackView();
-                    frmPrintPackReport packReport = new frmPrintPackReport(currentOrder);
+                    frmPrintPackReport packReport = new frmPrintPackReport(currentOrder, _myAccessToken);
                     packReport.ShowDialog();
                     packReport = null;
                 }
@@ -102,12 +108,12 @@ namespace com.Farouche
             {
                 MessageBox.Show("Please select an order from the list", "No Order Selected");
             }
-        }
-
+        }//End btnPackComplete_Click(..)
+  
         private void FrmShippingPackList_FormClosed(object sender, FormClosedEventArgs e)
         {
             Instance = null;
-        }
+        }//End FrmShippingPackList_FormClosed(..)
 
         private void lvPackList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -131,8 +137,11 @@ namespace com.Farouche
             lvPackList.Sort();
             // Set the ListViewItemSorter property to a new ListViewItemComparer object.
             this.lvPackList.ListViewItemSorter = new ListViewItemComparer(e.Column, lvPackList.Sorting);
-        }
+        }//End lvPackList_ColumnClick(..)
 
-        
+        private void lvPackList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnPackComplete.Enabled = true;
+        }//End lvPackList_SelectedIndexChanged(..)   
     }
 }

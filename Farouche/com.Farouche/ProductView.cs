@@ -46,6 +46,7 @@ namespace com.Farouche.Presentation
         public ProductView(AccessToken accToken)
         {
             InitializeComponent();
+            var RoleAccess = new RoleAccess(accToken, this);
             _myAccessToken = accToken;
             _productManager = new ProductManager();
             _vendorManager = new VendorManager();
@@ -387,7 +388,7 @@ namespace com.Farouche.Presentation
 
         private void btAddVendor_Click(object sender, EventArgs e)
         {
-            FrmAttachVendorSource frmVendorSource = new FrmAttachVendorSource(_currentProduct);
+            FrmAttachVendorSource frmVendorSource = new FrmAttachVendorSource(_currentProduct, _myAccessToken);
             frmVendorSource.ShowDialog();
             PopulateListView(lvVendors, _currentProduct.Id);
             btnRemoveVendor.Enabled = false;

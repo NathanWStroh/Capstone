@@ -43,11 +43,12 @@
             this.lvPickList.Location = new System.Drawing.Point(12, 12);
             this.lvPickList.MultiSelect = false;
             this.lvPickList.Name = "lvPickList";
-            this.lvPickList.Size = new System.Drawing.Size(760, 248);
+            this.lvPickList.Size = new System.Drawing.Size(760, 252);
             this.lvPickList.TabIndex = 4;
             this.lvPickList.UseCompatibleStateImageBehavior = false;
             this.lvPickList.View = System.Windows.Forms.View.Details;
             this.lvPickList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPickList_ColumnClick);
+            this.lvPickList.SelectedIndexChanged += new System.EventHandler(this.lvPickList_SelectedIndexChanged);
             // 
             // btnStartPick
             // 
@@ -63,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 301);
+            this.ClientSize = new System.Drawing.Size(784, 331);
             this.Controls.Add(this.lvPickList);
             this.Controls.Add(this.btnStartPick);
             this.Name = "FrmShippingPickList";

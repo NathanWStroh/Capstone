@@ -30,7 +30,7 @@ using com.Farouche.Commons;
 */
 
 //Enumeration for active drop down.
-public enum Active { No = 0, Yes = 1 };
+public enum Active { No = 0, Yes = 1, };
 
 namespace com.Farouche.Presentation
 {
@@ -39,7 +39,7 @@ namespace com.Farouche.Presentation
         private readonly AccessToken _myAccessToken;
         private ProductManager _myProductManager;
         public static FrmProduct Instance;
-
+        public RoleAccess RoleAccess;
         //Constructor with AccessToken as the only parameter.
         public FrmProduct(AccessToken acctoken)
         {
@@ -48,6 +48,7 @@ namespace com.Farouche.Presentation
             //Instantiates a ProductManager.
             _myProductManager = new ProductManager();
             Instance = this;
+            RoleAccess = new RoleAccess(_myAccessToken, this);
         }//End of FrmProduct(.)
 
         private void frmAddProduct_Load(object sender, EventArgs e)
@@ -244,7 +245,7 @@ namespace com.Farouche.Presentation
         {
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
-            FrmUpdateReorderAmount frm = new FrmUpdateReorderAmount(thisProduct._reorderAmount, thisProduct.Id);
+            FrmUpdateReorderAmount frm = new FrmUpdateReorderAmount(thisProduct._reorderAmount, thisProduct.Id, _myAccessToken);
             frm.ShowDialog();
             findActiveSelection();
         }
@@ -253,7 +254,7 @@ namespace com.Farouche.Presentation
         {
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
-            FrmUpdateReorderThreshold frm = new FrmUpdateReorderThreshold(thisProduct._reorderThreshold, thisProduct.Id);
+            FrmUpdateReorderThreshold frm = new FrmUpdateReorderThreshold(thisProduct._reorderThreshold, thisProduct.Id, _myAccessToken);
             frm.ShowDialog();
             findActiveSelection();
         }
@@ -262,7 +263,7 @@ namespace com.Farouche.Presentation
         {
             int currentIndex = this.lvProducts.SelectedIndices[0];
             Product thisProduct = _myProductManager.Products[currentIndex];
-            FrmUpdateReorderOnOrder frm = new FrmUpdateReorderOnOrder(thisProduct._onOrder, thisProduct.Id);
+            FrmUpdateReorderOnOrder frm = new FrmUpdateReorderOnOrder(thisProduct._onOrder, thisProduct.Id, _myAccessToken);
             frm.ShowDialog();
             findActiveSelection();
         }

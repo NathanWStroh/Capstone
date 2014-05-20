@@ -38,11 +38,13 @@
   <ItemGroup>
     <Compile Include="ApplicationVariables.cs" />
     <Compile Include="Authenticator.cs" />
+    <Compile Include="EmployeeManager.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="ReceivingManager.cs" />
     <Compile Include="ReportList.cs" />
     <Compile Include="ReorderManager.cs" />
     <Compile Include="ReportManager.cs" />
+    <Compile Include="RoleManager.cs" />
     <Compile Include="ShippingOrderLineItemManager.cs" />
     <Compile Include="ShippingOrderManager.cs" />
     <Compile Include="ShippingTermManager.cs" />

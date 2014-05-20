@@ -62,6 +62,7 @@
             this.lvAllOrders.UseCompatibleStateImageBehavior = false;
             this.lvAllOrders.View = System.Windows.Forms.View.Details;
             this.lvAllOrders.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvAllOrders_ColumnClick);
+            this.lvAllOrders.SelectedIndexChanged += new System.EventHandler(this.lvAllOrders_SelectedIndexChanged);
             // 
             // btnAssignUser
             // 
@@ -103,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 281);
+            this.ClientSize = new System.Drawing.Size(539, 322);
             this.Controls.Add(this.txtUserId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnUserDirectory);

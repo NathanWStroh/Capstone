@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using com.Farouche.BusinessLogic;
+using com.Farouche.Commons;
 
 namespace com.Farouche
 {
@@ -16,9 +17,11 @@ namespace com.Farouche
         private int _currentProduct;
         private ProductManager _productManager;
 
-        public FrmUpdateReorderOnOrder(int? currentReorderAmount, int currentProductID)
+        public FrmUpdateReorderOnOrder(int? currentReorderAmount, int currentProductID, AccessToken _myAccessToken)
         {
             InitializeComponent();
+
+            var RoleAccess = new RoleAccess(_myAccessToken, this);
             _currentAmount = currentReorderAmount;
             _currentProduct = currentProductID;
         }

@@ -58,12 +58,13 @@
             this.lvPackList.UseCompatibleStateImageBehavior = false;
             this.lvPackList.View = System.Windows.Forms.View.Details;
             this.lvPackList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPackList_ColumnClick);
+            this.lvPackList.SelectedIndexChanged += new System.EventHandler(this.lvPackList_SelectedIndexChanged);
             // 
             // FrmShippingPackList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 301);
+            this.ClientSize = new System.Drawing.Size(771, 347);
             this.Controls.Add(this.btnPackComplete);
             this.Controls.Add(this.lvPackList);
             this.Name = "FrmShippingPackList";
